@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { AnimatedTooltip } from "../components/ui/animated-tooltip";
-import { image } from "motion/react-client";
 const people = [
   {
     id: 1,
@@ -98,7 +97,9 @@ const people = [
 export default function Skills() {
   return (
     <div className="flex flex-row items-center justify-center mb-10 w-full">
-      <AnimatedTooltip items={people} />
+      <div className="flex flex-wrap">
+        <AnimatedTooltip items={people} />
+      </div>
     </div>
   );
 }

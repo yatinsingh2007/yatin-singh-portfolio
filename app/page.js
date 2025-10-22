@@ -4,7 +4,8 @@ import { NavbarDemo } from "../section/Navbar";
 import Prism from "../components/Prism";
 import Skills from "@/section/Skills";
 import GlowingButton from "@/section/GlowingButton";
-import { Github , Linkedin , Instagram } from "lucide-react"
+import { Github, Linkedin, Instagram } from "lucide-react";
+import Footer from "@/section/Footer";
 
 export default function Home() {
   useEffect(() => {
@@ -32,8 +33,6 @@ export default function Home() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black" />
-
-        {/* Hero Content */}
         <div className="z-10 text-center px-6 flex flex-col items-center gap-6">
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4">
             K. Yatin Singh
@@ -67,11 +66,15 @@ export default function Home() {
             <GlowingButton
               text="Instagram"
               icon={<Instagram size={20} />}
-              onClick={() => window.open("https://www.instagram.com/yatin_singh27", "_blank")}
+              onClick={() =>
+                window.open(
+                  "https://www.instagram.com/yatin_singh27",
+                  "_blank"
+                )
+              }
             />
           </div>
         </div>
-
         <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-black to-transparent" />
       </main>
       <section
@@ -83,6 +86,7 @@ export default function Home() {
           <Skills />
         </div>
       </section>
+      <Footer/>
     </>
   );
 }

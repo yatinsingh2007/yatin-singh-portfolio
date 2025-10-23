@@ -40,11 +40,7 @@ export default function Home() {
           <p className="text-lg md:text-2xl text-gray-300 font-light mb-2">
             Aspiring Full Stack Developer & AI/ML Enthusiast
           </p>
-          <p className="text-sm md:text-base text-gray-500 max-w-lg mx-auto mb-8">
-            Building intuitive interfaces and turning creative ideas into interactive web experiences.
-          </p>
-
-          {/* Social Glowing Buttons */}
+          <p>Student At NST | Ex-Intern @AssuredGig | Web Developer</p>
           <div className="flex flex-wrap justify-center gap-6">
             <GlowingButton
               text="GitHub"

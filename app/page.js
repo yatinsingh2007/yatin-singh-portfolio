@@ -6,13 +6,12 @@ import Skills from "@/section/Skills";
 import GlowingButton from "@/section/GlowingButton";
 import { Github, Linkedin, Instagram } from "lucide-react";
 import Footer from "@/section/Footer";
+import Hero from "@/section/Hero";
 
 export default function Home() {
   useEffect(() => {
     document.body.style.backgroundColor = "#000000";
-    return () => {
-      document.body.style.backgroundColor = "#000000";
-    };
+    return 
   }, []);
 
   return (
@@ -73,6 +72,9 @@ export default function Home() {
         </div>
         <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-black to-transparent" />
       </main>
+      <container>
+        <Hero/>
+      </container>
       <section
         id="skills"
         className="relative w-full bg-black text-white py-20 flex flex-col items-center justify-center"

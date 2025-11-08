@@ -71,12 +71,6 @@ const people = [
     image: "https://asset.brandfetch.io/idBBE3_R9e/idzL_5tH6B.jpg",
   },
   {
-    id: 13,
-    name: "Mongoose",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdn_5jo3KmPtuZk3Kgi_RvCS1JXfc5I8xPIg&s",
-  },
-  {
     id: 14,
     name: "Git",
     image:

@@ -1,7 +1,7 @@
 "use client"
 import { HeroParallax } from "@/components/ui/hero-parallax";
 
-const products = [
+export const products = [
   {
     title: "VintiCode",
     link: "https://vinticode.vercel.app/",

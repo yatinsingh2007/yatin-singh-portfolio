@@ -2,7 +2,7 @@
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-black text-white py-8 flex flex-col items-center justify-center gap-3">
+    <footer className="w-full bg-transparent text-white py-8 flex flex-col items-center justify-center gap-3 absolute bottom-0">
       <p className="text-gray-400">
         🌍 Based in India | 📧 yatin4591@gmail.com | 🚀 Keep learning!
       </p>

@@ -1,8 +1,7 @@
 "use client";
-import Footer from "@/section/Footer";
 import { useEffect } from "react";
-import { LampDemo } from "@/section/LampDemo";
 import { NavbarDemo } from "@/section/Navbar";
+import { BackgroundBeamsDemo } from "@/section/Background";
 
 export default function About() {
     useEffect(() => {
@@ -12,8 +11,7 @@ export default function About() {
   return (
     <>
       <NavbarDemo />
-      <LampDemo />
-      <Footer  />
+      <BackgroundBeamsDemo />
     </>
   );
 }

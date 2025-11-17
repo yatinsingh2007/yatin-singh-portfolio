@@ -5,7 +5,7 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 export function BackgroundBeamsDemo() {
   return (
     <div
-      className="h-[40rem] w-full rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
+      className="h-screen w-full rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
       <BackgroundBeams className="w-screen h-screen"/>
     </div>
   );

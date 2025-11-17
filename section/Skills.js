@@ -86,6 +86,11 @@ const people = [
     name : "Python" ,
     image : "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Python.svg/1200px-Python.svg.png"
   },
+  {
+    id : 17 ,
+    name : 'django' ,
+    image : 'https://www.cloudesign.com/images/djangomainbannerimage.webp'
+  }
 ];
 
 export default function Skills() {

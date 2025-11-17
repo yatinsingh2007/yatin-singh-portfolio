@@ -79,7 +79,7 @@ export default function Home() {
 
       <section
         id="skills"
-        className="relative w-full bg-black text-white py-20 flex flex-col items-center justify-center"
+        className="relative w-full text-white py-20 flex flex-col items-center justify-center"
       >
         <h1 className="text-4xl md:text-6xl font-extrabold mb-10">My Skills</h1>
 

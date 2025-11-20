@@ -34,7 +34,7 @@ function ExperienceCard(props) {
 
 
           <div className="flex flex-col sm:flex-row items-start gap-4">
-            <div className="w-16 h-16 rounded-xl overflow-hidden bg-zinc-900 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full overflow-hidden bg-zinc-900 flex items-center justify-center">
               {logo ? (
                 <Image
                   src={logo}
@@ -157,7 +157,7 @@ export default function ExperiencePage() {
       <Timeline>
         <TimelineItem>
           <ExperienceCard
-            logo="https://www.assuredgig.com/logo.png"
+            logo="https://landing-page-ag-sable.vercel.app/assuredgiglogo.webp"
             companyName="AssuredGig"
             companyDescription="AssuredGig is an early-stage startup building a secure freelance platform that connects verified freelancers and clients, ensuring fair work, guaranteed earnings, and trusted payments."
             features={[

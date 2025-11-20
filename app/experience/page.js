@@ -7,13 +7,15 @@ import { motion } from "framer-motion";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import React from "react";
 import { NavbarDemo } from "@/section/Navbar";
-
+import { FileText, ExternalLink, Calendar } from "lucide-react";
 
 function ExperienceCard(props) {
   const {
     logo = null,
     companyName = "Company Name",
     companyDescription = "Short description about the role/company.",
+    startDate = "Start Date",
+    endDate = "Present",
     features = [],
     offerLetterUrl = null,
     completionLetterUrl = null,
@@ -23,107 +25,128 @@ function ExperienceCard(props) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.35 }}
-      className="w-full max-w-2xl mx-auto mt-4"
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="w-full max-w-3xl mx-auto mb-12 relative group"
     >
-      <Card className="bg-black border border-zinc-800 text-white rounded-2xl shadow-lg p-6">
-        <CardContent className="flex flex-col gap-8">
-
-
-          <div className="flex flex-col sm:flex-row items-start gap-4">
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl opacity-0 group-hover:opacity-20 transition duration-500 blur-xl" />
+      
+      <Card className="relative bg-zinc-900/80 backdrop-blur-md border border-white/10 text-white rounded-2xl overflow-hidden hover:border-white/20 transition-colors duration-300">
+        <CardContent className="p-5 sm:p-8">
+          <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+            <div className="shrink-0 relative">
+              <div className="absolute -inset-1 bg-indigo-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               {logo ? (
                 <Image
                   src={logo}
                   alt={companyName}
-                  width={64}
-                  height={64}
-                  className="object-contain rounded-full"
+                  width={72}
+                  height={72}
+                  className="object-contain rounded-xl bg-zinc-950 border border-white/10 p-1 relative z-10 w-16 h-16 sm:w-[72px] sm:h-[72px]"
                 />
               ) : (
-                <span className="text-zinc-600 text-sm">No Logo</span>
+                <div className="w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-xl bg-zinc-800 flex items-center justify-center border border-white/10 relative z-10">
+                  <span className="text-zinc-500 text-xs">No Logo</span>
+                </div>
               )}
+            </div>
 
-            <div className="flex flex-col space-y-1 max-w-lg">
-              <h2 className="text-xl font-semibold">{companyName}</h2>
-              <p className="text-sm text-zinc-400 leading-relaxed whitespace-normal break-words">
+            <div className="flex-1 space-y-3 sm:space-y-4 w-full">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-indigo-400 transition-colors duration-300">
+                  {companyName}
+                </h2>
+                <div className="flex items-center gap-2 text-zinc-400 text-xs sm:text-sm bg-zinc-800/50 px-3 py-1 rounded-full border border-white/5 w-fit">
+                  <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span>{startDate} - {endDate}</span>
+                </div>
+              </div>
+              
+              <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
                 {companyDescription}
               </p>
-            </div>
-          </div>
 
+              <div>
+                <h3 className="text-xs sm:text-sm font-semibold text-zinc-300 mb-2 sm:mb-3 uppercase tracking-wider">
+                  Key Contributions
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {safeFeatures.length > 0 ? (
+                    safeFeatures.map((feature, i) => (
+                      <Badge
+                        key={i}
+                        variant="secondary"
+                        className="bg-zinc-800/50 hover:bg-zinc-700/50 text-zinc-300 border border-white/5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg transition-colors text-xs sm:text-sm whitespace-normal text-left leading-tight"
+                      >
+                        {feature}
+                      </Badge>
+                    ))
+                  ) : (
+                    <p className="text-zinc-500 text-sm italic">No features listed.</p>
+                  )}
+                </div>
+              </div>
 
-          <div>
-            <h3 className="text-lg font-medium mb-3">Features Worked On</h3>
+              {(offerLetterUrl || completionLetterUrl) && (
+                <div className="flex flex-wrap gap-3 pt-2">
+                  {offerLetterUrl && (
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="sm"
+                      className="bg-zinc-900/50 border-zinc-700 hover:bg-indigo-500/10 hover:border-indigo-500/50 hover:text-indigo-400 transition-all duration-300 h-8 sm:h-9 text-xs sm:text-sm"
+                    >
+                      <a
+                        href={offerLetterUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2"
+                      >
+                        <FileText className="w-3 h-3 sm:w-4 sm:h-4" />
+                        Offer Letter
+                      </a>
+                    </Button>
+                  )}
 
-            <div className="flex flex-wrap gap-2">
-              {safeFeatures.length > 0 ? (
-                safeFeatures.map((feature, i) => (
-                  <Badge
-                    key={i}
-                    className="bg-zinc-800 text-white px-3 py-2 rounded-xl max-w-full whitespace-normal break-words text-left"
-                  >
-                    {feature}
-                  </Badge>
-                ))
-              ) : (
-                <p className="text-zinc-500 text-sm">No features added.</p>
+                  {completionLetterUrl && (
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="sm"
+                      className="bg-zinc-900/50 border-zinc-700 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 transition-all duration-300 h-8 sm:h-9 text-xs sm:text-sm"
+                    >
+                      <a
+                        href={completionLetterUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2"
+                      >
+                        <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
+                        Completion Letter
+                      </a>
+                    </Button>
+                  )}
+                </div>
               )}
             </div>
           </div>
-
-
-          <div className="flex flex-wrap gap-4 mt-2">
-            {offerLetterUrl && (
-              <Button
-                asChild
-                variant="outline"
-                className="bg-zinc-900 border-zinc-700 text-white rounded-xl px-4 py-2 cursor-pointer"
-              >
-                <a
-                  href={offerLetterUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer"
-                >
-                  Offer Letter
-                </a>
-              </Button>
-            )}
-
-            {completionLetterUrl && (
-              <Button
-                asChild
-                variant="outline"
-                className="bg-zinc-900 border-zinc-700 text-white rounded-xl px-4 py-2 cursor-pointer"
-              >
-                <a href={completionLetterUrl} target="_blank" rel="noopener noreferrer">
-                  Completion Letter
-                </a>
-              </Button>
-            )}
-          </div>
-
         </CardContent>
       </Card>
     </motion.div>
   );
 }
 
-
-
 function Timeline({ children }) {
   return (
-    <div className="relative w-full max-w-3xl mx-auto mt-10">
+    <div className="relative w-full max-w-4xl mx-auto mt-12 sm:mt-16 px-2 sm:px-4">
+      {/* Glowing Line */}
+      <div className="absolute left-6 sm:left-12 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-indigo-500/50 to-transparent" />
       
-      <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-[3px] bg-zinc-700" />
-
-      <div className="flex flex-col gap-16 sm:gap-20 pl-10 sm:pl-16">
+      <div className="flex flex-col gap-8 pl-12 sm:pl-24">
         {children}
       </div>
-
     </div>
   );
 }
@@ -131,47 +154,63 @@ function Timeline({ children }) {
 function TimelineItem({ children }) {
   return (
     <div className="relative">
-
-      {/* Dot */}
-      <div className="absolute -left-[26px] sm:-left-[38px] top-4 w-5 h-5 sm:w-6 sm:h-6 bg-zinc-900 border border-zinc-600 rounded-full" />
-
-      <div>{children}</div>
+      {/* Glowing Dot */}
+      <div className="absolute -left-[33px] sm:-left-[57px] top-6 sm:top-8">
+        <div className="relative flex items-center justify-center w-6 h-6">
+          <div className="absolute w-full h-full bg-indigo-500 rounded-full opacity-20 animate-ping" />
+          <div className="relative w-3 h-3 bg-indigo-500 rounded-full shadow-[0_0_10px_rgba(99,102,241,0.8)]" />
+        </div>
+      </div>
+      {children}
     </div>
   );
 }
 
-
-
 export default function ExperiencePage() {
   return (
-    <div className="min-h-screen w-full bg-black text-white px-4 sm:px-6 py-20 relative">
-
-        <NavbarDemo />
-      <div className="pointer-events-none">
+    <div className="min-h-screen w-full bg-black text-white relative overflow-hidden">
+      <div className="fixed inset-0 z-0 pointer-events-none">
         <BackgroundBeams />
       </div>
+      
+      <div className="relative z-10">
+        <NavbarDemo />
+        
+        <main className="pt-24 sm:pt-32 pb-20 px-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12 sm:mb-16"
+          >
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-zinc-200 to-zinc-500 mb-4">
+              Professional Journey
+            </h1>
+            <p className="text-zinc-400 max-w-xl mx-auto text-base sm:text-lg">
+              Building scalable solutions and creating impact through technology.
+            </p>
+          </motion.div>
 
-
-      <Timeline>
-        <TimelineItem>
-          <ExperienceCard
-            logo="https://landing-page-ag-sable.vercel.app/assuredgiglogo.webp"
-            companyName="AssuredGig"
-            companyDescription="AssuredGig is an early-stage startup building a secure freelance platform that connects verified freelancers and clients, ensuring fair work, guaranteed earnings, and trusted payments."
-            features={[
-              "Part of the tech team for the first version (V1) of the platform.",
-              "Developed Entire CodeBase of Backend From Scratch especially worked on client side API's and also contributed in freelancer API's as well.",
-              "Developed The Websites landing page and improved mobile performance from 35% to 75%.",
-              "Implemented All The API's using Django and Django-Rest-Framework.",
-            ]}
-            offerLetterUrl="https://drive.google.com/file/d/1Y7g_iSAYbwe8d8bll0hXNRTvqVmoUCbD/view?usp=sharing"
-            completionLetterUrl="#"
-          />
-        </TimelineItem>
-      </Timeline>
-
-      <div className="pointer-events-none">
-        <BackgroundBeams />
+          <Timeline>
+            <TimelineItem>
+              <ExperienceCard
+                logo="https://landing-page-ag-sable.vercel.app/assuredgiglogo.webp"
+                companyName="AssuredGig"
+                companyDescription="AssuredGig is an early-stage startup building a secure freelance platform that connects verified freelancers and clients, ensuring fair work, guaranteed earnings, and trusted payments."
+                startDate="June 2024"
+                endDate="August 2024"
+                features={[
+                  "Architected and developed the complete backend infrastructure using Django & DRF",
+                  "Optimized mobile landing page performance, increasing score from 35% to 75%",
+                  "Designed and implemented RESTful APIs for both client and freelancer portals",
+                  "Collaborated with cross-functional teams to deliver the MVP (V1) platform"
+                ]}
+                offerLetterUrl="https://drive.google.com/file/d/1Y7g_iSAYbwe8d8bll0hXNRTvqVmoUCbD/view?usp=sharing"
+                completionLetterUrl="#"
+              />
+            </TimelineItem>
+          </Timeline>
+        </main>
       </div>
     </div>
   );

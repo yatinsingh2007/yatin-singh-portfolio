@@ -34,7 +34,6 @@ function ExperienceCard(props) {
 
 
           <div className="flex flex-col sm:flex-row items-start gap-4">
-            <div className="w-16 h-16 rounded-full overflow-hidden bg-zinc-900 flex items-center justify-center">
               {logo ? (
                 <Image
                   src={logo}
@@ -46,7 +45,6 @@ function ExperienceCard(props) {
               ) : (
                 <span className="text-zinc-600 text-sm">No Logo</span>
               )}
-            </div>
 
             <div className="flex flex-col space-y-1 max-w-lg">
               <h2 className="text-xl font-semibold">{companyName}</h2>

@@ -1,5 +1,6 @@
 "use client"
 import { BackgroundBeams } from "@/components/ui/background-beams"
+import { NavbarDemo } from "@/section/Navbar"
 
 export default function Education(){
     const educationData = [
@@ -33,6 +34,7 @@ export default function Education(){
 
     return (
         <div className="min-h-screen w-full bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950 relative overflow-hidden">
+            <NavbarDemo />
             <BackgroundBeams />
             
             <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">

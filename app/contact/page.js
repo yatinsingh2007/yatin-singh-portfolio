@@ -1,6 +1,5 @@
 "use client"
-import { LampDemo } from "@/section/LampDemo"
-
+import LampDemo from "@/section/LampDemo"
 export default function Contact(){
     return (
         <>

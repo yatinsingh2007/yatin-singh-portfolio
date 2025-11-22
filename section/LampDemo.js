@@ -37,7 +37,6 @@ export default function LampDemo() {
             ...prev,
             [name]: value
         }))
-        // Clear error for this field when user starts typing
         if (errors[name]) {
             setErrors(prev => ({
                 ...prev,
@@ -56,19 +55,35 @@ export default function LampDemo() {
         setIsSubmitting(true)
         setSubmitStatus(null)
         
-        // Simulate form submission (replace with actual API call)
+
         try {
-            await new Promise(resolve => setTimeout(resolve, 1500))
-            
-            // Success
-            setSubmitStatus("success")
-            setFormData({
-                email: "",
-                message: ""
-            })
-            
-            setTimeout(() => setSubmitStatus(null), 5000)
+            const response = await fetch(
+                "/api/contact",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: formData.email,
+                        message: formData.message,
+                    }),
+                }
+            );
+
+            if (response.ok) {
+                setSubmitStatus("success")
+                setFormData({
+                    email: "",
+                    message: ""
+                })
+                
+                setTimeout(() => setSubmitStatus(null), 5000)
+            } else {
+                setSubmitStatus("error")
+            }
         } catch (error) {
+            console.error('Error submitting form:', error)
             setSubmitStatus("error")
         } finally {
             setIsSubmitting(false)
@@ -80,9 +95,9 @@ export default function LampDemo() {
             <BackgroundBeams />
             
             <div className="w-full max-w-2xl relative z-10">
-                {/* Header */}
+
                 <div className="text-center mb-8 md:mb-12">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-gradient">
+                    <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-linear-to-r from-green-300 via-green-500 to-green-600 bg-clip-text text-transparent animate-gradient">
                         Let's Collaborate
                     </h1>
                     <p className="text-gray-400 text-lg md:text-xl">
@@ -90,15 +105,13 @@ export default function LampDemo() {
                     </p>
                 </div>
 
-                {/* Form Card */}
+
                 <form onSubmit={handleSubmit} className="relative">
-                    {/* Glassmorphism Card */}
+
                     <div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl">
-                        {/* Gradient Border Effect */}
                         <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl"></div>
                         
                         <div className="space-y-6">
-                            {/* Email Field */}
                             <div className="group">
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                                     Email Address *
@@ -117,7 +130,6 @@ export default function LampDemo() {
                                 )}
                             </div>
 
-                            {/* Message Field */}
                             <div className="group">
                                 <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
                                     Message *
@@ -135,7 +147,6 @@ export default function LampDemo() {
                                 )}
                             </div>
 
-                            {/* Submit Button */}
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
@@ -158,7 +169,6 @@ export default function LampDemo() {
                                 </div>
                             </button>
 
-                            {/* Success/Error Messages */}
                             {submitStatus === "success" && (
                                 <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-xl animate-fadeIn">
                                     <p className="text-green-400 text-center font-medium">
@@ -178,7 +188,6 @@ export default function LampDemo() {
                     </div>
                 </form>
 
-                {/* Additional Contact Info */}
                 <div className="mt-8 text-center">
                     <p className="text-gray-400 text-sm">
                         You can reach me directly at{" "}

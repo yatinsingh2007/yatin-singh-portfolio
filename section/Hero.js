@@ -30,7 +30,7 @@ export const products = [
   {
     title: "Neura Chat",
     link: "https://neura-chat.netlify.app/",
-    thumbnail: "/neura-chat 2.png"
+    thumbnail: "/neurachat 2.png"
   },
   {
     title: "SteamPunk",

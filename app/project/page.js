@@ -3,6 +3,7 @@ import { BackgroundBeams } from "@/components/ui/background-beams"
 import { NavbarDemo } from "@/section/Navbar"
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card"
 import Link from "next/link"
+import Image from "next/image"
 import Footer from "@/section/Footer"
 
 export default function Project(){
@@ -11,7 +12,7 @@ export default function Project(){
             id: 1,
             title: "VintiCode",
             description: "A beginner-focused coding practice platform that builds problem-solving intuition before formal DSA. It offers a series of challenges with automated test case execution to strengthen logical reasoning and coding fundamentals.",
-            image: "/vinticode.png",
+            image: "/vinticode 2.png",
             techStack: ["Next.js", "Tailwind CSS", "Node.js", "Express.js", "Prisma" , "PostgreSQL" , "Vercel"],
             liveUrl: "https://vinticode.vercel.app/",
             githubUrl: "https://github.com/yatinsingh2007/VintiCode",
@@ -20,8 +21,8 @@ export default function Project(){
         {
             id: 2,
             title: "Next Horizon",
-            description: "A full-stack e-commerce platform with payment integration, inventory management, and advanced search capabilities.",
-            image: "/nexthorizon.png",
+            description: "A networking platofrom where users can connect with other users and share their experiences.",
+            image: "/nexthorizon2.png",
             techStack: ["React.js", "Tailwind CSS", "Node.js", "Express.js", "mongoose" , "MongoDB" , "Vercel" , "Render"],
             liveUrl: "https://next-horizon-nine.vercel.app/",
             githubUrl: "https://github.com/yatinsingh2007/Next-Horizon",
@@ -30,8 +31,8 @@ export default function Project(){
         {
             id: 3,
             title: "Tic-Tac-Toe`",
-            description: "Modern social networking pla`tform with real-time messaging, media sharing, and AI-powered content recommendations.",
-            image: "/api/placeholder/400/300",
+            description: "A simple Tic-Tac-Toe game built with React and Tailwind CSS.",
+            image: "/tic-tac-toe.png",
             techStack: ["React","Tailwind CSS"],
             liveUrl: "https://tic-tac-toe-rust-rho.vercel.app/",
             githubUrl: "https://github.com/yatinsingh2007/Tic-Tac-Toe",
@@ -41,7 +42,7 @@ export default function Project(){
             id: 4,
             title: "Neura Chat",
             description: "Collaborative project management tool with kanban boards, time tracking, and team analytics.",
-            image: "/neurachat.png",
+            image: "/neurachat 2.png",
             techStack: ["React.js" , "Tailwind CSS" , "Gemini API" , "Vercel"],
             liveUrl: "https://neura-chat.netlify.app/",
             githubUrl: "https://github.com/yatinsingh2007/Neura-Chat",
@@ -51,7 +52,7 @@ export default function Project(){
             id: 5,
             title: "Claude Chef",
             description: "Created A website where use gets recipes based on whatever ingredient they have.",
-            image: "/chefclaude.png",
+            image: "/Chef-claude.png",
             techStack: ["React.js" , "Tailwind CSS" , "Gemini API" , "Vercel"],
             liveUrl: "https://claude-chef.netlify.app",
             githubUrl: "https://github.com/yatinsingh2007/Claude-Chef",
@@ -60,8 +61,8 @@ export default function Project(){
         {
             id: 6,
             title: "SteamPunk",
-            description: "Comprehensive health and fitness application with workout plans, nutrition tracking, and progress analytics.",
-            image: "/steam.png",
+            description: "Created a steampunk-style website using HTML5 and CSS3 , which contains all the retro anf futrestic design with animationa",
+            image: "/steampunk 2.png",
             techStack: ["HTML5" , "CSS3" , "Github Pages"],
             liveUrl: "https://yatinsingh2007.github.io/Project_Capstone_1.0/ProjectSteampunk1.0.html",
             githubUrl: "https://github.com/yatinsingh2007/Project_Capstone_1.0",
@@ -70,7 +71,7 @@ export default function Project(){
         {
             id: 7,
             title: "Calculator",
-            description: "",
+            description: "created a calculator using react.js and tailwind css",
             image: "/calculator.png",
             techStack: ["React.js" , "Tailwind CSS" , "Vercel"],
             liveUrl: "https://calculatoryatin.netlify.app/",
@@ -110,11 +111,14 @@ export default function Project(){
                                     translateZ="100"
                                 >
                                     <div className="relative w-full h-60 rounded-xl overflow-hidden">
-                                        <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20 group-hover/card:opacity-30 transition-opacity duration-300`}></div>
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                            <div className="text-6xl opacity-20">🚀</div>
-                                        </div>
-                                        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900"></div>
+                                        <Image
+                                            src={project.image}
+                                            alt={project.title}
+                                            width={480}
+                                            height={240}
+                                            className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-500"
+                                        />
+                                        <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-10 group-hover/card:opacity-20 transition-opacity duration-300`}></div>
                                     </div>
                                 </CardItem>
 

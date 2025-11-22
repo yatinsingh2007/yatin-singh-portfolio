@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
+import doten from "dotenv";
+doten.config();
 
 export async function POST(req){
     try{

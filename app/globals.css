@@ -116,6 +116,10 @@
   color-scheme: dark;
 }
 
+::webkit-scrollbar {
+    display: none;
+}
+
 
 @layer base {
   * {

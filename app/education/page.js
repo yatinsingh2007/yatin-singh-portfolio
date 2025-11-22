@@ -11,7 +11,7 @@ export default function Education(){
             startDate: "August 2024",
             endDate: "Present",
             grade: "CGPA: 7.76/10",
-            description: "Focused on software engineering, data structures, algorithms, and web development. Completed projects in machine learning and full-stack development.",
+            description: "Focused on software engineering, data structures, algorithms, web development and AIML",
         },
         {
             degree: "Higher Secondary Education (12th Grade)",

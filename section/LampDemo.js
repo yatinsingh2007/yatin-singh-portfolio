@@ -98,10 +98,10 @@ export default function LampDemo() {
 
                 <div className="text-center mb-8 md:mb-12">
                     <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-linear-to-r from-green-300 via-green-500 to-green-600 bg-clip-text text-transparent animate-gradient">
-                        Let's Collaborate
+                        Want to Contact Me?
                     </h1>
                     <p className="text-gray-400 text-lg md:text-xl">
-                        Have a project in mind? Let's work together to bring your ideas to life.
+                        Fill out the form below and I'll get back to you as soon as possible.
                     </p>
                 </div>
 

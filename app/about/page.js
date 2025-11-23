@@ -30,7 +30,6 @@ export default function About() {
       <main className="flex-grow relative z-10 flex items-center justify-center py-20 px-4 sm:px-6">
         <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
-          {/* Image Section */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -51,7 +50,6 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Content Section */}
           <motion.div 
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -79,7 +77,6 @@ export default function About() {
               </p>
             </div>
 
-            {/* Skills/Interests */}
             <div className="pt-6">
               <h3 className="text-sm font-semibold text-zinc-300 mb-4 uppercase tracking-wider">
                 Tech Stack & Interests
@@ -98,7 +95,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* Personal Interests */}
             <div className="pt-4 border-t border-zinc-800 mt-4">
               <p className="text-zinc-500 text-sm italic">
                 Outside of tech, I explore Science, History, Cooking, and Video Games.

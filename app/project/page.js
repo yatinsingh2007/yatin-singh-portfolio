@@ -106,65 +106,62 @@ export default function Project(){
                 <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
                     {projects.map((project) => (
                         <CardContainer key={project.id} className="inter-var">
-                            <CardBody className="bg-gray-950/50 relative group/card border border-white/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 backdrop-blur-xl">
-                                <CardItem
-                                    translateZ="100"
-                                >
-                                    <div className="relative w-full h-60 rounded-xl overflow-hidden">
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            width={480}
-                                            height={240}
-                                            className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-500"
-                                        />
-                                        <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-10 group-hover/card:opacity-20 transition-opacity duration-300`}></div>
-                                    </div>
-                                </CardItem>
-
+                            <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
                                 <CardItem
                                     translateZ="50"
-                                    className="text-xl font-bold text-white mt-6"
+                                    className="text-xl font-bold text-neutral-600 dark:text-white"
                                 >
                                     {project.title}
                                 </CardItem>
-
+                                
                                 <CardItem
                                     as="p"
                                     translateZ="60"
-                                    className="text-gray-400 text-sm mt-3 leading-relaxed"
+                                    className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
                                 >
                                     {project.description}
+                                </CardItem>
+                                
+                                <CardItem translateZ="100" className="w-full mt-4">
+                                    <img
+                                        src={project.image}
+                                        alt="thumbnail"
+                                        width={1000}
+                                        height={1000}
+                                        className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                                    />
                                 </CardItem>
 
                                 <CardItem
                                     translateZ="70"
-                                    className="flex flex-wrap gap-2 mt-4"
+                                    className="flex flex-wrap gap-2 mt-6"
                                 >
                                     {project.techStack.map((tech, index) => (
                                         <span
                                             key={index}
-                                            className={`px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r ${project.gradient} bg-opacity-10 text-white border border-white/[0.1] backdrop-blur-sm`}
+                                            className="px-3 py-1 text-xs font-medium rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300"
                                         >
                                             {tech}
                                         </span>
                                     ))}
                                 </CardItem>
-
-                                <div className="flex justify-between items-center mt-8">
+                                
+                                <div className="flex justify-between items-center mt-20">
                                     <CardItem
-                                        translateZ={80}
+                                        translateZ={20}
                                         as={Link}
                                         href={project.liveUrl}
-                                        className={`px-6 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r ${project.gradient} hover:shadow-lg hover:shadow-${project.gradient.split('-')[1]}-500/50 transition-all duration-300`}
+                                        target="_blank"
+                                        className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
                                     >
-                                        Live Demo →
+                                        Try now →
                                     </CardItem>
                                     <CardItem
-                                        translateZ={80}
+                                        translateZ={20}
                                         as={Link}
                                         href={project.githubUrl}
-                                        className="px-6 py-2 rounded-xl text-xs font-semibold text-gray-300 border border-white/[0.2] hover:bg-white/[0.05] transition-all duration-300"
+                                        target="_blank"
+                                        className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
                                     >
                                         GitHub
                                     </CardItem>

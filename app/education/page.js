@@ -10,7 +10,7 @@ export default function Education(){
             location: "Sonipat , Haryana , India",
             startDate: "August 2024",
             endDate: "Present",
-            grade: "CGPA: 7.76/10",
+            grade: "CGPA: 7.77/10",
             description: "Focused on software engineering, data structures, algorithms, web development and AIML",
         },
         {

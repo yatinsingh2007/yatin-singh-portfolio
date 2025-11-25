@@ -206,7 +206,7 @@ export default function ExperiencePage() {
                   "Collaborated with cross-functional teams to deliver the MVP (V1) platform"
                 ]}
                 offerLetterUrl="https://drive.google.com/file/d/1Y7g_iSAYbwe8d8bll0hXNRTvqVmoUCbD/view?usp=sharing"
-                completionLetterUrl="#"
+                completionLetterUrl="https://drive.google.com/file/d/1KCeFWM5e_lQdpjEVBcJNGlJZ6pm_aahM/view?usp=sharing"
               />
             </TimelineItem>
           </Timeline>

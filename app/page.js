@@ -141,7 +141,7 @@ export default function Home() {
               Expertise
             </h2>
             <h1 className="text-4xl md:text-5xl font-bold text-white">
-              My Tech Stack
+              Tech Stack I Have worked With
             </h1>
           </motion.div>
 

@@ -103,7 +103,7 @@ export default function About() {
               </p>
             </div>
 
-            <a className="pt-6 flex justify-center lg:justify-start" href="https://drive.google.com/file/d/1780ozsgziRlTsri0Nu0gjLPCy-Idgcac/view?usp=sharing">
+            <a className="pt-6 flex justify-center lg:justify-start" href="https://drive.google.com/file/d/1C-CYeAOXZ7S24WUoa2gvARVeP9KN18bt/view?usp=sharing">
               <GlowingButton
                 text="Resume"
                 icon={<FileText size={20} />}

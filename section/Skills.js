@@ -83,13 +83,23 @@ const people = [
   },
   {
     id : 16 ,
+    name : "Redux",
+    image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjwdCVBzblrWZtW7Cb9WjablInQjD3_R_Cyg&s"
+  } ,
+  {
+    id : 17 ,
     name : "Python" ,
     image : "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Python.svg/1200px-Python.svg.png"
   },
   {
-    id : 17 ,
+    id : 18 ,
     name : 'django' ,
     image : 'https://www.cloudesign.com/images/djangomainbannerimage.webp'
+  } ,
+  {
+    id : 19 ,
+    name : 'Docker' ,
+    image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBg-3j13zyOBkQgSe-igMxqNDoYpOvBkjQVw&s'
   }
 ];
 

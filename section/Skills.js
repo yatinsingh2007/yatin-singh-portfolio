@@ -100,7 +100,12 @@ const people = [
     id : 19 ,
     name : 'Docker' ,
     image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBg-3j13zyOBkQgSe-igMxqNDoYpOvBkjQVw&s'
-  }
+   } ,
+   {
+    id : 20 ,
+    name : 'mongoose' ,
+    image : 'https://img.icons8.com/color/1200/mongoose.jpg'
+   }
 ];
 
 export default function Skills() {

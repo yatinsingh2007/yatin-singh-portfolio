@@ -1,18 +1,10 @@
 "use client";
 import React from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  MotionValue,
-} from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-export const HeroParallax = ({
-  products,
-}) => {
+export const HeroParallax = ({ products }) => {
   const firstRow = products.slice(0, 5);
   const secondRow = products.slice(5, 10);
   const thirdRow = products.slice(10, 15);
@@ -22,32 +14,12 @@ export const HeroParallax = ({
     offset: ["start start", "end start"],
   });
 
-  const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
-
-  const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, 1000]),
-    springConfig,
-  );
-  const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -1000]),
-    springConfig,
-  );
-  const rotateX = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [15, 0]),
-    springConfig,
-  );
-  const opacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [0.2, 1]),
-    springConfig,
-  );
-  const rotateZ = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [20, 0]),
-    springConfig,
-  );
-  const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
-    springConfig,
-  );
+  const translateX = useTransform(scrollYProgress, [0, 1], [0, 1000]);
+  const translateXReverse = useTransform(scrollYProgress, [0, 1], [0, -1000]);
+  const rotateX = useTransform(scrollYProgress, [0, 0.2], [15, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [0.2, 1]);
+  const rotateZ = useTransform(scrollYProgress, [0, 0.2], [20, 0]);
+  const translateY = useTransform(scrollYProgress, [0, 0.2], [-700, 500]);
   return (
     <div
       ref={ref}
@@ -60,6 +32,7 @@ export const HeroParallax = ({
           rotateZ,
           translateY,
           opacity,
+          willChange: "transform, opacity",
         }}
         className=""
       >
@@ -110,10 +83,7 @@ export const Header = () => {
   );
 };
 
-export const ProductCard = ({
-  product,
-  translate,
-}) => {
+export const ProductCard = ({ product, translate }) => {
   return (
     <motion.div
       style={{

@@ -13,7 +13,6 @@ export default function Home() {
     <>
       <NavbarDemo />
       <main className="relative w-full min-h-screen bg-black text-white selection:bg-indigo-500/30">
-        
         {/* Hero Section */}
         <div className="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center">
           <div className="absolute inset-0 z-0">
@@ -27,6 +26,7 @@ export default function Home() {
               colorFrequency={1}
               noise={0.25}
               glow={1.2}
+              suspendWhenOffscreen
             />
           </div>
 
@@ -93,7 +93,7 @@ export default function Home() {
                 onClick={() =>
                   window.open(
                     "https://www.linkedin.com/in/yatin-singh-b37817323/",
-                    "_blank"
+                    "_blank",
                   )
                 }
               />
@@ -102,13 +102,16 @@ export default function Home() {
                 text="Instagram"
                 icon={<Instagram size={20} />}
                 onClick={() =>
-                  window.open("https://www.instagram.com/yatin_singh27", "_blank")
+                  window.open(
+                    "https://www.instagram.com/yatin_singh27",
+                    "_blank",
+                  )
                 }
               />
             </motion.div>
           </div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 1 }}
@@ -129,7 +132,7 @@ export default function Home() {
           className="relative w-full py-32 flex flex-col items-center justify-center bg-black"
         >
           <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/10 to-transparent pointer-events-none" />
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

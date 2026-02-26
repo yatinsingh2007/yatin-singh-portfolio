@@ -5,12 +5,12 @@ export const products = [
   {
     title: "VintiCode",
     link: "https://vinticode.vercel.app/",
-    thumbnail: '/vinticode 2.png'
+    thumbnail: '/VintiCode.png'
   },
   {
     title: "Next Horizon",
     link: "https://next-horizon-nine.vercel.app/",
-    thumbnail: "/nexthorizon2.png"
+    thumbnail: "/NextHorizon.png"
   },
   {
     title: "Tic-Tac-Toe",

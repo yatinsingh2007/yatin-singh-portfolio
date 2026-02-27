@@ -5,7 +5,7 @@ import { NavbarDemo } from "@/section/Navbar"
 export default function Education(){
     const educationData = [
         {
-            degree: "Bachelor of Technology in Computer Science and Artificial Intelligence",
+            degree: "Bachelor of Technology in Computer Science and Artificial Intelligence (2nd Year - Sem 4)",
             institution: "Newton School of Technology , Rishihood University",
             location: "Sonipat , Haryana , India",
             startDate: "August 2024",

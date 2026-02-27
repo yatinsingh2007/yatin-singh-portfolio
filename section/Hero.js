@@ -5,7 +5,7 @@ export const products = [
   {
     title: "VintiCode",
     link: "https://vinticode.vercel.app/",
-    thumbnail: '/VintiCode.png'
+    thumbnail: "/VintiCode.png"
   },
   {
     title: "Next Horizon",

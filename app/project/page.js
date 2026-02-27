@@ -123,7 +123,7 @@ export default function Project(){
                                 </CardItem>
                                 
                                 <CardItem translateZ="100" className="w-full mt-4">
-                                    <img
+                                    <Image
                                         src={project.image}
                                         alt="thumbnail"
                                         width={1000}

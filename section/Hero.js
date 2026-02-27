@@ -9,12 +9,12 @@ export const products = [
   },
   {
     title: "Next Horizon",
-    link: "https://next-horizon-nine.vercel.app/",
+    link: "https://next-horizon-nine.vercel.app",
     thumbnail: "/NextHorizon.png"
   },
   {
     title: "Tic-Tac-Toe",
-    link: "https://tic-tac-toe-rust-rho.vercel.app/",
+    link: "https://tic-tac-toe-rust-rho.vercel.app",
     thumbnail: "/tic-tac-toe.png"
   },
   {
@@ -24,12 +24,12 @@ export const products = [
   },
   {
     title: "Calculator",
-    link: "https://calculatoryatin.netlify.app/",
+    link: "https://calculatoryatin.netlify.app",
     thumbnail: "/calculator 2.png"
   },
   {
     title: "Neura Chat",
-    link: "https://neura-chat.netlify.app/",
+    link: "https://neura-chat.netlify.app",
     thumbnail: "/neurachat 2.png"
   },
   {

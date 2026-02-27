@@ -10,7 +10,7 @@ export const products = [
   {
     title: "Next Horizon",
     link: "https://next-horizon-nine.vercel.app",
-    thumbnail: "/nextHorizon.png"
+    thumbnail: "/nexthorizon.png"
   },
   {
     title: "Tic-Tac-Toe",

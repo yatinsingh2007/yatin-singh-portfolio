@@ -124,7 +124,7 @@ function ExperienceCard(props) {
                         className="flex items-center gap-2"
                       >
                         <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
-                        Completion Letter
+                        Experience Letter
                       </a>
                     </Button>
                   )}

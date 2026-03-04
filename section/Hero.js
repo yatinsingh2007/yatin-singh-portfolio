@@ -3,6 +3,16 @@ import { HeroParallax } from "@/components/ui/hero-parallax";
 
 export const products = [
   {
+    title : "reportLensAI" ,
+    link : "https://github.com/yatinsingh2007/ReportLens-AI" ,
+    thumbnail : "/reportLensAI.jpeg"
+  } ,
+  {
+    title: "CreditIQ",
+    link: "https://creditiq123.streamlit.app",
+    thumbnail: "/creditIQ.jpeg"
+  },
+  {
     title: "VintiCode",
     link: "https://vinticode.vercel.app/",
     thumbnail: "/vinticode.png"

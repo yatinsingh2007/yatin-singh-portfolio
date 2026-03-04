@@ -2,12 +2,32 @@
 import { BackgroundBeams } from "@/components/ui/background-beams"
 import { NavbarDemo } from "@/section/Navbar"
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card"
+import { Github } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import Footer from "@/section/Footer"
 
 export default function Project(){
     const projects = [
+        {
+            id : -1 ,
+            title : "ReportLens AI" ,
+            description : "ReportLens AI is a web application that uses AI to analyze and summarize PDF reports. It allows users to upload PDF files and receive AI-generated summaries, key insights, and answers to specific questions about the content. The system helps users quickly understand and extract valuable information from long documents.",
+            image: "/reportLensAI.jpeg",
+            techStack: ["React.js" , "Tailwind CSS" , "Gemini API" , "Vercel"],
+            githubUrl: "https://github.com/yatinsingh2007/ReportLens-AI",
+            gradient: "from-green-500 to-emerald-500"
+        },
+        {
+            id: 0,
+            title: "CreditIQ",
+            description: "CreditIQ is a machine learning–based web application that predicts whether a person’s loan will be approved or rejected based on financial details. The system uses two trained models — Decision Tree Classifier and Logistic Regression — to analyze user inputs and determine loan eligibility. It demonstrates how machine learning can assist in automating loan approval decisions.",
+            image: "/creditIQ.jpeg",
+            techStack: ["Python" , "scikit-learn" , "pandas" , "matplotlib" , "seaborn" , "plotly" , "streamlit"],
+            liveUrl: "https://creditiq123.streamlit.app",
+            githubUrl: "https://github.com/yatinsingh2007/CreditIQ",
+            gradient: ""
+        },
         {
             id: 1,
             title: "VintiCode",
@@ -30,7 +50,7 @@ export default function Project(){
         },
         {
             id: 3,
-            title: "Tic-Tac-Toe`",
+            title: "Tic-Tac-Toe",
             description: "A simple Tic-Tac-Toe game built with React and Tailwind CSS.",
             image: "/tic-tac-toe.png",
             techStack: ["React","Tailwind CSS"],
@@ -147,15 +167,17 @@ export default function Project(){
                                 </CardItem>
                                 
                                 <div className="flex justify-between items-center mt-20">
-                                    <CardItem
+                                    {project.liveUrl && (
+                                        <CardItem
                                         translateZ={20}
                                         as={Link}
                                         href={project.liveUrl}
                                         target="_blank"
                                         className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
                                     >
-                                        Try now →
+                                        Live Demo →
                                     </CardItem>
+                                    )}
                                     <CardItem
                                         translateZ={20}
                                         as={Link}
@@ -163,7 +185,10 @@ export default function Project(){
                                         target="_blank"
                                         className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
                                     >
+                                        <div className="flex justify-between items-center gap-2">
+                                        <Github />
                                         GitHub
+                                        </div>
                                     </CardItem>
                                 </div>
                             </CardBody>

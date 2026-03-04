@@ -82,11 +82,6 @@ const people = [
     image : "https://pbs.twimg.com/profile_images/1730334391501488129/G0R0sjHH_400x400.jpg"
   },
   {
-    id : 16 ,
-    name : "Redux",
-    image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjwdCVBzblrWZtW7Cb9WjablInQjD3_R_Cyg&s"
-  } ,
-  {
     id : 17 ,
     name : "Python" ,
     image : "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Python.svg/1200px-Python.svg.png"

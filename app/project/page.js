@@ -13,7 +13,7 @@ export default function Project(){
             id : -1 ,
             title : "ReportLens AI" ,
             description : "ReportLens AI is a web application that uses AI to analyze and summarize PDF reports. It allows users to upload PDF files and receive AI-generated summaries, key insights, and answers to specific questions about the content. The system helps users quickly understand and extract valuable information from long documents.",
-            image: "/reportLensAI.jpeg",
+            image: "/ReportLensAI.jpeg",
             techStack: ["React.js" , "Tailwind CSS" , "Gemini API" , "Vercel"],
             githubUrl: "https://github.com/yatinsingh2007/ReportLens-AI",
             gradient: "from-green-500 to-emerald-500"

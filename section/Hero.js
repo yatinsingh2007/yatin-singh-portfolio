@@ -5,7 +5,7 @@ export const products = [
   {
     title : "reportLensAI" ,
     link : "https://github.com/yatinsingh2007/ReportLens-AI" ,
-    thumbnail : "/reportLensAI.jpeg"
+    thumbnail : "/ReportLensAI.jpeg"
   } ,
   {
     title: "CreditIQ",

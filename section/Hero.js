@@ -45,7 +45,7 @@ export const products = [
   {
     title : "Netflix Clone" ,
     link : "https://yatinsingh2007.github.io/Netflix-Clone/Netflix.html" ,
-    thumbnail : "/netflix_colne.jpeg"
+    thumbnail : "/netflix_clone.jpeg"
   } ,
   {
     title: "SteamPunk",

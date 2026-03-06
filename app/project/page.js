@@ -102,7 +102,7 @@ export default function Project(){
             id: 8,
             title : "Netflix Clone" ,
             description : "Created a Netflix clone using HTML and CSS" ,
-            image : "/netflix_colne.jpeg" ,
+            image : "/netflix_clone.jpeg" ,
             techStack : ["HTML" , "CSS"] ,
             liveUrl : "https://yatinsingh2007.github.io/Netflix-Clone/Netflix.html" ,
             githubUrl : "https://github.com/yatinsingh2007/Netflix-Clone" ,

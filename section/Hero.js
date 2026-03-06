@@ -43,6 +43,11 @@ export const products = [
     thumbnail: "/neurachat 2.png"
   },
   {
+    title : "Netflix Clone" ,
+    link : "https://yatinsingh2007.github.io/Netflix-Clone/Netflix.html" ,
+    thumbnail : "/netflix_colne.jpeg"
+  } ,
+  {
     title: "SteamPunk",
     link: "https://yatinsingh2007.github.io/Project_Capstone_1.0/ProjectSteampunk1.0.html",
     thumbnail: "/steampunk 2.png"

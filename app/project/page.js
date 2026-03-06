@@ -97,6 +97,16 @@ export default function Project(){
             liveUrl: "https://calculatoryatin.netlify.app/",
             githubUrl: "https://github.com/yatinsingh2007/Calculator",
             gradient: "from-green-500 to-emerald-500"
+        } ,
+        {
+            id: 8,
+            title : "Netflix Clone" ,
+            description : "Created a Netflix clone using HTML and CSS" ,
+            image : "/netflix_colne.jpeg" ,
+            techStack : ["HTML" , "CSS"] ,
+            liveUrl : "https://yatinsingh2007.github.io/Netflix-Clone/Netflix.html" ,
+            githubUrl : "https://github.com/yatinsingh2007/Netflix-Clone" ,
+            gradient : "from-red-500 to-black"
         }
     ]
 

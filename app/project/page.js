@@ -14,7 +14,7 @@ export default function Project(){
             title : "ReportLens AI" ,
             description : "ReportLens AI is a web application that uses AI to analyze and summarize PDF reports. It allows users to upload PDF files and receive AI-generated summaries, key insights, and answers to specific questions about the content. The system helps users quickly understand and extract valuable information from long documents.",
             image: "/ReportLensAI.jpeg",
-            techStack: ["React.js" , "Tailwind CSS" , "Gemini API" , "Vercel"],
+            techStack: ["Next.js" , "Tailwind CSS" , "Gemini API" , "Node.js" , "Express.js" , "PostgreSQL" , "Prisma" , "Docker" , "GitHub Actions" , "Oracle Cloud infrastructure"],
             githubUrl: "https://github.com/yatinsingh2007/ReportLens-AI",
             gradient: "from-green-500 to-emerald-500"
         },
@@ -33,7 +33,7 @@ export default function Project(){
             title: "VintiCode",
             description: "A beginner-focused coding practice platform that builds problem-solving intuition before formal DSA. It offers a series of challenges with automated test case execution to strengthen logical reasoning and coding fundamentals.",
             image: "/vinticode.png",
-            techStack: ["Next.js", "Tailwind CSS", "Node.js", "Express.js", "Prisma" , "PostgreSQL" , "Vercel"],
+            techStack: ["Next.js", "Tailwind CSS", "Node.js", "Express.js", "Prisma" , "PostgreSQL" , "Vercel" , "Redis"],
             liveUrl: "https://vinticode.vercel.app/",
             githubUrl: "https://github.com/yatinsingh2007/VintiCode",
             gradient: "from-cyan-500 to-blue-500"

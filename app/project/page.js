@@ -21,9 +21,9 @@ export default function Project(){
         {
             id: 0,
             title: "CreditIQ",
-            description: "CreditIQ is a machine learning–based web application that predicts whether a person’s loan will be approved or rejected based on financial details. The system uses two trained models — Decision Tree Classifier and Logistic Regression — to analyze user inputs and determine loan eligibility. It demonstrates how machine learning can assist in automating loan approval decisions.",
+            description: "CreditIQ is an advanced AI-driven credit decisioning engine that moves beyond simple predictions to deep agentic reasoning. Using the PER (Plan-Execute-Reflect-Report) framework, it orchestrates multiple Llama models (8B/70B) to analyze loan applications, cross-reference RAG-powered credit policies via ChromaDB, and generate professional audit-ready reports. It features ultra-economy resilience with automatic fallback logic to ensure reliable operation within API limits.",
             image: "/creditIQ.jpeg",
-            techStack: ["Python" , "scikit-learn" , "pandas" , "matplotlib" , "seaborn" , "plotly" , "streamlit"],
+            techStack: ["Python", "Streamlit", "Llama 3 (8B/70B)", "LangGraph", "ChromaDB", "Groq", "Scikit-Learn", "RAG"],
             liveUrl: "https://creditiq123.streamlit.app",
             githubUrl: "https://github.com/yatinsingh2007/CreditIQ",
             gradient: ""

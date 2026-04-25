@@ -224,7 +224,6 @@ export default function About() {
                     </div>
                     <div className="space-y-1">
                       <div className="text-white font-bold tracking-wide">{skill.name}</div>
-                      <div className="text-xs text-zinc-500 font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Expert Level</div>
                     </div>
                   </div>
                 ))}

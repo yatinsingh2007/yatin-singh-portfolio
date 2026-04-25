@@ -1,23 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, MenuItem } from "../components/ui/navbar-menu";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Menu as MenuIcon, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export function NavbarDemo() {
-  return (
-    <div className="relative w-full flex items-center justify-center">
-      <Navbar className="top-4" />
-    </div>
-  );
-}
-
-function Navbar({ className }) {
+export function Navbar({ className }) {
   const [active, setActive] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navItems = [
     { name: "Home", link: "/" },
@@ -36,25 +38,39 @@ function Navbar({ className }) {
   return (
     <>
       {/* Desktop Navbar */}
-      <div className={cn("hidden md:fixed md:flex md:justify-center top-10 inset-x-0 max-w-2xl mx-auto z-50", className)}>
+      <div 
+        className={cn(
+          "fixed top-6 inset-x-0 max-w-2xl mx-auto z-50 transition-all duration-300 hidden md:block",
+          scrolled ? "top-4" : "top-8",
+          className
+        )}
+      >
         <Menu setActive={setActive}>
           {navItems.map((item) => (
-            <MenuItem
-              key={item.name}
-              setActive={setActive}
-              active={active}
-              item={item.name}
-              onClick={() => handleNavigation(item.link)}
-            />
+            <div key={item.name} className="relative">
+              <MenuItem
+                setActive={setActive}
+                active={active}
+                item={item.name}
+                onClick={() => handleNavigation(item.link)}
+              />
+              {pathname === item.link && (
+                <motion.div
+                  layoutId="activeNav"
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+            </div>
           ))}
         </Menu>
       </div>
 
-      {/* Mobile Navbar */}
+      {/* Mobile Navbar Button */}
       <div className="md:hidden fixed top-6 right-6 z-50">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="p-3 bg-zinc-900/90 backdrop-blur-md border border-white/10 rounded-full text-white shadow-lg hover:bg-zinc-800 transition-colors"
+          className="p-3 bg-black/80 backdrop-blur-xl border border-white/10 rounded-full text-white shadow-2xl hover:bg-zinc-900 transition-all active:scale-95"
         >
           {isMobileMenuOpen ? <X size={24} /> : <MenuIcon size={24} />}
         </button>
@@ -64,13 +80,12 @@ function Navbar({ className }) {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center md:hidden"
           >
-            <div className="flex flex-col gap-8 text-center">
+            <div className="flex flex-col gap-6 text-center">
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.name}
@@ -80,7 +95,12 @@ function Navbar({ className }) {
                 >
                   <button
                     onClick={() => handleNavigation(item.link)}
-                    className="text-2xl font-medium text-zinc-400 hover:text-white transition-colors"
+                    className={cn(
+                      "text-3xl font-bold tracking-tight transition-all duration-300",
+                      pathname === item.link 
+                        ? "text-indigo-500 scale-110" 
+                        : "text-zinc-500 hover:text-white"
+                    )}
                   >
                     {item.name}
                   </button>

@@ -1,6 +1,9 @@
 "use client"
+
 import { BackgroundBeams } from "@/components/ui/background-beams"
 import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Send, Mail, MessageSquare, CheckCircle2, AlertCircle } from "lucide-react"
 
 export default function LampDemo() {
     const [formData, setFormData] = useState({
@@ -54,36 +57,22 @@ export default function LampDemo() {
         
         setIsSubmitting(true)
         setSubmitStatus(null)
-        
 
         try {
-            const response = await fetch(
-                "/api/contact",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        email: formData.email,
-                        message: formData.message,
-                    }),
-                }
-            );
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
 
             if (response.ok) {
                 setSubmitStatus("success")
-                setFormData({
-                    email: "",
-                    message: ""
-                })
-                
+                setFormData({ email: "", message: "" })
                 setTimeout(() => setSubmitStatus(null), 5000)
             } else {
                 setSubmitStatus("error")
             }
         } catch (error) {
-            console.error('Error submitting form:', error)
             setSubmitStatus("error")
         } finally {
             setIsSubmitting(false)
@@ -91,30 +80,72 @@ export default function LampDemo() {
     }
 
     return (
-        <div className="w-full min-h-screen relative flex items-center justify-center p-4 py-20">
-            <BackgroundBeams />
+        <div className="w-full min-h-screen relative flex items-center justify-center p-6 py-32 overflow-hidden selection:bg-blue-500/30">
+            <BackgroundBeams className="opacity-40" />
             
-            <div className="w-full max-w-2xl relative z-10">
+            <div className="w-full max-w-4xl grid md:grid-cols-2 gap-12 relative z-10">
+                {/* Left Side: Copy */}
+                <div className="flex flex-col justify-center space-y-8">
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <h1 className="text-6xl md:text-7xl font-bold tracking-tighter text-white leading-[1.1]">
+                            Let's build <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">
+                                something epic.
+                            </span>
+                        </h1>
+                    </motion.div>
 
-                <div className="text-center mb-8 md:mb-12">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-linear-to-r from-green-300 via-green-500 to-green-600 bg-clip-text text-transparent animate-gradient">
-                        Want to Contact Me?
-                    </h1>
-                    <p className="text-gray-400 text-lg md:text-xl">
-                        Fill out the form below and I'll get back to you as soon as possible.
-                    </p>
+                    <motion.p 
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                        className="text-neutral-400 text-xl font-light leading-relaxed max-w-md"
+                    >
+                        Have a project in mind or just want to say hi? I'm always open to new opportunities and interesting conversations.
+                    </motion.p>
+
+                    <motion.div 
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="space-y-4 pt-4"
+                    >
+                        <div className="flex items-center gap-4 group">
+                            <div className="p-3 rounded-2xl bg-blue-500/10 border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
+                                <Mail className="w-6 h-6 text-blue-400" />
+                            </div>
+                            <div>
+                                <div className="text-sm text-neutral-500 font-medium">Email Me</div>
+                                <a href="mailto:yatin.singh.dev@gmail.com" className="text-lg text-white hover:text-blue-400 transition-colors font-medium">
+                                    yatin.singh.dev@gmail.com
+                                </a>
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
 
-
-                <form onSubmit={handleSubmit} className="relative">
-
-                    <div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl">
-                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl"></div>
+                {/* Right Side: Form */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="relative"
+                >
+                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                    
+                    <div className="relative bg-neutral-900/40 backdrop-blur-3xl border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl overflow-hidden">
+                        {/* Decorative background element */}
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[100px] -z-10" />
                         
-                        <div className="space-y-6">
-                            <div className="group">
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                                    Email Address *
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div className="space-y-2">
+                                <label htmlFor="email" className="text-sm font-mono tracking-widest text-neutral-500 uppercase flex items-center gap-2">
+                                    <Mail className="w-3.5 h-3.5" />
+                                    Email Address
                                 </label>
                                 <input
                                     type="email"
@@ -122,17 +153,28 @@ export default function LampDemo() {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/10'} rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-300 hover:bg-white/10`}
-                                    placeholder="john@example.com"
+                                    className={`w-full px-6 py-4 bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/10'} rounded-2xl text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all duration-300 hover:bg-white/10`}
+                                    placeholder="your@email.com"
                                 />
-                                {errors.email && (
-                                    <p className="mt-1 text-sm text-red-400 animate-fadeIn">{errors.email}</p>
-                                )}
+                                <AnimatePresence>
+                                    {errors.email && (
+                                        <motion.p 
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: "auto" }}
+                                            exit={{ opacity: 0, height: 0 }}
+                                            className="text-xs text-red-400 flex items-center gap-1 pl-2"
+                                        >
+                                            <AlertCircle className="w-3 h-3" />
+                                            {errors.email}
+                                        </motion.p>
+                                    )}
+                                </AnimatePresence>
                             </div>
 
-                            <div className="group">
-                                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                                    Message *
+                            <div className="space-y-2">
+                                <label htmlFor="message" className="text-sm font-mono tracking-widest text-neutral-500 uppercase flex items-center gap-2">
+                                    <MessageSquare className="w-3.5 h-3.5" />
+                                    Your Message
                                 </label>
                                 <textarea
                                     id="message"
@@ -140,62 +182,57 @@ export default function LampDemo() {
                                     value={formData.message}
                                     onChange={handleChange}
                                     rows="5"
-                                    className={`w-full px-4 py-3 bg-white/5 border ${errors.message ? 'border-red-500/50' : 'border-white/10'} rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all duration-300 hover:bg-white/10 resize-none`}
-                                ></textarea>
-                                {errors.message && (
-                                    <p className="mt-1 text-sm text-red-400 animate-fadeIn">{errors.message}</p>
-                                )}
+                                    className={`w-full px-6 py-4 bg-white/5 border ${errors.message ? 'border-red-500/50' : 'border-white/10'} rounded-2xl text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all duration-300 hover:bg-white/10 resize-none`}
+                                    placeholder="Tell me about your vision..."
+                                />
+                                <AnimatePresence>
+                                    {errors.message && (
+                                        <motion.p 
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: "auto" }}
+                                            exit={{ opacity: 0, height: 0 }}
+                                            className="text-xs text-red-400 flex items-center gap-1 pl-2"
+                                        >
+                                            <AlertCircle className="w-3 h-3" />
+                                            {errors.message}
+                                        </motion.p>
+                                    )}
+                                </AnimatePresence>
                             </div>
 
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full relative group/btn overflow-hidden rounded-xl bg-blue-500 p-[2px] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-purple-500/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                                className="w-full relative group/btn overflow-hidden rounded-2xl bg-blue-500 p-[1px] transition-all duration-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50"
                             >
-                                <div className="relative bg-gray-900 rounded-[10px] px-6 py-3 transition-all duration-300 group-hover/btn:bg-transparent">
-                                    <span className="relative z-10 font-semibold text-white">
-                                        {isSubmitting ? (
-                                            <span className="flex items-center justify-center gap-2">
-                                                <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                                </svg>
-                                                Sending...
-                                            </span>
-                                        ) : (
-                                            "Send Message"
-                                        )}
+                                <div className="relative bg-[#030303] rounded-[15px] px-8 py-4 transition-all duration-300 group-hover/btn:bg-transparent flex items-center justify-center gap-3 overflow-hidden">
+                                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
+                                    
+                                    <span className="relative z-10 font-bold text-white tracking-tight">
+                                        {isSubmitting ? "Initiating..." : "Launch Message"}
                                     </span>
+                                    {!isSubmitting && <Send className="w-4 h-4 relative z-10 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />}
                                 </div>
                             </button>
 
-                            {submitStatus === "success" && (
-                                <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-xl animate-fadeIn">
-                                    <p className="text-green-400 text-center font-medium">
-                                        ✓ Message sent successfully! I'll get back to you soon.
-                                    </p>
-                                </div>
-                            )}
-                            
-                            {submitStatus === "error" && (
-                                <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl animate-fadeIn">
-                                    <p className="text-red-400 text-center font-medium">
-                                        ✗ Something went wrong. Please try again.
-                                    </p>
-                                </div>
-                            )}
-                        </div>
+                            <AnimatePresence>
+                                {submitStatus === "success" && (
+                                    <motion.div 
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0 }}
+                                        className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl"
+                                    >
+                                        <p className="text-emerald-400 text-center text-sm font-medium flex items-center justify-center gap-2">
+                                            <CheckCircle2 className="w-4 h-4" />
+                                            Message intercepted. I'll respond shortly.
+                                        </p>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </form>
                     </div>
-                </form>
-
-                <div className="mt-8 text-center">
-                    <p className="text-gray-400 text-sm">
-                        You can reach me directly at{" "}
-                        <a href="mailto:your.email@example.com" className="text-purple-400 hover:text-purple-300 transition-colors duration-300 underline">
-                            yatin.singh.dev@gmail.com
-                        </a>
-                    </p>
-                </div>
+                </motion.div>
             </div>
         </div>
     )

@@ -1,171 +1,156 @@
 "use client"
-import { BackgroundBeams } from "@/components/ui/background-beams"
-import { NavbarDemo } from "@/section/Navbar"
 
-export default function Education(){
+import { BackgroundBeams } from "@/components/ui/background-beams"
+import { Navbar } from "@/section/Navbar"
+import { motion } from "framer-motion"
+import { GraduationCap, Calendar, MapPin, School, Award } from "lucide-react"
+
+export default function Education() {
     const educationData = [
         {
-            degree: "Bachelor of Technology in Computer Science and Artificial Intelligence (2nd Year - Sem 4)",
-            institution: "Newton School of Technology , Rishihood University",
-            location: "Sonipat , Haryana , India",
-            startDate: "August 2024",
-            endDate: "Present",
-            grade: "CGPA: 7.94/10",
-            description: "Focused on software engineering, data structures, algorithms, web development and AIML",
+            degree: "Bachelor of Technology in Computer Science and Artificial Intelligence",
+            period: "2024 — 2028",
+            institution: "Newton School of Technology",
+            university: "Rishihood University",
+            location: "Sonipat, Haryana, India",
+            status: "2nd Year — Sem 4",
+            grade: "CGPA: 7.94 / 10",
+            description: "Intensive program focused on software engineering, data structures, algorithms, and artificial intelligence. Actively participating in research and development projects.",
+            color: "from-emerald-400 to-cyan-400"
         },
         {
             degree: "Higher Secondary Education (12th Grade)",
+            period: "2022 — 2024",
             institution: "FIITJEE Junior College",
-            location: "Visakhapatnam , Andhra Pradesh , India",
-            startDate: "June 2022",
-            endDate: "May 2024",
+            location: "Visakhapatnam, Andhra Pradesh, India",
+            status: "Completed",
             grade: "Percentage: 93.3%",
-            description: "PCM"
-        } ,
+            description: "Advanced study in Physics, Chemistry, and Mathematics (PCM) with a focus on competitive examination preparation.",
+            color: "from-blue-400 to-indigo-400"
+        },
         {
             degree: "Secondary School Education (10th Grade)",
+            period: "2012 — 2022",
             institution: "Visakha Valley School",
-            location: "Visakhapatnam , Andhra Pradesh , India",
-            startDate: "June 2012",
-            endDate: "May 2022",
-            grade: "Percentage: 85%"
+            location: "Visakhapatnam, Andhra Pradesh, India",
+            status: "Completed",
+            grade: "Percentage: 85%",
+            description: "Foundational academic education with a strong emphasis on science and mathematics.",
+            color: "from-purple-400 to-pink-400"
         }
     ]
 
     return (
-        <div className="min-h-screen w-full bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950 relative overflow-hidden">
-            <NavbarDemo />
-            <BackgroundBeams />
+        <main className="min-h-screen w-full bg-[#030303] relative overflow-hidden selection:bg-emerald-500/30">
+            <Navbar />
+            <BackgroundBeams className="opacity-40" />
             
-            <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
-                <div className="text-center mb-16 animate-fade-in">
-                    <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500 mb-4">
-                        Education
-                    </h1>
-                    <p className="text-neutral-400 text-lg md:text-xl max-w-2xl mx-auto">
-                        My academic journey and qualifications
-                    </p>
-                </div>
+            <div className="relative z-10 max-w-5xl mx-auto px-6 py-32">
+                <header className="mb-24 space-y-4">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-white">
+                            Academic <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500">
+                                Journey
+                            </span>
+                        </h1>
+                    </motion.div>
+                    <motion.p 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                        className="text-neutral-400 text-xl max-w-xl font-light leading-relaxed"
+                    >
+                        A record of my academic milestones and the foundational knowledge that drives my technical pursuits.
+                    </motion.p>
+                </header>
 
-                <div className="relative">
-                    <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-500 via-cyan-500 to-blue-500 transform md:-translate-x-1/2"></div>
+                <div className="relative space-y-12">
+                    {/* Timeline Line */}
+                    <div className="absolute left-0 md:left-8 top-8 bottom-8 w-[1px] bg-gradient-to-b from-emerald-500/50 via-neutral-800 to-neutral-800/20" />
 
-                    <div className="space-y-12">
-                        {educationData.map((edu, index) => (
-                            <div 
-                                key={index}
-                                className={`relative flex items-center ${
-                                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                                } flex-col`}
-                                style={{
-                                    animation: `slideIn 0.6s ease-out ${index * 0.2}s both`
-                                }}
-                            >
-                                <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full transform md:-translate-x-1/2 border-4 border-neutral-900 z-10 pulse-dot"></div>
-
-                                <div className={`w-full md:w-[calc(50%-3rem)] ml-16 md:ml-0 ${
-                                    index % 2 === 0 ? 'md:mr-auto md:pr-12' : 'md:ml-auto md:pl-12'
-                                }`}>
-                                    <div className="group relative bg-neutral-900/40 backdrop-blur-xl border border-neutral-800/50 rounded-2xl p-6 md:p-8 hover:border-emerald-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-1">
-                                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-cyan-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                        
-                                        <div className="relative z-10">
-                                            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/20 rounded-full px-4 py-1.5 mb-4">
-                                                <span className="text-emerald-400 text-sm font-medium">
-                                                    {edu.startDate} - {edu.endDate}
-                                                </span>
+                    {educationData.map((edu, index) => (
+                        <motion.div 
+                            key={index}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                            className="relative pl-12 md:pl-24"
+                        >
+                            {/* Dot */}
+                            <div className="absolute left-[-5px] md:left-[27px] top-4 w-[11px] h-[11px] rounded-full bg-[#030303] border-2 border-emerald-500 z-20 shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
+                            
+                            <div className="group relative bg-neutral-900/20 backdrop-blur-sm border border-neutral-800/50 rounded-3xl p-8 md:p-10 hover:border-emerald-500/30 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${edu.color} opacity-0 group-hover:opacity-5 blur-[100px] transition-opacity duration-700`} />
+                                
+                                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
+                                    <div className="space-y-2">
+                                        <div className="flex items-center gap-2 text-emerald-400 font-mono text-sm tracking-widest uppercase">
+                                            <Calendar className="w-4 h-4" />
+                                            {edu.period}
+                                        </div>
+                                        <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight group-hover:text-emerald-300 transition-colors duration-300">
+                                            {edu.degree}
+                                        </h3>
+                                    </div>
+                                    <div className="flex-shrink-0">
+                                        <div className="bg-neutral-800/40 border border-neutral-700/50 rounded-2xl px-5 py-3 backdrop-blur-md">
+                                            <div className="text-sm text-neutral-400 font-medium mb-1">Status</div>
+                                            <div className="text-white font-semibold flex items-center gap-2 text-lg">
+                                                <Award className="w-5 h-5 text-emerald-400" />
+                                                {edu.status}
                                             </div>
-
-                                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors duration-300">
-                                                {edu.degree}
-                                            </h3>
-
-                                            <div className="flex items-center gap-2 text-neutral-300 mb-1">
-                                                <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                                </svg>
-                                                <span className="font-semibold">{edu.institution}</span>
-                                            </div>
-
-                                            <div className="flex items-center gap-2 text-neutral-400 mb-3">
-                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                </svg>
-                                                <span className="text-sm">{edu.location}</span>
-                                            </div>
-
-                                            <div className="inline-block bg-neutral-800/50 rounded-lg px-4 py-2 mb-4">
-                                                <span className="text-emerald-400 font-semibold">{edu.grade}</span>
-                                            </div>
-
-                                            {edu.achievements && edu.achievements.length > 0 && (
-                                                <div>
-                                                    <h4 className="text-white font-semibold mb-2 flex items-center gap-2">
-                                                        <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                        </svg>
-                                                        Key Achievements
-                                                    </h4>
-                                                    <ul className="space-y-2">
-                                                        {edu.achievements.map((achievement, i) => (
-                                                            <li key={i} className="flex items-start gap-2 text-neutral-400">
-                                                                <span className="text-emerald-400 mt-1">•</span>
-                                                                <span>{achievement}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            )}
                                         </div>
                                     </div>
                                 </div>
+
+                                <div className="grid md:grid-cols-2 gap-8 mb-8">
+                                    <div className="space-y-4">
+                                        <div className="flex items-start gap-3">
+                                            <div className="mt-1 p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                                                <School className="w-5 h-5 text-emerald-400" />
+                                            </div>
+                                            <div>
+                                                <div className="text-sm text-neutral-500 font-medium">Institution</div>
+                                                <div className="text-xl text-neutral-200 font-semibold">{edu.institution}</div>
+                                                {edu.university && (
+                                                    <div className="text-neutral-400">{edu.university}</div>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3">
+                                            <div className="mt-1 p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
+                                                <MapPin className="w-5 h-5 text-cyan-400" />
+                                            </div>
+                                            <div>
+                                                <div className="text-sm text-neutral-500 font-medium">Location</div>
+                                                <div className="text-lg text-neutral-300">{edu.location}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="space-y-4">
+                                        <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-2xl p-6">
+                                            <div className="text-sm text-emerald-500/70 font-mono tracking-wider uppercase mb-2">Performance</div>
+                                            <div className="text-3xl font-bold text-white tracking-tighter">
+                                                {edu.grade}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p className="text-neutral-400 text-lg leading-relaxed font-light">
+                                    {edu.description}
+                                </p>
                             </div>
-                        ))}
-                    </div>
+                        </motion.div>
+                    ))}
                 </div>
             </div>
-
-            <style jsx>{`
-                @keyframes slideIn {
-                    from {
-                        opacity: 0;
-                        transform: translateY(30px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-
-                @keyframes fadeIn {
-                    from {
-                        opacity: 0;
-                        transform: translateY(-20px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-
-                .animate-fade-in {
-                    animation: fadeIn 0.8s ease-out;
-                }
-
-                .pulse-dot {
-                    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-                }
-
-                @keyframes pulse {
-                    0%, 100% {
-                        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-                    }
-                    50% {
-                        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
-                    }
-                }
-            `}</style>
-        </div>
+        </main>
     )
 }

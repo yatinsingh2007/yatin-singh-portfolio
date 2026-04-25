@@ -87,8 +87,6 @@ export default function About() {
   const skills = [
     { name: "Full Stack Development", icon: <Globe className="w-4 h-4 text-blue-400" />, color: "border-blue-500/20 bg-blue-500/5" },
     { name: "MERN Stack", icon: <Database className="w-4 h-4 text-emerald-400" />, color: "border-emerald-500/20 bg-emerald-500/5" },
-    { name: "Django", icon: <Server className="w-4 h-4 text-indigo-400" />, color: "border-indigo-500/20 bg-indigo-500/5" },
-    { name: "GoLang", icon: <Code className="w-4 h-4 text-cyan-400" />, color: "border-cyan-500/20 bg-cyan-500/5" },
     { name: "DevOps", icon: <Terminal className="w-4 h-4 text-zinc-400" />, color: "border-zinc-500/20 bg-zinc-500/5" },
     { name: "AI/ML", icon: <Cpu className="w-4 h-4 text-purple-400" />, color: "border-purple-500/20 bg-purple-500/5" },
   ];

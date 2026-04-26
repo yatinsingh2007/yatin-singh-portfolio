@@ -84,7 +84,7 @@ const people = [
   {
     id : 17 ,
     name : "Python" ,
-    image : "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Python.svg/1200px-Python.svg.png"
+    image : "https://i.pinimg.com/736x/a8/53/14/a8531424a5fac660e4261f72ca817141.jpg"
   },
   {
     id : 18 ,

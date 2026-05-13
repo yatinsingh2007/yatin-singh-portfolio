@@ -114,8 +114,8 @@ export default function Project() {
             description: "A pixel-perfect recreation of the world's leading streaming platform, focusing on performance, responsiveness, and visual fidelity.",
             image: "/netflix_clone.jpeg",
             techStack: ["HTML", "CSS", "JavaScript", "Responsive Design"],
-            liveUrl: "https://yatinsingh2007.github.io/Netflix-Clone/Netflix.html",
-            githubUrl: "https://github.com/yatinsingh2007/Netflix-Clone",
+            liveUrl: "https://yatinsingh2007.github.io/Netflix_Clone/Netflix.html",
+            githubUrl: "https://github.com/yatinsingh2007/Netflix_Clone",
             gradient: "from-red-600 to-zinc-950",
             shadowColor: "rgba(220, 38, 38, 0.1)"
         }

@@ -15,7 +15,7 @@ export default function Project() {
             title: "Shopsmart",
             description: "A fully functional e-commerce website with features like product listing, cart management, and user authentication.",
             image: "/ecommerce.jpeg",
-            techStack: ["Next.js", "Tailwind CSS", "Prisma", "PostgreSQL", "Docker" , "Terraform" , "AWS-ECS" , "S-3 Bucket"],
+            techStack: ["Next.js", "Tailwind CSS", "Prisma", "PostgreSQL", "Docker" , "Terraform" , "AWS-ECS" , "AWS-S3"],
             githubUrl: "https://github.com/yatinsingh2007/shopsmart",
             gradient: "from-emerald-500 to-teal-500",
             shadowColor: "rgba(16, 185, 129, 0.1)"

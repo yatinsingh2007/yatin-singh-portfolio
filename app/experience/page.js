@@ -160,10 +160,10 @@ export default function ExperiencePage() {
       location : 'Remote',
       tags : [],
       features : [],
-      offerLetterUrl : 'https://drive.google.com/file/d/1fZYzcVdcsWsPlEZR4CYbxVKA5O4SNc7J/view?usp=sharing',
+      offerLetterUrl : 'https://drive.google.com/file/d/1S98KZtj4OYWdcR1ZsIEORwe5d9NUp9bc/view?usp=sharing',
       completionLetterUrl : null,
       duration : 'Present'
-  } ,
+    } ,
     {
       logo: "https://landing-page-ag-sable.vercel.app/assuredgiglogo.webp",
       companyName: "AssuredGig",

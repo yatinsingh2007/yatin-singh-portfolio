@@ -154,7 +154,7 @@ export default function ExperiencePage() {
       logo: "https://media.licdn.com/dms/image/v2/D4D0BAQFe6iYKRwjKHQ/company-logo_200_200/company-logo_200_200/0/1729863208386?e=2147483647&v=beta&t=kZz3W83vbFgwQRxQzivUKyFAEtPdEArdZmAR5SgnuqE" ,
       companyName : 'ByteBlock Technologies' ,
       startDate : 'June 2026' ,
-      endDate : 'Present' ,
+      endDate : 'September 2026' ,
       companyDescription : 'Building tailored software solutions and digital strategies to help businesses thrive in the modern tech landscape',
       role : 'Full Stack Intern',
       location : 'Remote',

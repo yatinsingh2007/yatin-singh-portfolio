@@ -1,5 +1,4 @@
 "use client";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -7,7 +6,7 @@ import { motion } from "framer-motion";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import React from "react";
 import { Navbar } from "@/section/Navbar";
-import { FileText, ExternalLink, Calendar, Briefcase, Zap, Globe, Rocket } from "lucide-react";
+import { FileText, ExternalLink, Calendar, Briefcase, Zap, Rocket } from "lucide-react";
 
 function ExperienceCard({
   logo,
@@ -15,10 +14,15 @@ function ExperienceCard({
   companyDescription,
   startDate,
   endDate,
+  duration,
+  role,
+  location,
+  tags = [],
   features = [],
   offerLetterUrl,
   completionLetterUrl,
-  index
+  index,
+  isLast
 }) {
   return (
     <motion.div
@@ -26,107 +30,120 @@ function ExperienceCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className="w-full max-w-4xl mx-auto mb-16 relative group"
+      className="w-full relative group"
     >
-      {/* Decorative background glow */}
-      <div className="absolute -inset-4 bg-emerald-500/5 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl pointer-events-none" />
-      
-      <Card className="relative bg-zinc-900/40 backdrop-blur-xl border border-white/5 text-white rounded-2xl overflow-hidden hover:border-emerald-500/30 transition-all duration-500 shadow-2xl">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        
-        <CardContent className="p-6 sm:p-10">
-          <div className="flex flex-col md:flex-row gap-8">
-            {/* Left side: Logo & Timeline visual */}
-            <div className="flex flex-col items-center gap-4">
-              <div className="relative">
-                <div className="absolute -inset-2 bg-emerald-500/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-zinc-950 border border-white/10 p-3 flex items-center justify-center overflow-hidden">
-                  {logo ? (
-                    <Image
-                      src={logo}
-                      alt={companyName}
-                      width={80}
-                      height={80}
-                      className="object-contain w-full h-full"
-                    />
-                  ) : (
-                    <Briefcase size={32} className="text-zinc-700" />
-                  )}
-                </div>
-              </div>
-              <div className="hidden md:block w-px h-full bg-gradient-to-b from-emerald-500/50 via-emerald-500/10 to-transparent mt-4" />
-            </div>
+      {/* Decorative background glow on hover */}
+      <div className="absolute -inset-x-4 -inset-y-6 bg-emerald-500/[0.02] rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl pointer-events-none" />
 
-            {/* Right side: Content */}
-            <div className="flex-1 space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-emerald-400 transition-colors duration-300 flex items-center gap-3">
-                    {companyName}
-                    <motion.span 
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="h-2 w-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]" 
-                    />
-                  </h2>
-                  <div className="flex items-center gap-2 text-emerald-500/80 text-sm font-medium mt-1">
-                    <Calendar size={14} />
-                    <span>{startDate} — {endDate}</span>
-                  </div>
-                </div>
-                
-                <div className="flex gap-2">
-                  {offerLetterUrl && (
-                    <a
-                      href={offerLetterUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-emerald-500/10 hover:border-emerald-500/50 text-zinc-400 hover:text-emerald-400 transition-all duration-300"
-                      title="Offer Letter"
-                    >
-                      <FileText size={18} />
-                    </a>
-                  )}
-                  {completionLetterUrl && (
-                    <a
-                      href={completionLetterUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-emerald-500/10 hover:border-emerald-500/50 text-zinc-400 hover:text-emerald-400 transition-all duration-300"
-                      title="Experience Letter"
-                    >
-                      <ExternalLink size={18} />
-                    </a>
-                  )}
-                </div>
-              </div>
+      {/* Timeline Circle Logo */}
+      <div className="absolute left-[-24px] sm:left-[-40px] top-0.5 transform -translate-x-1/2 z-20">
+        <div className="relative w-10 h-10 sm:w-16 sm:h-16 rounded-full bg-zinc-950 border border-white/10 flex items-center justify-center overflow-hidden shadow-xl group-hover:border-emerald-500/30 transition-colors duration-500">
+          {logo ? (
+            <Image
+              src={logo}
+              alt={companyName}
+              width={64}
+              height={64}
+              className="object-cover w-full h-full"
+            />
+          ) : (
+            <Briefcase size={20} className="text-zinc-600" />
+          )}
+        </div>
+      </div>
 
-              <p className="text-zinc-400 text-base sm:text-lg leading-relaxed font-light">
-                {companyDescription}
-              </p>
-
-              <div className="space-y-4 pt-2">
-                <h3 className="text-xs font-bold text-emerald-500 uppercase tracking-[0.2em] flex items-center gap-2">
-                  <Zap size={14} />
-                  Impact & Contributions
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {features.map((feature, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ x: 5 }}
-                      className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 group/feature hover:bg-white/[0.05] transition-all duration-300"
-                    >
-                      <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500/40 group-hover/feature:bg-emerald-500 transition-colors" />
-                      <span className="text-sm text-zinc-300 leading-tight">{feature}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>
+      {/* Content Area */}
+      <div className="space-y-6">
+        {/* Header: Company Name & Letters */}
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-emerald-400 transition-colors duration-300 flex items-center gap-3">
+              {companyName}
+              <motion.span 
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="h-2 w-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]" 
+              />
+            </h2>
+            <p className="text-zinc-400 text-base sm:text-lg leading-relaxed font-light mt-2 max-w-3xl">
+              {companyDescription}
+            </p>
           </div>
-        </CardContent>
-      </Card>
+          
+          {/* Action Links */}
+          <div className="flex flex-wrap gap-2 sm:shrink-0">
+            {offerLetterUrl && (
+              <a
+                href={offerLetterUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-emerald-400 border border-white/5 hover:border-emerald-500/30 bg-zinc-900/40 backdrop-blur-md px-3 py-1.5 rounded-full transition-all duration-300"
+                title="Offer Letter"
+              >
+                <FileText size={14} />
+                <span>Offer Letter</span>
+              </a>
+            )}
+            {completionLetterUrl && (
+              <a
+                href={completionLetterUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-emerald-400 border border-white/5 hover:border-emerald-500/30 bg-zinc-900/40 backdrop-blur-md px-3 py-1.5 rounded-full transition-all duration-300"
+                title="Experience Letter"
+              >
+                <ExternalLink size={14} />
+                <span>Experience Letter</span>
+              </a>
+            )}
+          </div>
+        </div>
+
+        {/* Sub-Header: Dates, Role, Location */}
+        <div className="space-y-1.5 pt-2">
+          <div className="text-zinc-500 text-xs sm:text-sm font-medium tracking-wide">
+            {startDate} — {endDate} {duration && `· ${duration}`}
+          </div>
+          <div className="text-white text-lg sm:text-xl font-bold">
+            {role} {location && <span className="text-zinc-400 font-normal"> — {location}</span>}
+          </div>
+        </div>
+
+        {/* Impact Metric Tags */}
+        {tags && tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 pt-1">
+            {tags.map((tag, idx) => (
+              <Badge 
+                key={idx}
+                className="bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/20 text-teal-400 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors"
+              >
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        )}
+
+        {/* Features Worked On */}
+        {features && features.length > 0 && (
+          <div className="space-y-3 pt-3">
+            <h3 className="text-sm font-bold text-zinc-200 tracking-wider">
+              Features Worked on
+            </h3>
+            <ul className="list-disc pl-5 space-y-2 text-zinc-400 font-light text-sm sm:text-base">
+              {features.map((feature, i) => (
+                <li key={i} className="leading-relaxed hover:text-zinc-300 transition-colors duration-200">
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      {/* Horizontal Dashed Divider between experiences */}
+      {!isLast && (
+        <div className="w-full my-16 border-t border-dashed border-zinc-800" />
+      )}
     </motion.div>
   );
 }
@@ -134,11 +151,32 @@ function ExperienceCard({
 export default function ExperiencePage() {
   const experiences = [
     {
+      logo: "https://media.licdn.com/dms/image/v2/D4D0BAQFe6iYKRwjKHQ/company-logo_200_200/company-logo_200_200/0/1729863208386?e=2147483647&v=beta&t=kZz3W83vbFgwQRxQzivUKyFAEtPdEArdZmAR5SgnuqE" ,
+      companyName : 'ByteBlock Technologies' ,
+      startDate : 'June 2026' ,
+      endDate : 'Present' ,
+      companyDescription : 'Building tailored software solutions and digital strategies to help businesses thrive in the modern tech landscape',
+      role : 'Full Stack Intern',
+      location : 'Remote',
+      tags : [],
+      features : [],
+      offerLetterUrl : 'https://drive.google.com/file/d/1fZYzcVdcsWsPlEZR4CYbxVKA5O4SNc7J/view?usp=sharing',
+      completionLetterUrl : null,
+      duration : 'Present'
+  } ,
+    {
       logo: "https://landing-page-ag-sable.vercel.app/assuredgiglogo.webp",
       companyName: "AssuredGig",
       companyDescription: "Architecting the future of secure freelancing. AssuredGig connects verified professionals with clients, prioritizing trust and guaranteed earnings through intelligent systems.",
-      startDate: "June 2024",
-      endDate: "August 2024",
+      startDate: "June 2025",
+      endDate: "August 2025",
+      duration: "2 mos",
+      role: "Full Stack Intern",
+      location: "Remote",
+      tags: [
+        "Optimized mobile performance (35% → 75%)",
+        "Architected Django & DRF backend APIs"
+      ],
       features: [
         "Architected complete backend with Django & DRF",
         "Optimized mobile performance (35% → 75%)",
@@ -166,9 +204,9 @@ export default function ExperiencePage() {
       <div className="relative z-10">
         <Navbar />
         
-        <main className="pt-32 pb-32 px-4 max-w-6xl mx-auto">
+        <main className="pt-32 pb-32 px-4 max-w-5xl mx-auto">
           {/* Header */}
-          <div className="relative mb-20 text-center sm:text-left">
+          <div className="relative mb-24 text-center sm:text-left">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -198,11 +236,21 @@ export default function ExperiencePage() {
             </motion.p>
           </div>
 
-          {/* Experience List */}
-          <div className="space-y-4">
-            {experiences.map((exp, index) => (
-              <ExperienceCard key={index} {...exp} index={index} />
-            ))}
+          {/* Timeline Experience List */}
+          <div className="relative pl-12 sm:pl-20 mt-12 mb-28">
+            {/* Vertical timeline line */}
+            <div className="absolute left-[24px] sm:left-[40px] top-2 bottom-2 w-px bg-zinc-800" />
+            
+            <div className="space-y-16">
+              {experiences.map((exp, index) => (
+                <ExperienceCard 
+                  key={index} 
+                  {...exp} 
+                  index={index} 
+                  isLast={index === experiences.length - 1} 
+                />
+              ))}
+            </div>
           </div>
 
           {/* Footer Call to Action */}
@@ -231,4 +279,5 @@ export default function ExperiencePage() {
     </div>
   );
 }
+
 

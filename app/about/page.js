@@ -168,7 +168,7 @@ export default function About() {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="flex flex-wrap gap-6 items-center pt-4"
               >
-                <a href="https://drive.google.com/file/d/1C-CYeAOXZ7S24WUoa2gvARVeP9KN18bt/view?usp=sharing" target="_blank">
+                <a href="https://drive.google.com/file/d/1S0xoxRe2WiBto-6tn-7eI_vuGNdo0xGL/view?usp=sharing" target="_blank">
                   <GlowingButton
                     text="Download CV"
                     icon={<FileText size={20} />}

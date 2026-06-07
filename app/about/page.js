@@ -170,7 +170,7 @@ export default function About() {
               >
                 <a href="https://drive.google.com/file/d/1S0xoxRe2WiBto-6tn-7eI_vuGNdo0xGL/view?usp=sharing" target="_blank">
                   <GlowingButton
-                    text="Download CV"
+                    text="Resume"
                     icon={<FileText size={20} />}
                   />
                 </a>

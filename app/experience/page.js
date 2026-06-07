@@ -158,8 +158,19 @@ export default function ExperiencePage() {
       companyDescription : 'Building tailored software solutions and digital strategies to help businesses thrive in the modern tech landscape',
       role : 'Full Stack Intern',
       location : 'Remote',
-      tags : [],
-      features : [],
+      tags : [
+        "Built end-to-end full-stack features",
+        "Integrated REST APIs & third-party services",
+        "Collaborated in agile development cycles"
+      ],
+      features : [
+        "Developed end-to-end web applications for external clients, translating business requirements into scalable solutions",
+        "Built robust features across frontend, backend, database, and authentication layers",
+        "Integrated third-party services, REST APIs, and database systems to support business workflows",
+        "Delivered client-facing projects from development through deployment, ensuring performance and maintainability",
+        "Collaborated with developers and project stakeholders in an agile environment to meet delivery milestones",
+        "Debugged, tested, and optimized applications to enhance reliability and user experience"
+      ],
       offerLetterUrl : 'https://drive.google.com/file/d/1S98KZtj4OYWdcR1ZsIEORwe5d9NUp9bc/view?usp=sharing',
       completionLetterUrl : null,
       duration : 'Present'

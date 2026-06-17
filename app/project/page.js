@@ -33,9 +33,9 @@ export default function Project() {
         {
             id: 0,
             title: "CreditIQ",
-            description: "Autonomous AI agents specialized in credit risk assessment. Leverages the PER framework to coordinate multi-agent reasoning with Llama 3 and RAG architectures.",
+            description: "An agentic credit-risk system that pairs ML classifiers (Logistic Regression + Decision Tree) with a RAG-retrieved credit-policy rulebook. A LangGraph pipeline grounds each prediction against the relevant lending rules to produce an explainable credit decision.",
             image: "/creditIQ.jpeg",
-            techStack: ["Python", "Streamlit", "LangGraph", "ChromaDB", "Llama 3", "Groq"],
+            techStack: ["Python", "Streamlit", "LangGraph", "ChromaDB", "Llama 3", "Groq", "scikit-learn"],
             liveUrl: "https://creditiq123.streamlit.app",
             githubUrl: "https://github.com/yatinsingh2007/CreditIQ",
             gradient: "from-indigo-600 to-violet-500",

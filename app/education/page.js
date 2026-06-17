@@ -13,7 +13,7 @@ export default function Education() {
             institution: "Newton School of Technology",
             university: "Rishihood University",
             location: "Sonipat, Haryana, India",
-            status: "2nd Year — Sem 4",
+            status: "3rd Year — Sem 5",
             grade: "CGPA: 7.94 / 10",
             description: "Intensive program focused on software engineering, data structures, algorithms, and artificial intelligence. Actively participating in research and development projects.",
             color: "from-emerald-400 to-cyan-400"

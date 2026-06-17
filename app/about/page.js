@@ -93,7 +93,7 @@ export default function About() {
 
   const milestones = [
     { label: "Experience", value: "Internship @AssuredGig", icon: <Zap size={16} className="text-amber-400" /> },
-    { label: "Education", value: "2nd Year B.Tech @NST", icon: <BookOpen size={16} className="text-indigo-400" /> },
+    { label: "Education", value: "3rd Year B.Tech @NST", icon: <BookOpen size={16} className="text-indigo-400" /> },
     { label: "Focus", value: "AI & Scalable Systems", icon: <Sparkles size={16} className="text-purple-400" /> },
   ];
 

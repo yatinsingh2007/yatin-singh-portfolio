@@ -64,6 +64,16 @@ export default function Project() {
             shadowColor: "rgba(37, 99, 235, 0.1)"
         },
         {
+            id: 10000000,
+            title: 'create-prism',
+            description: "A fast, no-nonsense CLI to scaffold Node.js + Express + Prisma (MySQL) starter projects in JavaScript or TypeScript.",
+            image: "/create-prism.png",
+            techStack: ["Node.js", "Express.js", "Prisma", "MySQL", "JavaScript", "TypeScript"],
+            liveUrl: "https://www.npmjs.com/package/create-prism",
+            gradient: "from-emerald-500 to-teal-500",
+            shadowColor: "rgba(16, 185, 129, 0.1)"
+        },
+        {
             id: 3,
             title: "Tic-Tac-Toe",
             description: "Classic gameplay meets futuristic design. A high-fidelity implementation featuring fluid animations and a polished glassmorphic interface.",

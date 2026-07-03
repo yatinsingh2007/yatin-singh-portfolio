@@ -114,9 +114,12 @@ export const ProjectCard = ({ project }) => {
               <CardItem
                 translateZ={20}
                 as={Link}
-                href={project.githubUrl}
+                href={project.githubUrl || "#"}
                 target="_blank"
-                className="group/btn px-6 py-2.5 rounded-full bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-500 transition-all flex items-center gap-2 shadow-lg shadow-indigo-500/20 active:scale-95"
+                className={cn(
+                  "group/btn px-6 py-2.5 rounded-full text-xs font-bold transition-all flex items-center gap-2 shadow-lg active:scale-95",
+                  project.githubUrl ? "bg-indigo-600 text-white hover:bg-indigo-500 shadow-indigo-500/20" : "bg-neutral-800 text-neutral-500 cursor-not-allowed"
+                )}
               >
                 <Github size={16} />
                 <span>Source Code</span>

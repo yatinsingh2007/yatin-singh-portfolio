@@ -14,7 +14,7 @@ export default function Education() {
             university: "Rishihood University",
             location: "Sonipat, Haryana, India",
             status: "3rd Year — Sem 5",
-            grade: "CGPA: 7.9 / 10",
+            grade: "CGPA: 7.91 / 10",
             description: "Intensive program focused on software engineering, data structures, algorithms, and artificial intelligence. Actively participating in research and development projects.",
             color: "from-emerald-400 to-cyan-400"
         },

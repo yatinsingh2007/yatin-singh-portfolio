@@ -69,6 +69,7 @@ export default function Project() {
             description: "A fast, no-nonsense CLI to scaffold Node.js + Express + Prisma (MySQL) starter projects in JavaScript or TypeScript.",
             image: "/create-prism.png",
             techStack: ["Node.js", "Express.js", "Prisma", "MySQL", "JavaScript", "TypeScript"],
+            githubUrl: "https://github.com/yatinsingh2007/create-prism",
             liveUrl: "https://www.npmjs.com/package/create-prism",
             gradient: "from-emerald-500 to-teal-500",
             shadowColor: "rgba(16, 185, 129, 0.1)"

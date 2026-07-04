@@ -1,18 +1,19 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Outfit, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import LoadingScreen from "@/components/LoadingScreen";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
+
 
 export const metadata = {
   title: "Yatin Singh | Full Stack Developer & AI Enthusiast",
@@ -28,10 +29,15 @@ export default function RootLayout({ children }) {
         <meta name="google-site-verification" content="L63uGSjv-ig202O9O7OB6XKbgHRQHhHyiKmkxhoJjNw" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black selection:bg-emerald-500/30`}
+        className={`${outfit.variable} ${spaceGrotesk.variable} antialiased bg-black selection:bg-indigo-500/30`}
       >
         <LoadingScreen />
         <div className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150" />
+        
+        {/* Ambient Glow */}
+        <div className="fixed top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-indigo-500/20 blur-[120px] pointer-events-none -z-10 mix-blend-screen animate-pulse" style={{ animationDuration: '10s' }} />
+        <div className="fixed bottom-[-20%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-purple-500/20 blur-[120px] pointer-events-none -z-10 mix-blend-screen animate-pulse" style={{ animationDuration: '15s', animationDelay: '2s' }} />
+
         <CustomCursor />
         <SmoothScroll>
           {children}

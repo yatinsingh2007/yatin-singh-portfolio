@@ -85,8 +85,8 @@ export default function Education() {
                             {/* Dot */}
                             <div className="absolute left-[-5px] md:left-[27px] top-4 w-[11px] h-[11px] rounded-full bg-[#030303] border-2 border-emerald-500 z-20 shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
                             
-                            <div className="group relative bg-neutral-900/20 backdrop-blur-sm border border-neutral-800/50 rounded-3xl p-8 md:p-10 hover:border-emerald-500/30 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-                                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${edu.color} opacity-0 group-hover:opacity-5 blur-[100px] transition-opacity duration-700`} />
+                            <div className="group relative bg-neutral-900/20 backdrop-blur-sm border border-neutral-800/50 rounded-3xl p-8 md:p-10 hover:border-emerald-500/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_10px_50px_rgba(16,185,129,0.15)]">
+                                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${edu.color} opacity-0 group-hover:opacity-10 blur-[100px] transition-opacity duration-700`} />
                                 
                                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
                                     <div className="space-y-2">

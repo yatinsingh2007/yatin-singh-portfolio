@@ -92,7 +92,6 @@ export default function About() {
   ];
 
   const milestones = [
-    { label: "Experience", value: "Intern @Byteblock Technologies | Ex-Intern @AssuredGig", icon: <Zap size={16} className="text-amber-400" /> },
     { label: "Education", value: "3rd Year B.Tech @NST", icon: <BookOpen size={16} className="text-indigo-400" /> },
     { label: "Focus", value: "AI & Scalable Systems", icon: <Sparkles size={16} className="text-purple-400" /> },
   ];
@@ -132,7 +131,7 @@ export default function About() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="grid grid-cols-1 md:grid-cols-3 gap-4"
+                className="grid grid-cols-1 md:grid-cols-2 gap-4"
               >
                 {milestones.map((item, i) => (
                   <div key={i} className="p-6 rounded-3xl bg-white/5 border border-white/5 backdrop-blur-xl hover:bg-white/10 transition-colors group">
@@ -155,7 +154,7 @@ export default function About() {
                   Currently in my third year of <span className="text-indigo-400 font-semibold">B.Tech at Newton School of Technology</span>, I thrive at the intersection of complex engineering and creative problem-solving.
                 </p>
                 <p>
-                  My journey is fueled by a relentless curiosity for how things work—from the low-level architecture of backend systems to the high-level intelligence of Large Language Models. My experiences as an intern at <span className="text-white">Byteblock Technologies</span> and ex-intern at <span className="text-white">AssuredGig</span> allowed me to apply these passions to real-world challenges, building systems that scale and matter.
+                  My journey is fueled by a relentless curiosity for how things work—from the low-level architecture of backend systems to the high-level intelligence of Large Language Models. I am constantly seeking out real-world challenges to apply these passions, building systems that scale and matter.
                 </p>
                 <p>
                   I don't just write code; I architect experiences. Whether it's mastering the MERN stack, diving deep into Django and GoLang, or orchestrating DevOps pipelines, my goal is always excellence.

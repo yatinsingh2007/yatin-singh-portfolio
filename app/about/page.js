@@ -151,7 +151,7 @@ export default function About() {
                 className="prose prose-invert prose-lg text-zinc-400 max-w-3xl space-y-6"
               >
                 <p>
-                  Currently in my third year of <span className="text-indigo-400 font-semibold">B.Tech at Newton School of Technology</span>, I thrive at the intersection of complex engineering and creative problem-solving.
+                  Currently in my third year of <span className="text-indigo-400 font-semibold">B.Tech at Newton School of Technology</span>, I thrive at the intersection of complex engineering and creative problem-solving. Soon, I will be embarking on my next academic chapter—pursuing a <span className="text-indigo-400 font-semibold">Master's degree in the Netherlands</span>.
                 </p>
                 <p>
                   My journey is fueled by a relentless curiosity for how things work—from the low-level architecture of backend systems to the high-level intelligence of Large Language Models. I am constantly seeking out real-world challenges to apply these passions, building systems that scale and matter.

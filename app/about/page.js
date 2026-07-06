@@ -154,10 +154,10 @@ export default function About() {
                   Currently in my third year of <span className="text-indigo-400 font-semibold">B.Tech at Newton School of Technology</span>, I thrive at the intersection of complex engineering and creative problem-solving. Soon, I will be embarking on my next academic chapter—pursuing a <span className="text-indigo-400 font-semibold">Master's degree in the Netherlands</span>.
                 </p>
                 <p>
-                  My journey is fueled by a relentless curiosity for how things work—from the low-level architecture of backend systems to the high-level intelligence of Large Language Models. I am constantly seeking out real-world challenges to apply these passions, building systems that scale and matter.
+                  Hailing from the coastal city of <span className="text-white font-semibold">Visakhapatnam</span>, my computer science journey originally began with a deep dive into <span className="text-white font-semibold">Full-Stack Development</span>. I spent my early days architecting scalable web applications and mastering modern frameworks.
                 </p>
                 <p>
-                  I don't just write code; I architect experiences. Whether it's mastering the MERN stack, diving deep into Django and GoLang, or orchestrating DevOps pipelines, my goal is always excellence.
+                  However, everything shifted for me in 2025. With the rapid evolution of autonomous <span className="text-indigo-400 font-semibold">AI Agents</span>, I realized we were no longer just writing static instructions for computers—we were giving them the ability to reason. That realization completely captivated me, pulling my focus deeply into the field of <span className="text-purple-400 font-semibold">AI and Machine Learning</span>, where I now build intelligent systems that can think, adapt, and execute.
                 </p>
               </motion.div>
 

@@ -126,9 +126,7 @@ function ExperienceCard({
         {/* Features Worked On */}
         {features && features.length > 0 && (
           <div className="space-y-3 pt-3">
-            <h3 className="text-sm font-bold text-zinc-200 tracking-wider">
-              Features Worked on
-            </h3>
+
             <ul className="list-disc pl-5 space-y-2 text-zinc-400 font-light text-sm sm:text-base">
               {features.map((feature, i) => (
                 <li key={i} className="leading-relaxed hover:text-zinc-300 transition-colors duration-200">

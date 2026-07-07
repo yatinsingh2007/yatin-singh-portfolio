@@ -1,4 +1,5 @@
 "use client";
+import React, { useState, useEffect } from "react";
 import { Navbar } from "../section/Navbar";
 import Prism from "../components/Prism";
 import Skills from "@/section/Skills";
@@ -6,9 +7,25 @@ import GlowingButton from "@/section/GlowingButton";
 import { Github, Linkedin, Instagram, ChevronDown, Sparkles } from "lucide-react";
 import Footer from "@/section/Footer";
 import Hero from "@/section/Hero";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+
+const roles = [
+  "Software Development",
+  "Cloud Infrastructure",
+  "Backend Engineering",
+  "Machine Learning & Deep Learning",
+  "Agentic Systems"
+];
 
 export default function Home() {
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <>
       <Navbar />
@@ -50,9 +67,23 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-xl sm:text-2xl md:text-3xl text-zinc-400 font-light max-w-3xl leading-relaxed"
+              className="text-xl sm:text-2xl md:text-3xl text-zinc-400 font-light max-w-3xl leading-relaxed flex flex-wrap justify-center gap-2 items-center min-h-[3rem]"
             >
-              Building the future with <span className="text-white font-medium">Full Stack Development</span> & <span className="text-white font-medium">AI Intelligence</span>
+              Focused on
+              <div className="relative inline-flex overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={currentRoleIndex}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -20, opacity: 0 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="text-white font-medium"
+                  >
+                    {roles[currentRoleIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
             </motion.p>
 
             <motion.div

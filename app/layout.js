@@ -1,11 +1,11 @@
-import { Outfit, Space_Grotesk } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import LoadingScreen from "@/components/LoadingScreen";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         <meta name="google-site-verification" content="L63uGSjv-ig202O9O7OB6XKbgHRQHhHyiKmkxhoJjNw" />
       </head>
       <body
-        className={`${outfit.variable} ${spaceGrotesk.variable} antialiased bg-black selection:bg-indigo-500/30`}
+        className={`${inter.variable} ${spaceGrotesk.variable} antialiased bg-black selection:bg-indigo-500/30`}
       >
         <LoadingScreen />
         <div className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150" />

@@ -164,12 +164,8 @@ export default function ExperiencePage() {
         "Collaborated in agile development cycles"
       ],
       features : [
-        "Developed end-to-end web applications for external clients, translating business requirements into scalable solutions",
-        "Built robust features across frontend, backend, database, and authentication layers",
-        "Integrated third-party services, REST APIs, and database systems to support business workflows",
-        "Delivered client-facing projects from development through deployment, ensuring performance and maintainability",
-        "Collaborated with developers and project stakeholders in an agile environment to meet delivery milestones",
-        "Debugged, tested, and optimized applications to enhance reliability and user experience"
+        "Shipped 27 merged PRs delivering maintenance cycle CRUD (validation, status transitions, automated date tracking) and role-based dashboards with centralized RBAC, on a Next.js contract management platform for a Tanzania-based TA client.",
+        "Built an automated cron-based reminder system (email integration, persistence logging) for payment and maintenance notifications, plus an urgency-alerting layer that excludes completed/cancelled cycles from false triggers."
       ],
       offerLetterUrl : 'https://drive.google.com/file/d/1S98KZtj4OYWdcR1ZsIEORwe5d9NUp9bc/view?usp=sharing',
       completionLetterUrl : null,

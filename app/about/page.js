@@ -21,7 +21,8 @@ import {
   Heart,
   Search,
   BookOpen,
-  Gamepad
+  Gamepad,
+  Trophy
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -245,6 +246,7 @@ export default function About() {
                 {[
                   { icon: <Search size={24} />, label: "Science" },
                   { icon: <BookOpen size={24} />, label: "History" },
+                  { icon: <Trophy size={24} />, label: "Football" },
                   { icon: <Coffee size={24} />, label: "Cooking" },
                   { icon: <Gamepad size={24} />, label: "Gaming" }
                 ].map((item, i) => (
@@ -257,7 +259,7 @@ export default function About() {
                 ))}
               </div>
               <p className="text-zinc-500 italic text-lg max-w-2xl mx-auto">
-                "When I'm not orchestrating servers or refining UI, you'll find me exploring the mysteries of science, the depths of history, or the creative art of cooking."
+                "When I'm not orchestrating servers or refining UI, you'll find me on the football pitch, exploring the mysteries of science, diving into history, or experimenting in the kitchen."
               </p>
             </div>
           </motion.div>

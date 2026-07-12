@@ -152,16 +152,16 @@ export default function About() {
                 className="prose prose-invert prose-lg text-zinc-400 max-w-3xl space-y-6"
               >
                 <p>
-                  Currently in my third year of <span className="text-indigo-400 font-semibold">B.Tech at Newton School of Technology</span>, I thrive at the intersection of complex engineering and creative problem-solving.
+                  I'm from <span className="text-white font-semibold">Visakhapatnam</span> — a coastal city that's equal parts calm and chaotic. Growing up, I was always the kind of person who needed to know <span className="text-white font-semibold">why</span> things worked, not just that they did. I remember wondering how a simple <span className="text-indigo-400 font-semibold">calculator</span> — a device that just adds numbers — slowly turned into the machine the entire world now depends on. That question stuck with me, and honestly, it's the reason I ended up in CS.
                 </p>
                 <p>
-                  Hailing from the coastal city of <span className="text-white font-semibold">Visakhapatnam</span>, my computer science journey originally began with a deep dive into <span className="text-white font-semibold">Full-Stack Development</span>. I spent my early days architecting scalable web applications and mastering modern frameworks.
+                  Before that, I was deep in <span className="text-white font-semibold">PCM</span> — physics, chemistry, math — the classic competitive exam track at FIITJEE. I genuinely loved it, especially physics. It had this satisfying way of explaining the world with clean logic. But at some point I realised I didn't just want to understand the world — I wanted to <span className="text-indigo-400 font-semibold">build things in it</span>. So here I am, third year B.Tech at Newton School of Technology.
                 </p>
                 <p>
-                  However, everything shifted for me in 2025. With the rapid evolution of autonomous <span className="text-indigo-400 font-semibold">AI Agents</span>, I realized we were no longer just writing static instructions for computers—we were giving them the ability to reason. That realization completely captivated me, pulling my focus deeply into <span className="text-purple-400 font-semibold">Machine Learning and Deep Learning</span>.
+                  My early years in CS were spent building for the web — full-stack apps, backends, figuring out how to make something go from an idea to something real that people could actually use. Then in 2025, AI started moving fast enough that it became impossible to ignore. Not in a hype way — but in a genuine <span className="text-purple-400 font-semibold">"something new is happening"</span> kind of way. I got pulled into machine learning and deep learning, and I've been deep in it since.
                 </p>
                 <p>
-                  I'm actively studying the mathematics that makes it all work—<span className="text-white font-semibold">gradient descent, backpropagation, loss functions</span>, and the calculus behind how neural networks actually learn. I've gone from building feedforward networks from scratch to experimenting with <span className="text-white font-semibold">CNNs, RNNs, and attention mechanisms</span>. Understanding transformers at an architectural level, not just using them as black boxes, has become a core part of how I approach this space. My goal is to bridge strong engineering foundations with a deep understanding of how models are trained, optimized, and deployed into real systems.
+                  Outside of all that — I play <span className="text-white font-semibold">football</span>, game, cook occasionally, and read about history and science more than I probably should. I think the curiosity that got me into physics is the same one that keeps me building things now.
                 </p>
               </motion.div>
 

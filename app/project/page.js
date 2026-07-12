@@ -31,6 +31,16 @@ export default function Project() {
             shadowColor: "rgba(16, 185, 129, 0.1)"
         },
         {
+            id: -2,
+            title: "Cordis Sentinel",
+            description: "An agentic AI pipeline for heart attack risk prediction. Built on a real-world messy clinical dataset with extensive cleaning — missing values, inconsistent encodings, outlier treatment. Combines Logistic Regression and Decision Tree with SHAP-based explainability, then layers a Plan-Execute-Reflect agentic architecture that reasons over predictions and feature attributions to produce clinically-grounded risk explanations, not just a raw probability score.",
+            image: "/cordis-sentinel.png",
+            techStack: ["Python", "Scikit-learn", "SHAP", "LangGraph", "LangChain", "ChromaDB", "Llama 3", "Groq", "Streamlit", "Pandas"],
+            githubUrl: "https://github.com/yatinsingh2007/Cordis-Sentinel",
+            gradient: "from-rose-600 to-red-700",
+            shadowColor: "rgba(225, 29, 72, 0.1)"
+        },
+        {
             id: 0,
             title: "CreditIQ",
             description: "An agentic credit-risk system that pairs ML classifiers (Logistic Regression + Decision Tree) with a RAG-retrieved credit-policy rulebook. A LangGraph pipeline grounds each prediction against the relevant lending rules to produce an explainable credit decision.",

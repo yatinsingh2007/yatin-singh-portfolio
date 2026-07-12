@@ -87,11 +87,6 @@ const people = [
     image : "https://i.pinimg.com/736x/a8/53/14/a8531424a5fac660e4261f72ca817141.jpg"
   },
   {
-    id : 18 ,
-    name : 'django' ,
-    image : 'https://www.cloudesign.com/images/djangomainbannerimage.webp'
-  } ,
-  {
     id : 19 ,
     name : 'Docker' ,
     image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBg-3j13zyOBkQgSe-igMxqNDoYpOvBkjQVw&s'
@@ -101,25 +96,6 @@ const people = [
     name : 'mongoose' ,
     image : 'https://img.icons8.com/color/1200/mongoose.jpg'
    },
-   {
-    id : 21 ,
-    name : 'NumPy' ,
-    image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmS-kAK2RcafsSaMscU-XlRt8ozz6nQrlNlwGjR1BblZp86LxotxZxBoep&s=10'
-   },
-   {
-    id : 22 ,
-    name : 'Pandas' ,
-    image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ3B4uddKsWsn2b6djQk2p_hCGRS0W10tQk3WKG3QDV_ZISxjRHHFiWaw&s=10'
-   },
-   {
-    id : 23 ,
-    name : 'Scikit-Learn' ,
-    image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7-oZ1axE5Huu3xtV2K5Y7n3EFKrQnhb7lakfEmqTdqXjrk_rXlYnT8dU&s=10'
-   } , {
-    id : 24 ,
-    name : 'Tensorflow' ,
-    image : 'https://img.icons8.com/color/1200/tensorflow.jpg'
-   }
 ];  
 
 export default function Skills() {

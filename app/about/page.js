@@ -21,9 +21,9 @@ import {
   Heart,
   Search,
   BookOpen,
-  Gamepad,
-  Trophy
+  Gamepad
 } from "lucide-react";
+import { FaFutbol } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 
 const MagneticImage = ({ src, alt }) => {
@@ -246,7 +246,7 @@ export default function About() {
                 {[
                   { icon: <Search size={24} />, label: "Science" },
                   { icon: <BookOpen size={24} />, label: "History" },
-                  { icon: <Trophy size={24} />, label: "Football" },
+                  { icon: <FaFutbol size={24} />, label: "Football" },
                   { icon: <Coffee size={24} />, label: "Cooking" },
                   { icon: <Gamepad size={24} />, label: "Gaming" }
                 ].map((item, i) => (

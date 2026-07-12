@@ -151,13 +151,16 @@ export default function About() {
                 className="prose prose-invert prose-lg text-zinc-400 max-w-3xl space-y-6"
               >
                 <p>
-                  Currently in my third year of <span className="text-indigo-400 font-semibold">B.Tech at Newton School of Technology</span>, I thrive at the intersection of complex engineering and creative problem-solving. Soon, I will be embarking on my next academic chapter—pursuing a <span className="text-indigo-400 font-semibold">Master's degree in the Netherlands</span>.
+                  Currently in my third year of <span className="text-indigo-400 font-semibold">B.Tech at Newton School of Technology</span>, I thrive at the intersection of complex engineering and creative problem-solving.
                 </p>
                 <p>
                   Hailing from the coastal city of <span className="text-white font-semibold">Visakhapatnam</span>, my computer science journey originally began with a deep dive into <span className="text-white font-semibold">Full-Stack Development</span>. I spent my early days architecting scalable web applications and mastering modern frameworks.
                 </p>
                 <p>
-                  However, everything shifted for me in 2025. With the rapid evolution of autonomous <span className="text-indigo-400 font-semibold">AI Agents</span>, I realized we were no longer just writing static instructions for computers—we were giving them the ability to reason. That realization completely captivated me, pulling my focus deeply into the field of <span className="text-purple-400 font-semibold">AI and Machine Learning</span>, where I now build intelligent systems that can think, adapt, and execute.
+                  However, everything shifted for me in 2025. With the rapid evolution of autonomous <span className="text-indigo-400 font-semibold">AI Agents</span>, I realized we were no longer just writing static instructions for computers—we were giving them the ability to reason. That realization completely captivated me, pulling my focus deeply into <span className="text-purple-400 font-semibold">Machine Learning and Deep Learning</span>.
+                </p>
+                <p>
+                  I'm actively studying the mathematics that makes it all work—<span className="text-white font-semibold">gradient descent, backpropagation, loss functions</span>, and the calculus behind how neural networks actually learn. I've gone from building feedforward networks from scratch to experimenting with <span className="text-white font-semibold">CNNs, RNNs, and attention mechanisms</span>. Understanding transformers at an architectural level, not just using them as black boxes, has become a core part of how I approach this space. My goal is to bridge strong engineering foundations with a deep understanding of how models are trained, optimized, and deployed into real systems.
                 </p>
               </motion.div>
 

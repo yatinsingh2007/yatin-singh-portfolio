@@ -35,7 +35,7 @@ export const products = [
   {
     title: "Next Horizon",
     link: "https://next-horizon-nine.vercel.app/",
-    thumbnail: "/nexthorizon.png"
+    thumbnail: "/NextHorizon.png"
   },
   {
     title: "create-prism",

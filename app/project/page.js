@@ -76,7 +76,7 @@ export default function Project() {
             id: 2,
             title: "Next Horizon",
             description: "A professional network reimagined for modern connectivity. Share milestones, network with peers, and discover opportunities in a sleek, reactive ecosystem.",
-            image: "/nexthorizon.png",
+            image: "/NextHorizon.png",
             techStack: ["React.js", "MongoDB", "Express.js", "Node.js", "Framer Motion"],
             liveUrl: "https://next-horizon-nine.vercel.app/",
             githubUrl: "https://github.com/yatinsingh2007/Next-Horizon",

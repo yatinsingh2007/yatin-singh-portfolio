@@ -232,36 +232,49 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Interests / Footer Info */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+          {/* Interests */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-40 p-12 rounded-[3rem] bg-neutral-950/50 border border-white/5 backdrop-blur-3xl text-center relative overflow-hidden"
+            transition={{ duration: 0.8 }}
+            className="mt-40"
           >
-            <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none" style={{ backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')" }} />
-            
-            <div className="relative z-10 space-y-8">
-              <div className="flex justify-center gap-12">
-                {[
-                  { icon: <Search size={24} />, label: "Science" },
-                  { icon: <BookOpen size={24} />, label: "History" },
-                  { icon: <FaFutbol size={24} />, label: "Football" },
-                  { icon: <Coffee size={24} />, label: "Cooking" },
-                  { icon: <Gamepad size={24} />, label: "Gaming" }
-                ].map((item, i) => (
-                  <div key={i} className="flex flex-col items-center gap-3 group">
-                    <div className="text-zinc-500 group-hover:text-white transition-colors group-hover:scale-110 transition-transform duration-300">
-                      {item.icon}
-                    </div>
-                    <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.2em]">{item.label}</span>
-                  </div>
-                ))}
-              </div>
-              <p className="text-zinc-500 italic text-lg max-w-2xl mx-auto">
-                "When I'm not orchestrating servers or refining UI, you'll find me on the football pitch, exploring the mysteries of science, diving into history, or experimenting in the kitchen."
-              </p>
+            <div className="flex items-center gap-3 text-indigo-400 font-bold tracking-[0.3em] uppercase text-xs mb-10">
+              <span className="w-8 h-[1px] bg-indigo-500/50" />
+              Beyond the Terminal
             </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+              {[
+                { icon: <FaFutbol size={20} />, label: "Football", desc: "Weekend warrior" },
+                { icon: <Search size={20} />, label: "Science", desc: "Always curious" },
+                { icon: <BookOpen size={20} />, label: "History", desc: "Deep diver" },
+                { icon: <Coffee size={20} />, label: "Cooking", desc: "Occasional chef" },
+                { icon: <Gamepad size={20} />, label: "Gaming", desc: "Stress relief" },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className="p-5 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] hover:border-white/10 transition-all duration-300 group flex flex-col items-center text-center gap-3"
+                >
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/5 text-zinc-500 group-hover:text-white group-hover:border-indigo-500/20 group-hover:bg-indigo-500/10 transition-all duration-300">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-white">{item.label}</div>
+                    <div className="text-[10px] text-zinc-600 mt-0.5">{item.desc}</div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <p className="text-zinc-600 italic text-base mt-8 max-w-2xl leading-relaxed">
+              "The curiosity that got me into physics is the same one that keeps me building things now."
+            </p>
           </motion.div>
         </div>
       </main>

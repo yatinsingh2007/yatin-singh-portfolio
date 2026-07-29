@@ -2,6 +2,7 @@
 
 import { BackgroundBeams } from "@/components/ui/background-beams"
 import { Navbar } from "@/section/Navbar"
+import Footer from "@/section/Footer"
 import { motion } from "framer-motion"
 import { GraduationCap, Calendar, MapPin, School, Award } from "lucide-react"
 
@@ -41,7 +42,7 @@ export default function Education() {
     ]
 
     return (
-        <main className="min-h-screen w-full bg-[#030303] relative overflow-hidden selection:bg-emerald-500/30">
+        <div className="min-h-screen w-full bg-[#030303] relative overflow-hidden selection:bg-emerald-500/30">
             <Navbar />
             <BackgroundBeams className="opacity-40" />
             
@@ -151,6 +152,7 @@ export default function Education() {
                     ))}
                 </div>
             </div>
-        </main>
+        <Footer />
+        </div>
     )
 }

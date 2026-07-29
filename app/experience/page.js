@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import React from "react";
 import { Navbar } from "@/section/Navbar";
+import Footer from "@/section/Footer";
 import { FileText, ExternalLink, Calendar, Briefcase, Zap, Rocket } from "lucide-react";
 
 function ExperienceCard({
@@ -280,6 +281,7 @@ export default function ExperiencePage() {
             </div>
           </motion.div>
         </main>
+        <Footer />
       </div>
     </div>
   );

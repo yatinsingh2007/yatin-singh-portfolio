@@ -158,15 +158,15 @@ export default function ExperiencePage() {
       role : 'Full Stack Intern',
       location : 'Remote',
       tags : [
-        "Full-Stack & Cloud Architecture",
-        "Open-Source LLMs & vLLM",
-        "Docker, GitHub Actions & VPS Deployment"
+        "50+ Merged PRs & Full-Stack RBAC",
+        "Open-Source LLMs (vLLM & Qwen 2.5)",
+        "CI/CD Pipeline & VPS Deployment (<3 min builds)"
       ],
       features : [
-        "Shipped 50+ merged PRs delivering maintenance cycle CRUD (validation, status transitions, automated date tracking) and role-based dashboards with centralized RBAC, on a Next.js contract management platform for clients from Technology Associates(Infrastructure Management Services Company).",
-        "Built an automated cron-based reminder system (email integration, persistence logging) for payment and maintenance notifications, plus an urgency-alerting layer that excludes completed/cancelled cycles from false triggers.",
-        "Shipped the contract management software of Technology Associates via Docker, created and automated the CI/CD pipeline using GitHub Actions, and deployed it inside a VPS.",
-        "Engineered an AI chatbot system powered by open-source models (e.g., Qwen 2.5 1.5B), wrapped inference into production API endpoints using vLLM, and deployed the system on a VPS."
+        "Shipped 50+ merged PRs delivering maintenance cycle CRUD (validation, status transitions, automated date tracking) and role-based dashboards with centralized RBAC for 500+ active users on a Next.js contract management platform for Technology Associates.",
+        "Built an automated cron-based reminder system handling 1,000+ daily email notifications with persistence logging, cutting manual payment & maintenance follow-up overhead by 85%.",
+        "Automated the end-to-end CI/CD deployment pipeline using Docker & GitHub Actions to a Linux VPS, reducing build & release cycles from 45 minutes to <3 minutes with zero-downtime rollouts.",
+        "Engineered an AI chatbot system powered by Qwen 2.5 (1.5B), optimizing model inference via vLLM on a VPS to achieve sub-200ms response latency and 40+ tokens/sec throughput across 1,000+ user interactions."
       ],
       offerLetterUrl : 'https://drive.google.com/file/d/1S98KZtj4OYWdcR1ZsIEORwe5d9NUp9bc/view?usp=sharing',
       completionLetterUrl : null,

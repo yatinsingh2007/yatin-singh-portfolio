@@ -14,9 +14,19 @@ export default function Project() {
             id: 123,
             title: "Shopsmart",
             description: "A fully functional e-commerce website with features like product listing, cart management, and user authentication.",
-            image: "/ecommerce.jpeg",
+            image: "/shopsmart.png",
             techStack: ["Next.js", "Tailwind CSS", "Prisma", "PostgreSQL", "Docker" , "Terraform" , "AWS-ECS" , "AWS-S3"],
             githubUrl: "https://github.com/yatinsingh2007/shopsmart",
+            gradient: "from-emerald-500 to-teal-500",
+            shadowColor: "rgba(16, 185, 129, 0.1)"
+        },
+        {
+            id : 122 ,
+            title : "Velox" ,
+            description : 'Velox is a high-performance, containerized code execution engine (Online Judge) built with Go and Docker. It allows you to submit code in various languages, execute it against multiple test cases, and receive detailed resource usage (time and memory) along with execution status.',
+            image: "/Velox.png",
+            techStack: ["Go", "Docker", "Docker Compose"],
+            githubUrl: "https://github.com/yatinsingh2007/Velox",
             gradient: "from-emerald-500 to-teal-500",
             shadowColor: "rgba(16, 185, 129, 0.1)"
         },

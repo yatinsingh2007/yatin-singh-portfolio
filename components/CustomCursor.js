@@ -1,106 +1,94 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { motion, useSpring, useMotionValue } from "motion/react";
+import React, { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
 
 export default function CustomCursor() {
-  const [isHovering, setIsHovering] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-
+  const ringRef = useRef(null);
+  const dotRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(
-        window.matchMedia("(pointer: coarse)").matches || 
-        window.innerWidth < 768
-      );
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const check = () =>
+      setIsMobile(window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, []);
-
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-
-  const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
     if (isMobile) return;
 
-    const moveCursor = (e) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
+    const ring = ringRef.current;
+    const dot = dotRef.current;
+    if (!ring || !dot) return;
+
+    // quickTo gives silky-smooth cursor lag without spring overshoot
+    const xRing = gsap.quickTo(ring, "x", { duration: 0.45, ease: "power3.out" });
+    const yRing = gsap.quickTo(ring, "y", { duration: 0.45, ease: "power3.out" });
+    const xDot  = gsap.quickTo(dot,  "x", { duration: 0.08, ease: "none" });
+    const yDot  = gsap.quickTo(dot,  "y", { duration: 0.08, ease: "none" });
+
+    const onMove = (e) => {
+      const cx = e.clientX;
+      const cy = e.clientY;
+      xRing(cx); yRing(cy);
+      xDot(cx);  yDot(cy);
+      gsap.to(ring, { opacity: 1, duration: 0.2 });
+      gsap.to(dot,  { opacity: 1, duration: 0.2 });
     };
 
-    const handleMouseOver = (e) => {
-      const target = e.target;
-      const isInteractive = 
-        target.tagName === 'A' || 
-        target.tagName === 'BUTTON' || 
-        target.closest('a') || 
-        target.closest('button') ||
-        window.getComputedStyle(target).cursor === 'pointer';
-      
-      setIsHovering(isInteractive);
+    const onOver = (e) => {
+      const t = e.target;
+      const interactive =
+        t.tagName === "A" || t.tagName === "BUTTON" ||
+        t.closest("a") || t.closest("button") ||
+        window.getComputedStyle(t).cursor === "pointer";
+      gsap.to(ring, {
+        scale: interactive ? 2.5 : 1,
+        backgroundColor: interactive ? "rgba(99,102,241,0.2)" : "rgba(99,102,241,0)",
+        duration: 0.3,
+        ease: "power2.out",
+      });
     };
 
-    const handleMouseDown = () => setIsClicking(true);
-    const handleMouseUp = () => setIsClicking(false);
-    const handleMouseLeave = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
+    const onDown = () => gsap.to(dot, { scale: 0.7, duration: 0.1 });
+    const onUp   = () => gsap.to(dot, { scale: 1,   duration: 0.15 });
+    const onLeave = () => { gsap.to(ring, { opacity: 0, duration: 0.3 }); gsap.to(dot, { opacity: 0, duration: 0.3 }); };
+    const onEnter = () => { gsap.to(ring, { opacity: 1, duration: 0.3 }); gsap.to(dot, { opacity: 1, duration: 0.3 }); };
 
-    window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseover", handleMouseOver);
-    window.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
-    document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mouseenter", handleMouseEnter);
+    // Initial hidden state
+    gsap.set([ring, dot], { opacity: 0, xPercent: -50, yPercent: -50 });
+
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseover", onOver);
+    window.addEventListener("mousedown", onDown);
+    window.addEventListener("mouseup", onUp);
+    document.addEventListener("mouseleave", onLeave);
+    document.addEventListener("mouseenter", onEnter);
 
     return () => {
-      window.removeEventListener("mousemove", moveCursor);
-      window.removeEventListener("mouseover", handleMouseOver);
-      window.removeEventListener("mousedown", handleMouseDown);
-      window.removeEventListener("mouseup", handleMouseUp);
-      document.removeEventListener("mouseleave", handleMouseLeave);
-      document.removeEventListener("mouseenter", handleMouseEnter);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseover", onOver);
+      window.removeEventListener("mousedown", onDown);
+      window.removeEventListener("mouseup", onUp);
+      document.removeEventListener("mouseleave", onLeave);
+      document.removeEventListener("mouseenter", onEnter);
     };
-  }, [cursorX, cursorY, isVisible, isMobile]);
+  }, [isMobile]);
 
   if (isMobile) return null;
 
   return (
     <>
-      <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-indigo-500 z-[9999] pointer-events-none mix-blend-difference flex items-center justify-center"
-        style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-        animate={{
-          scale: isHovering ? 2.5 : 1,
-          opacity: isVisible ? 1 : 0,
-          backgroundColor: isHovering ? "rgba(99, 102, 241, 0.2)" : "rgba(99, 102, 241, 0)",
-        }}
+      <div
+        ref={ringRef}
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-indigo-500 z-[9999] pointer-events-none mix-blend-difference"
+        style={{ willChange: "transform" }}
       />
-      <motion.div
+      <div
+        ref={dotRef}
         className="fixed top-0 left-0 w-1.5 h-1.5 bg-indigo-500 rounded-full z-[9999] pointer-events-none"
-        style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-        animate={{
-          scale: isClicking ? 0.8 : 1,
-          opacity: isVisible ? 1 : 0,
-        }}
+        style={{ willChange: "transform" }}
       />
     </>
   );

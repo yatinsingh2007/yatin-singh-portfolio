@@ -2,7 +2,11 @@
 import Link from "next/link";
 import { Mail, ArrowUpRight } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -14,20 +18,57 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { name: "GitHub", icon: FaGithub, href: "https://github.com/yatinsingh2007" },
-  { name: "LinkedIn", icon: FaLinkedin, href: "https://www.linkedin.com/in/yatin-singh-b37817323/" },
+  { name: "GitHub",    icon: FaGithub,    href: "https://github.com/yatinsingh2007" },
+  { name: "LinkedIn",  icon: FaLinkedin,  href: "https://www.linkedin.com/in/yatin-singh-b37817323/" },
   { name: "Instagram", icon: FaInstagram, href: "https://www.instagram.com/yatin_singh27" },
-  { name: "Email", icon: Mail, href: "mailto:yatin.singh.dev@gmail.com" },
+  { name: "Email",     icon: Mail,        href: "mailto:yatin.singh.dev@gmail.com" },
 ];
 
 export default function Footer() {
+  const footerRef = useRef(null);
+  const badgeRef  = useRef(null);
+
+  useEffect(() => {
+    // Footer columns slide up when entering viewport
+    if (footerRef.current) {
+      const cols = footerRef.current.querySelectorAll(".footer-col");
+      gsap.set(cols, { opacity: 0, y: 30 });
+      ScrollTrigger.create({
+        trigger: footerRef.current,
+        start: "top 90%",
+        once: true,
+        onEnter: () =>
+          gsap.to(cols, {
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            stagger: 0.12,
+            ease: "power3.out",
+          }),
+      });
+    }
+
+    // Available-for-hire badge gentle pulse via GSAP
+    if (badgeRef.current) {
+      gsap.to(badgeRef.current, {
+        opacity: 0.7,
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    }
+
+    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+  }, []);
+
   return (
-    <footer className="w-full border-t border-white/5 bg-black/60 backdrop-blur-xl">
+    <footer ref={footerRef} className="w-full border-t border-white/5 bg-black/60 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-6 pt-20 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
 
           {/* Brand */}
-          <div className="space-y-6">
+          <div className="footer-col space-y-6">
             <div className="space-y-3">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-linear-to-br from-indigo-500 to-purple-600 text-white font-bold text-lg shadow-[0_0_24px_rgba(99,102,241,0.35)]">
                 YS
@@ -54,7 +95,7 @@ export default function Footer() {
           </div>
 
           {/* Navigation */}
-          <div className="space-y-4">
+          <div className="footer-col space-y-4">
             <h4 className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.35em]">Navigation</h4>
             <nav className="flex flex-col gap-2.5">
               {navLinks.map(({ name, href }) => (
@@ -74,15 +115,12 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="space-y-4">
+          <div className="footer-col space-y-4">
             <h4 className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.35em]">Contact</h4>
             <div className="space-y-5">
               <div>
                 <div className="text-[10px] text-zinc-700 font-bold uppercase tracking-widest mb-1">Email</div>
-                <a
-                  href="mailto:yatin.singh.dev@gmail.com"
-                  className="text-zinc-400 hover:text-white text-sm transition-colors duration-200"
-                >
+                <a href="mailto:yatin.singh.dev@gmail.com" className="text-zinc-400 hover:text-white text-sm transition-colors duration-200">
                   yatin.singh.dev@gmail.com
                 </a>
               </div>
@@ -90,28 +128,23 @@ export default function Footer() {
                 <div className="text-[10px] text-zinc-700 font-bold uppercase tracking-widest mb-1">Location</div>
                 <p className="text-zinc-400 text-sm">India · Remote Friendly</p>
               </div>
-              <motion.div
-                animate={{ opacity: [0.7, 1, 0.7] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              <div
+                ref={badgeRef}
                 className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20"
               >
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-[10px] font-bold text-emerald-400 tracking-[0.2em] uppercase">
                   Available for Hire
                 </span>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-zinc-700 text-xs">
-            © {new Date().getFullYear()} K. Yatin Singh. All rights reserved.
-          </p>
-          <p className="text-zinc-800 text-xs">
-            Built with Next.js · Tailwind CSS · Framer Motion
-          </p>
+          <p className="text-zinc-700 text-xs">© {new Date().getFullYear()} K. Yatin Singh. All rights reserved.</p>
+          <p className="text-zinc-800 text-xs">Built with Next.js · Tailwind CSS · GSAP</p>
         </div>
       </div>
     </footer>

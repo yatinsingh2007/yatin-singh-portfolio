@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Navbar } from "../section/Navbar";
 import Prism from "../components/Prism";
 import Skills from "@/section/Skills";
@@ -9,6 +9,10 @@ import Footer from "@/section/Footer";
 import Hero from "@/section/Hero";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const roles = [
   "Software Development",
@@ -19,20 +23,96 @@ const roles = [
 ];
 
 const stats = [
-  { value: "14+", label: "Projects Built" },
-  { value: "2+", label: "Internships" },
-  { value: "3+", label: "Years Coding" },
-  { value: "10+", label: "Technologies" },
+  { value: 14, suffix: "+", label: "Projects Built" },
+  { value: 2,  suffix: "+", label: "Internships" },
+  { value: 3,  suffix: "+", label: "Years Coding" },
+  { value: 10, suffix: "+", label: "Technologies" },
 ];
+
+function AnimatedStat({ value, suffix, label, index }) {
+  const numRef  = useRef(null);
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    const num  = numRef.current;
+    if (!card || !num) return;
+
+    const proxy = { val: 0 };
+
+    const st = ScrollTrigger.create({
+      trigger: card,
+      start: "top 85%",
+      once: true,
+      onEnter: () => {
+        gsap.fromTo(card,
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.7, delay: index * 0.1, ease: "power3.out" }
+        );
+        gsap.to(proxy, {
+          val: value,
+          duration: 1.4,
+          delay: index * 0.1,
+          ease: "power2.out",
+          onUpdate: () => { num.textContent = Math.round(proxy.val) + suffix; },
+        });
+      },
+    });
+
+    gsap.set(card, { opacity: 0, y: 24 });
+
+    return () => st.kill();
+  }, [value, suffix, index]);
+
+  return (
+    <div ref={cardRef} className="text-center group cursor-default">
+      <div
+        ref={numRef}
+        className="text-4xl md:text-5xl font-bold text-white tracking-tighter group-hover:text-indigo-400 transition-colors duration-300"
+      >
+        0{suffix}
+      </div>
+      <div className="text-zinc-600 text-[10px] font-bold uppercase tracking-[0.25em] mt-2">
+        {label}
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const skillsHeadRef = useRef(null);
+  const skillsBodyRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
     }, 3000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Skills section scroll reveal
+  useEffect(() => {
+    const head = skillsHeadRef.current;
+    const body = skillsBodyRef.current;
+    if (!head || !body) return;
+
+    gsap.set([head, body], { opacity: 0, y: 40 });
+
+    const st1 = ScrollTrigger.create({
+      trigger: head,
+      start: "top 80%",
+      once: true,
+      onEnter: () => gsap.to(head, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }),
+    });
+    const st2 = ScrollTrigger.create({
+      trigger: body,
+      start: "top 85%",
+      once: true,
+      onEnter: () => gsap.to(body, { opacity: 1, y: 0, duration: 1, delay: 0.2, ease: "power3.out" }),
+    });
+
+    return () => { st1.kill(); st2.kill(); };
   }, []);
 
   return (
@@ -163,21 +243,7 @@ export default function Home() {
         <section className="relative z-10 py-20 border-y border-white/5 bg-black/40 backdrop-blur-xl">
           <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-10">
             {stats.map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="text-center group cursor-default"
-              >
-                <div className="text-4xl md:text-5xl font-bold text-white tracking-tighter group-hover:text-indigo-400 transition-colors duration-300">
-                  {stat.value}
-                </div>
-                <div className="text-zinc-600 text-[10px] font-bold uppercase tracking-[0.25em] mt-2">
-                  {stat.label}
-                </div>
-              </motion.div>
+              <AnimatedStat key={i} {...stat} index={i} />
             ))}
           </div>
         </section>
@@ -189,11 +255,8 @@ export default function Home() {
         >
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.06)_0%,_transparent_60%)] pointer-events-none" />
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          <div
+            ref={skillsHeadRef}
             className="text-center mb-16 z-10 px-4"
           >
             <p className="text-xs font-bold text-indigo-400 tracking-[0.5em] uppercase mb-4 opacity-80">
@@ -205,17 +268,14 @@ export default function Home() {
                 Toolbox
               </span>
             </h2>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.2 }}
+          <div
+            ref={skillsBodyRef}
             className="w-full max-w-5xl px-4 z-10"
           >
             <Skills />
-          </motion.div>
+          </div>
         </section>
 
         <Footer />

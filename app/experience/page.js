@@ -159,12 +159,13 @@ export default function ExperiencePage() {
       location : 'Remote',
       tags : [
         "Built end-to-end full-stack features",
-        "Integrated REST APIs & third-party services",
-        "Collaborated in agile development cycles"
+        "Docker & Automated CI/CD Pipelines",
+        "VPS Deployment & Cloud Hosting"
       ],
       features : [
         "Shipped 27 merged PRs delivering maintenance cycle CRUD (validation, status transitions, automated date tracking) and role-based dashboards with centralized RBAC, on a Next.js contract management platform for a Tanzania-based TA client.",
-        "Built an automated cron-based reminder system (email integration, persistence logging) for payment and maintenance notifications, plus an urgency-alerting layer that excludes completed/cancelled cycles from false triggers."
+        "Built an automated cron-based reminder system (email integration, persistence logging) for payment and maintenance notifications, plus an urgency-alerting layer that excludes completed/cancelled cycles from false triggers.",
+        "Shipped the contract management software of Technology Associates via Docker, created and automated the CI/CD pipeline, and deployed it inside a VPS."
       ],
       offerLetterUrl : 'https://drive.google.com/file/d/1S98KZtj4OYWdcR1ZsIEORwe5d9NUp9bc/view?usp=sharing',
       completionLetterUrl : null,

@@ -171,15 +171,19 @@ export default function Project() {
 
   useEffect(() => {
     // Hero entrance
-    if (heroRef.current) {
-      gsap.from(heroRef.current.children, {
-        opacity: 0,
-        y: 32,
-        duration: 0.9,
-        stagger: 0.14,
-        ease: "power3.out",
-        delay: 0.1,
-      });
+    if (heroRef.current && heroRef.current.children) {
+      gsap.fromTo(
+        heroRef.current.children,
+        { opacity: 0, y: 32 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          stagger: 0.14,
+          ease: "power3.out",
+          delay: 0.1,
+        }
+      );
     }
 
     // Each project card reveals as it enters the viewport
@@ -215,13 +219,13 @@ export default function Project() {
             <div className="px-4 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-indigo-400 text-xs font-bold tracking-[0.3em] uppercase">
               Gallery of Innovation
             </div>
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold bg-gradient-to-b from-white via-white/90 to-white/20 bg-clip-text text-transparent tracking-tighter leading-tight">
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold bg-gradient-to-b from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent tracking-tighter leading-tight">
               Digital <br className="md:hidden" /> Masterpieces
             </h1>
           </div>
 
-          <p className="text-xl md:text-2xl text-neutral-400 max-w-2xl mx-auto font-light leading-relaxed">
-            Each project is a unique blend of <span className="text-white">creative vision</span> and <span className="text-white">technical excellence</span>.
+          <p className="text-xl md:text-2xl text-zinc-300 max-w-2xl mx-auto font-light leading-relaxed">
+            Each project is a unique blend of <span className="text-white font-normal">creative vision</span> and <span className="text-white font-normal">technical excellence</span>.
           </p>
 
           <div className="flex items-center justify-center pt-4">

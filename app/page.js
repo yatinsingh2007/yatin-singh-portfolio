@@ -8,7 +8,7 @@ import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import Footer from "@/section/Footer";
 import Hero from "@/section/Hero";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Terminal, Cpu, Cloud, Brain, Zap } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -22,60 +22,98 @@ const roles = [
   "Agentic Systems",
 ];
 
-const stats = [
-  { value: 14, suffix: "+", label: "Projects Built" },
-  { value: 2,  suffix: "+", label: "Internships" },
-  { value: 3,  suffix: "+", label: "Years Coding" },
-  { value: 10, suffix: "+", label: "Technologies" },
+const corePillars = [
+  {
+    icon: Terminal,
+    title: "Software Development",
+    subtitle: "Full-Stack Web Apps & Architecture",
+  },
+  {
+    icon: Brain,
+    title: "Machine Learning & DL",
+    subtitle: "Neural Networks & Predictive Models",
+  },
+  {
+    icon: Cpu,
+    title: "Agentic & AI Systems",
+    subtitle: "LLM Workflows & Autonomous Agents",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & Infrastructure",
+    subtitle: "CI/CD, Docker & VPS Deployments",
+  },
+  {
+    icon: Zap,
+    title: "Backend Engineering",
+    subtitle: "Scalable APIs & High-Throughput Systems",
+  },
 ];
 
-function AnimatedStat({ value, suffix, label, index }) {
-  const numRef  = useRef(null);
-  const cardRef = useRef(null);
+function EngineeringPillarsSection() {
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    const card = cardRef.current;
-    const num  = numRef.current;
-    if (!card || !num) return;
+    const el = containerRef.current;
+    if (!el) return;
 
-    const proxy = { val: 0 };
+    gsap.set(el.children, { opacity: 0, y: 30 });
 
     const st = ScrollTrigger.create({
-      trigger: card,
+      trigger: el,
       start: "top 85%",
       once: true,
       onEnter: () => {
-        gsap.fromTo(card,
-          { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, duration: 0.7, delay: index * 0.1, ease: "power3.out" }
-        );
-        gsap.to(proxy, {
-          val: value,
-          duration: 1.4,
-          delay: index * 0.1,
-          ease: "power2.out",
-          onUpdate: () => { num.textContent = Math.round(proxy.val) + suffix; },
+        gsap.to(el.children, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: "power3.out",
         });
       },
     });
 
-    gsap.set(card, { opacity: 0, y: 24 });
-
     return () => st.kill();
-  }, [value, suffix, index]);
+  }, []);
 
   return (
-    <div ref={cardRef} className="text-center group cursor-default">
-      <div
-        ref={numRef}
-        className="text-4xl md:text-5xl font-bold text-white tracking-tighter group-hover:text-indigo-400 transition-colors duration-300"
-      >
-        0{suffix}
+    <section className="relative z-10 py-24 border-y border-white/10 bg-black/60 backdrop-blur-xl">
+      <div className="max-w-6xl mx-auto px-6 space-y-10">
+        <div className="text-center space-y-3">
+          <p className="text-xs font-bold text-indigo-400 tracking-[0.4em] uppercase opacity-80">
+            Engineering Focus
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
+            What I Build & Solve
+          </h2>
+        </div>
+
+        <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6">
+          {corePillars.map((pillar, index) => {
+            const Icon = pillar.icon;
+            return (
+              <div
+                key={index}
+                className="group relative p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-indigo-500/30 hover:bg-white/[0.04] transition-all duration-500 flex flex-col justify-between"
+              >
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all duration-300">
+                    <Icon size={22} />
+                  </div>
+                  <h3 className="text-base font-bold text-white group-hover:text-indigo-300 transition-colors leading-snug">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                    {pillar.subtitle}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <div className="text-zinc-600 text-[10px] font-bold uppercase tracking-[0.25em] mt-2">
-        {label}
-      </div>
-    </div>
+    </section>
   );
 }
 
@@ -239,14 +277,8 @@ export default function Home() {
           <Hero />
         </motion.section>
 
-        {/* ── Stats Strip ── */}
-        <section className="relative z-10 py-20 border-y border-white/5 bg-black/40 backdrop-blur-xl">
-          <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-10">
-            {stats.map((stat, i) => (
-              <AnimatedStat key={i} {...stat} index={i} />
-            ))}
-          </div>
-        </section>
+        {/* ── Engineering Focus ── */}
+        <EngineeringPillarsSection />
 
         {/* ── Skills ── */}
         <section

@@ -29,13 +29,18 @@ const people = [
     id: 5,
     name: "React.js",
     image:
-      "https://images-cdn.openxcell.com/wp-content/uploads/2024/07/25085005/reactjs-inner.svg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSluzK8feA_blqA2Winb6qAahR94pwZ9fTXDULu6w8EJWJ2GZM1IHgNB8o&s=10",
   },
   {
     id: 6,
     name: "Next.js",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS4gSbV80I94hVTscWjNfXT7NYo9riAujIAg&s",
   },
+  {
+    id : 22 ,
+    name : 'React Native' ,
+    image : 'https://silverskytechnology.com/wp-content/uploads/2025/07/react-native-1.png'
+  } ,
   {
     id: 7,
     name: "Node.js",
@@ -47,6 +52,11 @@ const people = [
     name: "Express.js",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7S33Oq2FeRbyBBA6l1q8PwLVa3SzaONO-9Q&s",
   },
+  {
+    id : 23 ,
+    name : 'Django' ,
+    image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwI3dHJK230ve4x6p-SsJtpAdF63-R807mVQXcRvlWhFvDrgbmnSkkNb7y&s=10'
+  } ,
   {
     id: 9,
     name: "MongoDB",

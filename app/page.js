@@ -40,8 +40,8 @@ const corePillars = [
   },
   {
     icon: Cloud,
-    title: "Cloud & Infrastructure",
-    subtitle: "CI/CD, Docker & VPS Deployments",
+    title: "Cloud & Deployment",
+    subtitle: "AWS, VPS, Docker & CI/CD Pipelines",
   },
   {
     icon: Zap,

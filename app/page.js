@@ -218,7 +218,7 @@ export default function Home() {
               transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-wrap justify-center gap-3 text-sm sm:text-base"
             >
-              {["Student At NST", "Ex-Intern @AssuredGig", "Full Stack Engineer"].map((tag) => (
+              {["Student At NST, Rishihood University", "Intern @ByteBlock Technologies", "Ex-Intern @AssuredGig"].map((tag) => (
                 <span
                   key={tag}
                   className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-zinc-400 hover:text-white hover:border-white/20 transition-all duration-300"

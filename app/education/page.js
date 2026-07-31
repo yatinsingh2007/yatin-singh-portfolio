@@ -21,7 +21,7 @@ export default function Education() {
       period: "2024 — 2028",
       institution: "Newton School of Technology",
       university: "Rishihood University",
-      location: "Sonipat, Haryana, India",
+      location: "Sonipat, Haryana (Delhi NCR) , India",
       status: "3rd Year — Sem 5",
       grade: "CGPA: 7.91 / 10",
       description: "Intensive program focused on software engineering, data structures, algorithms, and artificial intelligence. Actively participating in research and development projects.",

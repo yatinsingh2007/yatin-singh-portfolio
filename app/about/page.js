@@ -209,7 +209,7 @@ export default function About() {
               </div>
 
               <div className="flex flex-wrap gap-6 items-center pt-4">
-                <a href="https://drive.google.com/file/d/1S0xoxRe2WiBto-6tn-7eI_vuGNdo0xGL/view?usp=sharing" target="_blank">
+                <a href="https://drive.google.com/file/d/1r0EKsnEGAwq-seUdRe2BgiQDahsrv_PH/view?usp=sharing" target="_blank">
                   <GlowingButton text="Resume" icon={<FileText size={20} />} />
                 </a>
                 <div className="flex items-center gap-6 text-zinc-500 ml-2">

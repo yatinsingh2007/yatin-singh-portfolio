@@ -16,11 +16,11 @@ function ExperienceCard({ logo, companyName, companyDescription, startDate, endD
   return (
     <div ref={cardRef} className="w-full relative group" style={{ opacity: 0, transform: "translateY(32px)" }}>
       {/* Hover glow */}
-      <div className="absolute -inset-x-4 -inset-y-6 bg-emerald-500/[0.02] rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl pointer-events-none" />
+      <div className="absolute -inset-x-4 -inset-y-6 bg-white/[0.02] rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl pointer-events-none" />
 
       {/* Timeline Logo */}
       <div className="absolute left-[-24px] sm:left-[-40px] top-0.5 transform -translate-x-1/2 z-20">
-        <div className="relative w-10 h-10 sm:w-16 sm:h-16 rounded-full bg-zinc-950 border border-white/10 flex items-center justify-center overflow-hidden shadow-xl group-hover:border-emerald-500/30 transition-colors duration-500">
+        <div className="relative w-10 h-10 sm:w-16 sm:h-16 rounded-full bg-zinc-950 border border-white/10 flex items-center justify-center overflow-hidden shadow-xl group-hover:border-white/30 transition-colors duration-500">
           {logo ? (
             <Image src={logo} alt={companyName} width={64} height={64} className="object-cover w-full h-full" />
           ) : (
@@ -32,9 +32,9 @@ function ExperienceCard({ logo, companyName, companyDescription, startDate, endD
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-emerald-400 transition-colors duration-300 flex items-center gap-3">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-zinc-300 transition-colors duration-300 flex items-center gap-3">
               {companyName}
-              <span className="h-2 w-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)] animate-pulse" />
+              <span className="h-2 w-2 bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.5)] animate-pulse" />
             </h2>
             <p className="text-zinc-400 text-base sm:text-lg leading-relaxed font-light mt-2 max-w-3xl">
               {companyDescription}
@@ -43,13 +43,13 @@ function ExperienceCard({ logo, companyName, companyDescription, startDate, endD
           <div className="flex flex-wrap gap-2 sm:shrink-0">
             {offerLetterUrl && (
               <a href={offerLetterUrl} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-emerald-400 border border-white/5 hover:border-emerald-500/30 bg-zinc-900/40 backdrop-blur-md px-3 py-1.5 rounded-full transition-all duration-300">
+                className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white border border-white/5 hover:border-white/20 bg-zinc-900/40 backdrop-blur-md px-3 py-1.5 rounded-full transition-all duration-300">
                 <FileText size={14} /><span>Offer Letter</span>
               </a>
             )}
             {completionLetterUrl && (
               <a href={completionLetterUrl} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-emerald-400 border border-white/5 hover:border-emerald-500/30 bg-zinc-900/40 backdrop-blur-md px-3 py-1.5 rounded-full transition-all duration-300">
+                className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white border border-white/5 hover:border-white/20 bg-zinc-900/40 backdrop-blur-md px-3 py-1.5 rounded-full transition-all duration-300">
                 <ExternalLink size={14} /><span>Experience Letter</span>
               </a>
             )}
@@ -68,7 +68,7 @@ function ExperienceCard({ logo, companyName, companyDescription, startDate, endD
         {tags.length > 0 && (
           <div className="flex flex-wrap gap-2 pt-1">
             {tags.map((tag, idx) => (
-              <Badge key={idx} className="bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/20 text-teal-400 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors">
+              <Badge key={idx} className="bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-colors">
                 {tag}
               </Badge>
             ))}
@@ -202,8 +202,8 @@ export default function ExperiencePage() {
         <BackgroundBeams />
       </div>
       <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 blur-[120px] rounded-full" />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-white/[0.03] blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-white/[0.03] blur-[120px] rounded-full" />
       </div>
 
       <div className="relative z-10">
@@ -214,7 +214,7 @@ export default function ExperiencePage() {
           <div className="relative mb-24 text-center sm:text-left">
             <div
               ref={headerBadgeRef}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-widest mb-6"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-xs font-bold uppercase tracking-widest mb-6"
             >
               <Rocket size={14} />
               Professional Path
@@ -225,7 +225,7 @@ export default function ExperiencePage() {
               className="text-5xl sm:text-7xl font-bold tracking-tight mb-6"
             >
               Industry{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-400">
                 Experience
               </span>
             </h1>
@@ -263,13 +263,13 @@ export default function ExperiencePage() {
             ref={ctaRef}
             className="mt-20 p-8 rounded-3xl bg-white/[0.02] border border-white/5 text-center relative overflow-hidden group"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/[0.03] to-white/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             <h3 className="text-2xl font-bold mb-4 relative z-10">Want to see more?</h3>
             <p className="text-zinc-400 mb-8 max-w-md mx-auto relative z-10">
               Check out my technical skills or explore my personal projects to see how I apply these experiences.
             </p>
             <div className="flex flex-wrap justify-center gap-4 relative z-10">
-              <Button asChild className="bg-emerald-500 hover:bg-emerald-600 text-black font-bold px-8 py-6 rounded-xl transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+              <Button asChild className="bg-white hover:bg-zinc-200 text-black font-bold px-8 py-6 rounded-xl transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.15)]">
                 <a href="/project">View Projects</a>
               </Button>
               <Button asChild variant="outline" className="border-white/10 hover:bg-white/5 px-8 py-6 rounded-xl transition-all">

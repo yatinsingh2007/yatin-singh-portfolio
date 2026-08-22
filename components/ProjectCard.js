@@ -29,14 +29,14 @@ export const ProjectCard = ({ project }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <CardContainer className="inter-var w-full">
-        <CardBody className="bg-neutral-950/40 relative group/card dark:hover:shadow-2xl dark:hover:shadow-indigo-500/[0.1] border-white/5 w-full sm:w-[35rem] h-auto rounded-[2.5rem] p-1 border backdrop-blur-xl overflow-hidden transition-all duration-500">
+        <CardBody className="bg-neutral-950/40 relative group/card dark:hover:shadow-2xl dark:hover:shadow-white/[0.06] border-white/5 w-full sm:w-[35rem] h-auto rounded-[2.5rem] p-1 border backdrop-blur-xl overflow-hidden transition-all duration-500">
           {/* Spotlight Effect */}
           <motion.div
             className="pointer-events-none absolute -inset-px rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             style={{
               background: useTransform(
                 [mouseX, mouseY],
-                ([x, y]) => `radial-gradient(600px circle at ${x}px ${y}px, rgba(99, 102, 241, 0.08), transparent 80%)`
+                ([x, y]) => `radial-gradient(600px circle at ${x}px ${y}px, rgba(255, 255, 255, 0.05), transparent 80%)`
               ),
             }}
           />
@@ -118,7 +118,7 @@ export const ProjectCard = ({ project }) => {
                 target="_blank"
                 className={cn(
                   "group/btn px-6 py-2.5 rounded-full text-xs font-bold transition-all flex items-center gap-2 shadow-lg active:scale-95",
-                  project.githubUrl ? "bg-indigo-600 text-white hover:bg-indigo-500 shadow-indigo-500/20" : "bg-neutral-800 text-neutral-500 cursor-not-allowed"
+                  project.githubUrl ? "bg-white text-black hover:bg-zinc-200 shadow-white/10" : "bg-neutral-800 text-neutral-500 cursor-not-allowed"
                 )}
               >
                 <Github size={16} />

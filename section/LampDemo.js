@@ -80,7 +80,7 @@ export default function LampDemo() {
     }
 
     return (
-        <div className="w-full min-h-screen relative flex items-center justify-center p-6 py-32 overflow-hidden selection:bg-blue-500/30">
+        <div className="w-full min-h-screen relative flex items-center justify-center p-6 py-32 overflow-hidden selection:bg-white/20">
             <BackgroundBeams className="opacity-40" />
             
             <div className="w-full max-w-4xl grid md:grid-cols-2 gap-12 relative z-10">
@@ -93,7 +93,7 @@ export default function LampDemo() {
                     >
                         <h1 className="text-6xl md:text-7xl font-bold tracking-tighter text-white leading-[1.1]">
                             Let's build <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-300 to-zinc-400">
                                 something epic.
                             </span>
                         </h1>
@@ -115,12 +115,12 @@ export default function LampDemo() {
                         className="space-y-4 pt-4"
                     >
                         <div className="flex items-center gap-4 group">
-                            <div className="p-3 rounded-2xl bg-blue-500/10 border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
-                                <Mail className="w-6 h-6 text-blue-400" />
+                            <div className="p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
+                                <Mail className="w-6 h-6 text-zinc-300" />
                             </div>
                             <div>
                                 <div className="text-sm text-neutral-500 font-medium">Email Me</div>
-                                <a href="mailto:yatin.singh.dev@gmail.com" className="text-lg text-white hover:text-blue-400 transition-colors font-medium">
+                                <a href="mailto:yatin.singh.dev@gmail.com" className="text-lg text-white hover:text-zinc-300 transition-colors font-medium">
                                     yatin.singh.dev@gmail.com
                                 </a>
                             </div>
@@ -135,11 +135,11 @@ export default function LampDemo() {
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     className="relative"
                 >
-                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-white/10 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
                     
                     <div className="relative bg-neutral-900/40 backdrop-blur-3xl border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl overflow-hidden">
                         {/* Decorative background element */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[100px] -z-10" />
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/[0.03] blur-[100px] -z-10" />
                         
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="space-y-2">
@@ -153,7 +153,7 @@ export default function LampDemo() {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className={`w-full px-6 py-4 bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/10'} rounded-2xl text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all duration-300 hover:bg-white/10`}
+                                    className={`w-full px-6 py-4 bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/10'} rounded-2xl text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-300 hover:bg-white/10`}
                                     placeholder="your@email.com"
                                 />
                                 <AnimatePresence>
@@ -182,7 +182,7 @@ export default function LampDemo() {
                                     value={formData.message}
                                     onChange={handleChange}
                                     rows="5"
-                                    className={`w-full px-6 py-4 bg-white/5 border ${errors.message ? 'border-red-500/50' : 'border-white/10'} rounded-2xl text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all duration-300 hover:bg-white/10 resize-none`}
+                                    className={`w-full px-6 py-4 bg-white/5 border ${errors.message ? 'border-red-500/50' : 'border-white/10'} rounded-2xl text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-300 hover:bg-white/10 resize-none`}
                                     placeholder="Tell me about your vision..."
                                 />
                                 <AnimatePresence>
@@ -203,10 +203,10 @@ export default function LampDemo() {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full relative group/btn overflow-hidden rounded-2xl bg-blue-500 p-[1px] transition-all duration-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50"
+                                className="w-full relative group/btn overflow-hidden rounded-2xl bg-white p-[1px] transition-all duration-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50"
                             >
                                 <div className="relative bg-[#030303] rounded-[15px] px-8 py-4 transition-all duration-300 group-hover/btn:bg-transparent flex items-center justify-center gap-3 overflow-hidden">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-zinc-700 to-zinc-800 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
                                     
                                     <span className="relative z-10 font-bold text-white tracking-tight">
                                         {isSubmitting ? "Initiating..." : "Launch Message"}
@@ -221,9 +221,9 @@ export default function LampDemo() {
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0 }}
-                                        className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl"
+                                        className="p-4 bg-white/5 border border-white/10 rounded-2xl"
                                     >
-                                        <p className="text-emerald-400 text-center text-sm font-medium flex items-center justify-center gap-2">
+                                        <p className="text-white text-center text-sm font-medium flex items-center justify-center gap-2">
                                             <CheckCircle2 className="w-4 h-4" />
                                             Message intercepted. I'll respond shortly.
                                         </p>

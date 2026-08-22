@@ -46,7 +46,7 @@ export function Navbar({ className }) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="w-10 h-10 rounded-xl bg-linear-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_30px_rgba(99,102,241,0.6)] hover:scale-110 transition-all duration-300"
+          className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-black font-bold text-sm shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] hover:scale-110 transition-all duration-300"
         >
           YS
         </motion.div>
@@ -97,7 +97,7 @@ export function Navbar({ className }) {
         href="/"
         className="md:hidden fixed top-5 left-5 z-50"
       >
-        <div className="w-9 h-9 rounded-xl bg-linear-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs shadow-[0_0_16px_rgba(99,102,241,0.4)]">
+        <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center text-black font-bold text-xs shadow-[0_0_16px_rgba(255,255,255,0.15)]">
           YS
         </div>
       </Link>

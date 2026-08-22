@@ -70,7 +70,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="footer-col space-y-6">
             <div className="space-y-3">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-linear-to-br from-indigo-500 to-purple-600 text-white font-bold text-lg shadow-[0_0_24px_rgba(99,102,241,0.35)]">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white text-black font-bold text-lg shadow-[0_0_24px_rgba(255,255,255,0.15)]">
                 YS
               </div>
               <h3 className="text-lg font-bold text-white tracking-tight">K. Yatin Singh</h3>
@@ -130,10 +130,10 @@ export default function Footer() {
               </div>
               <div
                 ref={badgeRef}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-[10px] font-bold text-emerald-400 tracking-[0.2em] uppercase">
+                <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+                <span className="text-[10px] font-bold text-white tracking-[0.2em] uppercase">
                   Available for Hire
                 </span>
               </div>

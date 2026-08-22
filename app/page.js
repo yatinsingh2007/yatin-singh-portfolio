@@ -81,7 +81,7 @@ function EngineeringPillarsSection() {
     <section className="relative z-10 py-24 border-y border-white/10 bg-black/60 backdrop-blur-xl">
       <div className="max-w-6xl mx-auto px-6 space-y-10">
         <div className="text-center space-y-3">
-          <p className="text-xs font-bold text-indigo-400 tracking-[0.4em] uppercase opacity-80">
+          <p className="text-xs font-bold text-zinc-500 tracking-[0.4em] uppercase opacity-80">
             Engineering Focus
           </p>
           <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
@@ -95,13 +95,13 @@ function EngineeringPillarsSection() {
             return (
               <div
                 key={index}
-                className="group relative p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-indigo-500/30 hover:bg-white/[0.04] transition-all duration-500 flex flex-col justify-between"
+                className="group relative p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500 flex flex-col justify-between"
               >
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:scale-110 group-hover:bg-white/10 transition-all duration-300">
                     <Icon size={22} />
                   </div>
-                  <h3 className="text-base font-bold text-white group-hover:text-indigo-300 transition-colors leading-snug">
+                  <h3 className="text-base font-bold text-white group-hover:text-zinc-300 transition-colors leading-snug">
                     {pillar.title}
                   </h3>
                   <p className="text-xs text-zinc-400 font-light leading-relaxed">
@@ -156,7 +156,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="relative w-full min-h-screen bg-black text-white selection:bg-indigo-500/30">
+      <main className="relative w-full min-h-screen bg-black text-white selection:bg-white/20">
 
         {/* ── Hero ── */}
         <div className="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center">
@@ -285,18 +285,18 @@ export default function Home() {
           id="skills"
           className="relative w-full py-32 flex flex-col items-center justify-center bg-black overflow-hidden"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.06)_0%,_transparent_60%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.03)_0%,_transparent_60%)] pointer-events-none" />
 
           <div
             ref={skillsHeadRef}
             className="text-center mb-16 z-10 px-4"
           >
-            <p className="text-xs font-bold text-indigo-400 tracking-[0.5em] uppercase mb-4 opacity-80">
+            <p className="text-xs font-bold text-zinc-500 tracking-[0.5em] uppercase mb-4 opacity-80">
               Expertise
             </p>
             <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight">
               Tech Stack &{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 to-purple-500">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-zinc-400">
                 Toolbox
               </span>
             </h2>

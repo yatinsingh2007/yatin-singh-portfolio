@@ -209,14 +209,14 @@ export default function Project() {
   }, []);
 
   return (
-    <div className="min-h-screen relative bg-black selection:bg-indigo-500/30 overflow-x-hidden">
+    <div className="min-h-screen relative bg-black selection:bg-white/20 overflow-x-hidden">
       <Navbar />
       <BackgroundBeams className="opacity-40" />
 
       <div className="relative z-10 pt-40 pb-20 px-6">
         <div ref={heroRef} className="max-w-7xl mx-auto text-center space-y-8">
           <div className="flex flex-col items-center gap-4">
-            <div className="px-4 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-indigo-400 text-xs font-bold tracking-[0.3em] uppercase">
+            <div className="px-4 py-1 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold tracking-[0.3em] uppercase">
               Gallery of Innovation
             </div>
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold bg-gradient-to-b from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent tracking-tighter leading-tight">
@@ -231,8 +231,8 @@ export default function Project() {
           <div className="flex items-center justify-center pt-4">
             <div className="px-6 py-3 rounded-2xl bg-neutral-900/50 border border-white/5 backdrop-blur-xl flex items-center gap-4 cursor-default">
               <div className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
               </div>
               <span className="text-neutral-300 font-medium tracking-wide">
                 {projects.length} Elite Projects Cataloged

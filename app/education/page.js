@@ -25,7 +25,7 @@ export default function Education() {
       status: "3rd Year — Sem 5",
       grade: "CGPA: 7.91 / 10",
       description: "Intensive program focused on software engineering, data structures, algorithms, and artificial intelligence. Actively participating in research and development projects.",
-      color: "from-emerald-400 to-cyan-400",
+      color: "from-white/10 to-zinc-400/10",
     },
     {
       degree: "Higher Secondary Education (12th Grade)",
@@ -35,7 +35,7 @@ export default function Education() {
       status: "Completed",
       grade: "Percentage: 93.3%",
       description: "Advanced study in Physics, Chemistry, and Mathematics (PCM) with a focus on competitive examination preparation.",
-      color: "from-blue-400 to-indigo-400",
+      color: "from-white/10 to-zinc-400/10",
     },
     {
       degree: "Secondary School Education (10th Grade)",
@@ -45,7 +45,7 @@ export default function Education() {
       status: "Completed",
       grade: "Percentage: 85%",
       description: "Foundational academic education with a strong emphasis on science and mathematics.",
-      color: "from-purple-400 to-pink-400",
+      color: "from-white/10 to-zinc-400/10",
     },
   ];
 
@@ -97,7 +97,7 @@ export default function Education() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-[#030303] relative overflow-hidden selection:bg-emerald-500/30">
+    <div className="min-h-screen w-full bg-[#030303] relative overflow-hidden selection:bg-white/20">
       <Navbar />
       <BackgroundBeams className="opacity-40" />
 
@@ -106,7 +106,7 @@ export default function Education() {
           <div>
             <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-white">
               Academic <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-300 to-zinc-400">
                 Journey
               </span>
             </h1>
@@ -121,7 +121,7 @@ export default function Education() {
         <div className="relative space-y-12">
           <div
             ref={timelineLineRef}
-            className="absolute left-0 md:left-8 top-8 bottom-8 w-[1px] bg-gradient-to-b from-emerald-500/50 via-neutral-800 to-neutral-800/20"
+            className="absolute left-0 md:left-8 top-8 bottom-8 w-[1px] bg-gradient-to-b from-white/20 via-neutral-800 to-neutral-800/20"
           />
 
           {educationData.map((edu, index) => (
@@ -131,18 +131,18 @@ export default function Education() {
               className="relative pl-12 md:pl-24"
             >
               {/* Dot */}
-              <div className="absolute left-[-5px] md:left-[27px] top-4 w-[11px] h-[11px] rounded-full bg-[#030303] border-2 border-emerald-500 z-20 shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
+              <div className="absolute left-[-5px] md:left-[27px] top-4 w-[11px] h-[11px] rounded-full bg-[#030303] border-2 border-white z-20 shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
 
-              <div className="group relative bg-neutral-900/20 backdrop-blur-sm border border-neutral-800/50 rounded-3xl p-8 md:p-10 hover:border-emerald-500/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_10px_50px_rgba(16,185,129,0.15)]">
+              <div className="group relative bg-neutral-900/20 backdrop-blur-sm border border-neutral-800/50 rounded-3xl p-8 md:p-10 hover:border-white/20 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_10px_50px_rgba(255,255,255,0.06)]">
                 <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${edu.color} opacity-0 group-hover:opacity-10 blur-[100px] transition-opacity duration-700`} />
 
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-emerald-400 font-mono text-sm tracking-widest uppercase">
+                    <div className="flex items-center gap-2 text-zinc-400 font-mono text-sm tracking-widest uppercase">
                       <Calendar className="w-4 h-4" />
                       {edu.period}
                     </div>
-                    <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight group-hover:text-emerald-300 transition-colors duration-300">
+                    <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight group-hover:text-zinc-300 transition-colors duration-300">
                       {edu.degree}
                     </h3>
                   </div>
@@ -150,7 +150,7 @@ export default function Education() {
                     <div className="bg-neutral-800/40 border border-neutral-700/50 rounded-2xl px-5 py-3 backdrop-blur-md">
                       <div className="text-sm text-neutral-400 font-medium mb-1">Status</div>
                       <div className="text-white font-semibold flex items-center gap-2 text-lg">
-                        <Award className="w-5 h-5 text-emerald-400" />
+                        <Award className="w-5 h-5 text-zinc-400" />
                         {edu.status}
                       </div>
                     </div>
@@ -160,8 +160,8 @@ export default function Education() {
                 <div className="grid md:grid-cols-2 gap-8 mb-8">
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <div className="mt-1 p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
-                        <School className="w-5 h-5 text-emerald-400" />
+                      <div className="mt-1 p-2 rounded-lg bg-white/5 border border-white/10">
+                        <School className="w-5 h-5 text-zinc-400" />
                       </div>
                       <div>
                         <div className="text-sm text-neutral-500 font-medium">Institution</div>
@@ -170,8 +170,8 @@ export default function Education() {
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="mt-1 p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
-                        <MapPin className="w-5 h-5 text-cyan-400" />
+                      <div className="mt-1 p-2 rounded-lg bg-white/5 border border-white/10">
+                        <MapPin className="w-5 h-5 text-zinc-400" />
                       </div>
                       <div>
                         <div className="text-sm text-neutral-500 font-medium">Location</div>
@@ -180,8 +180,8 @@ export default function Education() {
                     </div>
                   </div>
                   <div className="space-y-4">
-                    <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-2xl p-6">
-                      <div className="text-sm text-emerald-500/70 font-mono tracking-wider uppercase mb-2">Performance</div>
+                    <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6">
+                      <div className="text-sm text-zinc-500 font-mono tracking-wider uppercase mb-2">Performance</div>
                       <div className="text-3xl font-bold text-white tracking-tighter">{edu.grade}</div>
                     </div>
                   </div>

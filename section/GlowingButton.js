@@ -7,7 +7,7 @@ export default function GlowingButton({ text, icon, onClick }) {
     <Button
       onClick={onClick}
       className="flex items-center gap-2 px-6 py-3 bg-transparent text-white font-semibold rounded-full
-                 relative overflow-hidden hover:scale-[1.07] hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all duration-300 cursor-pointer"
+                 relative overflow-hidden hover:scale-[1.07] hover:shadow-[0_0_20px_rgba(255,255,255,0.25)] transition-all duration-300 cursor-pointer"
     >
       {icon}
       {text}

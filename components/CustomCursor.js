@@ -1,111 +1,172 @@
 "use client";
-import { useEffect, useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useMotionValue,
-  useSpring,
-} from "framer-motion";
 
-export default function CustomCursor() {
-  const [isMobile, setIsMobile]   = useState(false);
+import { useEffect, useRef, useState } from "react";
+import { motion, useSpring } from "framer-motion";
+
+const DESKTOP_POINTER_QUERY = "(any-hover: hover) and (any-pointer: fine)";
+
+function DefaultCursorSVG() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={50}
+      height={54}
+      viewBox="0 0 50 54"
+      fill="none"
+      style={{ scale: 0.5 }}
+    >
+      <g filter="url(#filter0_d_91_7928)">
+        <path
+          d="M42.6817 41.1495L27.5103 6.79925C26.7269 5.02557 24.2082 5.02558 23.3927 6.79925L7.59814 41.1495C6.75833 42.9759 8.52712 44.8902 10.4125 44.1954L24.3757 39.0496C24.8829 38.8627 25.4385 38.8627 25.9422 39.0496L39.8121 44.1954C41.6849 44.8902 43.4884 42.9759 42.6817 41.1495Z"
+          fill="white"
+        />
+        <path
+          d="M43.7146 40.6933L28.5431 6.34306C27.3556 3.65428 23.5772 3.69516 22.3668 6.32755L6.57226 40.6778C5.3134 43.4156 7.97238 46.298 10.803 45.2549L24.7662 40.109C25.0221 40.0147 25.2999 40.0156 25.5494 40.1082L39.4193 45.254C42.2261 46.2953 44.9254 43.4347 43.7146 40.6933Z"
+          stroke="rgba(0,0,0,0.35)"
+          strokeWidth={2.25825}
+        />
+      </g>
+      <defs>
+        <filter
+          id="filter0_d_91_7928"
+          x={0.602397}
+          y={0.952444}
+          width={49.0584}
+          height={52.428}
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
+        >
+          <feFlood floodOpacity={0} result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dy={2.25825} />
+          <feGaussianBlur stdDeviation={2.25825} />
+          <feComposite in2="hardAlpha" operator="out" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+          />
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_91_7928" />
+          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_91_7928" result="shape" />
+        </filter>
+      </defs>
+    </svg>
+  );
+}
+
+export default function CustomCursor({
+  cursor = <DefaultCursorSVG />,
+  springConfig = { damping: 45, stiffness: 400, mass: 1, restDelta: 0.001 },
+}) {
+  const lastMousePos        = useRef({ x: 0, y: 0 });
+  const velocity            = useRef({ x: 0, y: 0 });
+  const lastUpdateTime      = useRef(Date.now());
+  const previousAngle       = useRef(0);
+  const accumulatedRotation = useRef(0);
+  const [isEnabled, setIsEnabled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Raw mouse position
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+  const cursorX  = useSpring(0, springConfig);
+  const cursorY  = useSpring(0, springConfig);
+  const rotation = useSpring(0, { ...springConfig, damping: 60, stiffness: 300 });
+  const scale    = useSpring(1, { ...springConfig, stiffness: 500, damping: 35 });
 
-  // Spring-based slow follow — lower stiffness = more lag (the "slow" feel)
-  const x = useSpring(mouseX, { stiffness: 120, damping: 20, mass: 0.6 });
-  const y = useSpring(mouseY, { stiffness: 120, damping: 20, mass: 0.6 });
-
-  // Label trails even further behind
-  const lx = useSpring(mouseX, { stiffness: 80, damping: 18, mass: 0.8 });
-  const ly = useSpring(mouseY, { stiffness: 80, damping: 18, mass: 0.8 });
-
+  // Enable only on real pointer devices (not touch)
   useEffect(() => {
-    const check = () =>
-      setIsMobile(
-        window.matchMedia("(pointer: coarse)").matches ||
-          window.innerWidth < 768
-      );
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    const mq = window.matchMedia(DESKTOP_POINTER_QUERY);
+    const update = () => {
+      setIsEnabled(mq.matches);
+      if (!mq.matches) setIsVisible(false);
+    };
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
   }, []);
 
   useEffect(() => {
-    if (isMobile) return;
+    if (!isEnabled) return;
 
-    document.documentElement.style.cursor = "none";
+    let timeout = null;
 
-    const onMove = (e) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-      setIsVisible(true);
+    const updateVelocity = (pos) => {
+      const now = Date.now();
+      const dt  = now - lastUpdateTime.current;
+      if (dt > 0) {
+        velocity.current = {
+          x: (pos.x - lastMousePos.current.x) / dt,
+          y: (pos.y - lastMousePos.current.y) / dt,
+        };
+      }
+      lastUpdateTime.current = now;
+      lastMousePos.current   = pos;
     };
-    const onLeave  = () => setIsVisible(false);
-    const onEnter  = () => setIsVisible(true);
 
-    window.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseleave", onLeave);
-    document.addEventListener("mouseenter", onEnter);
+    const onPointerMove = (e) => {
+      if (e.pointerType === "touch") return;
+      setIsVisible(true);
+
+      const pos = { x: e.clientX, y: e.clientY };
+      updateVelocity(pos);
+      cursorX.set(pos.x);
+      cursorY.set(pos.y);
+
+      const speed = Math.hypot(velocity.current.x, velocity.current.y);
+      if (speed > 0.1) {
+        const angle    = Math.atan2(velocity.current.y, velocity.current.x) * (180 / Math.PI) + 90;
+        let   diff     = angle - previousAngle.current;
+        if (diff >  180) diff -= 360;
+        if (diff < -180) diff += 360;
+        accumulatedRotation.current += diff;
+        rotation.set(accumulatedRotation.current);
+        previousAngle.current = angle;
+        scale.set(0.95);
+        if (timeout) clearTimeout(timeout);
+        timeout = setTimeout(() => scale.set(1), 150);
+      }
+    };
+
+    let rafId = 0;
+    const throttled = (e) => {
+      if (e.pointerType === "touch" || rafId) return;
+      rafId = requestAnimationFrame(() => { onPointerMove(e); rafId = 0; });
+    };
+
+    document.body.style.cursor = "none";
+    window.addEventListener("pointermove", throttled, { passive: true });
 
     return () => {
-      document.documentElement.style.cursor = "";
-      window.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseleave", onLeave);
-      document.removeEventListener("mouseenter", onEnter);
+      window.removeEventListener("pointermove", throttled);
+      document.body.style.cursor = "auto";
+      if (rafId) cancelAnimationFrame(rafId);
+      if (timeout) clearTimeout(timeout);
     };
-  }, [isMobile, mouseX, mouseY]);
+  }, [cursorX, cursorY, rotation, scale, isEnabled]);
 
-  if (isMobile) return null;
+  if (!isEnabled) return null;
 
   return (
-    <>
-      {/* Arrow cursor — spring follow */}
-      <AnimatePresence>
-        {isVisible && (
-          <motion.div
-            className="fixed top-0 left-0 z-[9999] pointer-events-none"
-            style={{ x, y }}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
-          >
-            {/* Exact Aceternity SVG arrow — rotated & styled for B&W */}
-            <svg
-              stroke="currentColor"
-              fill="currentColor"
-              strokeWidth="1"
-              viewBox="0 0 16 16"
-              className="h-6 w-6 -translate-x-[12px] -translate-y-[10px] -rotate-[70deg] transform stroke-white text-white drop-shadow-[0_0_4px_rgba(255,255,255,0.4)]"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z" />
-            </svg>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Label — trails further behind the arrow */}
-      <AnimatePresence>
-        {isVisible && (
-          <motion.div
-            className="fixed top-0 left-0 z-[9998] pointer-events-none"
-            style={{ x: lx, y: ly }}
-            initial={{ scale: 0.5, opacity: 0 }}
-            animate={{ scale: 1,   opacity: 1 }}
-            exit={{ scale: 0.5,   opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
-            <div className="ml-4 mt-1 min-w-max rounded-full bg-white px-3 py-1 text-[11px] font-semibold tracking-wide text-black whitespace-nowrap shadow-[0_2px_12px_rgba(255,255,255,0.15)]">
-              K. Yatin Singh
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+    <motion.div
+      style={{
+        position:      "fixed",
+        left:          cursorX,
+        top:           cursorY,
+        translateX:    "-50%",
+        translateY:    "-50%",
+        rotate:        rotation,
+        scale:         scale,
+        zIndex:        9999,
+        pointerEvents: "none",
+        willChange:    "transform",
+      }}
+      initial={false}
+      animate={{ opacity: isVisible ? 1 : 0 }}
+      transition={{ duration: 0.15 }}
+    >
+      {cursor}
+    </motion.div>
   );
 }

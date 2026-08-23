@@ -120,6 +120,28 @@
   display: none;
 }
 
+/* ── Role progression tree — flowing beam on the trunk ── */
+@keyframes roleBeamFlow {
+  0%   { top: -40%; opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+.role-beam::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 40%;
+  border-radius: 3px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.85), transparent);
+  animation: roleBeamFlow 3s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .role-beam::after { animation: none; opacity: 0; }
+}
+
 
 @layer base {
   * {

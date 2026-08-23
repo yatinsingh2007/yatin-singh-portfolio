@@ -68,10 +68,10 @@ export default function About() {
   const interestItemsRef = useRef([]);
 
   const skills = [
-    { name: "Full Stack Development", icon: <Globe className="w-4 h-4 text-zinc-400" />, color: "border-white/10 bg-white/[0.03]" },
-    { name: "MERN Stack",             icon: <Database className="w-4 h-4 text-zinc-400" />, color: "border-white/10 bg-white/[0.03]" },
-    { name: "DevOps",                 icon: <Terminal className="w-4 h-4 text-zinc-400" />,    color: "border-white/10 bg-white/[0.03]" },
-    { name: "AI/ML",                  icon: <Cpu className="w-4 h-4 text-zinc-400" />,       color: "border-white/10 bg-white/[0.03]" },
+    { name: "Full Stack Development", icon: <Globe className="w-4 h-4 text-zinc-400" />, color: "border-white/10 bg-white/[0.05]" },
+    { name: "MERN Stack",             icon: <Database className="w-4 h-4 text-zinc-400" />, color: "border-white/10 bg-white/[0.05]" },
+    { name: "DevOps",                 icon: <Terminal className="w-4 h-4 text-zinc-400" />,    color: "border-white/10 bg-white/[0.05]" },
+    { name: "AI/ML",                  icon: <Cpu className="w-4 h-4 text-zinc-400" />,       color: "border-white/10 bg-white/[0.05]" },
   ];
 
   const milestones = [
@@ -156,7 +156,14 @@ export default function About() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-black text-white relative flex flex-col overflow-x-hidden">
+    <div className="min-h-screen w-full bg-neutral-950 text-white relative flex flex-col overflow-x-hidden">
+      {/* Ambient lighting so the page reads with depth instead of flat black */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[80%] h-[45%] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.06)_0%,transparent_70%)]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[45%] h-[45%] bg-white/[0.05] blur-[130px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[45%] h-[45%] bg-white/[0.04] blur-[130px] rounded-full" />
+      </div>
+
       <Navbar />
 
       <main className="flex-grow relative z-10 pt-40 pb-24 px-6">
@@ -279,7 +286,7 @@ export default function About() {
                 <div
                   key={i}
                   ref={(el) => (interestItemsRef.current[i] = el)}
-                  className="p-5 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] hover:border-white/10 transition-all duration-300 group flex flex-col items-center text-center gap-3"
+                  className="p-5 rounded-2xl bg-white/[0.05] border border-white/10 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 group flex flex-col items-center text-center gap-3"
                 >
                   <div className="p-3 rounded-xl bg-white/5 border border-white/5 text-zinc-500 group-hover:text-white group-hover:border-white/20 group-hover:bg-white/[0.08] transition-all duration-300">
                     {item.icon}
@@ -299,7 +306,7 @@ export default function About() {
         </div>
       </main>
 
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-60">
         <BackgroundBeams />
       </div>
 

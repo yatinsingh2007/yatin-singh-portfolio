@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Navbar } from "../section/Navbar";
 import Prism from "../components/Prism";
 import Skills from "@/section/Skills";
@@ -7,8 +7,9 @@ import GlowingButton from "@/section/GlowingButton";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import Footer from "@/section/Footer";
 import Hero from "@/section/Hero";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronDown, Terminal, Cpu, Cloud, Brain, Zap } from "lucide-react";
+import { GooeyText } from "@/components/ui/gooey-text";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -118,16 +119,8 @@ function EngineeringPillarsSection() {
 }
 
 export default function Home() {
-  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const skillsHeadRef = useRef(null);
   const skillsBodyRef = useRef(null);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
   // Skills section scroll reveal
   useEffect(() => {
@@ -193,23 +186,15 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-xl sm:text-2xl md:text-3xl text-zinc-400 font-light max-w-3xl leading-relaxed flex flex-wrap justify-center gap-2 items-center min-h-[3rem]"
+              className="text-xl sm:text-2xl md:text-3xl text-zinc-400 font-light leading-relaxed flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1"
             >
-              Focused on
-              <span className="relative inline-flex overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={currentRoleIndex}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="text-white font-medium"
-                  >
-                    {roles[currentRoleIndex]}
-                  </motion.span>
-                </AnimatePresence>
-              </span>
+              <span>Focused on</span>
+              <GooeyText
+                texts={roles}
+                morphTime={1.1}
+                cooldownTime={2.4}
+                textClassName="font-medium text-white"
+              />
             </motion.p>
 
             <motion.div

@@ -127,36 +127,57 @@ function MultiRoleCard({ logo, companyName, companyDescription, roles = [], offe
           )}
         </div>
 
-        {/* Inner role progression — dot connector */}
-        <div className="relative pl-6 mt-2">
-          {/* Vertical connecting line */}
-          <div className="absolute left-[7px] top-3 bottom-3 w-px bg-gradient-to-b from-white/40 via-zinc-600 to-zinc-800" />
+        {/* Inner role progression — branching promotion tree */}
+        <div className="relative mt-3">
+          {roles.map((role, i) => {
+            const isLast = i === roles.length - 1;
+            const isCurrent = role.isCurrent;
+            return (
+              <div key={i} className="relative flex gap-3 sm:gap-4">
+                {/* Connector column: continuous trunk + curved branch + node */}
+                <div className="relative w-10 shrink-0">
+                  {/* Continuous vertical trunk (seniority gradient) */}
+                  <div
+                    className={`role-beam absolute left-2 top-0 w-px bg-gradient-to-b from-white/35 via-white/20 to-white/10 ${isLast ? "h-3.5" : "bottom-0"}`}
+                  />
 
-          <div className="space-y-0">
-            {roles.map((role, i) => (
-              <div key={i} className="relative">
-                {/* Dot */}
-                <div className={`absolute left-[-18px] top-[6px] flex items-center justify-center`}>
-                  {role.isCurrent ? (
-                    /* Current role — larger glowing dot */
-                    <span className="relative flex h-3.5 w-3.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-50" />
-                      <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
-                    </span>
-                  ) : (
-                    /* Past role — smaller muted dot */
-                    <span className="h-2.5 w-2.5 rounded-full bg-zinc-600 border border-zinc-500" />
-                  )}
+                  {/* Curved branch peeling off the trunk toward the node */}
+                  <svg
+                    className="absolute left-0 top-0 h-7 w-10 overflow-visible"
+                    viewBox="0 0 40 28"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M8 1 C 8 14, 20 14, 32 14"
+                      stroke={isCurrent ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.22)"}
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+
+                  {/* Node at the branch tip */}
+                  <div className="absolute left-8 top-3.5 -translate-x-1/2 -translate-y-1/2">
+                    {isCurrent ? (
+                      <span className="relative flex h-3.5 w-3.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-40" />
+                        <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-white shadow-[0_0_10px_rgba(255,255,255,0.7)]" />
+                      </span>
+                    ) : (
+                      <span className="block h-2.5 w-2.5 rounded-full bg-zinc-500 ring-2 ring-zinc-800" />
+                    )}
+                  </div>
                 </div>
 
                 {/* Role content */}
-                <div className={`pb-8 ${i === roles.length - 1 ? "pb-0" : ""}`}>
+                <div className={`flex-1 min-w-0 ${isLast ? "pb-1" : "pb-9"}`}>
                   <div className="flex flex-wrap items-center gap-3 mb-1">
-                    <span className={`text-base sm:text-lg font-bold ${role.isCurrent ? "text-white" : "text-zinc-300"}`}>
+                    <span className={`text-base sm:text-lg font-bold ${isCurrent ? "text-white" : "text-zinc-300"}`}>
                       {role.title}
                     </span>
-                    {role.isCurrent && (
-                      <span className="px-2 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-bold text-white uppercase tracking-widest">
+                    {isCurrent && (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-bold text-white uppercase tracking-widest">
+                        <Zap size={10} className="shrink-0" />
                         Current
                       </span>
                     )}
@@ -184,8 +205,8 @@ function MultiRoleCard({ logo, companyName, companyDescription, roles = [], offe
                   )}
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
 

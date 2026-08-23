@@ -6,14 +6,33 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 import React, { useEffect, useRef } from "react";
 import { Navbar } from "@/section/Navbar";
 import Footer from "@/section/Footer";
-import { FileText, ExternalLink, Calendar, Briefcase, Zap, Rocket } from "lucide-react";
+import { FileText, ExternalLink, Calendar, Briefcase, Zap, Rocket, GraduationCap, Clock } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/* ── Employment type badge — Internship / Part-time / Full-time ── */
+const EMPLOYMENT_TYPES = {
+  Internship: { label: "Internship", Icon: GraduationCap },
+  "Part-time": { label: "Part-time", Icon: Clock },
+  "Full-time": { label: "Full-time", Icon: Briefcase },
+};
+
+function EmploymentTypeBadge({ type }) {
+  const cfg = EMPLOYMENT_TYPES[type];
+  if (!cfg) return null;
+  const { label, Icon } = cfg;
+  return (
+    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-widest text-zinc-300">
+      <Icon size={12} className="shrink-0 text-zinc-400" />
+      {label}
+    </span>
+  );
+}
+
 /* ── Single-role card (used for every company except ByteBlock) ── */
-function ExperienceCard({ logo, companyName, companyDescription, startDate, endDate, duration, role, location, tags = [], features = [], offerLetterUrl, completionLetterUrl, isLast, cardRef }) {
+function ExperienceCard({ logo, companyName, companyDescription, startDate, endDate, duration, role, location, employmentType, tags = [], features = [], offerLetterUrl, completionLetterUrl, isLast, cardRef }) {
   return (
     <div ref={cardRef} className="w-full relative group" style={{ opacity: 0, transform: "translateY(32px)" }}>
       <div className="absolute -inset-x-4 -inset-y-6 bg-white/[0.02] rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl pointer-events-none" />
@@ -58,8 +77,11 @@ function ExperienceCard({ logo, companyName, companyDescription, startDate, endD
           <div className="text-zinc-500 text-xs sm:text-sm font-medium tracking-wide">
             {startDate} — {endDate} {duration && `· ${duration}`}
           </div>
-          <div className="text-white text-lg sm:text-xl font-bold">
-            {role} {location && <span className="text-zinc-400 font-normal"> — {location}</span>}
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="text-white text-lg sm:text-xl font-bold">
+              {role} {location && <span className="text-zinc-400 font-normal"> — {location}</span>}
+            </div>
+            <EmploymentTypeBadge type={employmentType} />
           </div>
         </div>
 
@@ -181,6 +203,7 @@ function MultiRoleCard({ logo, companyName, companyDescription, roles = [], offe
                         Current
                       </span>
                     )}
+                    <EmploymentTypeBadge type={role.employmentType} />
                   </div>
                   <div className="text-zinc-500 text-xs sm:text-sm font-medium tracking-wide mb-3">
                     {role.period} {role.location && `· ${role.location}`}
@@ -235,19 +258,23 @@ export default function ExperiencePage() {
           title: "Software Development Engineer (Full-Stack)",
           period: "Sep 2026 — Present",
           location: "Remote",
+          employmentType: "Internship",
           isCurrent: true,
         },
         {
           title: "Full Stack Developer",
           period: "Jun 2026 — Sep 2026",
           location: "Remote",
+          employmentType: "Internship",
           isCurrent: false,
           tags: ["50+ Merged PRs & Full-Stack RBAC", "Open-Source LLMs (vLLM & Qwen 2.5)", "CI/CD Pipeline & VPS Deployment (<3 min builds)"],
           features: [
-            "Shipped 50+ merged PRs delivering maintenance cycle CRUD (validation, status transitions, automated date tracking) and role-based dashboards with centralized RBAC for 500+ active users on a Next.js contract management platform for Technology Associates.",
-            "Built an automated cron-based reminder system handling 1,000+ daily email notifications with persistence logging, cutting manual payment & maintenance follow-up overhead by 85%.",
-            "Automated the end-to-end CI/CD deployment pipeline using Docker & GitHub Actions to a Linux VPS, reducing build & release cycles from 45 minutes to <3 minutes with zero-downtime rollouts.",
-            "Engineered an AI chatbot system powered by Qwen 2.5 (1.5B), optimizing model inference via vLLM on a VPS to achieve sub-200ms response latency and 40+ tokens/sec throughput across 1,000+ user interactions.",
+            "Developed and maintained a client-facing contract management platform for Technology Associates (Tanzania), implementing RBAC, role-based dashboards, contract lifecycle workflows, CRUD operations, data validation, and business logic automation across 10+ core application modules.",
+            "Delivered 50+ merged pull requests through Git-based workflows, contributing to production-grade frontend and backend features using Next.js, TypeScript, Prisma, and SQL, while improving maintainability through reusable components and structured API design.",
+            "Designed and deployed a Dockerized CI/CD pipeline using GitHub Actions, automating application builds, deployment workflows, and VPS releases, reducing deployment time from 45 minutes to under 3 minutes (~93% improvement).",
+            "Built an automated cron-based notification and reminder engine for payment and maintenance alerts, integrating scheduled jobs, email delivery services, database persistence, and status-based notification handling to improve reliability of contract operations.",
+            "Deployed and integrated the Qwen 2.5 1.5B open-source LLM using vLLM on a VPS, exposing inference APIs to enable an AI chatbot feature and demonstrating self-hosted LLM deployment within a production application environment.",
+            "Managed end-to-end production deployment workflows including Docker containerization, environment configuration, database migrations, reverse proxy configuration, and VPS infrastructure optimization.",
           ],
         },
       ],
@@ -261,14 +288,14 @@ export default function ExperiencePage() {
       duration: "2 mos",
       role: "Full Stack Developer",
       location: "Remote",
-      tags: ["Optimized mobile performance (35% → 75%)", "Architected Django & DRF backend APIs"],
+      employmentType: "Internship",
+      tags: ["Lighthouse mobile 35 → 75 (+114%)", "Django & DRF backend for 500+ users", "AWS EC2 & S3 deployment"],
       features: [
-        "Architected complete backend with Django & DRF",
-        "Optimized mobile performance (35% → 75%)",
-        "Designed RESTful APIs for complex workflows",
-        "Delivered MVP platform with cross-functional teams",
-        "Implemented secure payment integration flows",
-        "Enhanced user experience with real-time tracking",
+        "Engineered and scaled backend infrastructure from an early-stage prototype to a production-ready platform, developing RESTful APIs that powered core client–freelancer workflows including authentication, job management, and transaction processing for 500+ users.",
+        "Designed and implemented a scalable backend architecture using Python, Django, and Django REST Framework, building secure authentication flows, business logic layers, API endpoints, and database integrations across 10+ core features.",
+        "Deployed and maintained production infrastructure on AWS EC2, integrating Amazon S3 for static asset storage and delivery, reducing application server load by 20% and improving asset retrieval performance.",
+        "Optimized frontend performance and mobile responsiveness by improving rendering efficiency, asset handling, and UI responsiveness, increasing the Lighthouse mobile performance score from 35 to 75 (+114%).",
+        "Developed and maintained 30+ API endpoints with structured error handling, validation, and optimized request flows to improve reliability and scalability of the platform.",
       ],
       offerLetterUrl: "https://drive.google.com/file/d/1Y7g_iSAYbwe8d8bll0hXNRTvqVmoUCbD/view?usp=sharing",
       completionLetterUrl: "https://drive.google.com/file/d/1KCeFWM5e_lQdpjEVBcJNGlJZ6pm_aahM/view?usp=sharing",

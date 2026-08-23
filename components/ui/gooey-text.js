@@ -22,10 +22,10 @@ export function GooeyText({
   const text1Ref = React.useRef(null);
   const text2Ref = React.useRef(null);
 
-  const widest = React.useMemo(
-    () => (texts || []).reduce((a, b) => (b.length > a.length ? b : a), ""),
-    [texts]
-  );
+  // Word(s) the sizer must fit right now: the settled word while resting, or
+  // the wider of the outgoing/incoming pair mid-morph. Keeps the box hugging
+  // the visible text instead of always reserving the widest phrase's width.
+  const [sizerText, setSizerText] = React.useState(() => (texts || [])[0] ?? "");
 
   React.useEffect(() => {
     if (!texts || texts.length === 0) return;
@@ -70,6 +70,8 @@ export function GooeyText({
       if (fraction > 1) {
         cooldown = cooldownTime;
         fraction = 1;
+        // Morph settled — shrink the box to just the now-visible word.
+        setSizerText(texts[(textIndex + 1) % texts.length]);
       }
       setMorph(fraction);
     };
@@ -87,10 +89,14 @@ export function GooeyText({
       if (cooldown <= 0) {
         if (wasResting) {
           textIndex = (textIndex + 1) % texts.length;
+          const cur = texts[textIndex % texts.length];
+          const next = texts[(textIndex + 1) % texts.length];
           if (text1Ref.current && text2Ref.current) {
-            text1Ref.current.textContent = texts[textIndex % texts.length];
-            text2Ref.current.textContent = texts[(textIndex + 1) % texts.length];
+            text1Ref.current.textContent = cur;
+            text2Ref.current.textContent = next;
           }
+          // Mid-morph both words overlap — reserve the wider of the two.
+          setSizerText(cur.length >= next.length ? cur : next);
         }
         doMorph();
       } else {
@@ -119,7 +125,7 @@ export function GooeyText({
         </defs>
       </svg>
 
-      {/* Invisible sizer — reserves width/height of the widest phrase */}
+      {/* Invisible sizer — reserves width/height of the word(s) on screen */}
       <span
         aria-hidden="true"
         className={cn(
@@ -127,7 +133,7 @@ export function GooeyText({
           textClassName
         )}
       >
-        {widest}
+        {sizerText}
       </span>
 
       {/* Morphing layers — blended together by the threshold filter */}

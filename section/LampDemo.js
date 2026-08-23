@@ -1,70 +1,56 @@
 "use client"
 
-import { BackgroundBeams } from "@/components/ui/background-beams"
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Send, Mail, MessageSquare, CheckCircle2, AlertCircle } from "lucide-react"
+import { motion, AnimatePresence } from "motion/react"
+import { AlertCircle } from "lucide-react"
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa"
+import { PageGlow } from "@/components/terminal-ui"
+
+const socials = [
+    { name: "github", icon: FaGithub, href: "https://github.com/yatinsingh2007" },
+    { name: "linkedin", icon: FaLinkedin, href: "https://www.linkedin.com/in/yatin-singh-b37817323/" },
+    { name: "instagram", icon: FaInstagram, href: "https://www.instagram.com/yatin_singh27" },
+]
 
 export default function LampDemo() {
-    const [formData, setFormData] = useState({
-        email: "",
-        message: ""
-    })
-    
+    const [formData, setFormData] = useState({ email: "", message: "" })
     const [errors, setErrors] = useState({})
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitStatus, setSubmitStatus] = useState(null)
 
     const validateForm = () => {
         const newErrors = {}
-        
         if (!formData.email.trim()) {
-            newErrors.email = "Email is required"
+            newErrors.email = "email is required"
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-            newErrors.email = "Please enter a valid email"
+            newErrors.email = "invalid email"
         }
-        
         if (!formData.message.trim()) {
-            newErrors.message = "Message is required"
+            newErrors.message = "message is required"
         } else if (formData.message.trim().length < 10) {
-            newErrors.message = "Message must be at least 10 characters"
+            newErrors.message = "message must be at least 10 chars"
         }
-        
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0
     }
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }))
-        if (errors[name]) {
-            setErrors(prev => ({
-                ...prev,
-                [name]: ""
-            }))
-        }
+        setFormData((prev) => ({ ...prev, [name]: value }))
+        if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }))
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        
-        if (!validateForm()) {
-            return
-        }
-        
+        if (!validateForm()) return
         setIsSubmitting(true)
         setSubmitStatus(null)
-
         try {
             const response = await fetch("/api/contact", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
-            });
-
+            })
             if (response.ok) {
                 setSubmitStatus("success")
                 setFormData({ email: "", message: "" })
@@ -79,161 +65,161 @@ export default function LampDemo() {
         }
     }
 
-    return (
-        <div className="w-full min-h-screen relative flex items-center justify-center p-6 py-32 overflow-hidden selection:bg-white/20">
-            <BackgroundBeams className="opacity-40" />
-            
-            <div className="w-full max-w-4xl grid md:grid-cols-2 gap-12 relative z-10">
-                {/* Left Side: Copy */}
-                <div className="flex flex-col justify-center space-y-8">
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                        <h1 className="text-6xl md:text-7xl font-bold tracking-tighter text-white leading-[1.1]">
-                            Let's build <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-300 to-zinc-400">
-                                something epic.
-                            </span>
-                        </h1>
-                    </motion.div>
+    const inputBase =
+        "w-full bg-term border px-4 py-3 text-sm text-fg placeholder-fg-dim/60 outline-none transition-colors duration-200 focus:border-cy"
 
+    return (
+        <section className="scanlines relative w-full overflow-hidden bg-term font-mono text-fg">
+            <PageGlow />
+            <div className="relative mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-4 sm:px-6 pt-32 pb-28 lg:grid-cols-2 lg:gap-16">
+                {/* left: copy */}
+                <div className="flex flex-col justify-center">
                     <motion.p
-                        initial={{ opacity: 0, x: -30 }}
+                        initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-neutral-400 text-xl font-light leading-relaxed max-w-md"
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.7 }}
+                        className="text-xs uppercase tracking-[0.3em] text-cy"
                     >
-                        I'm currently open to software and ML related opportunities and open for collaboration. Have a project in mind or just want to say hi? I'm always up for new opportunities and interesting conversations.
+                        $ ./send-message --to yatin
                     </motion.p>
 
-                    <motion.div 
-                        initial={{ opacity: 0, x: -30 }}
+                    <motion.h1
+                        initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="space-y-4 pt-4"
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.05 }}
+                        className="mt-5 text-[clamp(2.6rem,7vw,5rem)] font-bold uppercase leading-[0.85] tracking-tight text-fg"
                     >
-                        <div className="flex items-center gap-4 group">
-                            <div className="p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
-                                <Mail className="w-6 h-6 text-zinc-300" />
-                            </div>
-                            <div>
-                                <div className="text-sm text-neutral-500 font-medium">Email Me</div>
-                                <a href="mailto:yatin.singh.dev@gmail.com" className="text-lg text-white hover:text-zinc-300 transition-colors font-medium">
-                                    yatin.singh.dev@gmail.com
+                        Let&apos;s build<br />something <span className="text-cy">real_</span>
+                    </motion.h1>
+
+                    <motion.p
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.1 }}
+                        className="mt-6 max-w-md text-sm leading-relaxed text-fg-dim"
+                    >
+                        // currently open to software &amp; ML opportunities and open for
+                        collaboration. have a project in mind or just want to say hi? I&apos;m
+                        always up for a good conversation.
+                    </motion.p>
+
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.15 }}
+                        className="mt-8 space-y-4"
+                    >
+                        <a
+                            href="mailto:yatin.singh.dev@gmail.com"
+                            className="inline-flex items-center gap-2 border border-edge px-4 py-3 text-sm text-fg transition-colors hover:border-cy hover:text-cy"
+                        >
+                            <span className="text-cy">❯</span> yatin.singh.dev@gmail.com
+                        </a>
+                        <div className="flex gap-2">
+                            {socials.map(({ name, icon: Icon, href }) => (
+                                <a
+                                    key={name}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={name}
+                                    className="flex h-11 w-11 items-center justify-center border border-edge text-fg-dim transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:border-cy hover:text-cy hover:shadow-[3px_3px_0_0_#22d3ee]"
+                                >
+                                    <Icon className="h-4 w-4" />
                                 </a>
-                            </div>
+                            ))}
                         </div>
                     </motion.div>
                 </div>
 
-                {/* Right Side: Form */}
+                {/* right: terminal form */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative"
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                    className="border border-edge bg-term-2 shadow-[8px_8px_0_0_rgba(34,211,238,0.12)]"
                 >
-                    <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-white/10 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-                    
-                    <div className="relative bg-neutral-900/40 backdrop-blur-3xl border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl overflow-hidden">
-                        {/* Decorative background element */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/[0.03] blur-[100px] -z-10" />
-                        
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            <div className="space-y-2">
-                                <label htmlFor="email" className="text-sm font-mono tracking-widest text-neutral-500 uppercase flex items-center gap-2">
-                                    <Mail className="w-3.5 h-3.5" />
-                                    Email Address
-                                </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className={`w-full px-6 py-4 bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/10'} rounded-2xl text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-300 hover:bg-white/10`}
-                                    placeholder="your@email.com"
-                                />
-                                <AnimatePresence>
-                                    {errors.email && (
-                                        <motion.p 
-                                            initial={{ opacity: 0, height: 0 }}
-                                            animate={{ opacity: 1, height: "auto" }}
-                                            exit={{ opacity: 0, height: 0 }}
-                                            className="text-xs text-red-400 flex items-center gap-1 pl-2"
-                                        >
-                                            <AlertCircle className="w-3 h-3" />
-                                            {errors.email}
-                                        </motion.p>
-                                    )}
-                                </AnimatePresence>
-                            </div>
+                    <div className="flex items-center gap-2 border-b border-edge px-4 py-2.5">
+                        <span className="h-2.5 w-2.5 bg-cy" />
+                        <span className="h-2.5 w-2.5 bg-edge-2" />
+                        <span className="h-2.5 w-2.5 bg-edge-2" />
+                        <span className="ml-2 text-[11px] text-fg-dim">contact.sh — bash</span>
+                    </div>
 
-                            <div className="space-y-2">
-                                <label htmlFor="message" className="text-sm font-mono tracking-widest text-neutral-500 uppercase flex items-center gap-2">
-                                    <MessageSquare className="w-3.5 h-3.5" />
-                                    Your Message
-                                </label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    rows="5"
-                                    className={`w-full px-6 py-4 bg-white/5 border ${errors.message ? 'border-red-500/50' : 'border-white/10'} rounded-2xl text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-300 hover:bg-white/10 resize-none`}
-                                    placeholder="Tell me about your vision..."
-                                />
-                                <AnimatePresence>
-                                    {errors.message && (
-                                        <motion.p 
-                                            initial={{ opacity: 0, height: 0 }}
-                                            animate={{ opacity: 1, height: "auto" }}
-                                            exit={{ opacity: 0, height: 0 }}
-                                            className="text-xs text-red-400 flex items-center gap-1 pl-2"
-                                        >
-                                            <AlertCircle className="w-3 h-3" />
-                                            {errors.message}
-                                        </motion.p>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-
-                            <button
-                                type="submit"
-                                disabled={isSubmitting}
-                                className="w-full relative group/btn overflow-hidden rounded-2xl bg-white p-[1px] transition-all duration-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50"
-                            >
-                                <div className="relative bg-[#030303] rounded-[15px] px-8 py-4 transition-all duration-300 group-hover/btn:bg-transparent flex items-center justify-center gap-3 overflow-hidden">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-zinc-700 to-zinc-800 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
-                                    
-                                    <span className="relative z-10 font-bold text-white tracking-tight">
-                                        {isSubmitting ? "Initiating..." : "Launch Message"}
-                                    </span>
-                                    {!isSubmitting && <Send className="w-4 h-4 relative z-10 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />}
-                                </div>
-                            </button>
-
+                    <form onSubmit={handleSubmit} className="space-y-6 p-6 sm:p-8">
+                        <div className="space-y-2">
+                            <label htmlFor="email" className="block text-[11px] uppercase tracking-widest text-fg-dim">
+                                <span className="text-cy">&gt;</span> your_email
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                placeholder="you@example.com"
+                                className={`${inputBase} ${errors.email ? "border-red-500/60" : "border-edge"}`}
+                            />
                             <AnimatePresence>
-                                {submitStatus === "success" && (
-                                    <motion.div 
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0 }}
-                                        className="p-4 bg-white/5 border border-white/10 rounded-2xl"
-                                    >
-                                        <p className="text-white text-center text-sm font-medium flex items-center justify-center gap-2">
-                                            <CheckCircle2 className="w-4 h-4" />
-                                            Message intercepted. I'll respond shortly.
-                                        </p>
-                                    </motion.div>
+                                {errors.email && (
+                                    <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="flex items-center gap-1.5 text-[11px] text-red-400">
+                                        <AlertCircle className="h-3 w-3" /> [err] {errors.email}
+                                    </motion.p>
                                 )}
                             </AnimatePresence>
-                        </form>
-                    </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label htmlFor="message" className="block text-[11px] uppercase tracking-widest text-fg-dim">
+                                <span className="text-cy">&gt;</span> message
+                            </label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="5"
+                                value={formData.message}
+                                onChange={handleChange}
+                                placeholder="tell me what you're building..."
+                                className={`${inputBase} resize-none ${errors.message ? "border-red-500/60" : "border-edge"}`}
+                            />
+                            <AnimatePresence>
+                                {errors.message && (
+                                    <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="flex items-center gap-1.5 text-[11px] text-red-400">
+                                        <AlertCircle className="h-3 w-3" /> [err] {errors.message}
+                                    </motion.p>
+                                )}
+                            </AnimatePresence>
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className="group inline-flex w-full items-center justify-center gap-2 border border-cy bg-cy px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-term transition-all duration-200 hover:bg-term hover:text-cy disabled:opacity-50"
+                        >
+                            {isSubmitting ? "transmitting..." : "$ send_message"}
+                            {!isSubmitting && <span className="term-blink">▋</span>}
+                        </button>
+
+                        <AnimatePresence>
+                            {submitStatus === "success" && (
+                                <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="border border-cy/40 bg-cy/5 px-4 py-3 text-xs text-cy">
+                                    → [ok] message transmitted. I&apos;ll respond shortly.
+                                </motion.p>
+                            )}
+                            {submitStatus === "error" && (
+                                <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="border border-red-500/40 bg-red-500/5 px-4 py-3 text-xs text-red-400">
+                                    → [err] transmission failed. try again or email directly.
+                                </motion.p>
+                            )}
+                        </AnimatePresence>
+                    </form>
                 </motion.div>
             </div>
-        </div>
+        </section>
     )
 }

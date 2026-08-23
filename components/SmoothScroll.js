@@ -26,13 +26,25 @@ export default function SmoothScroll({ children }) {
     lenis.on('scroll', ScrollTrigger.update);
 
     // Drive Lenis via GSAP ticker for perfectly synced frame timing
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+    const raf = (time) => lenis.raf(time * 1000);
+    gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
+    // Recalculate ScrollTrigger positions once layout, fonts and images
+    // have settled so reveal animations reliably fire (prevents content
+    // getting stuck at opacity:0 when a trigger was mis-measured on first paint).
+    ScrollTrigger.refresh();
+    const onLoad = () => ScrollTrigger.refresh();
+    window.addEventListener("load", onLoad);
+    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 600);
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => ScrollTrigger.refresh());
+    }
+
     return () => {
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+      gsap.ticker.remove(raf);
+      window.removeEventListener("load", onLoad);
+      clearTimeout(refreshTimer);
       lenis.destroy();
     };
   }, []);

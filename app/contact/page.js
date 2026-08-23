@@ -1,15 +1,14 @@
 "use client"
 import LampDemo from "@/section/LampDemo"
-import { Navbar } from "@/section/Navbar"
-import Footer from "@/section/Footer"
-import { BackgroundBeams } from "@/components/ui/background-beams"
-export default function Contact(){
+import TerminalNav from "@/section/TerminalNav"
+import TerminalFooter from "@/section/TerminalFooter"
+
+export default function Contact() {
     return (
-        <>
-            <Navbar/>
-            <BackgroundBeams/>
-            <LampDemo/>
-            <Footer/>
-        </>
+        <main className="min-h-screen w-full bg-term font-mono text-fg">
+            <TerminalNav />
+            <LampDemo />
+            <TerminalFooter />
+        </main>
     )
 }

@@ -1,16 +1,26 @@
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Fraunces, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import LoadingScreen from "@/components/LoadingScreen";
 
-const inter = Inter({
-  variable: "--font-inter",
+// Expressive editorial serif — display headings
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700", "900"],
+});
+
+// Clean humanist grotesk — body / UI
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument",
   subsets: ["latin"],
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+// Technical monospace — labels, meta, numerals
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
 });
 
@@ -29,7 +39,7 @@ export default function RootLayout({ children }) {
         <meta name="google-site-verification" content="L63uGSjv-ig202O9O7OB6XKbgHRQHhHyiKmkxhoJjNw" />
       </head>
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} antialiased bg-black selection:bg-white/20`}
+        className={`${fraunces.variable} ${instrumentSans.variable} ${jetbrainsMono.variable} font-sans antialiased bg-[#0a0a0b] text-[#e9e9e6]`}
       >
         <LoadingScreen />
         <div className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150" />

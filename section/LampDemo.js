@@ -99,13 +99,13 @@ export default function LampDemo() {
                         </h1>
                     </motion.div>
 
-                    <motion.p 
+                    <motion.p
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                         className="text-neutral-400 text-xl font-light leading-relaxed max-w-md"
                     >
-                        Have a project in mind or just want to say hi? I'm always open to new opportunities and interesting conversations.
+                        I'm currently open to software and ML related opportunities and open for collaboration. Have a project in mind or just want to say hi? I'm always up for new opportunities and interesting conversations.
                     </motion.p>
 
                     <motion.div 

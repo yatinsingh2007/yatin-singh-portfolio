@@ -12,13 +12,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function ExperienceCard({ logo, companyName, companyDescription, startDate, endDate, duration, role, location, tags = [], features = [], offerLetterUrl, completionLetterUrl, index, isLast, cardRef }) {
+/* ── Single-role card (used for every company except ByteBlock) ── */
+function ExperienceCard({ logo, companyName, companyDescription, startDate, endDate, duration, role, location, tags = [], features = [], offerLetterUrl, completionLetterUrl, isLast, cardRef }) {
   return (
     <div ref={cardRef} className="w-full relative group" style={{ opacity: 0, transform: "translateY(32px)" }}>
-      {/* Hover glow */}
       <div className="absolute -inset-x-4 -inset-y-6 bg-white/[0.02] rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl pointer-events-none" />
 
-      {/* Timeline Logo */}
       <div className="absolute left-[-24px] sm:left-[-40px] top-0.5 transform -translate-x-1/2 z-20">
         <div className="relative w-10 h-10 sm:w-16 sm:h-16 rounded-full bg-zinc-950 border border-white/10 flex items-center justify-center overflow-hidden shadow-xl group-hover:border-white/30 transition-colors duration-500">
           {logo ? (
@@ -34,7 +33,6 @@ function ExperienceCard({ logo, companyName, companyDescription, startDate, endD
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-zinc-300 transition-colors duration-300 flex items-center gap-3">
               {companyName}
-              <span className="h-2 w-2 bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.5)] animate-pulse" />
             </h2>
             <p className="text-zinc-400 text-base sm:text-lg leading-relaxed font-light mt-2 max-w-3xl">
               {companyDescription}
@@ -91,6 +89,111 @@ function ExperienceCard({ logo, companyName, companyDescription, startDate, endD
   );
 }
 
+/* ── Multi-role card — dot-connector progression within one company ── */
+function MultiRoleCard({ logo, companyName, companyDescription, roles = [], offerLetterUrl, isLast, cardRef }) {
+  return (
+    <div ref={cardRef} className="w-full relative group" style={{ opacity: 0, transform: "translateY(32px)" }}>
+      <div className="absolute -inset-x-4 -inset-y-6 bg-white/[0.02] rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl pointer-events-none" />
+
+      {/* Timeline logo */}
+      <div className="absolute left-[-24px] sm:left-[-40px] top-0.5 transform -translate-x-1/2 z-20">
+        <div className="relative w-10 h-10 sm:w-16 sm:h-16 rounded-full bg-zinc-950 border border-white/10 flex items-center justify-center overflow-hidden shadow-xl group-hover:border-white/30 transition-colors duration-500">
+          {logo ? (
+            <Image src={logo} alt={companyName} width={64} height={64} className="object-cover w-full h-full" />
+          ) : (
+            <Briefcase size={20} className="text-zinc-600" />
+          )}
+        </div>
+      </div>
+
+      <div className="space-y-6">
+        {/* Company header */}
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-zinc-300 transition-colors duration-300">
+              {companyName}
+            </h2>
+            <p className="text-zinc-400 text-base sm:text-lg leading-relaxed font-light mt-2 max-w-3xl">
+              {companyDescription}
+            </p>
+          </div>
+          {offerLetterUrl && (
+            <div className="flex flex-wrap gap-2 sm:shrink-0">
+              <a href={offerLetterUrl} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white border border-white/5 hover:border-white/20 bg-zinc-900/40 backdrop-blur-md px-3 py-1.5 rounded-full transition-all duration-300">
+                <FileText size={14} /><span>Offer Letter</span>
+              </a>
+            </div>
+          )}
+        </div>
+
+        {/* Inner role progression — dot connector */}
+        <div className="relative pl-6 mt-2">
+          {/* Vertical connecting line */}
+          <div className="absolute left-[7px] top-3 bottom-3 w-px bg-gradient-to-b from-white/40 via-zinc-600 to-zinc-800" />
+
+          <div className="space-y-0">
+            {roles.map((role, i) => (
+              <div key={i} className="relative">
+                {/* Dot */}
+                <div className={`absolute left-[-18px] top-[6px] flex items-center justify-center`}>
+                  {role.isCurrent ? (
+                    /* Current role — larger glowing dot */
+                    <span className="relative flex h-3.5 w-3.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-50" />
+                      <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
+                    </span>
+                  ) : (
+                    /* Past role — smaller muted dot */
+                    <span className="h-2.5 w-2.5 rounded-full bg-zinc-600 border border-zinc-500" />
+                  )}
+                </div>
+
+                {/* Role content */}
+                <div className={`pb-8 ${i === roles.length - 1 ? "pb-0" : ""}`}>
+                  <div className="flex flex-wrap items-center gap-3 mb-1">
+                    <span className={`text-base sm:text-lg font-bold ${role.isCurrent ? "text-white" : "text-zinc-300"}`}>
+                      {role.title}
+                    </span>
+                    {role.isCurrent && (
+                      <span className="px-2 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-bold text-white uppercase tracking-widest">
+                        Current
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-zinc-500 text-xs sm:text-sm font-medium tracking-wide mb-3">
+                    {role.period} {role.location && `· ${role.location}`}
+                  </div>
+
+                  {role.tags && role.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {role.tags.map((tag, idx) => (
+                        <Badge key={idx} className="bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 px-3 py-1 rounded-full text-xs font-semibold tracking-wide transition-colors">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+
+                  {role.features && role.features.length > 0 && (
+                    <ul className="list-disc pl-5 space-y-1.5 text-zinc-400 font-light text-sm">
+                      {role.features.map((f, fi) => (
+                        <li key={fi} className="leading-relaxed hover:text-zinc-300 transition-colors duration-200">{f}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {!isLast && <div className="w-full my-16 border-t border-dashed border-zinc-800" />}
+    </div>
+  );
+}
+
 export default function ExperiencePage() {
   const timelineLineRef = useRef(null);
   const headerBadgeRef  = useRef(null);
@@ -101,23 +204,32 @@ export default function ExperiencePage() {
 
   const experiences = [
     {
+      multiRole: true,
       logo: "https://media.licdn.com/dms/image/v2/D4D0BAQFe6iYKRwjKHQ/company-logo_200_200/company-logo_200_200/0/1729863208386?e=2147483647&v=beta&t=kZz3W83vbFgwQRxQzivUKyFAEtPdEArdZmAR5SgnuqE",
       companyName: "ByteBlock Technologies",
-      startDate: "June 2026",
-      endDate: "September 2026",
-      companyDescription: "Building tailored software solutions and digital strategies to help businesses thrive in the modern tech landscape",
-      role: "Full Stack Intern",
-      location: "Remote",
-      tags: ["50+ Merged PRs & Full-Stack RBAC", "Open-Source LLMs (vLLM & Qwen 2.5)", "CI/CD Pipeline & VPS Deployment (<3 min builds)"],
-      features: [
-        "Shipped 50+ merged PRs delivering maintenance cycle CRUD (validation, status transitions, automated date tracking) and role-based dashboards with centralized RBAC for 500+ active users on a Next.js contract management platform for Technology Associates.",
-        "Built an automated cron-based reminder system handling 1,000+ daily email notifications with persistence logging, cutting manual payment & maintenance follow-up overhead by 85%.",
-        "Automated the end-to-end CI/CD deployment pipeline using Docker & GitHub Actions to a Linux VPS, reducing build & release cycles from 45 minutes to <3 minutes with zero-downtime rollouts.",
-        "Engineered an AI chatbot system powered by Qwen 2.5 (1.5B), optimizing model inference via vLLM on a VPS to achieve sub-200ms response latency and 40+ tokens/sec throughput across 1,000+ user interactions.",
-      ],
+      companyDescription: "Building tailored software solutions and digital strategies to help businesses thrive in the modern tech landscape.",
       offerLetterUrl: "https://drive.google.com/file/d/1S98KZtj4OYWdcR1ZsIEORwe5d9NUp9bc/view?usp=sharing",
-      completionLetterUrl: null,
-      duration: "Present",
+      roles: [
+        {
+          title: "Software Development Engineer (Full-Stack)",
+          period: "Sep 2026 — Present",
+          location: "Remote",
+          isCurrent: true,
+        },
+        {
+          title: "Full Stack Developer",
+          period: "Jun 2026 — Sep 2026",
+          location: "Remote",
+          isCurrent: false,
+          tags: ["50+ Merged PRs & Full-Stack RBAC", "Open-Source LLMs (vLLM & Qwen 2.5)", "CI/CD Pipeline & VPS Deployment (<3 min builds)"],
+          features: [
+            "Shipped 50+ merged PRs delivering maintenance cycle CRUD (validation, status transitions, automated date tracking) and role-based dashboards with centralized RBAC for 500+ active users on a Next.js contract management platform for Technology Associates.",
+            "Built an automated cron-based reminder system handling 1,000+ daily email notifications with persistence logging, cutting manual payment & maintenance follow-up overhead by 85%.",
+            "Automated the end-to-end CI/CD deployment pipeline using Docker & GitHub Actions to a Linux VPS, reducing build & release cycles from 45 minutes to <3 minutes with zero-downtime rollouts.",
+            "Engineered an AI chatbot system powered by Qwen 2.5 (1.5B), optimizing model inference via vLLM on a VPS to achieve sub-200ms response latency and 40+ tokens/sec throughput across 1,000+ user interactions.",
+          ],
+        },
+      ],
     },
     {
       logo: "https://landing-page-ag-sable.vercel.app/assuredgiglogo.webp",
@@ -126,7 +238,7 @@ export default function ExperiencePage() {
       startDate: "June 2025",
       endDate: "August 2025",
       duration: "2 mos",
-      role: "Full Stack Intern",
+      role: "Full Stack Developer",
       location: "Remote",
       tags: ["Optimized mobile performance (35% → 75%)", "Architected Django & DRF backend APIs"],
       features: [
@@ -246,15 +358,23 @@ export default function ExperiencePage() {
             />
 
             <div className="space-y-16">
-              {experiences.map((exp, index) => (
-                <ExperienceCard
-                  key={index}
-                  {...exp}
-                  index={index}
-                  isLast={index === experiences.length - 1}
-                  cardRef={(el) => (cardRefs.current[index] = el)}
-                />
-              ))}
+              {experiences.map((exp, index) =>
+                exp.multiRole ? (
+                  <MultiRoleCard
+                    key={index}
+                    {...exp}
+                    isLast={index === experiences.length - 1}
+                    cardRef={(el) => (cardRefs.current[index] = el)}
+                  />
+                ) : (
+                  <ExperienceCard
+                    key={index}
+                    {...exp}
+                    isLast={index === experiences.length - 1}
+                    cardRef={(el) => (cardRefs.current[index] = el)}
+                  />
+                )
+              )}
             </div>
           </div>
 

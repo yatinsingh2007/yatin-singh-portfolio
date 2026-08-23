@@ -218,12 +218,26 @@ export default function Home() {
               transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-wrap justify-center gap-3 text-sm sm:text-base"
             >
-              {["Student At NST, Rishihood University", "Intern @ByteBlock Technologies", "Ex-Intern @AssuredGig"].map((tag) => (
+              {[
+                { label: "Student At NST, Rishihood University", current: false },
+                { label: "SDE (Full-Stack) @ByteBlock Technologies", current: true },
+                { label: "Ex-Intern @AssuredGig", current: false },
+              ].map(({ label, current }) => (
                 <span
-                  key={tag}
-                  className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-zinc-400 hover:text-white hover:border-white/20 transition-all duration-300"
+                  key={label}
+                  className={`px-4 py-1.5 rounded-full border backdrop-blur-md transition-all duration-300 flex items-center gap-2 ${
+                    current
+                      ? "border-white/20 bg-white/10 text-white"
+                      : "border-white/10 bg-white/5 text-zinc-400 hover:text-white hover:border-white/20"
+                  }`}
                 >
-                  {tag}
+                  {current && (
+                    <span className="relative flex h-1.5 w-1.5 shrink-0">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-60" />
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+                    </span>
+                  )}
+                  {label}
                 </span>
               ))}
             </motion.div>

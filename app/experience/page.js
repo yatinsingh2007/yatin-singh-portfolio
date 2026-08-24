@@ -21,7 +21,6 @@ const experiences = [
         location: "Remote",
         type: "Internship",
         current: true,
-        tags: [],
         features: [],
       },
       {
@@ -30,7 +29,6 @@ const experiences = [
         location: "Remote",
         type: "Internship",
         current: false,
-        tags: ["50+ Merged PRs & RBAC", "Open-Source LLMs (vLLM & Qwen 2.5)", "CI/CD & VPS (<3 min builds)"],
         features: [
           "Developed and maintained a client-facing contract management platform for Technology Associates (Tanzania) at ByteBlock Technologies, implementing RBAC, role-based dashboards, contract lifecycle workflows, CRUD operations, data validation, and business logic automation across 10+ core application modules",
           "Delivered 50+ merged pull requests through Git-based workflows, contributing to production-grade frontend and backend features using Next.js,TypeScript, Prisma, and SQL, while improving maintainability through reusable components and structured API design.",

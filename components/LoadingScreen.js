@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import Logo from "@/components/Logo";
 
 export default function LoadingScreen() {
   const overlayRef = useRef(null);
   const barRef     = useRef(null);
   const pctRef     = useRef(null);
+  const logoRef    = useRef(null);
   const nameRef    = useRef(null);
   const subRef     = useRef(null);
   const debugRef   = useRef(null);
@@ -31,7 +33,7 @@ export default function LoadingScreen() {
     });
 
     // Entrance
-    tl.from([nameRef.current, subRef.current], {
+    tl.from([logoRef.current, nameRef.current, subRef.current], {
       opacity: 0,
       y: 14,
       duration: 0.6,
@@ -82,13 +84,18 @@ export default function LoadingScreen() {
           </div>
         </div>
 
-        <div className="space-y-1">
-          <h2 ref={nameRef} className="text-[#e9e9e6] font-bold tracking-tight text-2xl md:text-3xl uppercase">
-            yatin_singh<span className="term-blink text-[#22d3ee]">_</span>
-          </h2>
-          <p ref={subRef} className="text-[10px] tracking-[0.25em] text-[#7a7a78] uppercase">
-            // software &amp; machine learning engineer
-          </p>
+        <div className="flex items-center gap-4">
+          <div ref={logoRef}>
+            <Logo size="lg" />
+          </div>
+          <div className="space-y-1">
+            <h2 ref={nameRef} className="text-[#e9e9e6] font-bold tracking-tight text-2xl md:text-3xl uppercase">
+              yatin_singh<span className="term-blink text-[#22d3ee]">_</span>
+            </h2>
+            <p ref={subRef} className="text-[10px] tracking-[0.25em] text-[#7a7a78] uppercase">
+              // software &amp; machine learning engineer
+            </p>
+          </div>
         </div>
       </div>
 

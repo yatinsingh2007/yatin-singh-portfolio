@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import Logo from "@/components/Logo";
 
 const nav = [
   { name: "index", href: "/" },
@@ -80,8 +81,11 @@ export default function TerminalFooter() {
         </p>
       </div>
 
-      <div className="mx-auto flex max-w-[1600px] flex-col items-center justify-between gap-2 border-t border-edge px-4 sm:px-6 py-5 text-[10px] uppercase tracking-widest text-fg-dim sm:flex-row">
-        <span>© {new Date().getFullYear()} k. yatin singh — EOF</span>
+      <div className="mx-auto flex max-w-[1600px] flex-col items-center justify-between gap-3 border-t border-edge px-4 sm:px-6 py-5 text-[10px] uppercase tracking-widest text-fg-dim sm:flex-row">
+        <div className="flex items-center gap-3">
+          <Logo size="sm" />
+          <span>© {new Date().getFullYear()} k. yatin singh — EOF</span>
+        </div>
         <span>built with next.js · tailwind · motion</span>
       </div>
     </footer>

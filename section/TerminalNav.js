@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
+import Logo from "@/components/Logo";
 
 const navItems = [
   { name: "index", link: "/" },
@@ -35,11 +36,14 @@ export default function TerminalNav() {
         )}
       >
         <div className="mx-auto flex h-14 max-w-[1600px] items-center justify-between px-4 sm:px-6">
-          {/* path / prompt */}
-          <Link href="/" className="flex items-center gap-2 text-sm">
-            <span className="text-cy">❯</span>
-            <span className="text-fg">~/yatin-singh</span>
-            <span className="term-blink text-cy">▋</span>
+          {/* path / prompt with logo */}
+          <Link href="/" className="group flex items-center gap-3 text-sm">
+            <Logo size="md" />
+            <div className="flex items-center gap-1.5 font-mono">
+              <span className="text-cy">❯</span>
+              <span className="font-bold text-fg transition-colors group-hover:text-cy">~/yatin-singh</span>
+              <span className="term-blink text-cy">▋</span>
+            </div>
           </Link>
 
           {/* desktop nav */}

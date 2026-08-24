@@ -54,7 +54,6 @@ const experiences = [
         location: "Remote",
         type: "Internship",
         current: false,
-        tags: ["Lighthouse 35 → 75 (+114%)", "Django & DRF for 500+ users", "AWS EC2 & S3"],
         features: [
           "Engineered and scaled backend infrastructure from an early-stage prototype to a production-ready platform, developing RESTful APIs that powered core client–freelancer workflows including authentication, job management, and transaction processing for 500 users.",
           "Designed and implemented a scalable backend architecture using Python, Django, and Django REST Framework, building secure authentication flows, business logic layers, API endpoints, and database integrations across 10+ core features.",
@@ -132,14 +131,6 @@ function CommitBlock({ exp }) {
                 {role.period} · {role.location}
               </div>
 
-              {role.tags.length > 0 && (
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {role.tags.map((t) => (
-                    <span key={t} className="border border-edge px-2 py-1 text-[9px] uppercase tracking-wider text-fg-dim">{t}</span>
-                  ))}
-                </div>
-              )}
-
               {role.features.length > 0 && (
                 <div className="mt-4 space-y-1.5">
                   {role.features.map((f, fi) => (
@@ -167,7 +158,7 @@ export default function ExperiencePage() {
         <div className="relative mx-auto max-w-[1100px] px-4 sm:px-6 pt-28 sm:pt-32 pb-14">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.15 }} className="flex items-center justify-between border-y border-edge py-2.5 text-[10px] uppercase tracking-[0.2em] text-fg-dim">
             <span className="text-cy">$ git log --experience</span>
-            <span>// career history</span>
+            <span className="hidden sm:inline">// career history</span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }} className="mt-10 text-[clamp(2.6rem,9vw,7rem)] font-bold uppercase leading-[0.85] tracking-tight text-fg">
             Experience<span className="term-blink text-cy">_</span>

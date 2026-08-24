@@ -28,11 +28,11 @@ export default function TerminalFooter() {
             <p className="text-xs uppercase tracking-widest text-fg-dim">$ ./contact --start</p>
             <a
               href="mailto:yatin.singh.dev@gmail.com"
-              className="group mt-4 inline-flex items-center gap-2 text-2xl font-bold text-fg transition-colors hover:text-cy sm:text-3xl"
+              className="group mt-4 inline-block break-all text-lg font-bold text-fg transition-colors hover:text-cy sm:text-2xl md:text-3xl"
             >
-              <span className="text-cy">❯</span>
+              <span className="mr-2 text-cy">❯</span>
               yatin.singh.dev@gmail.com
-              <span className="term-blink text-cy">_</span>
+              <span className="term-blink ml-1 text-cy">_</span>
             </a>
             <p className="mt-5 max-w-sm text-xs leading-relaxed text-fg-dim">
               // open to software &amp; ML opportunities and collaboration.

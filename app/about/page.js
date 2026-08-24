@@ -50,17 +50,17 @@ export default function About() {
           <Reveal>
             <div className="flex items-center justify-between border-y border-edge py-2.5 text-[10px] uppercase tracking-[0.2em] text-fg-dim">
               <span className="text-cy">$ cat about/README.md</span>
-              <span>// the human behind the code</span>
+              <span className="hidden sm:inline">// the human behind the code</span>
             </div>
           </Reveal>
 
           {/* hero */}
-          <div className="grid grid-cols-1 items-start gap-10 pt-12 lg:grid-cols-12">
+          <div className="grid grid-cols-1 items-start gap-10 pt-12 md:grid-cols-12">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="lg:col-span-4"
+              className="md:col-span-4"
             >
               <div className="group relative border border-edge shadow-[8px_8px_0_0_rgba(34,211,238,0.12)]">
                 <div className="relative aspect-4/5 w-full overflow-hidden">
@@ -81,7 +81,7 @@ export default function About() {
               </div>
             </motion.div>
 
-            <div className="lg:col-span-8">
+            <div className="md:col-span-8">
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}

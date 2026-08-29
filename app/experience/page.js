@@ -14,6 +14,7 @@ const experiences = [
     logo: "https://media.licdn.com/dms/image/v2/D4D0BAQFe6iYKRwjKHQ/company-logo_200_200/company-logo_200_200/0/1729863208386?e=2147483647&v=beta&t=kZz3W83vbFgwQRxQzivUKyFAEtPdEArdZmAR5SgnuqE",
     description: "Building tailored software solutions and digital strategies to help businesses thrive in the modern tech landscape.",
     offerLetterUrl: "https://drive.google.com/file/d/1S98KZtj4OYWdcR1ZsIEORwe5d9NUp9bc/view?usp=sharing",
+    extensionLetterUrl: "https://drive.google.com/file/d/1dRvzLbqBgggA6onE3bhBIdC7hWuBMS-v/view?usp=sharing",
     roles: [
       {
         title: "Software Development Engineer (Full-Stack)",
@@ -123,11 +124,16 @@ function CommitBlock({ exp }) {
         </div>
 
         {/* letters */}
-        {(exp.offerLetterUrl || exp.completionLetterUrl) && (
+        {(exp.offerLetterUrl || exp.extensionLetterUrl || exp.completionLetterUrl) && (
           <div className="mt-5 flex flex-wrap gap-2">
             {exp.offerLetterUrl && (
               <a href={exp.offerLetterUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 border border-edge px-3 py-1.5 text-[10px] uppercase tracking-wider text-fg-dim transition-colors hover:border-cy hover:text-cy">
                 <FileText size={12} /> offer_letter
+              </a>
+            )}
+            {exp.extensionLetterUrl && (
+              <a href={exp.extensionLetterUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 border border-edge px-3 py-1.5 text-[10px] uppercase tracking-wider text-fg-dim transition-colors hover:border-cy hover:text-cy">
+                <FileText size={12} /> extension_letter
               </a>
             )}
             {exp.completionLetterUrl && (

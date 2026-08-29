@@ -74,6 +74,31 @@ function TypeChip({ type }) {
   );
 }
 
+// parse a "Mon YYYY" token (or "Present") into a Date
+function parsePoint(token) {
+  if (/present/i.test(token)) return new Date();
+  const d = new Date(`${token.trim()} 1`);
+  return isNaN(d) ? null : d;
+}
+
+// derive a human duration like "3 months" / "1 year 2 months" from a period string
+function formatDuration(period) {
+  const [startStr, endStr] = period.split(/[—–-]/).map((s) => s.trim());
+  const start = parsePoint(startStr);
+  const end = parsePoint(endStr);
+  if (!start || !end) return null;
+
+  let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+  if (months < 1) months = 1;
+
+  const years = Math.floor(months / 12);
+  const rem = months % 12;
+  const parts = [];
+  if (years) parts.push(`${years} year${years > 1 ? "s" : ""}`);
+  if (rem) parts.push(`${rem} month${rem > 1 ? "s" : ""}`);
+  return parts.join(" ") || "1 month";
+}
+
 function CommitBlock({ exp }) {
   return (
     <Reveal className="relative pl-10 sm:pl-14">
@@ -114,35 +139,111 @@ function CommitBlock({ exp }) {
         )}
 
         {/* roles */}
-        <div className="mt-7 space-y-7 border-t border-edge pt-6">
-          {exp.roles.map((role, ri) => (
-            <div key={ri} className="relative border-l border-edge pl-5">
-              <span className={`absolute left-0 top-1.5 h-2 w-2 -translate-x-1/2 ${role.current ? "bg-cy" : "bg-edge-2"}`} />
-              <div className="flex flex-wrap items-center gap-2">
-                <h3 className={`text-sm font-bold ${role.current ? "text-cy" : "text-fg"}`}>{role.title}</h3>
-                {role.current && (
-                  <span className="inline-flex items-center gap-1 border border-cy px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-cy">
-                    <Zap size={9} /> current
-                  </span>
-                )}
-                <TypeChip type={role.type} />
-              </div>
-              <div className="mt-1 text-[11px] uppercase tracking-wider text-fg-dim">
-                {role.period} · {role.location}
-              </div>
+        <div className="mt-7 border-t border-edge pt-6">
+          <div className="relative">
+            {/* branching trunk connecting multiple roles at the same company */}
+            {exp.roles.length > 1 && (
+              <motion.span
+                aria-hidden
+                className="absolute left-[3px] top-2 bottom-8 w-px origin-top bg-gradient-to-b from-cy via-cy/40 to-edge-2"
+                initial={{ scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.9, ease: "easeInOut", delay: 0.2 }}
+              />
+            )}
 
-              {role.features.length > 0 && (
-                <div className="mt-4 space-y-1.5">
-                  {role.features.map((f, fi) => (
-                    <div key={fi} className="flex gap-2 text-xs leading-relaxed">
-                      <span className="shrink-0 text-cy">+</span>
-                      <span className="text-fg-dim">{f}</span>
+            <div className="space-y-7">
+              {exp.roles.map((role, ri) => {
+                const duration = formatDuration(role.period);
+                const branched = exp.roles.length > 1;
+                const roleBody = (
+                  <>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className={`text-sm font-bold ${role.current ? "text-cy" : "text-fg"}`}>{role.title}</h3>
+                      {role.current && (
+                        <span className="inline-flex items-center gap-1 border border-cy px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-cy">
+                          <Zap size={9} /> current
+                        </span>
+                      )}
+                      <TypeChip type={role.type} />
                     </div>
-                  ))}
-                </div>
-              )}
+                    <div className="mt-1 flex flex-wrap items-center gap-x-1.5 text-[11px] uppercase tracking-wider text-fg-dim">
+                      <span>{role.period}</span>
+                      {duration && (
+                        <>
+                          <span className="text-edge-2">·</span>
+                          <span className="text-cy/80">{duration}</span>
+                        </>
+                      )}
+                      <span className="text-edge-2">·</span>
+                      <span>{role.location}</span>
+                    </div>
+
+                    {role.features.length > 0 && (
+                      <div className="mt-4 space-y-1.5">
+                        {role.features.map((f, fi) => (
+                          <div key={fi} className="flex gap-2 text-xs leading-relaxed">
+                            <span className="shrink-0 text-cy">+</span>
+                            <span className="text-fg-dim">{f}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                );
+
+                if (!branched) {
+                  return (
+                    <div key={ri} className="relative">
+                      <motion.span
+                        className={`absolute left-[3px] top-1.5 h-2 w-2 -translate-x-1/2 ${role.current ? "bg-cy shadow-[0_0_8px_rgba(34,211,238,0.6)]" : "bg-edge-2"}`}
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true, margin: "-60px" }}
+                        transition={{ duration: 0.35, delay: 0.35 + ri * 0.15, ease: "backOut" }}
+                      />
+                      <div className="pl-6">{roleBody}</div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div key={ri} className="relative">
+                    {/* curved branch peeling off the company trunk */}
+                    <svg
+                      aria-hidden
+                      width="40"
+                      height="34"
+                      viewBox="0 0 40 34"
+                      fill="none"
+                      className="absolute left-[3px] top-0 overflow-visible"
+                    >
+                      <motion.path
+                        d="M0.5 0 C 0.5 22, 4 30, 34 30"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        className={role.current ? "stroke-cy" : "stroke-edge-2"}
+                        initial={{ pathLength: 0 }}
+                        whileInView={{ pathLength: 1 }}
+                        viewport={{ once: true, margin: "-60px" }}
+                        transition={{ duration: 0.7, delay: 0.3 + ri * 0.15, ease: "easeInOut" }}
+                      />
+                    </svg>
+                    {/* node at the branch tip */}
+                    <motion.span
+                      className={`absolute left-[37px] top-[30px] h-2 w-2 -translate-x-1/2 -translate-y-1/2 ${role.current ? "bg-cy shadow-[0_0_8px_rgba(34,211,238,0.6)]" : "bg-edge-2"}`}
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true, margin: "-60px" }}
+                      transition={{ duration: 0.35, delay: 0.55 + ri * 0.15, ease: "backOut" }}
+                    />
+                    <div className="pl-12 pt-5">{roleBody}</div>
+                  </div>
+                );
+              })}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </Reveal>

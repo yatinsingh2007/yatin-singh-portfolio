@@ -1,9 +1,9 @@
 "use client";
 import { motion } from "motion/react";
 import { GraduationCap } from "lucide-react";
-import TerminalNav from "@/section/TerminalNav";
-import TerminalFooter from "@/section/TerminalFooter";
-import { Reveal, PageGlow } from "@/components/terminal-ui";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
+import { Reveal, Kicker, GlassCard } from "@/components/aurora-ui";
 
 const educationData = [
   {
@@ -41,67 +41,64 @@ const educationData = [
 
 export default function Education() {
   return (
-    <main className="min-h-screen w-full bg-term font-mono text-fg">
-      <TerminalNav />
-      <div className="scanlines relative overflow-hidden">
-        <PageGlow />
-        <div className="relative mx-auto max-w-[1100px] px-4 sm:px-6 pt-28 sm:pt-32 pb-14">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.15 }} className="flex items-center justify-between border-y border-edge py-2.5 text-[10px] uppercase tracking-[0.2em] text-fg-dim">
-            <span className="text-cy">$ cat education.log</span>
-            <span className="hidden sm:inline">// academic journey</span>
+    <main className="min-h-screen w-full text-ink">
+      <SiteNav />
+
+      <section className="relative">
+        <div className="relative mx-auto max-w-4xl px-5 sm:px-8 pt-32 sm:pt-40 pb-14">
+          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}>
+            <Kicker>Academic journey</Kicker>
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }} className="mt-10 text-[clamp(2.6rem,9vw,7rem)] font-bold uppercase leading-[0.85] tracking-tight text-fg">
-            Education<span className="term-blink text-cy">_</span>
+          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }} className="mt-6 font-display text-[clamp(2.75rem,9vw,6rem)] font-semibold leading-[0.95] tracking-tight text-ink">
+            Education
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.4 }} className="mt-5 max-w-xl text-sm leading-relaxed text-fg-dim">
-            // milestones and the foundational knowledge behind my technical pursuits.
+          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.4 }} className="mt-5 max-w-2xl text-base leading-relaxed text-ink-dim sm:text-lg">
+            Milestones and the foundational knowledge behind my technical pursuits.
           </motion.p>
         </div>
-      </div>
+      </section>
 
-      <section className="mx-auto max-w-[1100px] px-4 sm:px-6 pb-24">
+      <section className="mx-auto max-w-4xl px-5 sm:px-8 pb-24">
         <div className="relative space-y-8">
-          <div className="absolute left-2.5 sm:left-[22px] top-2 bottom-2 w-px bg-edge" />
+          <div className="absolute left-[7px] sm:left-[15px] top-4 bottom-4 w-px bg-hair" />
           {educationData.map((edu, i) => (
-            <Reveal key={i} className="relative pl-10 sm:pl-14">
-              <span className={`absolute left-2.5 sm:left-[22px] top-1.5 z-10 h-3 w-3 -translate-x-1/2 ${edu.current ? "bg-cy shadow-[0_0_10px_rgba(34,211,238,0.6)]" : "bg-edge-2"}`} />
+            <Reveal key={i} className="relative pl-8 sm:pl-12">
+              <span className={`absolute left-[7px] sm:left-[15px] top-8 z-10 h-3.5 w-3.5 -translate-x-1/2 rounded-full ring-4 ring-bg ${edu.current ? "bg-gradient-to-br from-brand-3 to-brand-2 shadow-[0_0_14px_2px_rgba(139,124,246,0.6)]" : "bg-ink-faint"}`} />
 
-              <div className="group border border-edge bg-term-2/40 p-6 transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:border-cy hover:shadow-[6px_6px_0_0_#22d3ee] sm:p-8">
+              <GlassCard className="p-6 sm:p-8">
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <span className="text-[11px] uppercase tracking-wider text-cy">{edu.period}</span>
-                  <span className="inline-flex items-center gap-1.5 border border-edge px-2.5 py-1 text-[10px] uppercase tracking-widest text-fg-dim">
-                    <GraduationCap size={12} className="text-cy" /> {edu.status}
+                  <span className="font-mono text-sm text-brand-2">{edu.period}</span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-hair bg-white/[0.03] px-3 py-1 text-xs text-ink-dim">
+                    <GraduationCap size={13} className="text-brand-2" /> {edu.status}
                   </span>
                 </div>
 
-                <h2 className="mt-4 text-lg font-bold uppercase tracking-tight text-fg group-hover:text-cy sm:text-2xl">{edu.degree}</h2>
+                <h2 className="mt-4 font-display text-xl font-semibold text-ink sm:text-2xl">{edu.degree}</h2>
 
-                <div className="mt-5 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
+                <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2">
                   <div>
-                    <div className="text-[10px] uppercase tracking-widest text-fg-dim">institution</div>
-                    <div className="mt-1 text-sm text-fg">{edu.institution}</div>
-                    {edu.university && <div className="text-xs text-fg-dim">{edu.university}</div>}
+                    <div className="text-[11px] uppercase tracking-widest text-ink-faint">Institution</div>
+                    <div className="mt-1 text-sm text-ink">{edu.institution}</div>
+                    {edu.university && <div className="text-xs text-ink-dim">{edu.university}</div>}
                   </div>
                   <div>
-                    <div className="text-[10px] uppercase tracking-widest text-fg-dim">location</div>
-                    <div className="mt-1 text-sm text-fg">{edu.location}</div>
+                    <div className="text-[11px] uppercase tracking-widest text-ink-faint">Location</div>
+                    <div className="mt-1 text-sm text-ink">{edu.location}</div>
                   </div>
-                  <div className="sm:col-span-2 border-t border-edge pt-4">
-                    <div className="text-[10px] uppercase tracking-widest text-fg-dim">performance</div>
-                    <div className="mt-1 text-2xl font-bold text-fg">
-                      {edu.grade}
-                    </div>
+                  <div className="sm:col-span-2 border-t border-hair pt-5">
+                    <div className="text-[11px] uppercase tracking-widest text-ink-faint">Performance</div>
+                    <div className="mt-1 font-display text-2xl font-semibold text-gradient">{edu.grade}</div>
                   </div>
                 </div>
 
-                <p className="mt-5 text-xs leading-relaxed text-fg-dim">{edu.description}</p>
-              </div>
+                <p className="mt-5 text-sm leading-relaxed text-ink-dim">{edu.description}</p>
+              </GlassCard>
             </Reveal>
           ))}
         </div>
       </section>
 
-      <TerminalFooter />
+      <SiteFooter />
     </main>
   );
 }

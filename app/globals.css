@@ -115,6 +115,27 @@
   --color-cy-dim: #0e7490;
 }
 
+/* ──────────────────────────────────────────────────────────────
+   "Aurora" — active flagship system (recruiter-friendly).
+   Deep indigo-black base, soft violet aurora glows, glass cards,
+   editorial serif display type. Clean, readable, premium.
+   ────────────────────────────────────────────────────────────── */
+@theme {
+  --color-bg: #07070c;
+  --color-bg-2: #0c0b14;
+  --color-ink: #ededf2;
+  --color-ink-dim: #a3a3b4;
+  --color-ink-faint: #6c6c80;
+  --color-hair: #ffffff14;
+  --color-hair-2: #ffffff24;
+  --color-brand: #8b7cf6;
+  --color-brand-2: #c084fc;
+  --color-brand-3: #6366f1;
+  --color-brand-ink: #0a0a12;
+
+  --animate-aurora: aurora 18s ease-in-out infinite alternate;
+}
+
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(calc(-100% - var(--gap, 1rem))); }
@@ -122,6 +143,12 @@
 @keyframes marquee-vertical {
   from { transform: translateY(0); }
   to { transform: translateY(calc(-100% - var(--gap, 1rem))); }
+}
+
+@keyframes aurora {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(4%, -3%) scale(1.12); }
+  100% { transform: translate(-3%, 4%) scale(1.05); }
 }
 
 :root {
@@ -215,10 +242,147 @@
   mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
 
-/* ── Terminal selection + typographic rhythm polish ── */
+/* ── Selection + typographic rhythm polish ── */
 ::selection {
-  background: #22d3ee;
-  color: #0a0a0b;
+  background: #8b7cf6;
+  color: #0a0a12;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Aurora design-system utilities
+   ────────────────────────────────────────────────────────────── */
+
+/* Frosted-glass card surface */
+.glass {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Brand gradient text */
+.text-gradient {
+  background-image: linear-gradient(105deg, #ededf2 0%, #c9c2ff 40%, #c084fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-brand {
+  background-image: linear-gradient(105deg, #8b7cf6 0%, #c084fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Faint dot / grid backdrop */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.grid-mask {
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+/* Soft ring that glows on hover — used on cards */
+.card-hover {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s, background-color 0.4s;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(139, 124, 246, 0.45);
+  box-shadow: 0 12px 40px -12px rgba(139, 124, 246, 0.35);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Conic shimmer for the primary button border */
+.btn-glow {
+  box-shadow: 0 8px 30px -8px rgba(139, 124, 246, 0.55);
+}
+
+/* ── Cursor-tracking spotlight on cards ─────────────────────────
+   A radial glow follows the pointer; content is lifted above it.
+   JS sets --mx / --my on the element. ─────────────────────────── */
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    360px circle at var(--mx, 50%) var(--my, -20%),
+    rgba(139, 124, 246, 0.16),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.spotlight:hover::after { opacity: 1; }
+/* keep real content above the glow */
+.spotlight > * { position: relative; z-index: 1; }
+
+/* ── Light-sweep sheen for primary buttons ──────────────────────── */
+.sheen { position: relative; overflow: hidden; }
+.sheen::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -160%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+.sheen:hover::after { animation: sheen 0.9s ease; }
+@keyframes sheen { to { left: 170%; } }
+
+/* ── Shimmering gradient text for headline accents ──────────────── */
+.text-shimmer {
+  background-image: linear-gradient(100deg, #8b7cf6 0%, #c084fc 25%, #f4f0ff 50%, #c084fc 75%, #8b7cf6 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: text-shimmer 7s linear infinite;
+}
+@keyframes text-shimmer { to { background-position: 200% center; } }
+
+/* ── Self-contained filmic grain (animated, seamless) ───────────── */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  animation: grain-shift 6s steps(8) infinite;
+}
+@keyframes grain-shift {
+  0% { background-position: 0 0; }
+  100% { background-position: 140px 140px; }
+}
+
+/* ── Animated link underline ────────────────────────────────────── */
+.link-underline { position: relative; }
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover::after { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .text-shimmer { animation: none; }
+  .sheen:hover::after { animation: none; }
+  .animate-aurora { animation: none; }
+  .grain { animation: none; }
 }
 
 /* Always-visible entrance (runs on load, never gated by scroll observers) */

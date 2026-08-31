@@ -3,6 +3,8 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import LoadingScreen from "@/components/LoadingScreen";
+import AuroraBackground from "@/components/AuroraBackground";
+import ScrollProgress from "@/components/ScrollProgress";
 
 // Expressive editorial serif — display headings
 const fraunces = Fraunces({
@@ -44,10 +46,12 @@ export default function RootLayout({ children }) {
         <meta name="google-site-verification" content="L63uGSjv-ig202O9O7OB6XKbgHRQHhHyiKmkxhoJjNw" />
       </head>
       <body
-        className={`${fraunces.variable} ${instrumentSans.variable} ${jetbrainsMono.variable} font-sans antialiased bg-[#0a0a0b] text-[#e9e9e6]`}
+        className={`${fraunces.variable} ${instrumentSans.variable} ${jetbrainsMono.variable} font-sans antialiased bg-bg text-ink`}
       >
         <LoadingScreen />
-        <div className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150" />
+        <AuroraBackground />
+        <ScrollProgress />
+        <div className="grain pointer-events-none fixed inset-0 z-[9998] opacity-[0.04]" />
 
         <CustomCursor />
         <SmoothScroll>

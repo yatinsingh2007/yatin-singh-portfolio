@@ -2,25 +2,33 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { FileText, Coffee, Heart } from "lucide-react";
+import { FileText, Coffee, Heart, Search, BookOpen, Gamepad, Soup } from "lucide-react";
 import { FaFutbol } from "react-icons/fa";
-import { Search, BookOpen, Gamepad, Soup } from "lucide-react";
-import TerminalNav from "@/section/TerminalNav";
-import TerminalFooter from "@/section/TerminalFooter";
-import { SectionHead, Reveal, PageGlow, btnPrimary, btnGhost } from "@/components/terminal-ui";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
+import {
+  Reveal,
+  SectionHeading,
+  Kicker,
+  GlassCard,
+  Tilt,
+  Magnetic,
+  btnPrimary,
+  btnGhost,
+} from "@/components/aurora-ui";
 
 const facts = [
-  ["edu", "3rd Year B.Tech @ NST"],
-  ["focus", "AI & Scalable Systems"],
-  ["from", "Visakhapatnam, IN"],
-  ["status", "open to work"],
+  ["Education", "3rd Year B.Tech @ NST"],
+  ["Focus", "AI & Scalable Systems"],
+  ["From", "Visakhapatnam, IN"],
+  ["Status", "Open to work"],
 ];
 
 const stack = [
-  { module: "web", title: "Full-Stack Development", desc: "End-to-end web apps & architecture." },
-  { module: "mern", title: "MERN Stack", desc: "React, Node, Express & Mongo systems." },
-  { module: "ops", title: "DevOps", desc: "Docker, CI/CD, VPS & cloud deployment." },
-  { module: "ml", title: "AI / ML", desc: "Neural nets, LLMs & agentic pipelines." },
+  { title: "Full-Stack Development", desc: "End-to-end web apps & clean architecture." },
+  { title: "MERN Stack", desc: "React, Node, Express & Mongo systems." },
+  { title: "DevOps", desc: "Docker, CI/CD, VPS & cloud deployment." },
+  { title: "AI / ML", desc: "Neural nets, LLMs & agentic pipelines." },
 ];
 
 const bio = [
@@ -31,142 +39,141 @@ const bio = [
 ];
 
 const interests = [
-  { icon: <FaFutbol size={18} />, label: "football", desc: "weekend warrior" },
-  { icon: <Search size={18} />, label: "science", desc: "always curious" },
-  { icon: <BookOpen size={18} />, label: "history", desc: "deep diver" },
-  { icon: <Soup size={18} />, label: "cooking", desc: "occasional chef" },
-  { icon: <Gamepad size={18} />, label: "gaming", desc: "stress relief" },
+  { icon: <FaFutbol size={18} />, label: "Football", desc: "Weekend warrior" },
+  { icon: <Search size={18} />, label: "Science", desc: "Always curious" },
+  { icon: <BookOpen size={18} />, label: "History", desc: "Deep diver" },
+  { icon: <Soup size={18} />, label: "Cooking", desc: "Occasional chef" },
+  { icon: <Gamepad size={18} />, label: "Gaming", desc: "Stress relief" },
 ];
 
 export default function About() {
   return (
-    <main className="min-h-screen w-full bg-term font-mono text-fg">
-      <TerminalNav />
-      <div className="scanlines relative overflow-hidden">
-        <PageGlow />
+    <main className="min-h-screen w-full text-ink">
+      <SiteNav />
 
-        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 pt-28 sm:pt-32 pb-20">
-          {/* meta */}
-          <Reveal>
-            <div className="flex items-center justify-between border-y border-edge py-2.5 text-[10px] uppercase tracking-[0.2em] text-fg-dim">
-              <span className="text-cy">$ cat about/README.md</span>
-              <span className="hidden sm:inline">// the human behind the code</span>
-            </div>
-          </Reveal>
-
+      <section className="relative">
+        <div className="relative mx-auto max-w-6xl px-5 sm:px-8 pt-32 sm:pt-40 pb-16">
           {/* hero */}
-          <div className="grid grid-cols-1 items-start gap-10 pt-12 md:grid-cols-12">
+          <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-12">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="md:col-span-4"
+              className="md:col-span-5 lg:col-span-4"
             >
-              <div className="group relative border border-edge shadow-[8px_8px_0_0_rgba(34,211,238,0.12)]">
-                <div className="relative aspect-4/5 w-full overflow-hidden">
-                  <Image src="/yatin_singh.jpeg" alt="Yatin Singh" fill priority className="object-cover grayscale transition-all duration-700 group-hover:grayscale-0" />
-                </div>
-                <div className="flex items-center justify-between border-t border-edge px-3 py-2 text-[10px] uppercase tracking-widest text-fg-dim">
-                  <span className="text-cy">fig.01</span>
-                  <span>the_engineer.jpg</span>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 border-x border-b border-edge">
-                {facts.map(([k, v], i) => (
-                  <div key={k} className={`border-edge p-3 ${i % 2 === 0 ? "border-r" : ""} ${i < 2 ? "border-b" : ""}`}>
-                    <div className="text-[9px] uppercase tracking-widest text-fg-dim">{k}</div>
-                    <div className="mt-1 text-[11px] text-fg">{v}</div>
+              <Tilt className="relative" max={7}>
+                <div className="absolute -inset-3 rounded-[1.75rem] bg-gradient-to-tr from-brand-3/25 via-brand/15 to-brand-2/25 blur-2xl" />
+                <GlassCard hover={false} className="relative overflow-hidden p-2">
+                  <div className="relative aspect-4/5 w-full overflow-hidden rounded-xl">
+                    <Image src="/yatin_singh.jpeg" alt="Yatin Singh" fill priority className="object-cover" />
                   </div>
+                </GlassCard>
+              </Tilt>
+              <div className="mt-4 grid grid-cols-2 gap-3">
+                {facts.map(([k, v]) => (
+                  <GlassCard key={k} hover={false} className="p-4">
+                    <div className="text-[11px] uppercase tracking-widest text-ink-faint">{k}</div>
+                    <div className="mt-1 text-sm text-ink">{v}</div>
+                  </GlassCard>
                 ))}
               </div>
             </motion.div>
 
-            <div className="md:col-span-8">
-              <motion.p
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.25 }}
-                className="mb-4 text-xs uppercase tracking-[0.25em] text-fg-dim"
-              >
-                // full-stack engineer &amp; ai enthusiast
-              </motion.p>
+            <div className="md:col-span-7 lg:col-span-8">
+              <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}>
+                <Kicker>About me</Kicker>
+              </motion.div>
               <motion.h1
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-[clamp(2.6rem,7vw,5rem)] font-bold uppercase leading-[0.88] tracking-tight text-fg"
+                className="mt-6 font-display text-[clamp(2.5rem,6vw,4.5rem)] font-semibold leading-[1] tracking-tight text-ink"
               >
-                I&apos;m Yatin<span className="text-cy">.</span>
+                The human behind <span className="text-shimmer">the code</span>
               </motion.h1>
 
-              <div className="mt-8 space-y-5 border-l border-edge pl-5 text-sm leading-relaxed text-fg-dim">
+              <div className="mt-8 space-y-5 text-base leading-relaxed text-ink-dim">
                 {bio.map((p, i) => (
                   <Reveal key={i} delay={i * 0.05} y={16}>
-                    <p>
-                      <span className="mr-2 text-cy">{String(i + 1).padStart(2, "0")}</span>
-                      {p}
-                    </p>
+                    <p>{p}</p>
                   </Reveal>
                 ))}
               </div>
 
               <Reveal delay={0.1} className="mt-9 flex flex-wrap items-center gap-3">
                 <a href="https://drive.google.com/file/d/13pgBfgDfxREFM-vZvG8W4ZrQ4YFoGdUW/view?usp=sharing" target="_blank" rel="noopener noreferrer" className={btnPrimary}>
-                  <FileText size={15} /> resume.pdf
+                  <FileText size={16} /> Download résumé
                 </a>
-                <span className="flex items-center gap-2 border border-edge px-4 py-3 text-[10px] uppercase tracking-widest text-fg-dim">
-                  <Coffee size={14} className="text-cy" /> coffee_powered
+                <span className="inline-flex items-center gap-2 rounded-full border border-hair bg-white/[0.02] px-4 py-3 text-sm text-ink-dim">
+                  <Coffee size={15} className="text-brand-2" /> Coffee powered
                 </span>
-                <span className="flex items-center gap-2 border border-edge px-4 py-3 text-[10px] uppercase tracking-widest text-fg-dim">
-                  <Heart size={14} className="text-cy" /> design_driven
+                <span className="inline-flex items-center gap-2 rounded-full border border-hair bg-white/[0.02] px-4 py-3 text-sm text-ink-dim">
+                  <Heart size={15} className="text-brand-2" /> Design driven
                 </span>
               </Reveal>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* stack */}
-      <section className="mx-auto max-w-[1400px] px-4 sm:px-6 py-20">
-        <SectionHead n="01" cmd="$ cat stack.json" note="the arsenal" />
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="mx-auto max-w-6xl px-5 sm:px-8 py-20">
+        <SectionHeading eyebrow="The arsenal" title="What I work with" />
+        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {stack.map((s, i) => (
             <Reveal key={s.title} delay={(i % 4) * 0.06}>
-              <div className="group h-full border border-edge bg-term-2/40 p-6 transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:border-cy hover:shadow-[6px_6px_0_0_#22d3ee]">
-                <div className="flex items-center justify-between text-[10px] uppercase tracking-widest text-fg-dim">
-                  <span className="text-cy">[{String(i + 1).padStart(2, "0")}]</span>
-                  <span>//{s.module}</span>
+              <GlassCard className="h-full p-6">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-3/25 to-brand-2/25 font-mono text-sm font-semibold text-brand-2">
+                  {String(i + 1).padStart(2, "0")}
                 </div>
-                <h3 className="mt-6 text-lg font-bold uppercase tracking-tight text-fg group-hover:text-cy">{s.title}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-fg-dim">{s.desc}</p>
-              </div>
+                <h3 className="mt-5 font-display text-lg font-semibold text-ink">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-dim">{s.desc}</p>
+              </GlassCard>
             </Reveal>
           ))}
         </div>
       </section>
 
       {/* interests */}
-      <section className="mx-auto max-w-[1400px] px-4 sm:px-6 py-20">
-        <SectionHead n="02" cmd="$ ls ~/interests" note="beyond the terminal" />
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+      <section className="mx-auto max-w-6xl px-5 sm:px-8 py-20">
+        <SectionHeading eyebrow="Beyond the code" title="Outside of work" />
+        <div className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-5">
           {interests.map((it, i) => (
             <Reveal key={it.label} delay={i * 0.05}>
-              <div className="group flex h-full flex-col items-start gap-4 border border-edge bg-term-2/40 p-5 transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:border-cy hover:shadow-[6px_6px_0_0_#22d3ee]">
-                <div className="border border-edge p-2.5 text-fg-dim transition-colors group-hover:border-cy group-hover:text-cy">{it.icon}</div>
+              <GlassCard className="flex h-full flex-col items-start gap-4 p-5">
+                <div className="rounded-xl border border-hair bg-white/[0.03] p-3 text-brand-2">{it.icon}</div>
                 <div>
-                  <div className="text-sm font-bold lowercase text-fg">{it.label}</div>
-                  <div className="mt-0.5 text-[10px] uppercase tracking-widest text-fg-dim">{it.desc}</div>
+                  <div className="text-sm font-semibold text-ink">{it.label}</div>
+                  <div className="mt-0.5 text-xs text-ink-faint">{it.desc}</div>
                 </div>
-              </div>
+              </GlassCard>
             </Reveal>
           ))}
         </div>
-        <p className="mt-8 border-l-2 border-cy pl-4 text-sm italic text-fg-dim">
-          &quot;the curiosity that got me into physics is the same one that keeps me building things now.&quot;
-        </p>
+        <Reveal className="mt-10">
+          <p className="border-l-2 border-brand pl-5 font-display text-xl italic text-ink-dim sm:text-2xl">
+            &quot;The curiosity that got me into physics is the same one that keeps me building things now.&quot;
+          </p>
+        </Reveal>
       </section>
 
-      <TerminalFooter />
+      {/* CTA */}
+      <section className="mx-auto max-w-6xl px-5 sm:px-8 pb-24">
+        <Reveal className="flex flex-wrap items-center justify-between gap-6 rounded-3xl border border-hair bg-white/[0.02] p-8 sm:p-10">
+          <div>
+            <h3 className="font-display text-2xl font-semibold text-ink">Want to see what I've built?</h3>
+            <p className="mt-2 text-sm text-ink-dim">Explore my projects or reach out directly.</p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Magnetic>
+              <a href="/project" className={btnPrimary}>View projects</a>
+            </Magnetic>
+            <a href="/contact" className={btnGhost}>Contact me</a>
+          </div>
+        </Reveal>
+      </section>
+
+      <SiteFooter />
     </main>
   );
 }

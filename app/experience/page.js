@@ -14,7 +14,7 @@ const experiences = [
     logo: "https://media.licdn.com/dms/image/v2/D4D0BAQFe6iYKRwjKHQ/company-logo_200_200/company-logo_200_200/0/1729863208386?e=2147483647&v=beta&t=kZz3W83vbFgwQRxQzivUKyFAEtPdEArdZmAR5SgnuqE",
     description: "Building tailored software solutions and digital strategies to help businesses thrive in the modern tech landscape.",
     offerLetterUrl: "https://drive.google.com/file/d/1S98KZtj4OYWdcR1ZsIEORwe5d9NUp9bc/view?usp=sharing",
-    extensionLetterUrl: "https://drive.google.com/file/d/1dRvzLbqBgggA6onE3bhBIdC7hWuBMS-v/view?usp=sharing",
+    extensionLetterUrl: "https://drive.google.com/file/d/1bc_2evAhrGGjRzJnnuz0JE2-wroSP8JT/view?usp=sharing",
     roles: [
       {
         title: "Software Development Engineer (Full-Stack)",

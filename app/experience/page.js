@@ -96,11 +96,11 @@ function LetterLink({ href, children }) {
   );
 }
 
-function Role({ role }) {
+function Role({ role, branched }) {
   const duration = formatDuration(role.period);
-  return (
-    <div className="relative pl-7">
-      <span className={`absolute left-0 top-2 h-2.5 w-2.5 -translate-x-1/2 rotate-45 ${role.current ? "bg-flare" : "border border-ink-soft bg-paper"}`} />
+
+  const body = (
+    <>
       <div className="flex flex-wrap items-center gap-2.5">
         <h3 className={`font-display text-lg font-medium ${role.current ? "text-flare" : "text-ink"}`}>{role.title}</h3>
         {role.current && (
@@ -125,6 +125,36 @@ function Role({ role }) {
           ))}
         </ul>
       )}
+    </>
+  );
+
+  // Single role at a company — simple node.
+  if (!branched) {
+    return (
+      <div className="relative pl-7">
+        <span className={`absolute left-0 top-2 h-2.5 w-2.5 -translate-x-1/2 rotate-45 ${role.current ? "bg-flare" : "border border-ink-soft bg-paper"}`} />
+        {body}
+      </div>
+    );
+  }
+
+  // Multiple roles — curved branch peeling off the company trunk.
+  return (
+    <div className="relative pl-12 pt-5">
+      <svg aria-hidden width="40" height="34" viewBox="0 0 40 34" fill="none" className="absolute left-[5px] top-0 overflow-visible">
+        <motion.path
+          d="M1 0 C 1 22, 5 30, 34 30"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          className={role.current ? "stroke-flare" : "stroke-line-2"}
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, delay: 0.2, ease: "easeInOut" }}
+        />
+      </svg>
+      <span className={`absolute left-[39px] top-[30px] h-2 w-2 -translate-x-1/2 -translate-y-1/2 rotate-45 ${role.current ? "bg-flare" : "bg-ink-soft"}`} />
+      {body}
     </div>
   );
 }
@@ -155,11 +185,11 @@ function ExperienceEntry({ exp }) {
 
         <div className="relative mt-7 border-t border-line pt-7">
           {exp.roles.length > 1 && (
-            <span className="absolute left-[5px] top-9 bottom-8 w-px bg-line-2" />
+            <span className="absolute left-[5px] top-7 bottom-8 w-px bg-line-2" />
           )}
           <div className="space-y-8">
             {exp.roles.map((role, ri) => (
-              <Role key={ri} role={role} />
+              <Role key={ri} role={role} branched={exp.roles.length > 1} />
             ))}
           </div>
         </div>

@@ -5,7 +5,7 @@ import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import Logo from "@/components/Logo";
 
 const nav = [
-  { name: "Home", href: "/" },
+  { name: "Index", href: "/" },
   { name: "About", href: "/about" },
   { name: "Work", href: "/project" },
   { name: "Experience", href: "/experience" },
@@ -21,22 +21,22 @@ const socials = [
 
 export default function SiteFooter() {
   return (
-    <footer className="relative mt-10 border-t border-hair">
+    <footer className="relative mt-16 border-t border-line-2">
       <div className="mx-auto max-w-6xl px-5 sm:px-8 py-16">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           {/* contact block */}
           <div className="md:col-span-6">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+            <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-ink-soft">
               Get in touch
             </span>
             <a
               href="mailto:yatin.singh.dev@gmail.com"
-              className="group mt-4 flex items-center gap-2 break-all font-display text-2xl font-semibold tracking-tight text-ink transition-colors hover:text-brand-2 sm:text-3xl"
+              className="group mt-4 flex items-center gap-2 break-all font-display text-2xl font-medium tracking-tight text-ink transition-colors hover:text-flare sm:text-3xl"
             >
               yatin.singh.dev@gmail.com
               <ArrowUpRight className="h-6 w-6 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-ink-dim">
+            <p className="mt-5 max-w-sm leading-relaxed text-ink-2">
               Open to software &amp; ML engineering roles and collaborations.
               Based in India — happy to work remotely.
             </p>
@@ -44,10 +44,10 @@ export default function SiteFooter() {
 
           {/* sitemap */}
           <div className="md:col-span-3">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint">Explore</p>
-            <nav className="mt-4 flex flex-col gap-2.5 text-sm">
+            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ink-soft">Sitemap</p>
+            <nav className="mt-4 flex flex-col gap-2.5">
               {nav.map(({ name, href }) => (
-                <Link key={name} href={href} className="link-underline w-fit text-ink-dim transition-colors hover:text-ink">
+                <Link key={name} href={href} className="link-underline w-fit text-ink-2 transition-colors hover:text-ink">
                   {name}
                 </Link>
               ))}
@@ -56,15 +56,15 @@ export default function SiteFooter() {
 
           {/* socials */}
           <div className="md:col-span-3">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink-faint">Elsewhere</p>
-            <div className="mt-4 flex flex-col gap-2.5 text-sm">
+            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ink-soft">Elsewhere</p>
+            <div className="mt-4 flex flex-col gap-2.5">
               {socials.map(({ name, icon: Icon, href }) => (
                 <a
                   key={name}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="link-underline flex w-fit items-center gap-2.5 text-ink-dim transition-colors hover:text-ink"
+                  className="link-underline flex w-fit items-center gap-2.5 text-ink-2 transition-colors hover:text-ink"
                 >
                   <Icon className="h-4 w-4" />
                   {name}
@@ -76,18 +76,18 @@ export default function SiteFooter() {
       </div>
 
       {/* oversized name band */}
-      <div className="overflow-hidden">
-        <p className="select-none whitespace-nowrap px-4 text-center font-display text-[15vw] font-semibold uppercase leading-none tracking-tighter text-white/[0.035]">
+      <div className="overflow-hidden border-t border-line">
+        <p className="select-none whitespace-nowrap px-4 text-center font-display text-[15vw] font-medium uppercase leading-none tracking-tight text-ink/[0.06]">
           Yatin Singh
         </p>
       </div>
 
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-hair px-5 sm:px-8 py-6 text-xs text-ink-faint sm:flex-row">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-line px-5 sm:px-8 py-6 font-mono text-[11px] uppercase tracking-wider text-ink-soft sm:flex-row">
         <div className="flex items-center gap-3">
           <Logo size="sm" />
-          <span>© {new Date().getFullYear()} Yatin Singh. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Yatin Singh</span>
         </div>
-        <span>Built with Next.js, Tailwind &amp; Motion.</span>
+        <span>Built with Next.js · Tailwind · Motion</span>
       </div>
     </footer>
   );

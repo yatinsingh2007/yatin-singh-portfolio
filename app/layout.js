@@ -1,4 +1,4 @@
-import { Fraunces, Instrument_Sans, JetBrains_Mono } from "next/font/google";
+import { Archivo, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
@@ -6,12 +6,11 @@ import LoadingScreen from "@/components/LoadingScreen";
 import AuroraBackground from "@/components/AuroraBackground";
 import ScrollProgress from "@/components/ScrollProgress";
 
-// Expressive editorial serif — display headings
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+// Heavy grotesk — oversized brutalist display headings
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
-  style: ["normal", "italic"],
-  weight: ["400", "500", "600", "700", "900"],
+  weight: ["500", "600", "700", "800", "900"],
 });
 
 // Clean humanist grotesk — body / UI
@@ -40,18 +39,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
         <meta name="google-site-verification" content="L63uGSjv-ig202O9O7OB6XKbgHRQHhHyiKmkxhoJjNw" />
       </head>
       <body
-        className={`${fraunces.variable} ${instrumentSans.variable} ${jetbrainsMono.variable} font-sans antialiased bg-bg text-ink`}
+        className={`${archivo.variable} ${instrumentSans.variable} ${jetbrainsMono.variable} font-sans antialiased bg-paper text-ink`}
       >
         <LoadingScreen />
         <AuroraBackground />
         <ScrollProgress />
-        <div className="grain pointer-events-none fixed inset-0 z-[9998] opacity-[0.04]" />
 
         <CustomCursor />
         <SmoothScroll>

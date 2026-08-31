@@ -22,7 +22,7 @@ export default function Logo({
   return (
     <div
       className={cn(
-        "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-lg border border-hair shadow-sm transition-all duration-200 group-hover:scale-105 group-hover:border-brand/60",
+        "relative inline-flex shrink-0 items-center justify-center overflow-hidden border border-ink/70 transition-all duration-200 group-hover:border-flare",
         currentSize.class,
         className
       )}

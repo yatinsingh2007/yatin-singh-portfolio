@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { ArrowRight, Github, ExternalLink } from "lucide-react";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
-import { Reveal, Kicker, GlassCard, Tag, Magnetic, RevealImage, btnPrimary } from "@/components/aurora-ui";
+import { Reveal, GlassCard, Tag, RevealImage, btnPrimary } from "@/components/aurora-ui";
 
 const projects = [
   { id: "shopsmart", title: "Shopsmart", category: "Full-Stack · E-commerce", description: "A fully functional e-commerce platform with product listing, cart management and user authentication.", image: "/shopsmart.png", techStack: ["Next.js", "Tailwind", "Prisma", "PostgreSQL", "Docker", "AWS-ECS"], githubUrl: "https://github.com/yatinsingh2007/shopsmart" },
@@ -26,18 +26,20 @@ const projects = [
 function ProjectCard({ project, index }) {
   return (
     <Reveal delay={(index % 2) * 0.08}>
-      <GlassCard className="flex h-full flex-col overflow-hidden">
-        <div className="relative aspect-16/9 overflow-hidden">
-          <RevealImage src={project.image} alt={project.title} sizes="(max-width:1024px) 100vw, 45vw" imgClassName="transition-transform duration-700 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-t from-bg/70 to-transparent" />
-          <span className="absolute left-4 top-4 rounded-full border border-hair bg-bg/70 px-3 py-1 text-[11px] font-medium text-ink backdrop-blur-md">
-            {project.category}
+      <GlassCard className="group flex h-full flex-col">
+        <div className="relative aspect-16/9 overflow-hidden border-b border-line">
+          <RevealImage src={project.image} alt={project.title} sizes="(max-width:1024px) 100vw, 45vw" imgClassName="grayscale-[0.3] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]" />
+          <span className="absolute left-0 top-0 bg-ink px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-paper">
+            № {String(index + 1).padStart(2, "0")}
           </span>
         </div>
 
         <div className="flex flex-1 flex-col p-6 sm:p-7">
-          <h3 className="font-display text-2xl font-semibold text-ink">{project.title}</h3>
-          <p className="mt-3 text-sm leading-relaxed text-ink-dim">{project.description}</p>
+          <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-ink-soft">
+            <span className="text-flare">{project.category}</span>
+          </div>
+          <h3 className="mt-3 font-display text-2xl font-bold uppercase tracking-tight text-ink transition-colors group-hover:text-flare">{project.title}</h3>
+          <p className="mt-2.5 leading-relaxed text-ink-2">{project.description}</p>
 
           <div className="mt-5 flex flex-wrap gap-1.5">
             {project.techStack.slice(0, 6).map((t) => (
@@ -45,13 +47,13 @@ function ProjectCard({ project, index }) {
             ))}
           </div>
 
-          <div className="mt-6 flex items-center gap-4 border-t border-hair pt-5">
-            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-ink-dim transition-colors hover:text-ink">
-              <Github size={16} /> Source
+          <div className="mt-6 flex items-center gap-5 border-t border-line pt-5">
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-ink-2 transition-colors hover:text-ink">
+              <Github size={15} /> Source
             </a>
             {project.liveUrl && (
-              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-brand-2 transition-colors hover:text-ink">
-                <ExternalLink size={16} /> Live demo
+              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-flare transition-colors hover:text-ink">
+                <ExternalLink size={15} /> Live
               </a>
             )}
           </div>
@@ -67,15 +69,16 @@ export default function Project() {
       <SiteNav />
 
       <section className="relative">
-        <div className="relative mx-auto max-w-6xl px-5 sm:px-8 pt-32 sm:pt-40 pb-14">
-          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}>
-            <Kicker>{projects.length} projects &amp; counting</Kicker>
+        <div className="mx-auto max-w-6xl px-5 sm:px-8 pt-28 sm:pt-32 pb-14">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }} className="flex items-center justify-between border-y border-line-2 py-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">
+            <span>Catalogue of works</span>
+            <span>{projects.length} entries</span>
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }} className="mt-6 font-display text-[clamp(2.75rem,9vw,6rem)] font-semibold leading-[0.95] tracking-tight text-ink">
-            Projects
+          <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.15 }} className="mt-10 font-display text-[clamp(3.2rem,10vw,7rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.03em] text-ink">
+            Selected Work
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.4 }} className="mt-5 max-w-2xl text-base leading-relaxed text-ink-dim sm:text-lg">
-            A catalog of things I've built — full-stack products, ML pipelines,
+          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }} className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
+            A catalogue of things I've built — full-stack products, ML pipelines,
             agentic systems and developer tooling.
           </motion.p>
         </div>
@@ -91,22 +94,18 @@ export default function Project() {
 
       <section className="mx-auto max-w-6xl px-5 sm:px-8 pb-24">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-hair bg-white/[0.02] px-6 py-16 text-center sm:px-16">
-            <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/25 blur-[120px]" />
-            <div className="relative">
-              <h2 className="mx-auto max-w-2xl font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">
-                Have a project in mind?
-              </h2>
-              <p className="mx-auto mt-4 max-w-md text-base text-ink-dim">
-                I'm always up for building something new. Let's talk.
-              </p>
-              <div className="mt-9 flex justify-center">
-                <Magnetic>
-                  <Link href="/contact" className={btnPrimary}>
-                    Start a conversation <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </Link>
-                </Magnetic>
-              </div>
+          <div className="border border-ink/70 bg-paper-2 px-6 py-16 text-center sm:px-16">
+            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-flare">Next chapter</p>
+            <h2 className="mx-auto mt-5 max-w-2xl font-display text-3xl font-extrabold uppercase leading-[0.95] tracking-tight text-ink sm:text-5xl">
+              Have a project in mind?
+            </h2>
+            <p className="mx-auto mt-4 max-w-md text-lg text-ink-2">
+              I'm always up for building something new. Let's talk.
+            </p>
+            <div className="mt-9 flex justify-center">
+              <Link href="/contact" className={btnPrimary}>
+                Start a conversation <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
             </div>
           </div>
         </Reveal>

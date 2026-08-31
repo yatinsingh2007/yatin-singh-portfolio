@@ -2,10 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { FileText, ExternalLink, ArrowRight, Zap, Check } from "lucide-react";
+import { FileText, ExternalLink, ArrowRight } from "lucide-react";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
-import { Reveal, Kicker, GlassCard, Magnetic, btnPrimary, btnGhost } from "@/components/aurora-ui";
+import { Reveal, GlassCard, btnPrimary, btnGhost } from "@/components/aurora-ui";
 
 const experiences = [
   {
@@ -31,12 +31,12 @@ const experiences = [
         type: "Internship",
         current: false,
         features: [
-          "Developed and maintained a client-facing contract management platform for Technology Associates (Tanzania) at ByteBlock Technologies, implementing RBAC, role-based dashboards, contract lifecycle workflows, CRUD operations, data validation, and business logic automation across 10+ core application modules.",
+          "Developed and maintained a client-facing contract management platform for Technology Associates (Tanzania), implementing RBAC, role-based dashboards, contract lifecycle workflows, CRUD operations, data validation, and business logic automation across 10+ core application modules.",
           "Delivered 50+ merged pull requests through Git-based workflows, contributing to production-grade frontend and backend features using Next.js, TypeScript, Prisma, and SQL, while improving maintainability through reusable components and structured API design.",
-          "Designed and deployed a Dockerized CI/CD pipeline using GitHub Actions, automating application builds, deployment workflows, and VPS releases, reducing deployment time from 45 minutes to under 3 minutes (~93% improvement).",
-          "Built an automated cron-based notification and reminder engine for payment and maintenance alerts, integrating scheduled jobs, email delivery services, database persistence, and status-based notification handling.",
+          "Designed and deployed a Dockerized CI/CD pipeline using GitHub Actions, automating builds, deployment workflows and VPS releases, reducing deployment time from 45 minutes to under 3 minutes (~93% improvement).",
+          "Built an automated cron-based notification and reminder engine for payment and maintenance alerts, integrating scheduled jobs, email delivery services and status-based notification handling.",
           "Deployed and integrated the Qwen 2.5 1.5B open-source LLM using vLLM on a VPS, exposing inference APIs to power an AI chatbot feature and demonstrating self-hosted LLM deployment in production.",
-          "Managed end-to-end production deployment workflows including Docker containerization, environment configuration, database migrations, reverse proxy configuration, and VPS infrastructure optimization.",
+          "Managed end-to-end production deployment workflows including Docker containerization, environment configuration, database migrations, reverse-proxy configuration and VPS infrastructure optimization.",
         ],
       },
     ],
@@ -56,34 +56,30 @@ const experiences = [
         type: "Internship",
         current: false,
         features: [
-          "Engineered and scaled backend infrastructure from an early-stage prototype to a production-ready platform, developing RESTful APIs that powered core client–freelancer workflows including authentication, job management, and transaction processing for 500 users.",
-          "Designed and implemented a scalable backend architecture using Python, Django, and Django REST Framework, building secure authentication flows, business logic layers, API endpoints, and database integrations across 10+ core features.",
-          "Deployed and maintained production infrastructure on AWS EC2, integrating Amazon S3 for static asset storage and delivery, reducing application server load by 20% and improving asset retrieval performance.",
+          "Engineered and scaled backend infrastructure from an early-stage prototype to a production-ready platform, developing RESTful APIs that powered core client–freelancer workflows including authentication, job management and transaction processing for 500 users.",
+          "Designed and implemented a scalable backend architecture using Python, Django and Django REST Framework, building secure authentication flows, business logic layers, API endpoints and database integrations across 10+ core features.",
+          "Deployed and maintained production infrastructure on AWS EC2, integrating Amazon S3 for static asset storage and delivery, reducing application server load by 20%.",
           "Optimized frontend performance and mobile responsiveness, increasing the Lighthouse mobile performance score from 35 to 75 (+114%).",
-          "Developed and maintained 20+ API endpoints with structured error handling, validation, and optimized request flows to improve reliability and scalability of the platform.",
+          "Developed and maintained 20+ API endpoints with structured error handling, validation and optimized request flows to improve reliability and scalability of the platform.",
         ],
       },
     ],
   },
 ];
 
-// parse a "Mon YYYY" token (or "Present") into a Date
 function parsePoint(token) {
   if (/present/i.test(token)) return new Date();
   const d = new Date(`${token.trim()} 1`);
   return isNaN(d) ? null : d;
 }
 
-// derive a human duration like "3 months" / "1 year 2 months" from a period string
 function formatDuration(period) {
   const [startStr, endStr] = period.split(/[—–-]/).map((s) => s.trim());
   const start = parsePoint(startStr);
   const end = parsePoint(endStr);
   if (!start || !end) return null;
-
   let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
   if (months < 1) months = 1;
-
   const years = Math.floor(months / 12);
   const rem = months % 12;
   const parts = [];
@@ -94,7 +90,7 @@ function formatDuration(period) {
 
 function LetterLink({ href, children }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-hair bg-white/[0.03] px-3.5 py-1.5 text-xs text-ink-dim transition-colors hover:border-brand/50 hover:text-ink">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 border border-line px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-widest text-ink-2 transition-colors hover:border-flare hover:text-flare">
       {children}
     </a>
   );
@@ -104,29 +100,26 @@ function Role({ role }) {
   const duration = formatDuration(role.period);
   return (
     <div className="relative pl-7">
-      {/* node */}
-      <span className={`absolute left-0 top-1.5 h-3 w-3 -translate-x-1/2 rounded-full ring-4 ring-bg ${role.current ? "bg-brand shadow-[0_0_12px_2px_rgba(139,124,246,0.7)]" : "bg-ink-faint"}`} />
-      <div className="flex flex-wrap items-center gap-2">
-        <h3 className={`font-display text-lg font-semibold ${role.current ? "text-gradient-brand" : "text-ink"}`}>{role.title}</h3>
+      <span className={`absolute left-0 top-2 h-2.5 w-2.5 -translate-x-1/2 rotate-45 ${role.current ? "bg-flare" : "border border-ink-soft bg-paper"}`} />
+      <div className="flex flex-wrap items-center gap-2.5">
+        <h3 className={`font-display text-lg font-medium ${role.current ? "text-flare" : "text-ink"}`}>{role.title}</h3>
         {role.current && (
-          <span className="inline-flex items-center gap-1 rounded-full border border-brand/40 bg-brand/10 px-2.5 py-0.5 text-[11px] font-semibold text-brand-2">
-            <Zap size={11} /> Current
-          </span>
+          <span className="border border-flare px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-flare">Current</span>
         )}
-        <span className="rounded-full border border-hair bg-white/[0.03] px-2.5 py-0.5 text-[11px] text-ink-dim">{role.type}</span>
+        <span className="border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft">{role.type}</span>
       </div>
-      <div className="mt-1.5 flex flex-wrap items-center gap-x-2 font-mono text-xs text-ink-faint">
+      <div className="mt-1.5 flex flex-wrap items-center gap-x-2 font-mono text-[11px] uppercase tracking-wide text-ink-soft">
         <span>{role.period}</span>
-        {duration && (<><span>·</span><span className="text-brand-2">{duration}</span></>)}
-        <span>·</span>
+        {duration && (<><span className="text-line-2">/</span><span className="text-flare">{duration}</span></>)}
+        <span className="text-line-2">/</span>
         <span>{role.location}</span>
       </div>
 
       {role.features.length > 0 && (
         <ul className="mt-4 space-y-2.5">
           {role.features.map((f, fi) => (
-            <li key={fi} className="flex gap-2.5 text-sm leading-relaxed text-ink-dim">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-2" />
+            <li key={fi} className="flex gap-3 leading-relaxed text-ink-2">
+              <span className="mt-2 h-1 w-1 shrink-0 bg-flare" />
               <span>{f}</span>
             </li>
           ))}
@@ -136,20 +129,19 @@ function Role({ role }) {
   );
 }
 
-function ExperienceCard({ exp }) {
+function ExperienceEntry({ exp }) {
   return (
     <Reveal className="relative pl-8 sm:pl-12">
-      {/* company node on the main spine */}
-      <span className="absolute left-[7px] sm:left-[15px] top-8 z-10 h-3.5 w-3.5 -translate-x-1/2 rounded-full bg-gradient-to-br from-brand-3 to-brand-2 ring-4 ring-bg shadow-[0_0_14px_2px_rgba(139,124,246,0.6)]" />
+      <span className="absolute left-[7px] sm:left-[15px] top-8 z-10 h-3.5 w-3.5 -translate-x-1/2 rotate-45 bg-ink" />
 
       <GlassCard className="p-6 sm:p-8">
         <div className="flex items-start gap-4">
-          <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-hair bg-white/5">
+          <div className="relative h-12 w-12 shrink-0 overflow-hidden border border-line bg-paper-2">
             <Image src={exp.logo} alt={exp.company} fill className="object-cover" />
           </div>
           <div className="flex-1">
-            <h2 className="font-display text-2xl font-semibold text-ink">{exp.company}</h2>
-            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-dim">{exp.description}</p>
+            <h2 className="font-display text-2xl font-bold uppercase tracking-tight text-ink">{exp.company}</h2>
+            <p className="mt-2 max-w-2xl leading-relaxed text-ink-2">{exp.description}</p>
           </div>
         </div>
 
@@ -161,10 +153,9 @@ function ExperienceCard({ exp }) {
           </div>
         )}
 
-        {/* roles */}
-        <div className="relative mt-7 border-t border-hair pt-7">
+        <div className="relative mt-7 border-t border-line pt-7">
           {exp.roles.length > 1 && (
-            <span className="absolute left-[5px] top-9 bottom-8 w-px bg-gradient-to-b from-brand/60 via-brand/30 to-transparent" />
+            <span className="absolute left-[5px] top-9 bottom-8 w-px bg-line-2" />
           )}
           <div className="space-y-8">
             {exp.roles.map((role, ri) => (
@@ -183,14 +174,15 @@ export default function ExperiencePage() {
       <SiteNav />
 
       <section className="relative">
-        <div className="relative mx-auto max-w-4xl px-5 sm:px-8 pt-32 sm:pt-40 pb-14">
-          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}>
-            <Kicker>Career history</Kicker>
+        <div className="mx-auto max-w-4xl px-5 sm:px-8 pt-28 sm:pt-32 pb-14">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }} className="flex items-center justify-between border-y border-line-2 py-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">
+            <span>Career record</span>
+            <span className="hidden sm:block">2025 — present</span>
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }} className="mt-6 font-display text-[clamp(2.75rem,9vw,6rem)] font-semibold leading-[0.95] tracking-tight text-ink">
+          <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.15 }} className="mt-10 font-display text-[clamp(3.2rem,10vw,7rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.03em] text-ink">
             Experience
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.4 }} className="mt-5 max-w-2xl text-base leading-relaxed text-ink-dim sm:text-lg">
+          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }} className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
             Professional growth, technical contributions and the impact I've shipped
             across startups.
           </motion.p>
@@ -199,22 +191,20 @@ export default function ExperiencePage() {
 
       <section className="mx-auto max-w-4xl px-5 sm:px-8 pb-24">
         <div className="relative space-y-8">
-          <div className="absolute left-[7px] sm:left-[15px] top-4 bottom-4 w-px bg-hair" />
+          <div className="absolute left-[7px] sm:left-[15px] top-4 bottom-4 w-px bg-line-2" />
           {experiences.map((exp) => (
-            <ExperienceCard key={exp.id} exp={exp} />
+            <ExperienceEntry key={exp.id} exp={exp} />
           ))}
         </div>
 
         <Reveal className="mt-12">
-          <div className="flex flex-col items-center gap-6 rounded-3xl border border-hair bg-white/[0.02] p-10 text-center">
+          <div className="flex flex-col items-center gap-6 border border-ink/70 bg-paper-2 p-10 text-center">
             <div>
-              <h3 className="font-display text-2xl font-semibold text-ink">Want to see more?</h3>
-              <p className="mt-2 text-sm text-ink-dim">Explore my projects or read more about how I work.</p>
+              <h3 className="font-display text-2xl font-medium text-ink">Want to see more?</h3>
+              <p className="mt-2 text-ink-2">Explore my projects or read more about how I work.</p>
             </div>
             <div className="flex flex-wrap justify-center gap-3">
-              <Magnetic>
-                <Link href="/project" className={btnPrimary}>View projects <ArrowRight className="h-4 w-4" /></Link>
-              </Magnetic>
+              <Link href="/project" className={btnPrimary}>View projects <ArrowRight className="h-4 w-4" /></Link>
               <Link href="/about" className={btnGhost}>About me</Link>
             </div>
           </div>

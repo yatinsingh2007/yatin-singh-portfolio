@@ -8,7 +8,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-instrument);
   --font-mono: var(--font-jetbrains);
-  --font-display: var(--font-fraunces);
+  --font-display: var(--font-archivo);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -116,24 +116,24 @@
 }
 
 /* ──────────────────────────────────────────────────────────────
-   "Aurora" — active flagship system (recruiter-friendly).
-   Deep indigo-black base, soft violet aurora glows, glass cards,
-   editorial serif display type. Clean, readable, premium.
+   "Monolith" — active flagship system.
+   Near-black base, off-white type, hairline rules, oversized grotesk
+   display, a single signal-red accent. High-contrast, brutalist-
+   editorial. No gradients / glass / glow.
+   (Token names kept as paper/ink/line/flare so the whole site
+    cascades; values are now dark.)
    ────────────────────────────────────────────────────────────── */
 @theme {
-  --color-bg: #07070c;
-  --color-bg-2: #0c0b14;
-  --color-ink: #ededf2;
-  --color-ink-dim: #a3a3b4;
-  --color-ink-faint: #6c6c80;
-  --color-hair: #ffffff14;
-  --color-hair-2: #ffffff24;
-  --color-brand: #8b7cf6;
-  --color-brand-2: #c084fc;
-  --color-brand-3: #6366f1;
-  --color-brand-ink: #0a0a12;
-
-  --animate-aurora: aurora 18s ease-in-out infinite alternate;
+  --color-paper: #0a0a09;      /* base near-black                 */
+  --color-paper-2: #141412;    /* raised panel / hover fill       */
+  --color-paper-3: #1d1d1a;    /* deeper panel                    */
+  --color-ink: #ecebe4;        /* primary off-white text          */
+  --color-ink-2: #9d998e;      /* secondary text                  */
+  --color-ink-soft: #6a675d;   /* muted labels / captions         */
+  --color-line: #26251f;       /* hairline rules                  */
+  --color-line-2: #3a382f;     /* stronger rules                  */
+  --color-flare: #ff3b26;      /* signal-red accent               */
+  --color-flare-2: #d92a17;    /* darker accent (hover)           */
 }
 
 @keyframes marquee {
@@ -242,127 +242,52 @@
   mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
 
-/* ── Selection + typographic rhythm polish ── */
+/* ── Selection ── */
 ::selection {
-  background: #8b7cf6;
-  color: #0a0a12;
+  background: #ff3b26;
+  color: #0a0a09;
 }
 
 /* ──────────────────────────────────────────────────────────────
-   Aurora design-system utilities
+   Engineer's Almanac utilities
    ────────────────────────────────────────────────────────────── */
 
-/* Frosted-glass card surface */
-.glass {
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-/* Brand gradient text */
-.text-gradient {
-  background-image: linear-gradient(105deg, #ededf2 0%, #c9c2ff 40%, #c084fc 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.text-gradient-brand {
-  background-image: linear-gradient(105deg, #8b7cf6 0%, #c084fc 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Faint dot / grid backdrop */
-.grid-bg {
+/* Engineering graph-paper grid (light lines on near-black) */
+.paper-grid {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
-.grid-mask {
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
 }
 
-/* Soft ring that glows on hover — used on cards */
-.card-hover {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s, background-color 0.4s;
-}
-.card-hover:hover {
-  transform: translateY(-4px);
-  border-color: rgba(139, 124, 246, 0.45);
-  box-shadow: 0 12px 40px -12px rgba(139, 124, 246, 0.35);
-  background-color: rgba(255, 255, 255, 0.04);
-}
-
-/* Conic shimmer for the primary button border */
-.btn-glow {
-  box-shadow: 0 8px 30px -8px rgba(139, 124, 246, 0.55);
-}
-
-/* ── Cursor-tracking spotlight on cards ─────────────────────────
-   A radial glow follows the pointer; content is lifted above it.
-   JS sets --mx / --my on the element. ─────────────────────────── */
-.spotlight::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  background: radial-gradient(
-    360px circle at var(--mx, 50%) var(--my, -20%),
-    rgba(139, 124, 246, 0.16),
-    transparent 62%
-  );
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-.spotlight:hover::after { opacity: 1; }
-/* keep real content above the glow */
-.spotlight > * { position: relative; z-index: 1; }
-
-/* ── Light-sweep sheen for primary buttons ──────────────────────── */
-.sheen { position: relative; overflow: hidden; }
-.sheen::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -160%;
-  width: 55%;
-  height: 100%;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-  transform: skewX(-20deg);
-  pointer-events: none;
-}
-.sheen:hover::after { animation: sheen 0.9s ease; }
-@keyframes sheen { to { left: 170%; } }
-
-/* ── Shimmering gradient text for headline accents ──────────────── */
-.text-shimmer {
-  background-image: linear-gradient(100deg, #8b7cf6 0%, #c084fc 25%, #f4f0ff 50%, #c084fc 75%, #8b7cf6 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: text-shimmer 7s linear infinite;
-}
-@keyframes text-shimmer { to { background-position: 200% center; } }
-
-/* ── Self-contained filmic grain (animated, seamless) ───────────── */
-.grain {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+/* Subtle paper fibre grain (data-URI, static) */
+.paper-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  animation: grain-shift 6s steps(8) infinite;
-}
-@keyframes grain-shift {
-  0% { background-position: 0 0; }
-  100% { background-position: 140px 140px; }
 }
 
-/* ── Animated link underline ────────────────────────────────────── */
+/* Horizontal edge fade for marquee ticker bands */
+.edge-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+/* Flat editorial card: hairline frame, gentle raise + accent rule on hover */
+.card-almanac {
+  position: relative;
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s, background-color 0.35s;
+}
+.card-almanac:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-line-2);
+  background: var(--color-paper-2);
+}
+
+/* Growing rule under links (draws from the left) */
 .link-underline { position: relative; }
 .link-underline::after {
   content: "";
@@ -378,12 +303,8 @@
 }
 .link-underline:hover::after { transform: scaleX(1); }
 
-@media (prefers-reduced-motion: reduce) {
-  .text-shimmer { animation: none; }
-  .sheen:hover::after { animation: none; }
-  .animate-aurora { animation: none; }
-  .grain { animation: none; }
-}
+/* Scroll-reveal rule that draws itself in */
+@keyframes rule-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 /* Always-visible entrance (runs on load, never gated by scroll observers) */
 @keyframes fadeUp {
@@ -415,12 +336,14 @@
   );
 }
 
-/* Keyboard focus — soft warm ring for accessibility without visual noise */
+/* Keyboard focus — ink ring for accessibility without visual noise */
 a:focus-visible,
-button:focus-visible {
-  outline: 2px solid rgba(246, 244, 240, 0.45);
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(207, 63, 29, 0.6);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
 /* ── Role progression tree — flowing beam on the trunk ── */
@@ -451,11 +374,9 @@ button:focus-visible {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    letter-spacing: -0.011em;
   }
   /* Tighter, more editorial heading rhythm; balance prevents orphan words */
   h1, h2, h3, h4 {

@@ -6,16 +6,7 @@ import { FileText, Coffee, Heart, Search, BookOpen, Gamepad, Soup } from "lucide
 import { FaFutbol } from "react-icons/fa";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
-import {
-  Reveal,
-  SectionHeading,
-  Kicker,
-  GlassCard,
-  Tilt,
-  Magnetic,
-  btnPrimary,
-  btnGhost,
-} from "@/components/aurora-ui";
+import { Reveal, SectionHeading, Kicker, btnPrimary, btnGhost } from "@/components/aurora-ui";
 
 const facts = [
   ["Education", "3rd Year B.Tech @ NST"],
@@ -24,7 +15,7 @@ const facts = [
   ["Status", "Open to work"],
 ];
 
-const stack = [
+const disciplines = [
   { title: "Full-Stack Development", desc: "End-to-end web apps & clean architecture." },
   { title: "MERN Stack", desc: "React, Node, Express & Mongo systems." },
   { title: "DevOps", desc: "Docker, CI/CD, VPS & cloud deployment." },
@@ -52,63 +43,77 @@ export default function About() {
       <SiteNav />
 
       <section className="relative">
-        <div className="relative mx-auto max-w-6xl px-5 sm:px-8 pt-32 sm:pt-40 pb-16">
-          {/* hero */}
-          <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-12">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8 pt-28 sm:pt-32">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7 }}
+            className="flex items-center justify-between border-y border-line-2 py-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft"
+          >
+            <span>Chapter — About</span>
+            <span className="hidden sm:block">The human behind the code</span>
+          </motion.div>
+
+          <div className="grid grid-cols-1 items-start gap-12 pt-12 md:grid-cols-12">
+            {/* portrait + facts */}
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.15 }}
               className="md:col-span-5 lg:col-span-4"
             >
-              <Tilt className="relative" max={7}>
-                <div className="absolute -inset-3 rounded-[1.75rem] bg-gradient-to-tr from-brand-3/25 via-brand/15 to-brand-2/25 blur-2xl" />
-                <GlassCard hover={false} className="relative overflow-hidden p-2">
-                  <div className="relative aspect-4/5 w-full overflow-hidden rounded-xl">
-                    <Image src="/yatin_singh.jpeg" alt="Yatin Singh" fill priority className="object-cover" />
-                  </div>
-                </GlassCard>
-              </Tilt>
-              <div className="mt-4 grid grid-cols-2 gap-3">
+              <figure className="border border-ink/70 bg-paper p-2">
+                <div className="relative aspect-4/5 w-full overflow-hidden">
+                  <Image src="/yatin_singh.jpeg" alt="Yatin Singh" fill priority className="object-cover grayscale-[0.4] transition-all duration-700 hover:grayscale-0" />
+                </div>
+                <figcaption className="flex items-center justify-between border-t border-line px-1 pt-2.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft">
+                  <span className="text-flare">Fig. 02</span>
+                  <span>Yatin Singh</span>
+                </figcaption>
+              </figure>
+              <div className="mt-3 grid grid-cols-2 border-l border-t border-line">
                 {facts.map(([k, v]) => (
-                  <GlassCard key={k} hover={false} className="p-4">
-                    <div className="text-[11px] uppercase tracking-widest text-ink-faint">{k}</div>
+                  <div key={k} className="border-b border-r border-line p-4">
+                    <div className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">{k}</div>
                     <div className="mt-1 text-sm text-ink">{v}</div>
-                  </GlassCard>
+                  </div>
                 ))}
               </div>
             </motion.div>
 
+            {/* bio */}
             <div className="md:col-span-7 lg:col-span-8">
-              <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}>
+              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
                 <Kicker>About me</Kicker>
               </motion.div>
               <motion.h1
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="mt-6 font-display text-[clamp(2.5rem,6vw,4.5rem)] font-semibold leading-[1] tracking-tight text-ink"
+                transition={{ duration: 0.8, delay: 0.28 }}
+                className="mt-6 font-display text-[clamp(2.8rem,6.5vw,5rem)] font-extrabold uppercase leading-[0.92] tracking-[-0.03em] text-ink"
               >
-                The human behind <span className="text-shimmer">the code</span>
+                The human behind <span className="text-flare">the code</span>
               </motion.h1>
 
-              <div className="mt-8 space-y-5 text-base leading-relaxed text-ink-dim">
+              <div className="mt-8 columns-1 gap-8 space-y-5 text-lg leading-relaxed text-ink-2 lg:columns-2">
                 {bio.map((p, i) => (
-                  <Reveal key={i} delay={i * 0.05} y={16}>
-                    <p>{p}</p>
+                  <Reveal key={i} delay={i * 0.05} y={14}>
+                    <p className={i === 0 ? "first-letter:float-left first-letter:mr-2 first-letter:font-display first-letter:text-6xl first-letter:font-medium first-letter:leading-[0.8] first-letter:text-flare" : ""}>
+                      {p}
+                    </p>
                   </Reveal>
                 ))}
               </div>
 
               <Reveal delay={0.1} className="mt-9 flex flex-wrap items-center gap-3">
                 <a href="https://drive.google.com/file/d/13pgBfgDfxREFM-vZvG8W4ZrQ4YFoGdUW/view?usp=sharing" target="_blank" rel="noopener noreferrer" className={btnPrimary}>
-                  <FileText size={16} /> Download résumé
+                  <FileText size={15} /> Download résumé
                 </a>
-                <span className="inline-flex items-center gap-2 rounded-full border border-hair bg-white/[0.02] px-4 py-3 text-sm text-ink-dim">
-                  <Coffee size={15} className="text-brand-2" /> Coffee powered
+                <span className="inline-flex items-center gap-2 border border-line px-4 py-3 font-mono text-xs uppercase tracking-widest text-ink-soft">
+                  <Coffee size={14} className="text-flare" /> Coffee powered
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-hair bg-white/[0.02] px-4 py-3 text-sm text-ink-dim">
-                  <Heart size={15} className="text-brand-2" /> Design driven
+                <span className="inline-flex items-center gap-2 border border-line px-4 py-3 font-mono text-xs uppercase tracking-widest text-ink-soft">
+                  <Heart size={14} className="text-flare" /> Design driven
                 </span>
               </Reveal>
             </div>
@@ -116,19 +121,17 @@ export default function About() {
         </div>
       </section>
 
-      {/* stack */}
+      {/* disciplines */}
       <section className="mx-auto max-w-6xl px-5 sm:px-8 py-20">
-        <SectionHeading eyebrow="The arsenal" title="What I work with" />
-        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {stack.map((s, i) => (
+        <SectionHeading index="01" eyebrow="The arsenal" title="What I work with" />
+        <div className="mt-12 grid grid-cols-1 border-l border-t border-line sm:grid-cols-2 lg:grid-cols-4">
+          {disciplines.map((s, i) => (
             <Reveal key={s.title} delay={(i % 4) * 0.06}>
-              <GlassCard className="h-full p-6">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-3/25 to-brand-2/25 font-mono text-sm font-semibold text-brand-2">
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-                <h3 className="mt-5 font-display text-lg font-semibold text-ink">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-dim">{s.desc}</p>
-              </GlassCard>
+              <div className="group h-full border-b border-r border-line p-6 transition-colors duration-300 hover:bg-paper-2">
+                <span className="font-mono text-xs text-flare">§{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-5 font-display text-lg font-medium text-ink">{s.title}</h3>
+                <p className="mt-2 leading-relaxed text-ink-2">{s.desc}</p>
+              </div>
             </Reveal>
           ))}
         </div>
@@ -136,22 +139,22 @@ export default function About() {
 
       {/* interests */}
       <section className="mx-auto max-w-6xl px-5 sm:px-8 py-20">
-        <SectionHeading eyebrow="Beyond the code" title="Outside of work" />
-        <div className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-5">
+        <SectionHeading index="02" eyebrow="Marginalia" title="Beyond the desk" />
+        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
           {interests.map((it, i) => (
             <Reveal key={it.label} delay={i * 0.05}>
-              <GlassCard className="flex h-full flex-col items-start gap-4 p-5">
-                <div className="rounded-xl border border-hair bg-white/[0.03] p-3 text-brand-2">{it.icon}</div>
+              <div className="group flex h-full flex-col items-start gap-4 border border-line bg-paper p-5 transition-colors duration-300 hover:bg-paper-2">
+                <div className="border border-line p-3 text-flare">{it.icon}</div>
                 <div>
-                  <div className="text-sm font-semibold text-ink">{it.label}</div>
-                  <div className="mt-0.5 text-xs text-ink-faint">{it.desc}</div>
+                  <div className="font-display text-base font-medium text-ink">{it.label}</div>
+                  <div className="mt-0.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft">{it.desc}</div>
                 </div>
-              </GlassCard>
+              </div>
             </Reveal>
           ))}
         </div>
         <Reveal className="mt-10">
-          <p className="border-l-2 border-brand pl-5 font-display text-xl italic text-ink-dim sm:text-2xl">
+          <p className="border-l-2 border-flare pl-5 font-display text-2xl font-bold uppercase leading-tight tracking-tight text-ink sm:text-3xl">
             &quot;The curiosity that got me into physics is the same one that keeps me building things now.&quot;
           </p>
         </Reveal>
@@ -159,15 +162,13 @@ export default function About() {
 
       {/* CTA */}
       <section className="mx-auto max-w-6xl px-5 sm:px-8 pb-24">
-        <Reveal className="flex flex-wrap items-center justify-between gap-6 rounded-3xl border border-hair bg-white/[0.02] p-8 sm:p-10">
+        <Reveal className="flex flex-wrap items-center justify-between gap-6 border border-ink/70 bg-paper-2 p-8 sm:p-10">
           <div>
-            <h3 className="font-display text-2xl font-semibold text-ink">Want to see what I've built?</h3>
-            <p className="mt-2 text-sm text-ink-dim">Explore my projects or reach out directly.</p>
+            <h3 className="font-display text-2xl font-medium text-ink">Want to see what I've built?</h3>
+            <p className="mt-2 text-ink-2">Explore my projects or reach out directly.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Magnetic>
-              <a href="/project" className={btnPrimary}>View projects</a>
-            </Magnetic>
+            <a href="/project" className={btnPrimary}>View projects</a>
             <a href="/contact" className={btnGhost}>Contact me</a>
           </div>
         </Reveal>

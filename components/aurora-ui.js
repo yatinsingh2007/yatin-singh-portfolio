@@ -1,55 +1,63 @@
 "use client";
-import { useRef } from "react";
 import Image from "next/image";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
-/* Shared Aurora building blocks used across every page. */
+/* Shared "Engineer's Almanac" building blocks used across every page.
+   Flat, editorial, hairline-ruled. No gradients / glass / glow. */
 
 /* ── Buttons ──────────────────────────────────────────────────── */
 export const btnPrimary =
-  "sheen group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-3 via-brand to-brand-2 px-6 py-3 text-sm font-semibold text-white btn-glow transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5";
+  "group inline-flex items-center justify-center gap-2 border border-ink bg-ink px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-paper transition-colors duration-300 hover:border-flare hover:bg-flare";
 
 export const btnGhost =
-  "group inline-flex items-center justify-center gap-2 rounded-full border border-hair-2 bg-white/[0.02] px-6 py-3 text-sm font-medium text-ink backdrop-blur-sm transition-all duration-300 hover:border-brand/60 hover:bg-white/[0.05] hover:-translate-y-0.5";
+  "group inline-flex items-center justify-center gap-2 border border-ink px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-ink transition-colors duration-300 hover:bg-ink hover:text-paper";
 
-/* ── Small eyebrow / kicker label ─────────────────────────────── */
+/* ── Eyebrow / kicker (mono, with a flare tick) ───────────────── */
 export function Kicker({ children, className }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 rounded-full border border-hair bg-white/[0.03] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-dim",
+        "inline-flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-soft",
         className
       )}
     >
-      <span className="h-1.5 w-1.5 rounded-full bg-brand shadow-[0_0_8px_2px_rgba(139,124,246,0.7)]" />
+      <span className="h-2 w-2 bg-flare" />
       {children}
     </span>
   );
 }
 
-/* ── Section heading with kicker + title + optional description ── */
-export function SectionHeading({ eyebrow, title, description, align = "left", className }) {
+/* ── Section heading — ruled, numbered, editorial ─────────────── */
+export function SectionHeading({ index, eyebrow, title, description, align = "left", className }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className={cn(align === "center" && "text-center", className)}
     >
-      {eyebrow && (
-        <div className={cn("mb-5 flex", align === "center" && "justify-center")}>
-          <Kicker>{eyebrow}</Kicker>
-        </div>
-      )}
-      <h2 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl">
+      <div
+        className={cn(
+          "flex items-center gap-4 border-t border-line-2 pt-3",
+          align === "center" && "justify-center"
+        )}
+      >
+        {index && <span className="font-mono text-xs text-flare">§{index}</span>}
+        {eyebrow && (
+          <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-ink-soft">
+            {eyebrow}
+          </span>
+        )}
+      </div>
+      <h2 className="mt-5 font-display text-4xl font-extrabold uppercase leading-[0.98] tracking-[-0.01em] text-ink sm:text-5xl">
         {title}
       </h2>
       {description && (
         <p
           className={cn(
-            "mt-5 max-w-2xl text-base leading-relaxed text-ink-dim",
+            "mt-4 max-w-2xl text-lg leading-relaxed text-ink-2",
             align === "center" && "mx-auto"
           )}
         >
@@ -61,7 +69,7 @@ export function SectionHeading({ eyebrow, title, description, align = "left", cl
 }
 
 /* ── Scroll reveal wrapper ────────────────────────────────────── */
-export function Reveal({ children, delay = 0, y = 24, className, once = true }) {
+export function Reveal({ children, delay = 0, y = 20, className, once = true }) {
   return (
     <motion.div
       initial={{ opacity: 0, y }}
@@ -75,25 +83,13 @@ export function Reveal({ children, delay = 0, y = 24, className, once = true }) 
   );
 }
 
-/* ── Frosted glass card (cursor-tracking spotlight when hover) ─── */
+/* ── Flat editorial card (hairline frame) ─────────────────────── */
 export function GlassCard({ children, className, hover = true, ...props }) {
-  const ref = useRef(null);
-
-  const onMove = (e) => {
-    const el = ref.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--my", `${e.clientY - r.top}px`);
-  };
-
   return (
     <div
-      ref={ref}
-      onMouseMove={hover ? onMove : undefined}
       className={cn(
-        "relative overflow-hidden rounded-2xl border border-hair bg-white/[0.025] backdrop-blur-md",
-        hover && "card-hover spotlight",
+        "relative border border-line bg-paper",
+        hover && "card-almanac",
         className
       )}
       {...props}
@@ -103,71 +99,23 @@ export function GlassCard({ children, className, hover = true, ...props }) {
   );
 }
 
-/* ── Magnetic wrapper — pulls its child toward the cursor ──────── */
-export function Magnetic({ children, strength = 0.35, className }) {
-  const ref = useRef(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 200, damping: 15, mass: 0.5 });
-  const sy = useSpring(y, { stiffness: 200, damping: 15, mass: 0.5 });
-
-  const onMove = (e) => {
-    const el = ref.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    x.set((e.clientX - (r.left + r.width / 2)) * strength);
-    y.set((e.clientY - (r.top + r.height / 2)) * strength);
-  };
-  const onLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      style={{ x: sx, y: sy }}
-      className={cn("inline-block", className)}
-    >
-      {children}
-    </motion.div>
-  );
+/* ── Passthrough wrappers (kept for API compatibility; the almanac
+      aesthetic is intentionally still, so these no longer animate) ─ */
+export function Tilt({ children, className }) {
+  return <div className={className}>{children}</div>;
+}
+export function Magnetic({ children, className }) {
+  return <span className={cn("inline-block", className)}>{children}</span>;
 }
 
-/* ── Pointer-driven 3D tilt wrapper ───────────────────────────── */
-export function Tilt({ children, className, max = 8 }) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [max, -max]), { stiffness: 150, damping: 18 });
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-max, max]), { stiffness: 150, damping: 18 });
-
-  const onMove = (e) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    x.set((e.clientX - r.left) / r.width - 0.5);
-    y.set((e.clientY - r.top) / r.height - 0.5);
-  };
-  const onLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <div className={className} style={{ perspective: 1000 }} onMouseMove={onMove} onMouseLeave={onLeave}>
-      <motion.div style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}>{children}</motion.div>
-    </div>
-  );
-}
-
-/* ── Fill image that wipes + settles into view on scroll ──────── */
+/* ── Fill image that wipes into view on scroll ────────────────── */
 export function RevealImage({ src, alt, sizes, priority, imgClassName }) {
   return (
     <motion.div
-      initial={{ clipPath: "inset(0 0 100% 0)", scale: 1.08 }}
-      whileInView={{ clipPath: "inset(0 0 0% 0)", scale: 1 }}
+      initial={{ clipPath: "inset(0 0 100% 0)" }}
+      whileInView={{ clipPath: "inset(0 0 0% 0)" }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
       className="absolute inset-0"
     >
       <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={cn("object-cover", imgClassName)} />
@@ -175,23 +123,23 @@ export function RevealImage({ src, alt, sizes, priority, imgClassName }) {
   );
 }
 
-/* ── Decorative gradient divider with a glowing node ──────────── */
+/* ── Hairline divider with a small flare node ─────────────────── */
 export function Divider({ className }) {
   return (
-    <div className={cn("mx-auto max-w-6xl px-5 sm:px-8", className)}>
-      <div className="relative h-px w-full bg-gradient-to-r from-transparent via-hair-2 to-transparent">
-        <span className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-brand/70 shadow-[0_0_10px_2px_rgba(139,124,246,0.5)]" />
+    <div className={cn("mx-auto max-w-5xl px-5 sm:px-8", className)}>
+      <div className="relative h-px w-full bg-line-2">
+        <span className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-flare" />
       </div>
     </div>
   );
 }
 
-/* ── Little pill / tag ────────────────────────────────────────── */
+/* ── Mono tag / chip ──────────────────────────────────────────── */
 export function Tag({ children, className }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full border border-hair bg-white/[0.03] px-2.5 py-1 font-mono text-[11px] text-ink-dim",
+        "inline-flex items-center border border-line px-2.5 py-1 font-mono text-[11px] text-ink-soft",
         className
       )}
     >

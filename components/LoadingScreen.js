@@ -70,47 +70,40 @@ export default function LoadingScreen() {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-[#07070c]"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-[#0a0a09]"
       style={{ willChange: "transform" }}
     >
-      {/* aurora glow */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-1/3 h-[420px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8b7cf6]/25 blur-[130px]" />
-      </div>
+      <div aria-hidden className="pointer-events-none absolute inset-0 paper-grid opacity-70" />
 
-      <div className="relative z-20 w-full max-w-md px-8 space-y-9">
+      <div className="relative z-20 w-full max-w-md px-8 space-y-10">
         <div className="flex items-center gap-4">
           <div ref={logoRef}>
             <Logo size="lg" />
           </div>
           <div className="space-y-1.5">
-            <h2 ref={nameRef} className="font-display text-3xl font-semibold tracking-tight text-[#ededf2] md:text-4xl">
+            <h2 ref={nameRef} className="font-display text-3xl font-extrabold uppercase tracking-tight text-[#ecebe4] md:text-4xl">
               Yatin Singh
             </h2>
-            <p ref={subRef} className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#a3a3b4]">
+            <p ref={subRef} className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#9d998e]">
               Software &amp; Machine Learning Engineer
             </p>
           </div>
         </div>
 
         <div className="space-y-3">
-          <div className="flex items-end justify-between font-mono text-[11px] uppercase tracking-[0.2em] text-[#6c6c80]">
+          <div className="flex items-end justify-between font-mono text-[11px] uppercase tracking-[0.2em] text-[#9d998e]">
             <span>Loading portfolio</span>
-            <span ref={pctRef} className="text-[#c084fc]">0%</span>
+            <span ref={pctRef} className="text-[#ff3b26]">0%</span>
           </div>
-          <div className="relative h-1 w-full overflow-hidden rounded-full bg-white/10">
-            <div
-              ref={barRef}
-              className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#6366f1] via-[#8b7cf6] to-[#c084fc]"
-              style={{ width: "0%" }}
-            />
+          <div className="relative h-px w-full overflow-hidden bg-[#3a382f]">
+            <div ref={barRef} className="absolute inset-y-0 left-0 bg-[#ff3b26]" style={{ width: "0%" }} />
           </div>
         </div>
       </div>
 
-      <div ref={debugRef} className="absolute bottom-10 left-8 hidden font-mono text-[10px] leading-relaxed tracking-wide text-[#4a4a58] md:block">
-        <div>Preparing experience…</div>
-        <div>Loading projects &amp; case studies…</div>
+      <div ref={debugRef} className="absolute bottom-10 left-8 hidden font-mono text-[10px] uppercase leading-relaxed tracking-widest text-[#6a675d] md:block">
+        <div>Compiling…</div>
+        <div>Loading projects…</div>
         <div>Almost ready…</div>
       </div>
     </div>

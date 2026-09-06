@@ -25,7 +25,7 @@ const experiences = [
     extensionLetterUrl: "https://drive.google.com/file/d/1bc_2evAhrGGjRzJnnuz0JE2-wroSP8JT/view?usp=sharing",
     roles: [
       {
-        title: "Software Development Engineer (Full-Stack)",
+        title: "Software Development Engineer",
         period: "Sep 2026 — Present",
         location: "Remote",
         type: "Internship",

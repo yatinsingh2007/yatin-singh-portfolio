@@ -26,7 +26,7 @@ const experiences = [
     roles: [
       {
         title: "Software Development Engineer",
-        period: "Sep 2026 — Present",
+        period: "Sep 2026 — Dec 2026",
         location: "Remote",
         type: "Internship",
         current: true,
@@ -34,7 +34,7 @@ const experiences = [
       },
       {
         title: "Full Stack Developer",
-        period: "Jun 2026 — Sep 2026",
+        period: "Jun 2026 — Aug 2026",
         location: "Remote",
         type: "Internship",
         current: false,

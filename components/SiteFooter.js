@@ -5,10 +5,10 @@ import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import Logo from "@/components/Logo";
 
 const nav = [
-  { name: "Index", href: "/" },
-  { name: "About", href: "/about" },
+  { name: "Overview", href: "/" },
   { name: "Work", href: "/project" },
   { name: "Experience", href: "/experience" },
+  { name: "About", href: "/about" },
   { name: "Education", href: "/education" },
   { name: "Contact", href: "/contact" },
 ];
@@ -21,52 +21,52 @@ const socials = [
 
 export default function SiteFooter() {
   return (
-    <footer className="relative mt-16 border-t border-line-2">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8 py-16">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
-          {/* contact block */}
+    <footer className="relative mt-10 border-t border-line">
+      <div className="mx-auto w-full max-w-[86rem] px-6 py-20 md:px-8 md:py-24">
+        <div className="grid grid-cols-1 gap-14 md:grid-cols-12 md:gap-8">
+          {/* contact */}
           <div className="md:col-span-6">
-            <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-ink-soft">
-              Get in touch
-            </span>
+            <p className="t-meta text-ink-soft">Get in touch</p>
             <a
               href="mailto:yatin.singh.dev@gmail.com"
-              className="group mt-4 flex items-center gap-2 break-all font-display text-2xl font-medium tracking-tight text-ink transition-colors hover:text-flare sm:text-3xl"
+              className="group mt-5 flex w-fit items-start gap-2 t-h3 text-ink transition-colors hover:text-ink-1"
             >
-              yatin.singh.dev@gmail.com
-              <ArrowUpRight className="h-6 w-6 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <span className="break-all">yatin.singh.dev@gmail.com</span>
+              <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
-            <p className="mt-5 max-w-sm leading-relaxed text-ink-2">
-              Open to software &amp; ML engineering roles and collaborations.
-              Based in India — happy to work remotely.
+            <p className="t-body mt-6 max-w-sm text-ink-2">
+              Open to software &amp; ML engineering roles and collaborations. Based in
+              India — happy to work remotely.
             </p>
           </div>
 
-          {/* sitemap */}
           <div className="md:col-span-3">
-            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ink-soft">Sitemap</p>
-            <nav className="mt-4 flex flex-col gap-2.5">
+            <p className="t-meta text-ink-soft">Sitemap</p>
+            <nav className="mt-5 flex flex-col items-start gap-3">
               {nav.map(({ name, href }) => (
-                <Link key={name} href={href} className="link-underline w-fit text-ink-2 transition-colors hover:text-ink">
+                <Link
+                  key={name}
+                  href={href}
+                  className="link-underline t-cta w-fit text-ink-2 transition-colors hover:text-ink"
+                >
                   {name}
                 </Link>
               ))}
             </nav>
           </div>
 
-          {/* socials */}
           <div className="md:col-span-3">
-            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ink-soft">Elsewhere</p>
-            <div className="mt-4 flex flex-col gap-2.5">
+            <p className="t-meta text-ink-soft">Elsewhere</p>
+            <div className="mt-5 flex flex-col items-start gap-3">
               {socials.map(({ name, icon: Icon, href }) => (
                 <a
                   key={name}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="link-underline flex w-fit items-center gap-2.5 text-ink-2 transition-colors hover:text-ink"
+                  className="link-underline t-cta flex w-fit items-center gap-2.5 text-ink-2 transition-colors hover:text-ink"
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-3.5 w-3.5" />
                   {name}
                 </a>
               ))}
@@ -75,19 +75,12 @@ export default function SiteFooter() {
         </div>
       </div>
 
-      {/* oversized name band */}
-      <div className="overflow-hidden border-t border-line">
-        <p className="select-none whitespace-nowrap px-4 text-center font-display text-[15vw] font-medium uppercase leading-none tracking-tight text-ink/[0.06]">
-          Yatin Singh
-        </p>
-      </div>
-
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-line px-5 sm:px-8 py-6 font-mono text-[11px] uppercase tracking-wider text-ink-soft sm:flex-row">
-        <div className="flex items-center gap-3">
+      <div className="mx-auto flex w-full max-w-[86rem] flex-col items-center justify-between gap-4 border-t border-line px-6 py-6 md:flex-row md:px-8">
+        <div className="flex items-center gap-2.5">
           <Logo size="sm" />
-          <span>© {new Date().getFullYear()} Yatin Singh</span>
+          <span className="t-caption text-ink-soft">© {new Date().getFullYear()} Yatin Singh</span>
         </div>
-        <span>Built with Next.js · Tailwind · Motion</span>
+        <span className="t-caption text-ink-faint">Built with Next.js · Tailwind · Motion</span>
       </div>
     </footer>
   );

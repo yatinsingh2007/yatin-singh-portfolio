@@ -1,9 +1,17 @@
 "use client";
-import { motion } from "motion/react";
-import { GraduationCap } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
-import { Reveal, GlassCard } from "@/components/aurora-ui";
+import {
+  Reveal,
+  Panel,
+  PageHeader,
+  Container,
+  Section,
+  btnPrimary,
+  btnGhost,
+} from "@/components/aurora-ui";
 
 const educationData = [
   {
@@ -44,60 +52,84 @@ export default function Education() {
     <main className="min-h-screen w-full text-ink">
       <SiteNav />
 
-      <section className="relative">
-        <div className="mx-auto max-w-4xl px-5 sm:px-8 pt-28 sm:pt-32 pb-14">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }} className="flex items-center justify-between border-y border-line-2 py-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">
-            <span>Academic record</span>
-            <span className="hidden sm:block">2012 — 2028</span>
-          </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.15 }} className="mt-10 font-display text-[clamp(3.2rem,10vw,7rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.03em] text-ink">
-            Education
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }} className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
-            Milestones and the foundational knowledge behind my technical pursuits.
-          </motion.p>
+      <PageHeader
+        eyebrow="Academic record"
+        title="Where the foundations came from"
+        description="Milestones and the groundwork behind the engineering — from a physics-heavy start to computer science and AI."
+        meta={["2012 — 2028", "CGPA 7.91 / 10"]}
+      />
+
+      <Section className="pt-14 md:pt-20">
+        <div className="mx-auto w-full max-w-4xl px-6 md:px-8">
+          <div className="relative space-y-6">
+            <span aria-hidden className="absolute bottom-6 left-[7px] top-6 w-px bg-line sm:left-[15px]" />
+
+            {educationData.map((edu, i) => (
+              <Reveal key={i} className="relative pl-8 sm:pl-12">
+                <span
+                  aria-hidden
+                  className={`absolute left-[7px] top-9 z-10 h-2.5 w-2.5 -translate-x-1/2 rounded-full sm:left-[15px] ${
+                    edu.current ? "signal-dot bg-flare" : "bg-ink-faint"
+                  }`}
+                />
+
+                <Panel hover={false} className="p-6 sm:p-9">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <span className="t-meta text-ink-soft">{edu.period}</span>
+                    <span className="t-meta rounded-full border border-line px-2.5 py-1 text-ink-faint">
+                      {edu.status}
+                    </span>
+                  </div>
+
+                  <h2 className="t-h3 mt-5 text-ink">{edu.degree}</h2>
+
+                  <dl className="mt-8 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                    <div>
+                      <dt className="t-meta text-ink-faint">Institution</dt>
+                      <dd className="t-h5 mt-2 text-ink">{edu.institution}</dd>
+                      {edu.university && (
+                        <dd className="t-caption mt-1 text-ink-2">{edu.university}</dd>
+                      )}
+                    </div>
+                    <div>
+                      <dt className="t-meta text-ink-faint">Location</dt>
+                      <dd className="t-h5 mt-2 text-ink">{edu.location}</dd>
+                    </div>
+                    <div className="border-t border-line pt-6 sm:col-span-2">
+                      <dt className="t-meta text-ink-faint">Performance</dt>
+                      <dd className="t-h2 mt-3 text-ink">{edu.grade}</dd>
+                    </div>
+                  </dl>
+
+                  <p className="t-body mt-6 text-ink-2">{edu.description}</p>
+                </Panel>
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </section>
+      </Section>
 
-      <section className="mx-auto max-w-4xl px-5 sm:px-8 pb-24">
-        <div className="relative space-y-8">
-          <div className="absolute left-[7px] sm:left-[15px] top-4 bottom-4 w-px bg-line-2" />
-          {educationData.map((edu, i) => (
-            <Reveal key={i} className="relative pl-8 sm:pl-12">
-              <span className={`absolute left-[7px] sm:left-[15px] top-8 z-10 h-3.5 w-3.5 -translate-x-1/2 rotate-45 ${edu.current ? "bg-flare" : "border border-ink-soft bg-paper"}`} />
-
-              <GlassCard className="p-6 sm:p-8">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <span className="font-mono text-xs uppercase tracking-widest text-flare">{edu.period}</span>
-                  <span className="inline-flex items-center gap-1.5 border border-line px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-ink-soft">
-                    <GraduationCap size={13} className="text-flare" /> {edu.status}
-                  </span>
-                </div>
-
-                <h2 className="mt-4 font-display text-xl font-medium tracking-tight text-ink sm:text-2xl">{edu.degree}</h2>
-
-                <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2">
-                  <div>
-                    <div className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">Institution</div>
-                    <div className="mt-1 text-ink">{edu.institution}</div>
-                    {edu.university && <div className="text-sm text-ink-2">{edu.university}</div>}
-                  </div>
-                  <div>
-                    <div className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">Location</div>
-                    <div className="mt-1 text-ink">{edu.location}</div>
-                  </div>
-                  <div className="sm:col-span-2 border-t border-line pt-5">
-                    <div className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">Performance</div>
-                    <div className="mt-1 font-display text-3xl font-medium text-flare">{edu.grade}</div>
-                  </div>
-                </div>
-
-                <p className="mt-5 leading-relaxed text-ink-2">{edu.description}</p>
-              </GlassCard>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      <Section className="pt-0">
+        <Container>
+          <Reveal>
+            <div className="astra-surface flex flex-col items-center gap-8 rounded-3xl px-6 py-16 text-center md:px-16">
+              <div>
+                <h3 className="t-h3 text-ink">Theory is only half of it</h3>
+                <p className="t-lead mt-4 text-ink-2">
+                  The rest lives in the things I&apos;ve actually shipped.
+                </p>
+              </div>
+              <div className="flex flex-wrap justify-center gap-3">
+                <Link href="/project" className={btnPrimary}>
+                  View projects
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                </Link>
+                <Link href="/experience" className={btnGhost}>Experience</Link>
+              </div>
+            </div>
+          </Reveal>
+        </Container>
+      </Section>
 
       <SiteFooter />
     </main>

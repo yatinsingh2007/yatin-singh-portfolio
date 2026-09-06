@@ -4,16 +4,11 @@ import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-export default function Logo({
-  className = "",
-  size = "md", // 'sm' | 'md' | 'lg'
-  variant = "light", // 'light' (as in user image) | 'dark'
-  alt = "YS Logo",
-}) {
+export default function Logo({ className = "", size = "md", variant = "light", alt = "YS Logo" }) {
   const sizeMap = {
-    sm: { width: 36, height: 26, class: "w-9 h-[26px]" },
-    md: { width: 44, height: 32, class: "w-11 h-8" },
-    lg: { width: 60, height: 44, class: "w-15 h-11" },
+    sm: { width: 32, height: 32, class: "h-7 w-7" },
+    md: { width: 40, height: 40, class: "h-9 w-9" },
+    lg: { width: 56, height: 56, class: "h-12 w-12" },
   };
 
   const currentSize = sizeMap[size] || sizeMap.md;
@@ -22,7 +17,7 @@ export default function Logo({
   return (
     <div
       className={cn(
-        "relative inline-flex shrink-0 items-center justify-center overflow-hidden border border-ink/70 transition-all duration-200 group-hover:border-flare",
+        "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border border-line bg-paper-2 transition-colors duration-300 group-hover:border-line-2",
         currentSize.class,
         className
       )}

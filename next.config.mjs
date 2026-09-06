@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["landing-page-ag-sable.vercel.app", "media.licdn.com"],
+    remotePatterns: [
+      { protocol: "https", hostname: "landing-page-ag-sable.vercel.app" },
+      { protocol: "https", hostname: "media.licdn.com" },
+    ],
   },
 };
 

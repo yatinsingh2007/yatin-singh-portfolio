@@ -1,290 +1,449 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* ══════════════════════════════════════════════════════════════════
+   ASTRA — design system
+   ──────────────────────────────────────────────────────────────────
+   A true-black canvas with a generative particle field behind every
+   page. Chrome is monochrome: one foreground colour expressed at
+   graduated alpha (100 / 72 / 60 / 44 / 24 / 12 / 4) rather than a
+   palette of greys. A single deep-steel ambient wash lives only in
+   the field — never in the UI. Type is light-weight, sentence case,
+   tightly tracked. No gradients on components, no glass, no glow.
+   ══════════════════════════════════════════════════════════════════ */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-instrument);
   --font-mono: var(--font-jetbrains);
-  --font-display: var(--font-archivo);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
+  --font-display: var(--font-display-sans);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* ──────────────────────────────────────────────────────────────
-   Warm editorial palette override.
-   Redefines Tailwind's base color tokens to warm variants so every
-   existing black / white / zinc / neutral utility across the site
-   shifts to a soft, premium warm-neutral scale — no saturated accent.
-   ────────────────────────────────────────────────────────────── */
 @theme {
-  --color-black: #0a0908;
-  --color-white: #f6f4f0;
+  /* ── Canvas ─────────────────────────────────────────────────── */
+  --color-void: #000000;
+  --color-paper: #000000;              /* base — true black          */
+  --color-paper-2: rgb(255 255 255 / 0.04);  /* raised surface       */
+  --color-paper-3: rgb(255 255 255 / 0.08);  /* hover surface        */
 
-  /* Unify zinc + neutral onto one warm gray scale for consistency */
-  --color-zinc-100: #efece7;
-  --color-zinc-200: #e4e0d9;
-  --color-zinc-300: #cbc6bd;
-  --color-zinc-400: #a19b90;
-  --color-zinc-500: #746e65;
-  --color-zinc-600: #524d46;
-  --color-zinc-700: #3c3833;
-  --color-zinc-800: #262320;
-  --color-zinc-900: #191613;
-  --color-zinc-950: #100e0b;
+  /* ── Foreground: one colour, graduated alpha ────────────────── */
+  --color-ink: #ffffff;                       /* primary   100%      */
+  --color-ink-1: rgb(255 255 255 / 0.72);     /* strong body         */
+  --color-ink-2: rgb(255 255 255 / 0.60);     /* body                */
+  --color-ink-soft: rgb(255 255 255 / 0.44);  /* captions / meta     */
+  --color-ink-faint: rgb(255 255 255 / 0.28); /* de-emphasised       */
 
-  --color-neutral-100: #efece7;
-  --color-neutral-200: #e4e0d9;
-  --color-neutral-300: #cbc6bd;
-  --color-neutral-400: #a19b90;
-  --color-neutral-500: #746e65;
-  --color-neutral-600: #524d46;
-  --color-neutral-700: #3c3833;
-  --color-neutral-800: #262320;
-  --color-neutral-900: #191613;
-  --color-neutral-950: #100e0b;
-}
+  /* ── Rules ──────────────────────────────────────────────────── */
+  --color-line: rgb(255 255 255 / 0.12);
+  --color-line-2: rgb(255 255 255 / 0.24);
 
-/* ──────────────────────────────────────────────────────────────
-   "Engineer's Almanac" — editorial design system (new flagship).
-   Deep warm ink, warm bone foreground, single vermillion accent.
-   ────────────────────────────────────────────────────────────── */
-@theme {
-  --color-ink: #0c0b09;
-  --color-ink-2: #14120f;
-  --color-ink-3: #1c1915;
-  --color-bone: #ede7db;
-  --color-bone-dim: #b7ae9f;
-  --color-taupe: #8a8175;
-  --color-line: #322d26;
-  --color-flare: #ff4d1c;
-  --color-flare-soft: #ff7a4d;
+  /* ── Ambient + signal ───────────────────────────────────────── */
+  --color-halo: #23435f;               /* field wash only            */
+  --color-flare: #8ab4dd;              /* restrained live/now signal */
+  --color-flare-2: #b5d2ec;
+
+  /* ── Motion ─────────────────────────────────────────────────── */
+  --ease-curve-a: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Marquee ticker animations */
   --animate-marquee: marquee var(--duration, 40s) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--duration, 40s) linear infinite;
 }
 
-/* ──────────────────────────────────────────────────────────────
-   Neo-Brutalist Terminal — active flagship system.
-   Near-black terminal base, stark near-white fg, single cyan accent.
-   Monospace-driven, hard edges, offset shadows, command-line motifs.
-   ────────────────────────────────────────────────────────────── */
-@theme {
-  --color-term: #0a0a0b;
-  --color-term-2: #0e0e11;
-  --color-term-3: #141418;
-  --color-fg: #e9e9e6;
-  --color-fg-dim: #7a7a78;
-  --color-edge: #26262b;
-  --color-edge-2: #3a3a41;
-  --color-cy: #22d3ee;
-  --color-cy-dim: #0e7490;
-}
-
-/* ──────────────────────────────────────────────────────────────
-   "Monolith" — active flagship system.
-   Near-black base, off-white type, hairline rules, oversized grotesk
-   display, a single signal-red accent. High-contrast, brutalist-
-   editorial. No gradients / glass / glow.
-   (Token names kept as paper/ink/line/flare so the whole site
-    cascades; values are now dark.)
-   ────────────────────────────────────────────────────────────── */
-@theme {
-  --color-paper: #0a0a09;      /* base near-black                 */
-  --color-paper-2: #141412;    /* raised panel / hover fill       */
-  --color-paper-3: #1d1d1a;    /* deeper panel                    */
-  --color-ink: #ecebe4;        /* primary off-white text          */
-  --color-ink-2: #9d998e;      /* secondary text                  */
-  --color-ink-soft: #6a675d;   /* muted labels / captions         */
-  --color-line: #26251f;       /* hairline rules                  */
-  --color-line-2: #3a382f;     /* stronger rules                  */
-  --color-flare: #ff3b26;      /* signal-red accent               */
-  --color-flare-2: #d92a17;    /* darker accent (hover)           */
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-100% - var(--gap, 1rem))); }
-}
-@keyframes marquee-vertical {
-  from { transform: translateY(0); }
-  to { transform: translateY(calc(-100% - var(--gap, 1rem))); }
-}
-
-@keyframes aurora {
-  0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(4%, -3%) scale(1.12); }
-  100% { transform: translate(-3%, 4%) scale(1.05); }
-}
-
-:root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.08 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.12 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.12 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.08 0 0);
-  --secondary: oklch(0.2 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.2 0 0);
-  --muted-foreground: oklch(0.6 0 0);
-  --accent: oklch(0.2 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.5 0 0);
-  --chart-1: oklch(0.8 0 0);
-  --chart-2: oklch(0.65 0 0);
-  --chart-3: oklch(0.5 0 0);
-  --chart-4: oklch(0.35 0 0);
-  --chart-5: oklch(0.2 0 0);
-  --sidebar: oklch(0.12 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.985 0 0);
-  --sidebar-primary-foreground: oklch(0.08 0 0);
-  --sidebar-accent: oklch(0.2 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.5 0 0);
-}
-
 :root {
   color-scheme: dark;
+  --radius: 0.75rem;
+  --background: #000000;
+  --foreground: #ffffff;
+  --border: rgb(255 255 255 / 0.12);
+  --input: rgb(255 255 255 / 0.12);
+  --ring: rgb(255 255 255 / 0.44);
+  --header-h: 4rem;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
+::-webkit-scrollbar { display: none; }
 
-/* ── Editorial atmosphere: faint engineering graph-paper grid ── */
-.almanac-grid {
-  background-image:
-    linear-gradient(to right, rgba(237, 231, 219, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(237, 231, 219, 0.035) 1px, transparent 1px);
-  background-size: 72px 72px;
-}
-
-/* Horizontal edge fade for marquee ticker bands */
-.edge-fade-x {
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-}
-
-/* ── Selection ── */
 ::selection {
-  background: #ff3b26;
-  color: #0a0a09;
+  background: #ffffff;
+  color: #000000;
 }
 
-/* ──────────────────────────────────────────────────────────────
-   Engineer's Almanac utilities
-   ────────────────────────────────────────────────────────────── */
-
-/* Engineering graph-paper grid (light lines on near-black) */
-.paper-grid {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+/* ══════════════════════════════════════════════════════════════════
+   Type scale
+   Mirrors the launch-page ladder: a small number of named steps,
+   all light weight and sentence case, sized fluidly.
+   ══════════════════════════════════════════════════════════════════ */
+@layer components {
+  .t-h1 {
+    font-family: var(--font-display-sans), sans-serif;
+    font-size: clamp(3rem, 9vw, 7rem);
+    font-weight: 400;
+    line-height: 0.94;
+    letter-spacing: -0.038em;
+  }
+  .t-h2 {
+    font-family: var(--font-display-sans), sans-serif;
+    font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: -0.028em;
+  }
+  .t-h3 {
+    font-family: var(--font-display-sans), sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.022em;
+  }
+  .t-h4 {
+    font-family: var(--font-display-sans), sans-serif;
+    font-size: clamp(1.2rem, 1.9vw, 1.55rem);
+    font-weight: 400;
+    line-height: 1.22;
+    letter-spacing: -0.016em;
+  }
+  .t-h5 {
+    font-family: var(--font-display-sans), sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+  .t-lead {
+    font-size: clamp(1.0625rem, 1.5vw, 1.3125rem);
+    line-height: 1.55;
+    letter-spacing: -0.005em;
+  }
+  .t-body {
+    font-size: 1rem;
+    line-height: 1.68;
+  }
+  .t-caption {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+  .t-cta {
+    font-size: 0.875rem;
+    line-height: 1;
+    letter-spacing: -0.004em;
+  }
+  .t-meta {
+    font-family: var(--font-jetbrains), monospace;
+    font-size: 0.6875rem;
+    line-height: 1.4;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
 }
 
-/* Subtle paper fibre grain (data-URI, static) */
-.paper-grain {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+/* ══════════════════════════════════════════════════════════════════
+   Layout — 12 column grid, responsive gutter
+   ══════════════════════════════════════════════════════════════════ */
+@layer components {
+  .astra-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    --grid-gap: 8px;
+    column-gap: var(--grid-gap);
+  }
+  @media (min-width: 768px) { .astra-grid { --grid-gap: 16px; } }
+  @media (min-width: 1024px) { .astra-grid { --grid-gap: 24px; } }
+
+  /* Reading measure: full width on mobile, centred half on desktop */
+  .astra-prose { grid-column: 1 / -1; }
+  @media (min-width: 768px) { .astra-prose { grid-column: 3 / span 8; } }
+  @media (min-width: 1280px) { .astra-prose { grid-column: 4 / span 6; } }
+
+  /* Slightly wider measure for headings and lead paragraphs */
+  .astra-wide { grid-column: 1 / -1; }
+  @media (min-width: 768px) { .astra-wide { grid-column: 2 / span 10; } }
+  @media (min-width: 1280px) { .astra-wide { grid-column: 3 / span 8; } }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Hero — split wordmark with per-letter entrance
+   Letters resolve inward from the edges as the field settles.
+   ══════════════════════════════════════════════════════════════════ */
+.astra-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(var(--shift, 0));
+  animation: astra-letter-in var(--dur, 1s) var(--ease-out-expo) var(--delay, 0s) forwards;
+}
+@keyframes astra-letter-in {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.astra-fade-in {
+  opacity: 0;
+  animation: astra-fade-in 1.2s var(--ease-curve-a) var(--delay, 0s) forwards;
+}
+@keyframes astra-fade-in {
+  to { opacity: 1; }
+}
+
+/* The vignette that seats the particle field in the black */
+.astra-vignette {
+  background: radial-gradient(
+    circle,
+    transparent 47%,
+    rgb(0 0 0 / 0.18) 72%,
+    rgb(0 0 0 / 0.82) 100%
+  );
+}
+
+/* Ambient wash — a two-tone nebula gas cloud seated behind the galaxy core */
+.astra-ambient {
+  background:
+    radial-gradient(
+      ellipse 62% 48% at 50% 46%,
+      color-mix(in srgb, var(--color-halo) 55%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 70% 55% at 44% 54%,
+      rgba(94, 62, 110, 0.16),
+      transparent 74%
+    );
+  filter: blur(48px);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SPACE SCENERY — stars, drifting nebulae, shaded planets, and the
+   odd shooting star. Painted once, behind the interactive galaxy
+   core, and left visible (at a low key) through every section as
+   the page scrolls — the durable "we are in space" backdrop that
+   doesn't fade the way the hero centrepiece does.
+   ══════════════════════════════════════════════════════════════════ */
+
+.space-stars {
+  position: absolute;
+  inset: -15%;
   background-repeat: repeat;
 }
+.space-stars-a {
+  opacity: 0.6;
+  background-image:
+    radial-gradient(1.6px 1.6px at 6% 14%, #fff, transparent 60%),
+    radial-gradient(1.2px 1.2px at 18% 62%, rgba(255, 255, 255, 0.85), transparent 60%),
+    radial-gradient(1.8px 1.8px at 33% 30%, #fff, transparent 60%),
+    radial-gradient(1.2px 1.2px at 47% 78%, rgba(255, 255, 255, 0.7), transparent 60%),
+    radial-gradient(1.4px 1.4px at 61% 10%, rgba(255, 255, 255, 0.9), transparent 60%),
+    radial-gradient(1.2px 1.2px at 74% 52%, rgba(255, 255, 255, 0.65), transparent 60%),
+    radial-gradient(1.8px 1.8px at 86% 24%, #fff, transparent 60%),
+    radial-gradient(1.2px 1.2px at 94% 70%, rgba(255, 255, 255, 0.75), transparent 60%),
+    radial-gradient(1.4px 1.4px at 12% 90%, rgba(255, 255, 255, 0.6), transparent 60%),
+    radial-gradient(1.2px 1.2px at 55% 46%, rgba(255, 255, 255, 0.55), transparent 60%);
+  background-size: 460px 460px;
+  animation: space-drift-a 260s linear infinite, space-twinkle-a 6.5s ease-in-out infinite;
+}
+.space-stars-b {
+  opacity: 0.4;
+  background-image:
+    radial-gradient(1px 1px at 20% 20%, rgba(200, 220, 255, 0.8), transparent 60%),
+    radial-gradient(1px 1px at 40% 70%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(1.3px 1.3px at 65% 40%, rgba(255, 230, 200, 0.75), transparent 60%),
+    radial-gradient(1px 1px at 80% 85%, rgba(255, 255, 255, 0.6), transparent 60%),
+    radial-gradient(1px 1px at 90% 15%, rgba(200, 220, 255, 0.7), transparent 60%),
+    radial-gradient(1.3px 1.3px at 10% 55%, rgba(255, 255, 255, 0.5), transparent 60%);
+  background-size: 300px 300px;
+  animation: space-drift-b 190s linear infinite reverse, space-twinkle-b 4.5s ease-in-out infinite;
+}
+@keyframes space-drift-a { from { background-position: 0 0; } to { background-position: -460px 320px; } }
+@keyframes space-drift-b { from { background-position: 0 0; } to { background-position: 300px -220px; } }
+@keyframes space-twinkle-a { 0%, 100% { opacity: 0.38; } 50% { opacity: 0.68; } }
+@keyframes space-twinkle-b { 0%, 100% { opacity: 0.22; } 50% { opacity: 0.46; } }
 
-/* Horizontal edge fade for marquee ticker bands */
-.edge-fade {
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+/* Soft Milky-Way smear — a diffuse diagonal band of colour, mostly black */
+.space-galaxy-band {
+  background: linear-gradient(
+    118deg,
+    transparent 30%,
+    rgba(120, 140, 200, 0.05) 42%,
+    rgba(210, 190, 230, 0.07) 48%,
+    rgba(140, 170, 210, 0.05) 54%,
+    transparent 66%
+  );
+  filter: blur(6px);
+  mix-blend-mode: screen;
 }
 
-/* Flat editorial card: hairline frame, gentle raise + accent rule on hover */
-.card-almanac {
+/* Nebula colour wash — blurred and additive, so black stays black between them */
+.space-nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+/* Drift is GSAP-driven (see AstraField.js) — these just set position/colour. */
+.space-nebula-a {
+  top: -10%;
+  left: -8%;
+  width: 42vw;
+  height: 42vw;
+  background: radial-gradient(circle, rgba(58, 92, 140, 0.35), transparent 70%);
+}
+.space-nebula-b {
+  bottom: -14%;
+  right: -10%;
+  width: 46vw;
+  height: 46vw;
+  background: radial-gradient(circle, rgba(90, 60, 110, 0.28), transparent 70%);
+}
+.space-nebula-c {
+  top: 30%;
+  right: 18%;
+  width: 26vw;
+  height: 26vw;
+  background: radial-gradient(circle, rgba(120, 90, 50, 0.18), transparent 72%);
+}
+
+/* ── Planets — shaded spheres, no glow, no gradient-as-ornament. Each
+   reads as a lit body sitting in the dark, not a UI decoration. ───── */
+.space-planet {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}
+/* Float is GSAP-driven (see AstraField.js) — these just set shape/shading. */
+.space-planet-ice {
+  background:
+    radial-gradient(circle at 32% 28%, rgba(214, 236, 255, 0.5), transparent 12%),
+    radial-gradient(circle at 30% 30%, #9fc3d6 0%, #4d7691 34%, #223349 68%, #0a0f18 100%);
+  box-shadow: inset -22px -18px 46px rgba(0, 0, 0, 0.85), inset 10px 10px 26px rgba(210, 236, 255, 0.16);
+}
+.space-planet-ember {
+  background:
+    radial-gradient(circle at 34% 26%, rgba(255, 224, 190, 0.4), transparent 10%),
+    radial-gradient(circle at 30% 30%, #c97a4f 0%, #7a3a2c 36%, #2c1a1c 70%, #0a0808 100%);
+  box-shadow: inset -18px -14px 36px rgba(0, 0, 0, 0.85), inset 8px 8px 20px rgba(255, 190, 140, 0.14);
+}
+.space-planet-ring-body {
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 244, 214, 0.4), transparent 12%),
+    radial-gradient(circle at 30% 30%, #d8c48c 0%, #a4874f 38%, #4a3c26 70%, #100c07 100%);
+  box-shadow: inset -20px -16px 40px rgba(0, 0, 0, 0.85), inset 9px 9px 22px rgba(255, 240, 200, 0.14);
+}
+.space-planet-ring-wrap {
+  position: absolute;
+}
+.space-planet-ring {
+  position: absolute;
+  inset: -55% -95%;
+  border: 1.5px solid rgba(230, 214, 176, 0.3);
+  border-radius: 50%;
+  transform: rotate(-18deg) scaleY(0.34);
+}
+.space-planet-ring::before {
+  content: "";
+  position: absolute;
+  inset: 14%;
+  border: 1px solid rgba(230, 214, 176, 0.16);
+  border-radius: 50%;
+}
+
+/* ── Bright stars — a handful of real, individual points of light with
+   a soft four-point glint, scattered among the tiled dust layers so the
+   sky reads as actual stars rather than a uniform haze. Twinkle is
+   GSAP-driven (see AstraField.js), randomised per star. ────────────── */
+.space-star-bright {
+  position: absolute;
+  width: 2.5px;
+  height: 2.5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 7px 1px rgba(255, 255, 255, 0.85), 0 0 16px 3px rgba(255, 255, 255, 0.22);
+}
+.space-star-bright::before,
+.space-star-bright::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent);
+  transform: translate(-50%, -50%);
+}
+.space-star-bright::before { width: 20px; height: 1px; }
+.space-star-bright::after { width: 1px; height: 20px; }
+
+/* ── Shooting stars — rare, quick, diagonal. GSAP fires each one on its
+   own random schedule (see AstraField.js); at rest they sit invisible. ── */
+.space-shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.7);
+  opacity: 0;
+}
+.space-shooting-star::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 90px;
+  height: 1px;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.85), transparent);
+  transform: translateY(-50%);
+}
+
+@media (max-width: 720px) {
+  .space-nebula-c { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space-stars-a, .space-stars-b {
+    animation: none;
+  }
+}
+
+/* Scroll cue — a hairline that draws itself downward, on a loop */
+.astra-cue {
   position: relative;
-  background: var(--color-paper);
-  border: 1px solid var(--color-line);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s, background-color 0.35s;
+  overflow: hidden;
 }
-.card-almanac:hover {
-  transform: translateY(-3px);
-  border-color: var(--color-line-2);
-  background: var(--color-paper-2);
+.astra-cue::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, rgb(255 255 255 / 0.7));
+  animation: astra-cue-fall 2.6s var(--ease-curve-a) infinite;
+}
+@keyframes astra-cue-fall {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  35%  { opacity: 1; }
+  100% { transform: translateY(250%); opacity: 0; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Surfaces + chrome
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Translucent panel that lets the field read faintly through it */
+.astra-surface {
+  background: rgb(255 255 255 / 0.035);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  backdrop-filter: blur(20px);
+  transition: background-color 0.4s var(--ease-curve-a),
+              border-color 0.4s var(--ease-curve-a),
+              transform 0.4s var(--ease-out-expo);
+}
+.astra-surface-hover:hover {
+  background: rgb(255 255 255 / 0.07);
+  border-color: rgb(255 255 255 / 0.2);
 }
 
 /* Growing rule under links (draws from the left) */
@@ -299,75 +458,58 @@
   background: currentColor;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.45s var(--ease-out-expo);
 }
 .link-underline:hover::after { transform: scaleX(1); }
 
-/* Scroll-reveal rule that draws itself in */
-@keyframes rule-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-
-/* Always-visible entrance (runs on load, never gated by scroll observers) */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(22px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Live / current indicator */
+.signal-dot {
+  box-shadow: 0 0 0 0 rgb(138 180 221 / 0.6);
+  animation: signal-pulse 2.6s ease-out infinite;
+}
+@keyframes signal-pulse {
+  0%        { box-shadow: 0 0 0 0 rgb(138 180 221 / 0.5); }
+  70%, 100% { box-shadow: 0 0 0 9px rgb(138 180 221 / 0); }
 }
 
-/* Blinking terminal cursor */
-@keyframes term-blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-.term-blink {
-  animation: term-blink 1.05s steps(1) infinite;
+/* Horizontal edge fade for marquee bands */
+.edge-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
 
-/* Faint CRT scanlines for terminal atmosphere */
-.scanlines::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.018) 0px,
-    rgba(255, 255, 255, 0.018) 1px,
-    transparent 1px,
-    transparent 3px
-  );
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100% - var(--gap, 1rem))); }
+}
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to   { transform: translateY(calc(-100% - var(--gap, 1rem))); }
 }
 
-/* Keyboard focus — ink ring for accessibility without visual noise */
+/* ══════════════════════════════════════════════════════════════════
+   Accessibility
+   ══════════════════════════════════════════════════════════════════ */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid rgba(207, 63, 29, 0.6);
+  outline: 2px solid rgb(255 255 255 / 0.6);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
-/* ── Role progression tree — flowing beam on the trunk ── */
-@keyframes roleBeamFlow {
-  0%   { top: -40%; opacity: 0; }
-  20%  { opacity: 1; }
-  80%  { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
-}
-.role-beam::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 3px;
-  height: 40%;
-  border-radius: 3px;
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.85), transparent);
-  animation: roleBeamFlow 3s ease-in-out infinite;
-}
 @media (prefers-reduced-motion: reduce) {
-  .role-beam::after { animation: none; opacity: 0; }
+  .astra-letter,
+  .astra-fade-in { animation: none; opacity: 1; transform: none; }
+  .astra-cue::after,
+  .signal-dot { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
-
 
 @layer base {
   * {
@@ -378,11 +520,6 @@ textarea:focus-visible {
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
-  /* Tighter, more editorial heading rhythm; balance prevents orphan words */
-  h1, h2, h3, h4 {
-    text-wrap: balance;
-  }
-  p {
-    text-wrap: pretty;
-  }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  p { text-wrap: pretty; }
 }

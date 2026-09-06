@@ -1,10 +1,21 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowRight, Github, ExternalLink } from "lucide-react";
+import { ArrowRight, Github, ExternalLink, ArrowUpRight } from "lucide-react";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
-import { Reveal, GlassCard, Tag, RevealImage, btnPrimary } from "@/components/aurora-ui";
+import {
+  Reveal,
+  Panel,
+  Tag,
+  RevealImage,
+  PageHeader,
+  Container,
+  Section,
+  btnPrimary,
+  btnGhost,
+} from "@/components/aurora-ui";
 
 const projects = [
   { id: "shopsmart", title: "Shopsmart", category: "Full-Stack · E-commerce", description: "A fully functional e-commerce platform with product listing, cart management and user authentication.", image: "/shopsmart.png", techStack: ["Next.js", "Tailwind", "Prisma", "PostgreSQL", "Docker", "AWS-ECS"], githubUrl: "https://github.com/yatinsingh2007/shopsmart" },
@@ -23,93 +34,203 @@ const projects = [
   { id: "netflix-clone", title: "Netflix Clone", category: "Web · Clone", description: "A pixel-perfect recreation of the world's leading streaming platform, focused on performance and visual fidelity.", image: "/netflix_clone.jpeg", techStack: ["HTML", "CSS", "JavaScript", "Responsive"], liveUrl: "https://yatinsingh2007.github.io/Netflix_Clone/Netflix.html", githubUrl: "https://github.com/yatinsingh2007/Netflix_Clone" },
 ];
 
+
+const filters = [
+  { id: "all", label: "All" },
+  { id: "ai", label: "AI & ML" },
+  { id: "product", label: "Product" },
+  { id: "systems", label: "Systems" },
+];
+
+function matchesFilter(project, filter) {
+  if (filter === "all") return true;
+  const category = project.category.toLowerCase();
+  if (filter === "ai") return /ai|ml|llm/.test(category);
+  if (filter === "systems") return /systems|open source/.test(category);
+  return /full-stack|web/.test(category);
+}
+
+function ProjectMeta({ project }) {
+  return (
+    <div className="mt-auto flex items-center gap-6 border-t border-line pt-5">
+      <a
+        href={project.githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="t-cta inline-flex items-center gap-1.5 text-ink-2 transition-colors hover:text-ink"
+      >
+        <Github size={15} /> Source
+      </a>
+      {project.liveUrl && (
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="t-cta inline-flex items-center gap-1.5 text-ink transition-colors hover:text-ink-2"
+        >
+          <ExternalLink size={15} /> Live
+          <ArrowUpRight className="h-3.5 w-3.5" />
+        </a>
+      )}
+    </div>
+  );
+}
+
+function TechTags({ items }) {
+  return (
+    <div className="mb-7 mt-6 flex flex-wrap gap-1.5">
+      {items.slice(0, 6).map((t) => (
+        <Tag key={t}>{t}</Tag>
+      ))}
+    </div>
+  );
+}
+
+/* The lead entry runs the full width of the grid. Project shots are mostly
+   wide architecture diagrams, so its frame stays near their native ratio
+   rather than cropping into the middle of one. */
+function FeaturedCard({ project }) {
+  return (
+    <Reveal className="lg:col-span-2">
+      <Panel className="group flex h-full flex-col hover:-translate-y-1">
+        <div className="relative aspect-video overflow-hidden border-b border-line lg:aspect-[21/9]">
+          <RevealImage
+            src={project.image}
+            alt={project.title}
+            priority
+            sizes="(max-width:1024px) 100vw, 90vw"
+            imgClassName="grayscale-[0.45] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]"
+          />
+        </div>
+
+        <div className="grid flex-1 grid-cols-1 gap-x-10 p-6 sm:p-7 lg:grid-cols-12 lg:items-start lg:p-10">
+          <div className="lg:col-span-5">
+            <span className="t-meta text-ink-soft">{project.category}</span>
+            <h3 className="t-h2 mt-4 text-ink">{project.title}</h3>
+          </div>
+
+          <div className="mt-6 flex flex-1 flex-col lg:col-span-7 lg:mt-1">
+            <p className="t-lead text-pretty text-ink-2">{project.description}</p>
+            <TechTags items={project.techStack} />
+            <ProjectMeta project={project} />
+          </div>
+        </div>
+      </Panel>
+    </Reveal>
+  );
+}
+
 function ProjectCard({ project, index }) {
   return (
-    <Reveal delay={(index % 2) * 0.08}>
-      <GlassCard className="group flex h-full flex-col">
-        <div className="relative aspect-16/9 overflow-hidden border-b border-line">
-          <RevealImage src={project.image} alt={project.title} sizes="(max-width:1024px) 100vw, 45vw" imgClassName="grayscale-[0.3] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]" />
-          <span className="absolute left-0 top-0 bg-ink px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-paper">
-            № {String(index + 1).padStart(2, "0")}
-          </span>
+    <Reveal delay={(index % 2) * 0.07}>
+      <Panel className="group flex h-full flex-col hover:-translate-y-1">
+        <div className="relative aspect-video overflow-hidden border-b border-line">
+          <RevealImage
+            src={project.image}
+            alt={project.title}
+            sizes="(max-width:1024px) 100vw, 45vw"
+            imgClassName="grayscale-[0.45] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]"
+          />
         </div>
 
         <div className="flex flex-1 flex-col p-6 sm:p-7">
-          <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-ink-soft">
-            <span className="text-flare">{project.category}</span>
-          </div>
-          <h3 className="mt-3 font-display text-2xl font-bold uppercase tracking-tight text-ink transition-colors group-hover:text-flare">{project.title}</h3>
-          <p className="mt-2.5 leading-relaxed text-ink-2">{project.description}</p>
-
-          <div className="mt-5 flex flex-wrap gap-1.5">
-            {project.techStack.slice(0, 6).map((t) => (
-              <Tag key={t}>{t}</Tag>
-            ))}
-          </div>
-
-          <div className="mt-6 flex items-center gap-5 border-t border-line pt-5">
-            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-ink-2 transition-colors hover:text-ink">
-              <Github size={15} /> Source
-            </a>
-            {project.liveUrl && (
-              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-flare transition-colors hover:text-ink">
-                <ExternalLink size={15} /> Live
-              </a>
-            )}
-          </div>
+          <span className="t-meta text-ink-soft">{project.category}</span>
+          <h3 className="t-h4 mt-4 text-ink">{project.title}</h3>
+          <p className="t-body mt-3 text-pretty text-ink-2">{project.description}</p>
+          <TechTags items={project.techStack} />
+          <ProjectMeta project={project} />
         </div>
-      </GlassCard>
+      </Panel>
     </Reveal>
   );
 }
 
 export default function Project() {
+  const [activeFilter, setActiveFilter] = useState("all");
+  const visibleProjects = projects.filter((project) => matchesFilter(project, activeFilter));
+
   return (
     <main className="min-h-screen w-full text-ink">
       <SiteNav />
 
-      <section className="relative">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8 pt-28 sm:pt-32 pb-14">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }} className="flex items-center justify-between border-y border-line-2 py-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">
-            <span>Catalogue of works</span>
-            <span>{projects.length} entries</span>
-          </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.15 }} className="mt-10 font-display text-[clamp(3.2rem,10vw,7rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.03em] text-ink">
-            Selected Work
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }} className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
-            A catalogue of things I've built — full-stack products, ML pipelines,
-            agentic systems and developer tooling.
-          </motion.p>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Selected work"
+        title="A catalogue of what I've built"
+        description="Full-stack products, ML pipelines, agentic systems and developer tooling — each one shipped, not shelved."
+        meta={[`${projects.length} projects`, "2023 — 2026"]}
+      />
 
-      <section className="mx-auto max-w-6xl px-5 sm:px-8 pb-24">
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {projects.map((p, i) => (
-            <ProjectCard key={p.id} project={p} index={i} />
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-5 sm:px-8 pb-24">
-        <Reveal>
-          <div className="border border-ink/70 bg-paper-2 px-6 py-16 text-center sm:px-16">
-            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-flare">Next chapter</p>
-            <h2 className="mx-auto mt-5 max-w-2xl font-display text-3xl font-extrabold uppercase leading-[0.95] tracking-tight text-ink sm:text-5xl">
-              Have a project in mind?
-            </h2>
-            <p className="mx-auto mt-4 max-w-md text-lg text-ink-2">
-              I'm always up for building something new. Let's talk.
-            </p>
-            <div className="mt-9 flex justify-center">
-              <Link href="/contact" className={btnPrimary}>
-                Start a conversation <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-            </div>
+      <Section className="pt-14 md:pt-20">
+        <Container>
+          {/* filter rail */}
+          <div className="flex flex-wrap items-center justify-center gap-2" aria-label="Filter projects">
+            {filters.map((filter) => {
+              const active = activeFilter === filter.id;
+              return (
+                <button
+                  key={filter.id}
+                  type="button"
+                  onClick={() => setActiveFilter(filter.id)}
+                  aria-pressed={active}
+                  className={`relative h-10 overflow-hidden rounded-full border px-5 t-cta transition-colors duration-300 ${
+                    active
+                      ? "border-transparent text-void"
+                      : "border-line bg-paper-2 text-ink-2 backdrop-blur-xl hover:bg-paper-3 hover:text-ink"
+                  }`}
+                >
+                  {active && (
+                    <motion.span
+                      layoutId="active-project-filter"
+                      className="absolute inset-0 z-0 bg-ink"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                  <span className="relative z-10">{filter.label}</span>
+                </button>
+              );
+            })}
           </div>
-        </Reveal>
-      </section>
+
+          <motion.div layout className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-2 md:mt-16">
+            {visibleProjects.map((p, i) => (
+              <motion.div
+                layout
+                key={p.id}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className={i === 0 ? "lg:col-span-2" : ""}
+              >
+                {i === 0 ? (
+                  <FeaturedCard project={p} />
+                ) : (
+                  <ProjectCard project={p} index={i} />
+                )}
+              </motion.div>
+            ))}
+          </motion.div>
+        </Container>
+      </Section>
+
+      <Section className="pt-0">
+        <Container>
+          <Reveal>
+            <div className="astra-surface flex flex-col items-center rounded-3xl px-6 py-20 text-center md:px-16">
+              <h2 className="t-h2 max-w-[18ch] text-balance text-ink">
+                Have a project in mind?
+              </h2>
+              <p className="t-lead mt-5 max-w-[42ch] text-ink-2">
+                I&apos;m always up for building something new. Let&apos;s talk.
+              </p>
+              <div className="mt-10 flex flex-wrap justify-center gap-3">
+                <Link href="/contact" className={btnPrimary}>
+                  Start a conversation
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                </Link>
+                <Link href="/about" className={btnGhost}>About me</Link>
+              </div>
+            </div>
+          </Reveal>
+        </Container>
+      </Section>
 
       <SiteFooter />
     </main>

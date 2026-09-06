@@ -5,7 +5,15 @@ import { motion } from "motion/react";
 import { FileText, ExternalLink, ArrowRight } from "lucide-react";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
-import { Reveal, GlassCard, btnPrimary, btnGhost } from "@/components/aurora-ui";
+import {
+  Reveal,
+  Panel,
+  PageHeader,
+  Container,
+  Section,
+  btnPrimary,
+  btnGhost,
+} from "@/components/aurora-ui";
 
 const experiences = [
   {
@@ -67,6 +75,7 @@ const experiences = [
   },
 ];
 
+
 function parsePoint(token) {
   if (/present/i.test(token)) return new Date();
   const d = new Date(`${token.trim()} 1`);
@@ -90,7 +99,12 @@ function formatDuration(period) {
 
 function LetterLink({ href, children }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 border border-line px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-widest text-ink-2 transition-colors hover:border-flare hover:text-flare">
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="t-caption inline-flex items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-ink-2 transition-colors duration-300 hover:border-line-2 hover:text-ink"
+    >
       {children}
     </a>
   );
@@ -102,24 +116,35 @@ function Role({ role, branched }) {
   const body = (
     <>
       <div className="flex flex-wrap items-center gap-2.5">
-        <h3 className={`font-display text-lg font-medium ${role.current ? "text-flare" : "text-ink"}`}>{role.title}</h3>
+        <h3 className="t-h4 text-ink">{role.title}</h3>
         {role.current && (
-          <span className="border border-flare px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-flare">Current</span>
+          <span className="t-meta inline-flex items-center gap-2 rounded-full border border-line px-2.5 py-1 text-ink-soft">
+            <span className="signal-dot h-1.5 w-1.5 rounded-full bg-flare" />
+            Current
+          </span>
         )}
-        <span className="border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft">{role.type}</span>
+        <span className="t-meta rounded-full border border-line px-2.5 py-1 text-ink-faint">
+          {role.type}
+        </span>
       </div>
-      <div className="mt-1.5 flex flex-wrap items-center gap-x-2 font-mono text-[11px] uppercase tracking-wide text-ink-soft">
+
+      <div className="t-meta mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-soft">
         <span>{role.period}</span>
-        {duration && (<><span className="text-line-2">/</span><span className="text-flare">{duration}</span></>)}
-        <span className="text-line-2">/</span>
+        {duration && (
+          <>
+            <span aria-hidden className="h-3 w-px bg-line-2" />
+            <span>{duration}</span>
+          </>
+        )}
+        <span aria-hidden className="h-3 w-px bg-line-2" />
         <span>{role.location}</span>
       </div>
 
       {role.features.length > 0 && (
-        <ul className="mt-4 space-y-2.5">
+        <ul className="mt-5 space-y-3">
           {role.features.map((f, fi) => (
-            <li key={fi} className="flex gap-3 leading-relaxed text-ink-2">
-              <span className="mt-2 h-1 w-1 shrink-0 bg-flare" />
+            <li key={fi} className="t-body flex gap-3.5 text-ink-2">
+              <span aria-hidden className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-ink-faint" />
               <span>{f}</span>
             </li>
           ))}
@@ -128,32 +153,49 @@ function Role({ role, branched }) {
     </>
   );
 
-  // Single role at a company — simple node.
+  // Single role at a company — a plain node on the trunk.
   if (!branched) {
     return (
       <div className="relative pl-7">
-        <span className={`absolute left-0 top-2 h-2.5 w-2.5 -translate-x-1/2 rotate-45 ${role.current ? "bg-flare" : "border border-ink-soft bg-paper"}`} />
+        <span
+          aria-hidden
+          className={`absolute left-0 top-2.5 h-2 w-2 -translate-x-1/2 rounded-full ${
+            role.current ? "bg-flare" : "bg-ink-faint"
+          }`}
+        />
         {body}
       </div>
     );
   }
 
-  // Multiple roles — curved branch peeling off the company trunk.
+  // Multiple roles — a curve peeling off the company trunk.
   return (
     <div className="relative pl-12 pt-5">
-      <svg aria-hidden width="40" height="34" viewBox="0 0 40 34" fill="none" className="absolute left-[5px] top-0 overflow-visible">
+      <svg
+        aria-hidden
+        width="40"
+        height="34"
+        viewBox="0 0 40 34"
+        fill="none"
+        className="absolute left-[5px] top-0 overflow-visible"
+      >
         <motion.path
           d="M1 0 C 1 22, 5 30, 34 30"
-          strokeWidth="1.5"
+          strokeWidth="1.25"
           strokeLinecap="round"
           className={role.current ? "stroke-flare" : "stroke-line-2"}
           initial={{ pathLength: 0 }}
           whileInView={{ pathLength: 1 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7, delay: 0.2, ease: "easeInOut" }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
         />
       </svg>
-      <span className={`absolute left-[39px] top-[30px] h-2 w-2 -translate-x-1/2 -translate-y-1/2 rotate-45 ${role.current ? "bg-flare" : "bg-ink-soft"}`} />
+      <span
+        aria-hidden
+        className={`absolute left-[39px] top-[30px] h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full ${
+          role.current ? "bg-flare" : "bg-ink-faint"
+        }`}
+      />
       {body}
     </div>
   );
@@ -162,38 +204,47 @@ function Role({ role, branched }) {
 function ExperienceEntry({ exp }) {
   return (
     <Reveal className="relative pl-8 sm:pl-12">
-      <span className="absolute left-[7px] sm:left-[15px] top-8 z-10 h-3.5 w-3.5 -translate-x-1/2 rotate-45 bg-ink" />
+      <span
+        aria-hidden
+        className="absolute left-[7px] top-9 z-10 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-ink sm:left-[15px]"
+      />
 
-      <GlassCard className="p-6 sm:p-8">
+      <Panel hover={false} className="p-6 sm:p-9">
         <div className="flex items-start gap-4">
-          <div className="relative h-12 w-12 shrink-0 overflow-hidden border border-line bg-paper-2">
+          <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-line bg-paper-2">
             <Image src={exp.logo} alt={exp.company} fill className="object-cover" />
           </div>
           <div className="flex-1">
-            <h2 className="font-display text-2xl font-bold uppercase tracking-tight text-ink">{exp.company}</h2>
-            <p className="mt-2 max-w-2xl leading-relaxed text-ink-2">{exp.description}</p>
+            <h2 className="t-h3 text-ink">{exp.company}</h2>
+            <p className="t-body mt-3 max-w-2xl text-ink-2">{exp.description}</p>
           </div>
         </div>
 
         {(exp.offerLetterUrl || exp.extensionLetterUrl || exp.completionLetterUrl) && (
-          <div className="mt-5 flex flex-wrap gap-2">
-            {exp.offerLetterUrl && <LetterLink href={exp.offerLetterUrl}><FileText size={13} /> Offer letter</LetterLink>}
-            {exp.extensionLetterUrl && <LetterLink href={exp.extensionLetterUrl}><FileText size={13} /> Extension letter</LetterLink>}
-            {exp.completionLetterUrl && <LetterLink href={exp.completionLetterUrl}><ExternalLink size={13} /> Experience letter</LetterLink>}
+          <div className="mt-6 flex flex-wrap gap-2">
+            {exp.offerLetterUrl && (
+              <LetterLink href={exp.offerLetterUrl}><FileText size={13} /> Offer letter</LetterLink>
+            )}
+            {exp.extensionLetterUrl && (
+              <LetterLink href={exp.extensionLetterUrl}><FileText size={13} /> Extension letter</LetterLink>
+            )}
+            {exp.completionLetterUrl && (
+              <LetterLink href={exp.completionLetterUrl}><ExternalLink size={13} /> Experience letter</LetterLink>
+            )}
           </div>
         )}
 
-        <div className="relative mt-7 border-t border-line pt-7">
+        <div className="relative mt-8 border-t border-line pt-8">
           {exp.roles.length > 1 && (
-            <span className="absolute left-[5px] top-7 bottom-8 w-px bg-line-2" />
+            <span aria-hidden className="absolute bottom-8 left-[5px] top-8 w-px bg-line" />
           )}
-          <div className="space-y-8">
+          <div className="space-y-9">
             {exp.roles.map((role, ri) => (
               <Role key={ri} role={role} branched={exp.roles.length > 1} />
             ))}
           </div>
         </div>
-      </GlassCard>
+      </Panel>
     </Reveal>
   );
 }
@@ -203,43 +254,45 @@ export default function ExperiencePage() {
     <main className="min-h-screen w-full text-ink">
       <SiteNav />
 
-      <section className="relative">
-        <div className="mx-auto max-w-4xl px-5 sm:px-8 pt-28 sm:pt-32 pb-14">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }} className="flex items-center justify-between border-y border-line-2 py-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft">
-            <span>Career record</span>
-            <span className="hidden sm:block">2025 — present</span>
-          </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.15 }} className="mt-10 font-display text-[clamp(3.2rem,10vw,7rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.03em] text-ink">
-            Experience
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }} className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-2">
-            Professional growth, technical contributions and the impact I've shipped
-            across startups.
-          </motion.p>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Career record"
+        title="Where I've shipped"
+        description="Professional growth, technical contributions and the impact I've delivered across startups."
+        meta={["2025 — present", "2 companies", "Remote"]}
+      />
 
-      <section className="mx-auto max-w-4xl px-5 sm:px-8 pb-24">
-        <div className="relative space-y-8">
-          <div className="absolute left-[7px] sm:left-[15px] top-4 bottom-4 w-px bg-line-2" />
-          {experiences.map((exp) => (
-            <ExperienceEntry key={exp.id} exp={exp} />
-          ))}
-        </div>
-
-        <Reveal className="mt-12">
-          <div className="flex flex-col items-center gap-6 border border-ink/70 bg-paper-2 p-10 text-center">
-            <div>
-              <h3 className="font-display text-2xl font-medium text-ink">Want to see more?</h3>
-              <p className="mt-2 text-ink-2">Explore my projects or read more about how I work.</p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              <Link href="/project" className={btnPrimary}>View projects <ArrowRight className="h-4 w-4" /></Link>
-              <Link href="/about" className={btnGhost}>About me</Link>
-            </div>
+      <Section className="pt-14 md:pt-20">
+        <div className="mx-auto w-full max-w-4xl px-6 md:px-8">
+          <div className="relative space-y-6">
+            <span aria-hidden className="absolute bottom-6 left-[7px] top-6 w-px bg-line sm:left-[15px]" />
+            {experiences.map((exp) => (
+              <ExperienceEntry key={exp.id} exp={exp} />
+            ))}
           </div>
-        </Reveal>
-      </section>
+        </div>
+      </Section>
+
+      <Section className="pt-0">
+        <Container>
+          <Reveal>
+            <div className="astra-surface flex flex-col items-center gap-8 rounded-3xl px-6 py-16 text-center md:px-16">
+              <div>
+                <h3 className="t-h3 text-ink">Want to see more?</h3>
+                <p className="t-lead mt-4 text-ink-2">
+                  Explore the projects, or read about how I work.
+                </p>
+              </div>
+              <div className="flex flex-wrap justify-center gap-3">
+                <Link href="/project" className={btnPrimary}>
+                  View projects
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                </Link>
+                <Link href="/about" className={btnGhost}>About me</Link>
+              </div>
+            </div>
+          </Reveal>
+        </Container>
+      </Section>
 
       <SiteFooter />
     </main>

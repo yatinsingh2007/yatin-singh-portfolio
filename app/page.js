@@ -1,10 +1,24 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
-import { ArrowUpRight, ArrowRight, ArrowDown } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import {
+  SiTypescript,
+  SiNextdotjs,
+  SiReact,
+  SiNodedotjs,
+  SiPython,
+  SiDjango,
+  SiPytorch,
+  SiPostgresql,
+  SiPrisma,
+  SiMongodb,
+  SiDocker,
+  SiTailwindcss,
+  SiExpress,
+  SiGit,
+} from "react-icons/si";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import { Marquee } from "@/components/magicui/marquee";
@@ -12,10 +26,16 @@ import { NumberTicker } from "@/components/magicui/number-ticker";
 import {
   Reveal,
   SectionHeading,
-  GlassCard,
+  Panel,
   Tag,
   RevealImage,
   Divider,
+  Container,
+  Grid,
+  Prose,
+  Section,
+  Signal,
+  Kicker,
   btnPrimary,
   btnGhost,
 } from "@/components/aurora-ui";
@@ -70,159 +90,184 @@ const projects = [
 ];
 
 const capabilities = [
-  { title: "Software Development", desc: "Full-stack web apps, clean architecture and reusable systems built to last." },
-  { title: "Machine Learning & DL", desc: "Neural networks, predictive models and end-to-end training pipelines." },
-  { title: "Agentic & AI Systems", desc: "LLM workflows, autonomous agents and self-hosted inference." },
-  { title: "Cloud & Deployment", desc: "AWS, VPS, Docker and CI/CD pipelines that deploy in under three minutes." },
-  { title: "Backend Engineering", desc: "Scalable REST APIs and high-throughput services with solid data modelling." },
-  { title: "Systems & Tooling", desc: "Developer tooling, automation and performance-focused engineering." },
+  { title: "Software development", desc: "Full-stack web apps, clean architecture and reusable systems built to last." },
+  { title: "Machine learning & deep learning", desc: "Neural networks, predictive models and end-to-end training pipelines." },
+  { title: "Agentic & AI systems", desc: "LLM workflows, autonomous agents and self-hosted inference." },
+  { title: "Cloud & deployment", desc: "AWS, VPS, Docker and CI/CD pipelines that deploy in under three minutes." },
+  { title: "Backend engineering", desc: "Scalable REST APIs and high-throughput services with solid data modelling." },
+  { title: "Systems & tooling", desc: "Developer tooling, automation and performance-focused engineering." },
 ];
 
-const stack = ["TypeScript", "Next.js", "React", "Node.js", "Python", "Django", "PyTorch", "PostgreSQL", "Prisma", "MongoDB", "Docker", "AWS", "vLLM", "Tailwind", "Express", "Git"];
+// Real brand marks, not text pills — and only entries with a genuine
+// recognisable logo make the cut (no AWS, no vLLM).
+const stack = [
+  { name: "TypeScript", Icon: SiTypescript },
+  { name: "Next.js", Icon: SiNextdotjs },
+  { name: "React", Icon: SiReact },
+  { name: "Node.js", Icon: SiNodedotjs },
+  { name: "Python", Icon: SiPython },
+  { name: "Django", Icon: SiDjango },
+  { name: "PyTorch", Icon: SiPytorch },
+  { name: "PostgreSQL", Icon: SiPostgresql },
+  { name: "Prisma", Icon: SiPrisma },
+  { name: "MongoDB", Icon: SiMongodb },
+  { name: "Docker", Icon: SiDocker },
+  { name: "Tailwind CSS", Icon: SiTailwindcss },
+  { name: "Express", Icon: SiExpress },
+  { name: "Git", Icon: SiGit },
+];
 
 const stats = [
   { value: 50, suffix: "+", label: "Merged pull requests", note: "In production codebases" },
   { value: 93, suffix: "%", label: "Faster deployments", note: "45 min → under 3 min" },
   { value: 500, suffix: "+", label: "Users served", note: "Across shipped products" },
-  { value: 14, suffix: "", label: "Projects shipped", note: "Web, ML & tooling" },
+  { value: 14, suffix: "", label: "Projects shipped", note: "Web, ML and tooling" },
 ];
+
+/* ── Split wordmark ───────────────────────────────────────────────
+   Letters resolve inward from the edges of the frame as the field
+   behind them settles — the launch-title gesture, borrowed. */
+function Word({ text, direction = "left" }) {
+  const chars = text.split("");
+  return (
+    <p className="t-h1 select-none text-ink" aria-hidden>
+      {chars.map((ch, i) => {
+        // outermost letters arrive last, so the name closes on the centre
+        const order = direction === "left" ? chars.length - 1 - i : i;
+        return (
+          <span
+            key={`${ch}-${i}`}
+            className="astra-letter"
+            style={{
+              "--shift": direction === "left" ? "-44px" : "44px",
+              "--delay": `${0.85 + order * 0.1}s`,
+              "--dur": "1s",
+            }}
+          >
+            {ch}
+          </span>
+        );
+      })}
+    </p>
+  );
+}
 
 /* ── Hero ─────────────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section className="relative">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8 pt-28 sm:pt-32">
-        {/* masthead */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7 }}
-          className="flex items-center justify-between border-y border-line-2 py-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft"
-        >
-          <span>Portfolio № 01</span>
-          <span className="hidden sm:block">Software &amp; ML Engineer</span>
-          <span>Est. 2024 — Visakhapatnam, IN</span>
-        </motion.div>
+    <section className="relative flex min-h-svh w-full flex-col justify-between pt-24 pb-10">
+      <div className="flex flex-1 items-center">
+        <Container className="flex items-center justify-between gap-4">
+          <Word text="Yatin" direction="left" />
+          <Word text="Singh" direction="right" />
+        </Container>
+      </div>
 
-        <div className="grid grid-cols-1 items-end gap-10 pt-12 lg:grid-cols-12 lg:gap-10">
-          {/* headline */}
-          <div className="lg:col-span-7">
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="mb-6 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-soft"
-            >
-              <span className="inline-flex h-2 w-2 bg-flare" />
-              Available for opportunities
-            </motion.p>
+      <Container>
+        <div className="flex flex-col items-center gap-8 md:flex-row md:items-end md:justify-between">
+          <p className="astra-fade-in t-meta text-ink-soft" style={{ "--delay": "1.7s" }}>
+            Software / Machine learning engineer
+          </p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, delay: 0.16 }}
-              className="font-display text-[clamp(3.4rem,10vw,8rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.03em] text-ink"
-            >
-              Yatin Singh
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.28 }}
-              className="mt-6 font-mono text-sm uppercase tracking-[0.3em] text-ink-2 sm:text-base"
-            >
-              Software / Machine Learning Engineer
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.38 }}
-              className="mt-7 max-w-xl text-lg leading-relaxed text-ink-2"
-            >
-              I build intelligent systems end to end — from full-stack products and
-              scalable backends to self-hosted machine learning. Currently a Software
-              Development Engineer at ByteBlock Technologies.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.48 }}
-              className="mt-9 flex flex-wrap items-center gap-3"
-            >
-              <Link href="/project" className={btnPrimary}>
-                View my work
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-              <Link href="/contact" className={btnGhost}>Get in touch</Link>
-
-              <div className="ml-1 flex items-center gap-2">
-                {[
-                  { icon: FaGithub, href: "https://github.com/yatinsingh2007", label: "GitHub" },
-                  { icon: FaLinkedin, href: "https://www.linkedin.com/in/yatin-singh-b37817323/", label: "LinkedIn" },
-                  { icon: FaInstagram, href: "https://www.instagram.com/yatin_singh27", label: "Instagram" },
-                ].map(({ icon: Icon, href, label }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="flex h-11 w-11 items-center justify-center border border-ink/70 text-ink transition-colors duration-200 hover:bg-ink hover:text-paper"
-                  >
-                    <Icon className="h-4 w-4" />
-                  </a>
-                ))}
-              </div>
-            </motion.div>
+          {/* the field is interactive; say so, quietly */}
+          <div
+            className="astra-fade-in flex flex-col items-center gap-3"
+            style={{ "--delay": "2s" }}
+          >
+            <span className="astra-cue h-14 w-px bg-line" />
+            <span className="t-meta text-ink-faint">Scroll</span>
           </div>
 
-          {/* portrait figure */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.4 }}
-            className="lg:col-span-5"
-          >
-            <figure className="border border-ink/70 bg-paper p-2">
-              <div className="relative aspect-4/5 w-full overflow-hidden">
-                <Image
-                  src="/yatin_singh.jpeg"
-                  alt="Yatin Singh"
-                  fill
-                  priority
-                  sizes="(max-width:1024px) 100vw, 40vw"
-                  className="object-cover grayscale-[0.35] transition-all duration-700 hover:grayscale-0"
-                />
-              </div>
-              <figcaption className="flex items-center justify-between border-t border-line px-1 pt-2.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft">
-                <span className="text-flare">Fig. 01</span>
-                <span>The engineer at work</span>
-              </figcaption>
-            </figure>
-          </motion.div>
+          <p className="astra-fade-in t-meta text-ink-soft md:text-right" style={{ "--delay": "1.7s" }}>
+            Visakhapatnam, IN — Est. 2024
+          </p>
         </div>
-
-        <div className="mt-14 flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-soft">
-          <ArrowDown className="h-4 w-4 animate-bounce text-flare" />
-          Scroll to read on
-        </div>
-      </div>
+      </Container>
     </section>
+  );
+}
+
+/* ── Introduction ─────────────────────────────────────────────── */
+function Introduction() {
+  return (
+    <Section className="pt-10 md:pt-16">
+      <Container>
+        <Grid>
+          <div className="astra-wide flex flex-col items-center text-center">
+            <Reveal>
+              <Signal className="mb-8">Available for opportunities</Signal>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="t-h2 max-w-[18ch] text-balance text-ink">
+                I turn ideas into systems that run in production.
+              </h2>
+            </Reveal>
+          </div>
+        </Grid>
+
+        <Grid className="mt-10">
+          <Prose>
+            <Reveal delay={0.1}>
+              <p className="t-lead text-pretty text-ink-2">
+                I build intelligent systems end to end — full-stack products, scalable
+                backends, and self-hosted machine learning. Currently a Software
+                Development Engineer at ByteBlock Technologies, where I ship
+                production features, cut a 45-minute deploy down to under three
+                minutes, and run open-weight models on our own infrastructure.
+              </p>
+              <p className="t-body mt-6 text-ink-2">
+                Before that I spent a summer scaling AssuredGig&apos;s backend from
+                prototype to a platform serving 500 users. I&apos;m in my third year of a
+                B.Tech in Computer Science &amp; AI, and most of what I know came from
+                building things that had to work for someone other than me.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.15}>
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <Link href="/project" className={btnPrimary}>
+                  View my work
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                </Link>
+                <Link href="/contact" className={btnGhost}>
+                  Get in touch
+                </Link>
+                <div className="flex items-center gap-1.5">
+                  {[
+                    { icon: FaGithub, href: "https://github.com/yatinsingh2007", label: "GitHub" },
+                    { icon: FaLinkedin, href: "https://www.linkedin.com/in/yatin-singh-b37817323/", label: "LinkedIn" },
+                    { icon: FaInstagram, href: "https://www.instagram.com/yatin_singh27", label: "Instagram" },
+                  ].map(({ icon: Icon, href, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-paper-2 text-ink-2 backdrop-blur-xl transition-colors duration-300 hover:bg-paper-3 hover:text-ink"
+                    >
+                      <Icon className="h-4 w-4" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          </Prose>
+        </Grid>
+      </Container>
+    </Section>
   );
 }
 
 /* ── Role marquee band ────────────────────────────────────────── */
 function RoleBand() {
   return (
-    <div className="mt-16 border-y border-line-2 py-5">
-      <Marquee className="[--duration:38s]">
+    <div className="edge-fade border-y border-line py-6">
+      <Marquee className="[--duration:44s]">
         {roleMarquee.map((r) => (
-          <span key={r} className="mx-7 flex items-center gap-7 font-display text-2xl font-extrabold uppercase tracking-tight text-ink/25 md:text-3xl">
+          <span key={r} className="mx-6 flex items-center gap-6 t-h4 text-ink-faint">
             {r}
-            <span className="text-flare">✳</span>
+            <span className="h-1 w-1 rounded-full bg-flare" />
           </span>
         ))}
       </Marquee>
@@ -233,102 +278,104 @@ function RoleBand() {
 /* ── Selected work ────────────────────────────────────────────── */
 function SelectedWork() {
   return (
-    <section className="mx-auto max-w-6xl px-5 sm:px-8 py-24">
-      <div className="flex flex-wrap items-end justify-between gap-6">
+    <Section id="work">
+      <Container>
         <SectionHeading
-          index="01"
           eyebrow="Selected work"
-          title="A field guide to things I've built"
+          title="Things I've built and shipped"
           description="Full-stack products, ML pipelines, agentic systems and developer tooling."
         />
-        <Link href="/project" className="group hidden items-center gap-2 font-mono text-xs uppercase tracking-widest text-ink-2 transition-colors hover:text-ink sm:flex">
-          <span className="link-underline">All projects</span>
-          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-        </Link>
-      </div>
 
-      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((p, i) => (
-          <Reveal key={p.title} delay={(i % 3) * 0.08}>
-            <a href={p.link} target="_blank" rel="noopener noreferrer" className="group block h-full">
-              <GlassCard className="flex h-full flex-col">
-                <div className="relative aspect-video overflow-hidden border-b border-line">
-                  <RevealImage
-                    src={p.image}
-                    alt={p.title}
-                    sizes="(max-width:768px) 100vw, (max-width:1024px) 50vw, 33vw"
-                    imgClassName="grayscale-[0.3] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]"
-                  />
-                  <span className="absolute left-0 top-0 bg-ink px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-paper">
-                    № {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-
-                <div className="flex flex-1 flex-col p-6">
-                  <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-ink-soft">
-                    <span className="text-flare">{p.category}</span>
-                    <span>{p.year}</span>
-                  </div>
-                  <h3 className="mt-3 font-display text-xl font-bold uppercase tracking-tight text-ink transition-colors group-hover:text-flare">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2.5 leading-relaxed text-ink-2">{p.desc}</p>
-
-                  <div className="mt-5 flex flex-wrap gap-1.5">
-                    {p.stack.map((s) => (
-                      <Tag key={s}>{s}</Tag>
-                    ))}
+        <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 md:mt-20">
+          {projects.map((p, i) => (
+            <Reveal key={p.title} delay={(i % 3) * 0.07}>
+              <a href={p.link} target="_blank" rel="noopener noreferrer" className="group block h-full">
+                <Panel className="flex h-full flex-col group-hover:-translate-y-1">
+                  <div className="relative aspect-video overflow-hidden border-b border-line">
+                    <RevealImage
+                      src={p.image}
+                      alt={p.title}
+                      sizes="(max-width:768px) 100vw, (max-width:1024px) 50vw, 33vw"
+                      imgClassName="grayscale-[0.45] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]"
+                    />
                   </div>
 
-                  <div className="mt-6 flex items-center gap-1.5 border-t border-line pt-4 font-mono text-xs uppercase tracking-widest text-ink-2 transition-colors group-hover:text-flare">
-                    Read entry
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <div className="flex flex-1 flex-col p-6">
+                    <div className="t-meta flex items-center justify-between text-ink-soft">
+                      <span>{p.category}</span>
+                      <span className="text-ink-faint">{p.year}</span>
+                    </div>
+                    <h3 className="t-h4 mt-4 text-ink">{p.title}</h3>
+                    <p className="t-body mt-2.5 text-ink-2">{p.desc}</p>
+
+                    <div className="mb-7 mt-6 flex flex-wrap gap-1.5">
+                      {p.stack.map((s) => (
+                        <Tag key={s}>{s}</Tag>
+                      ))}
+                    </div>
+
+                    <div className="mt-auto flex items-center gap-1.5 border-t border-line pt-5 t-cta text-ink-2 transition-colors group-hover:text-ink">
+                      Read more
+                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </div>
                   </div>
-                </div>
-              </GlassCard>
-            </a>
-          </Reveal>
-        ))}
-      </div>
-    </section>
+                </Panel>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <Link href="/project" className={btnGhost}>
+            All projects
+            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+      </Container>
+    </Section>
   );
 }
 
 /* ── Capabilities ─────────────────────────────────────────────── */
 function Capabilities() {
   return (
-    <section className="mx-auto max-w-6xl px-5 sm:px-8 py-24">
-      <SectionHeading
-        index="02"
-        eyebrow="Disciplines"
-        title="What I practise"
-        description="From product front-ends to the models and infrastructure that power them."
-      />
-      <div className="mt-12 grid grid-cols-1 border-l border-t border-line sm:grid-cols-2 lg:grid-cols-3">
-        {capabilities.map((c, i) => (
-          <Reveal key={c.title} delay={(i % 3) * 0.07}>
-            <div className="group h-full border-b border-r border-line p-7 transition-colors duration-300 hover:bg-paper-2">
-              <span className="font-mono text-xs text-flare">§{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-5 font-display text-xl font-medium text-ink">{c.title}</h3>
-              <p className="mt-2.5 leading-relaxed text-ink-2">{c.desc}</p>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </section>
+    <Section>
+      <Container>
+        <SectionHeading
+          eyebrow="Disciplines"
+          title="What I practise"
+          description="From product front-ends to the models and infrastructure that power them."
+        />
+
+        <div className="mt-14 border-t border-line md:mt-20">
+          {capabilities.map((c, i) => (
+            <Reveal key={c.title} delay={(i % 3) * 0.05}>
+              <div className="group grid grid-cols-1 items-baseline gap-3 border-b border-line py-7 transition-colors duration-500 hover:bg-paper-2 md:grid-cols-12 md:gap-6 md:px-4">
+                <span className="t-meta text-ink-faint md:col-span-1">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="t-h4 text-ink md:col-span-4">{c.title}</h3>
+                <p className="t-body text-ink-2 md:col-span-7">{c.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Container>
+    </Section>
   );
 }
 
 /* ── Tech stack ───────────────────────────────────────────────── */
 function StackRow({ reverse }) {
   return (
-    <Marquee reverse={reverse} pauseOnHover className={reverse ? "[--duration:46s]" : "[--duration:38s]"}>
-      {stack.map((t) => (
+    <Marquee reverse={reverse} pauseOnHover className={reverse ? "[--duration:52s]" : "[--duration:44s]"}>
+      {stack.map(({ name, Icon }) => (
         <span
-          key={t}
-          className="mx-2 border border-line bg-paper px-5 py-2.5 font-mono text-sm text-ink-2 transition-colors duration-200 hover:border-flare hover:text-flare"
+          key={name}
+          className="t-cta mx-1.5 inline-flex items-center gap-2.5 rounded-full border border-line bg-paper-2 px-5 py-2.5 text-ink-2 backdrop-blur-xl transition-colors duration-300 hover:border-line-2 hover:text-ink"
         >
-          {t}
+          <Icon className="h-4 w-4 shrink-0" aria-hidden />
+          {name}
         </span>
       ))}
     </Marquee>
@@ -337,66 +384,70 @@ function StackRow({ reverse }) {
 
 function Stack() {
   return (
-    <section className="py-24">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <SectionHeading index="03" eyebrow="Toolkit" title="Instruments of the trade" />
-      </div>
-      <div className="mt-12 flex flex-col gap-4">
+    <Section>
+      <Container>
+        <SectionHeading eyebrow="Toolkit" title="Instruments of the trade" />
+      </Container>
+      <div className="edge-fade mt-14 flex flex-col gap-3 md:mt-20">
         <StackRow />
         <StackRow reverse />
       </div>
-    </section>
+    </Section>
   );
 }
 
 /* ── Stats ────────────────────────────────────────────────────── */
 function Stats() {
   return (
-    <section className="mx-auto max-w-6xl px-5 sm:px-8 py-24">
-      <SectionHeading index="04" eyebrow="By the numbers" title="A short ledger of impact" />
-      <div className="mt-12 grid grid-cols-2 border-l border-t border-line lg:grid-cols-4">
-        {stats.map((s, i) => (
-          <Reveal key={s.label} delay={i * 0.07}>
-            <div className="h-full border-b border-r border-line p-6 sm:p-7">
-              <div className="flex items-baseline font-display text-5xl font-medium text-ink sm:text-6xl">
-                <NumberTicker value={s.value} />
-                <span className="text-flare">{s.suffix}</span>
+    <Section>
+      <Container>
+        <SectionHeading eyebrow="By the numbers" title="A short ledger of impact" />
+        <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4 md:mt-20">
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 0.06} className="bg-void/40 backdrop-blur-xl">
+              <div className="h-full p-7">
+                <div className="t-h2 flex items-baseline text-ink">
+                  <NumberTicker value={s.value} />
+                  <span className="text-ink-soft">{s.suffix}</span>
+                </div>
+                <div className="t-h5 mt-5 text-ink">{s.label}</div>
+                <div className="t-caption mt-1.5 text-ink-soft">{s.note}</div>
               </div>
-              <div className="mt-4 text-sm font-medium text-ink">{s.label}</div>
-              <div className="mt-1 font-mono text-[11px] uppercase tracking-wide text-ink-soft">{s.note}</div>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </section>
+            </Reveal>
+          ))}
+        </div>
+      </Container>
+    </Section>
   );
 }
 
 /* ── Closing ──────────────────────────────────────────────────── */
 function Closing() {
   return (
-    <section className="mx-auto max-w-6xl px-5 sm:px-8 py-24">
-      <Reveal>
-        <div className="border border-ink/70 bg-paper-2 px-6 py-16 text-center sm:px-16 sm:py-24">
-          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-flare">Colophon</p>
-          <h2 className="mx-auto mt-6 max-w-3xl font-display text-4xl font-extrabold uppercase leading-[0.95] tracking-tight text-ink sm:text-6xl">
-            Let's build something <span className="text-flare">worth keeping</span>
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-ink-2">
-            Have a role, a project or an idea in mind? I'd love to hear about it.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/contact" className={btnPrimary}>
-              Start a conversation
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-            <a href="mailto:yatin.singh.dev@gmail.com" className={btnGhost}>
-              yatin.singh.dev@gmail.com
-            </a>
+    <Section>
+      <Container>
+        <Reveal>
+          <div className="astra-surface flex flex-col items-center rounded-3xl px-6 py-20 text-center md:px-16 md:py-28">
+            <Kicker className="mb-7">Availability</Kicker>
+            <h2 className="t-h2 max-w-[20ch] text-balance text-ink">
+              Let&apos;s build something worth keeping
+            </h2>
+            <p className="t-lead mt-5 max-w-[46ch] text-pretty text-ink-2">
+              Have a role, a project or an idea in mind? I&apos;d love to hear about it.
+            </p>
+            <div className="mt-11 flex flex-wrap items-center justify-center gap-3">
+              <Link href="/contact" className={btnPrimary}>
+                Start a conversation
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </Link>
+              <a href="mailto:yatin.singh.dev@gmail.com" className={btnGhost}>
+                yatin.singh.dev@gmail.com
+              </a>
+            </div>
           </div>
-        </div>
-      </Reveal>
-    </section>
+        </Reveal>
+      </Container>
+    </Section>
   );
 }
 
@@ -405,6 +456,7 @@ export default function Home() {
     <main className="min-h-screen w-full text-ink">
       <SiteNav />
       <Hero />
+      <Introduction />
       <RoleBand />
       <SelectedWork />
       <Divider />

@@ -1,10 +1,7 @@
 "use client";
 import { motion, useScroll, useSpring } from "motion/react";
 
-/**
- * Thin gradient progress bar pinned to the top of the viewport.
- * Reflects how far the page has been scrolled.
- */
+/** Hairline read-progress rule pinned to the top of the viewport. */
 export default function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -17,7 +14,7 @@ export default function ScrollProgress() {
     <motion.div
       aria-hidden
       style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-flare"
+      className="fixed inset-x-0 top-0 z-60 h-px origin-left bg-ink/70"
     />
   );
 }

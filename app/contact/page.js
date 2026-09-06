@@ -1,5 +1,5 @@
 "use client";
-import ContactSection from "@/section/LampDemo";
+import ContactSection from "@/components/ContactSection";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 

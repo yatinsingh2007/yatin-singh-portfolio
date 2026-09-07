@@ -63,27 +63,31 @@ export default function About() {
 
       <Section className="pt-14 md:pt-20">
         <Container>
-          {/* portrait (small, rectangular, left) + fact strip */}
+          {/* portrait (large, rectangular, left) + fact strip */}
           <Reveal>
-            <div className="mx-auto flex max-w-4xl flex-col items-start gap-6 sm:flex-row sm:items-stretch">
-              <figure className="shrink-0 self-start">
-                <div className="relative aspect-3/4 w-28 overflow-hidden rounded-2xl border border-line bg-paper-2 sm:w-32">
+            <div className="mx-auto grid max-w-5xl grid-cols-1 items-stretch gap-8 md:grid-cols-[minmax(0,1fr)_1.1fr] md:gap-10">
+              <figure className="group relative">
+                <div className="relative aspect-3/4 w-full overflow-hidden rounded-3xl border border-line bg-paper-2">
                   <Image
                     src="/yatin_singh.jpeg"
                     alt="Yatin Singh"
                     fill
                     priority
-                    sizes="128px"
-                    className="object-cover object-[center_18%] grayscale-[0.5] transition-[filter] duration-700 hover:grayscale-0"
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className="object-cover object-[center_18%] grayscale-[0.35] transition-[filter,transform] duration-700 group-hover:grayscale-0 group-hover:scale-[1.02]"
                   />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/60 via-transparent to-transparent" />
                 </div>
               </figure>
 
-              <dl className="grid flex-1 grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line">
+              <dl className="grid grid-cols-2 gap-px self-stretch overflow-hidden rounded-3xl border border-line bg-line">
                 {facts.map(([k, v]) => (
-                  <div key={k} className="bg-void/40 p-5 backdrop-blur-xl">
+                  <div
+                    key={k}
+                    className="flex flex-col justify-center bg-void/40 p-6 backdrop-blur-xl md:p-8"
+                  >
                     <dt className="t-meta text-ink-faint">{k}</dt>
-                    <dd className="t-h5 mt-2.5 text-ink">{v}</dd>
+                    <dd className="t-h4 mt-3 text-ink">{v}</dd>
                   </div>
                 ))}
               </dl>

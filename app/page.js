@@ -21,14 +21,12 @@ import {
 } from "react-icons/si";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import { HeroParallax } from "@/components/ui/hero-parallax";
 import { Marquee } from "@/components/magicui/marquee";
 import { NumberTicker } from "@/components/magicui/number-ticker";
 import {
   Reveal,
   SectionHeading,
-  Panel,
-  Tag,
-  RevealImage,
   Divider,
   Container,
   Grid,
@@ -286,46 +284,13 @@ function SelectedWork() {
           description="Full-stack products, ML pipelines, agentic systems and developer tooling."
         />
 
-        <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 md:mt-20">
-          {projects.map((p, i) => (
-            <Reveal key={p.title} delay={(i % 3) * 0.07}>
-              <a href={p.link} target="_blank" rel="noopener noreferrer" className="group block h-full">
-                <Panel className="flex h-full flex-col group-hover:-translate-y-1">
-                  <div className="relative aspect-video overflow-hidden border-b border-line">
-                    <RevealImage
-                      src={p.image}
-                      alt={p.title}
-                      sizes="(max-width:768px) 100vw, (max-width:1024px) 50vw, 33vw"
-                      imgClassName="grayscale-[0.45] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]"
-                    />
-                  </div>
+      </Container>
 
-                  <div className="flex flex-1 flex-col p-6">
-                    <div className="t-meta flex items-center justify-between text-ink-soft">
-                      <span>{p.category}</span>
-                      <span className="text-ink-faint">{p.year}</span>
-                    </div>
-                    <h3 className="t-h4 mt-4 text-ink">{p.title}</h3>
-                    <p className="t-body mt-2.5 text-ink-2">{p.desc}</p>
+      {/* Project plates drift past on scroll — see hero-parallax */}
+      <HeroParallax products={projects} />
 
-                    <div className="mb-7 mt-6 flex flex-wrap gap-1.5">
-                      {p.stack.map((s) => (
-                        <Tag key={s}>{s}</Tag>
-                      ))}
-                    </div>
-
-                    <div className="mt-auto flex items-center gap-1.5 border-t border-line pt-5 t-cta text-ink-2 transition-colors group-hover:text-ink">
-                      Read more
-                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                    </div>
-                  </div>
-                </Panel>
-              </a>
-            </Reveal>
-          ))}
-        </div>
-
-        <div className="mt-12 flex justify-center">
+      <Container>
+        <div className="flex justify-center">
           <Link href="/project" className={btnGhost}>
             All projects
             <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

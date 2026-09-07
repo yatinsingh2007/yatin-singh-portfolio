@@ -21,7 +21,7 @@ import {
 } from "@/components/aurora-ui";
 
 const facts = [
-  ["Education", "3rd year B.Tech — NST"],
+  ["Education", "3rd year B.Tech — Newton School of Technology, Rishihood University"],
   ["Focus", "AI & scalable systems"],
   ["Based in", "Visakhapatnam, IN"],
   ["Status", "Open to work"],

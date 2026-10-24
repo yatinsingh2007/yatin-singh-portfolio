@@ -87,7 +87,7 @@ function formatDuration(period) {
   const start = parsePoint(startStr);
   const end = parsePoint(endStr);
   if (!start || !end) return null;
-  let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+  let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()) + 1;
   if (months < 1) months = 1;
   const years = Math.floor(months / 12);
   const rem = months % 12;
@@ -116,7 +116,7 @@ function Role({ role, branched }) {
   const body = (
     <>
       <div className="flex flex-wrap items-center gap-2.5">
-        <h3 className="t-h4 text-ink">{role.title}</h3>
+        <h3 className="t-h5 text-ink">{role.title}</h3>
         {role.current && (
           <span className="t-meta inline-flex items-center gap-2 rounded-full border border-line px-2.5 py-1 text-ink-soft">
             <span className="signal-dot h-1.5 w-1.5 rounded-full bg-flare" />
@@ -128,7 +128,7 @@ function Role({ role, branched }) {
         </span>
       </div>
 
-      <div className="t-meta mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-soft">
+      <div className="t-meta mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-soft">
         <span>{role.period}</span>
         {duration && (
           <>
@@ -141,10 +141,10 @@ function Role({ role, branched }) {
       </div>
 
       {role.features.length > 0 && (
-        <ul className="mt-5 space-y-3">
+        <ul className="mt-4 space-y-2">
           {role.features.map((f, fi) => (
-            <li key={fi} className="t-body flex gap-3.5 text-ink-2">
-              <span aria-hidden className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-ink-faint" />
+            <li key={fi} className="t-caption flex gap-3 text-ink-2">
+              <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-ink-faint" />
               <span>{f}</span>
             </li>
           ))}
@@ -209,14 +209,16 @@ function ExperienceEntry({ exp }) {
         className="absolute left-[7px] top-9 z-10 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-ink sm:left-[15px]"
       />
 
-      <Panel hover={false} className="p-6 sm:p-9">
+      <Panel hover={false} className="grid grid-cols-1 gap-8 p-6 sm:p-8 lg:grid-cols-12 lg:gap-10">
+        {/* company on the left, its roles beside it — one company reads in one screen */}
+        <div className="lg:col-span-4 lg:border-r lg:border-line lg:pr-8">
         <div className="flex items-start gap-4">
           <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-line bg-paper-2">
             <Image src={exp.logo} alt={exp.company} fill className="object-cover" />
           </div>
           <div className="flex-1">
-            <h2 className="t-h3 text-ink">{exp.company}</h2>
-            <p className="t-body mt-3 max-w-2xl text-ink-2">{exp.description}</p>
+            <h2 className="t-h4 text-ink">{exp.company}</h2>
+            <p className="t-caption mt-2 text-ink-2">{exp.description}</p>
           </div>
         </div>
 
@@ -233,12 +235,13 @@ function ExperienceEntry({ exp }) {
             )}
           </div>
         )}
+        </div>
 
-        <div className="relative mt-8 border-t border-line pt-8">
+        <div className="relative border-t border-line pt-8 lg:col-span-8 lg:border-t-0 lg:pt-0">
           {exp.roles.length > 1 && (
-            <span aria-hidden className="absolute bottom-8 left-[5px] top-8 w-px bg-line" />
+            <span aria-hidden className="absolute bottom-8 left-[5px] top-8 w-px bg-line lg:top-0" />
           )}
-          <div className="space-y-9">
+          <div className="space-y-7">
             {exp.roles.map((role, ri) => (
               <Role key={ri} role={role} branched={exp.roles.length > 1} />
             ))}
@@ -255,14 +258,13 @@ export default function ExperiencePage() {
       <SiteNav />
 
       <PageHeader
-        eyebrow="Career record"
         title="Where I've shipped"
         description="Professional growth, technical contributions and the impact I've delivered across startups."
         meta={["2025 — present", "2 companies", "Remote"]}
       />
 
-      <Section className="pt-14 md:pt-20">
-        <div className="mx-auto w-full max-w-4xl px-6 md:px-8">
+      <Section className="pt-12 md:pt-16">
+        <div className="mx-auto w-full max-w-6xl px-6 md:px-8">
           <div className="relative space-y-6">
             <span aria-hidden className="absolute bottom-6 left-[7px] top-6 w-px bg-line sm:left-[15px]" />
             {experiences.map((exp) => (

@@ -135,12 +135,13 @@ export default function CustomCursor({
       rafId = requestAnimationFrame(() => { onPointerMove(e); rafId = 0; });
     };
 
-    document.body.style.cursor = "none";
+    // hide the native cursor everywhere, including the hand on links and buttons
+    document.documentElement.classList.add("custom-cursor");
     window.addEventListener("pointermove", throttled, { passive: true });
 
     return () => {
       window.removeEventListener("pointermove", throttled);
-      document.body.style.cursor = "auto";
+      document.documentElement.classList.remove("custom-cursor");
       if (rafId) cancelAnimationFrame(rafId);
       if (timeout) clearTimeout(timeout);
     };

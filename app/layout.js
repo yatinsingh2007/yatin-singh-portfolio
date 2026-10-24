@@ -38,8 +38,17 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Before paint: skip the cold open if it already played this session,
+            or if the visitor prefers reduced motion. Sets a class on <html>,
+            hence suppressHydrationWarning above. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('ys-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro-seen')}catch(e){}",
+          }}
+        />
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
         <meta name="google-site-verification" content="L63uGSjv-ig202O9O7OB6XKbgHRQHhHyiKmkxhoJjNw" />
       </head>

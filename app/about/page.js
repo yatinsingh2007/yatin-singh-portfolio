@@ -55,7 +55,6 @@ export default function About() {
       <SiteNav />
 
       <PageHeader
-        eyebrow="About"
         title="The human behind the code"
         description="Curious by default, an engineer by training, and happiest when an idea finally becomes something other people can use."
         meta={["Visakhapatnam, IN", "B.Tech CS & AI", "Open to work"]}
@@ -130,7 +129,6 @@ export default function About() {
       <Section>
         <Container>
           <SectionHeading
-            eyebrow="The arsenal"
             title="What I work with"
             description="Four areas I keep returning to, and the ones I'd want to be hired for."
           />
@@ -138,10 +136,7 @@ export default function About() {
             {disciplines.map((s, i) => (
               <Reveal key={s.title} delay={(i % 4) * 0.05}>
                 <div className="grid grid-cols-1 items-baseline gap-3 border-b border-line py-7 transition-colors duration-500 hover:bg-paper-2 md:grid-cols-12 md:gap-6 md:px-4">
-                  <span className="t-meta text-ink-faint md:col-span-1">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="t-h4 text-ink md:col-span-4">{s.title}</h3>
+                  <h3 className="t-h4 text-ink md:col-span-5">{s.title}</h3>
                   <p className="t-body text-ink-2 md:col-span-7">{s.desc}</p>
                 </div>
               </Reveal>
@@ -154,22 +149,23 @@ export default function About() {
 
       <Section>
         <Container>
-          <SectionHeading eyebrow="Off the clock" title="Beyond the desk" />
-          <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 md:mt-20">
-            {interests.map((it, i) => (
-              <Reveal key={it.label} delay={i * 0.05}>
-                <Panel className="flex h-full flex-col items-start gap-5 p-5">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink-2">
+          <SectionHeading title="Beyond the desk" />
+          <Reveal>
+            <ul className="mx-auto mt-12 flex max-w-4xl flex-wrap justify-center gap-3 md:mt-16">
+              {interests.map((it) => (
+                <li
+                  key={it.label}
+                  className="inline-flex items-center gap-3 rounded-full border border-line bg-paper-2 py-2.5 pl-3 pr-5"
+                >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-paper-3 text-ink-2" aria-hidden>
                     {it.icon}
-                  </div>
-                  <div>
-                    <div className="t-h5 text-ink">{it.label}</div>
-                    <div className="t-caption mt-1 text-ink-soft">{it.desc}</div>
-                  </div>
-                </Panel>
-              </Reveal>
-            ))}
-          </div>
+                  </span>
+                  <span className="t-h5 text-ink">{it.label}</span>
+                  <span className="t-caption text-ink-soft">{it.desc}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
 
           <Reveal delay={0.1}>
             <blockquote className="mx-auto mt-16 max-w-3xl text-center">

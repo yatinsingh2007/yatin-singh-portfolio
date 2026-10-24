@@ -74,7 +74,7 @@ export function Signal({ children, className }) {
 }
 
 /* ── Section heading — centred by default, as on a launch page ─── */
-export function SectionHeading({ eyebrow, title, description, align = "center", className, index }) {
+export function SectionHeading({ title, description, align = "center", className }) {
   const centred = align === "center";
   return (
     <motion.div
@@ -84,12 +84,6 @@ export function SectionHeading({ eyebrow, title, description, align = "center", 
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       className={cn("flex flex-col", centred ? "items-center text-center" : "items-start", className)}
     >
-      {(eyebrow || index) && (
-        <Kicker className="mb-5">
-          {index && <span className="text-ink-faint">{index}</span>}
-          {eyebrow}
-        </Kicker>
-      )}
       <h2 className={cn("t-h2 max-w-[22ch] text-balance text-ink", centred && "mx-auto")}>{title}</h2>
       {description && (
         <p className={cn("t-lead mt-5 max-w-[52ch] text-pretty text-ink-2", centred && "mx-auto")}>
@@ -143,6 +137,13 @@ export function Magnetic({ children, className }) {
 
 /* ── Media ─────────────────────────────────────────────────────── */
 export function RevealImage({ src, alt, sizes, priority, imgClassName }) {
+  if (!src) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center bg-paper-2">
+        <span className="t-h3 text-ink-soft">{alt}</span>
+      </div>
+    );
+  }
   return (
     <div className="absolute inset-0">
       <Image
@@ -194,21 +195,12 @@ export function Tag({ children, className }) {
 
 /* ── Interior page header ──────────────────────────────────────────
    Centred title over the field, matching the launch-page opening. */
-export function PageHeader({ eyebrow, title, description, meta }) {
+export function PageHeader({ title, description, meta }) {
   return (
     <header className="relative pt-36 pb-4 md:pt-44">
       <Container>
         <Grid>
           <div className="astra-wide flex flex-col items-center text-center">
-            {eyebrow && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8 }}
-              >
-                <Kicker className="mb-7">{eyebrow}</Kicker>
-              </motion.div>
-            )}
             <motion.h1
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}

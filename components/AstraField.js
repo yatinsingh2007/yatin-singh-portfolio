@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 
 /**
@@ -58,6 +59,8 @@ function makeSprite(rgb, size = 32) {
 }
 
 export default function AstraField() {
+  // the galaxy is the homepage's centrepiece; elsewhere it sits back behind the reading
+  const isHome = usePathname() === "/";
   const canvasRef = useRef(null);
   const wrapRef = useRef(null);
 
@@ -476,10 +479,15 @@ export default function AstraField() {
       {/* ── the galaxy core — interactive, the only element that fades
           on scroll — and the wash + vignette that seat it in black ── */}
       <div
-        className="astra-ambient absolute inset-0"
-        style={{ opacity: "calc(0.5 + 0.35 * var(--astra-hero))" }}
-      />
-      <canvas ref={canvasRef} className="absolute inset-0 block h-full w-full" />
+        className="absolute inset-0 transition-opacity duration-1000 ease-out"
+        style={{ opacity: isHome ? 1 : 0.4 }}
+      >
+        <div
+          className="astra-ambient absolute inset-0"
+          style={{ opacity: "calc(0.5 + 0.35 * var(--astra-hero))" }}
+        />
+        <canvas ref={canvasRef} className="absolute inset-0 block h-full w-full" />
+      </div>
       <div className="astra-vignette absolute inset-0" />
     </div>
   );

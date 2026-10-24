@@ -71,7 +71,6 @@ export default function ContactSection() {
   return (
     <>
       <PageHeader
-        eyebrow="Get in touch"
         title="Let's build something worth keeping"
         description="I'm open to software and ML engineering roles and collaborations. Have a project in mind, or just want to say hi? I reply within 48 hours."
       />

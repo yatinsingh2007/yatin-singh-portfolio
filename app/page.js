@@ -21,9 +21,9 @@ import {
 } from "react-icons/si";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
-import { HeroParallax } from "@/components/ui/hero-parallax";
 import { Marquee } from "@/components/magicui/marquee";
 import { NumberTicker } from "@/components/magicui/number-ticker";
+import { MissionLog } from "@/components/MissionLog";
 import {
   Reveal,
   SectionHeading,
@@ -33,7 +33,6 @@ import {
   Prose,
   Section,
   Signal,
-  Kicker,
   btnPrimary,
   btnGhost,
 } from "@/components/aurora-ui";
@@ -51,7 +50,7 @@ const roleMarquee = [
 const projects = [
   {
     title: "Cordis Sentinel", category: "ML · Agentic AI", year: "2026",
-    link: "https://github.com/yatinsingh2007/Cordis-Sentinel", image: "/cordis-sentinel.png",
+    link: "https://github.com/yatinsingh2007/Cordis-Sentinel",
     desc: "An agentic AI pipeline for heart-attack risk prediction with SHAP explainability and a Plan-Execute-Reflect agent.",
     stack: ["Python", "LangGraph", "SHAP", "Llama 3"],
   },
@@ -75,7 +74,7 @@ const projects = [
   },
   {
     title: "Next Horizon", category: "Web · MERN", year: "2025",
-    link: "https://next-horizon-nine.vercel.app/", image: "/NextHorizon.png",
+    link: "https://next-horizon-nine.vercel.app/", image: "/nexthorizon.png",
     desc: "A professional network reimagined — share milestones, connect with peers and discover opportunities.",
     stack: ["React", "MongoDB", "Express", "Node"],
   },
@@ -128,7 +127,7 @@ const stats = [
 function Word({ text, direction = "left" }) {
   const chars = text.split("");
   return (
-    <p className="t-h1 select-none text-ink" aria-hidden>
+    <span className="t-h1 block select-none text-ink" aria-hidden>
       {chars.map((ch, i) => {
         // outermost letters arrive last, so the name closes on the centre
         const order = direction === "left" ? chars.length - 1 - i : i;
@@ -146,7 +145,7 @@ function Word({ text, direction = "left" }) {
           </span>
         );
       })}
-    </p>
+    </span>
   );
 }
 
@@ -155,17 +154,26 @@ function Hero() {
   return (
     <section className="relative flex min-h-svh w-full flex-col justify-between pt-24 pb-10">
       <div className="flex flex-1 items-center">
-        <Container className="flex items-center justify-between gap-4">
-          <Word text="Yatin" direction="left" />
-          <Word text="Singh" direction="right" />
+        <Container>
+          <h1
+            aria-label="Yatin Singh, software and machine learning engineer"
+            className="flex items-center justify-between gap-4"
+          >
+            <Word text="Yatin" direction="left" />
+            <Word text="Singh" direction="right" />
+          </h1>
         </Container>
       </div>
 
       <Container>
         <div className="flex flex-col items-center gap-8 md:flex-row md:items-end md:justify-between">
-          <p className="astra-fade-in t-meta text-ink-soft" style={{ "--delay": "1.7s" }}>
-            Software / Machine learning engineer
-          </p>
+          <div className="astra-fade-in flex flex-col items-center gap-5 md:items-start" style={{ "--delay": "1.7s" }}>
+            <p className="t-meta text-ink-soft">Software / Machine learning engineer</p>
+            <Link href="/project" className={btnPrimary}>
+              View my work
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+            </Link>
+          </div>
 
           {/* the field is interactive; say so, quietly */}
           <div
@@ -193,9 +201,6 @@ function Introduction() {
         <Grid>
           <div className="astra-wide flex flex-col items-center text-center">
             <Reveal>
-              <Signal className="mb-8">Available for opportunities</Signal>
-            </Reveal>
-            <Reveal delay={0.05}>
               <h2 className="t-h2 max-w-[18ch] text-balance text-ink">
                 I turn ideas into systems that run in production.
               </h2>
@@ -249,6 +254,7 @@ function Introduction() {
                   ))}
                 </div>
               </div>
+              <Signal className="mt-8">Available for new roles and collaborations</Signal>
             </Reveal>
           </Prose>
         </Grid>
@@ -279,18 +285,14 @@ function SelectedWork() {
     <Section id="work">
       <Container>
         <SectionHeading
-          eyebrow="Selected work"
           title="Things I've built and shipped"
           description="Full-stack products, ML pipelines, agentic systems and developer tooling."
         />
 
-      </Container>
+        {/* one project at a time; the full catalogue lives on /project */}
+        <MissionLog projects={projects.filter((p) => p.image)} />
 
-      {/* Project plates drift past on scroll — see hero-parallax */}
-      <HeroParallax products={projects} />
-
-      <Container>
-        <div className="flex justify-center">
+        <div className="mt-16 flex justify-center md:mt-20">
           <Link href="/project" className={btnGhost}>
             All projects
             <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -307,7 +309,6 @@ function Capabilities() {
     <Section>
       <Container>
         <SectionHeading
-          eyebrow="Disciplines"
           title="What I practise"
           description="From product front-ends to the models and infrastructure that power them."
         />
@@ -316,10 +317,7 @@ function Capabilities() {
           {capabilities.map((c, i) => (
             <Reveal key={c.title} delay={(i % 3) * 0.05}>
               <div className="group grid grid-cols-1 items-baseline gap-3 border-b border-line py-7 transition-colors duration-500 hover:bg-paper-2 md:grid-cols-12 md:gap-6 md:px-4">
-                <span className="t-meta text-ink-faint md:col-span-1">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="t-h4 text-ink md:col-span-4">{c.title}</h3>
+                <h3 className="t-h4 text-ink md:col-span-5">{c.title}</h3>
                 <p className="t-body text-ink-2 md:col-span-7">{c.desc}</p>
               </div>
             </Reveal>
@@ -351,7 +349,7 @@ function Stack() {
   return (
     <Section>
       <Container>
-        <SectionHeading eyebrow="Toolkit" title="Instruments of the trade" />
+        <SectionHeading title="Instruments of the trade" />
       </Container>
       <div className="edge-fade mt-14 flex flex-col gap-3 md:mt-20">
         <StackRow />
@@ -366,7 +364,7 @@ function Stats() {
   return (
     <Section>
       <Container>
-        <SectionHeading eyebrow="By the numbers" title="A short ledger of impact" />
+        <SectionHeading title="A short ledger of impact" />
         <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4 md:mt-20">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.06} className="bg-void/40 backdrop-blur-xl">
@@ -393,7 +391,6 @@ function Closing() {
       <Container>
         <Reveal>
           <div className="astra-surface flex flex-col items-center rounded-3xl px-6 py-20 text-center md:px-16 md:py-28">
-            <Kicker className="mb-7">Availability</Kicker>
             <h2 className="t-h2 max-w-[20ch] text-balance text-ink">
               Let&apos;s build something worth keeping
             </h2>

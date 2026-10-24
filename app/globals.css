@@ -37,9 +37,9 @@
   /* ── Foreground: one colour, graduated alpha ────────────────── */
   --color-ink: #ffffff;                       /* primary   100%      */
   --color-ink-1: rgb(255 255 255 / 0.72);     /* strong body         */
-  --color-ink-2: rgb(255 255 255 / 0.60);     /* body                */
-  --color-ink-soft: rgb(255 255 255 / 0.44);  /* captions / meta     */
-  --color-ink-faint: rgb(255 255 255 / 0.28); /* de-emphasised       */
+  --color-ink-2: rgb(255 255 255 / 0.68);     /* body                */
+  --color-ink-soft: rgb(255 255 255 / 0.56);  /* captions / meta     */
+  --color-ink-faint: rgb(255 255 255 / 0.46); /* de-emphasised       */
 
   /* ── Rules ──────────────────────────────────────────────────── */
   --color-line: rgb(255 255 255 / 0.12);
@@ -70,7 +70,19 @@
   --header-h: 4rem;
 }
 
-::-webkit-scrollbar { display: none; }
+/* Thin, quiet scrollbar — kept visible so position on long pages is never lost */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.22) transparent;
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgb(255 255 255 / 0.18);
+  border-radius: 8px;
+  border: 2px solid #000;
+}
+::-webkit-scrollbar-thumb:hover { background: rgb(255 255 255 / 0.32); }
 
 ::selection {
   background: #ffffff;
@@ -128,7 +140,7 @@
     line-height: 1.68;
   }
   .t-caption {
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     line-height: 1.5;
   }
   .t-cta {
@@ -138,9 +150,9 @@
   }
   .t-meta {
     font-family: var(--font-jetbrains), monospace;
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     line-height: 1.4;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
   }
 }
@@ -486,6 +498,15 @@
   from { transform: translateY(0); }
   to   { transform: translateY(calc(-100% - var(--gap, 1rem))); }
 }
+
+/* While the custom cursor is active it is the only pointer on screen */
+.custom-cursor,
+.custom-cursor * {
+  cursor: none !important;
+}
+
+/* The cold open plays once per session (see LoadingScreen + layout) */
+.intro-seen [data-loader] { display: none; }
 
 /* ══════════════════════════════════════════════════════════════════
    Accessibility

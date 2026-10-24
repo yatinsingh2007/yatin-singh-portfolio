@@ -20,6 +20,12 @@ export default function LoadingScreen() {
     const overlay = overlayRef.current;
     if (!overlay) return;
 
+    // already played this session (or reduced motion): CSS keeps it display:none
+    if (document.documentElement.classList.contains("intro-seen")) return;
+    try {
+      sessionStorage.setItem("ys-intro", "1");
+    } catch {}
+
     const proxy = { pct: 0 };
     const leftLetters = leftRef.current?.children ?? [];
     const rightLetters = rightRef.current?.children ?? [];
@@ -77,6 +83,7 @@ export default function LoadingScreen() {
   return (
     <div
       ref={overlayRef}
+      data-loader
       className="fixed inset-0 z-100 flex flex-col items-center justify-center overflow-hidden bg-void"
     >
       <div className="astra-ambient absolute inset-0 opacity-40" />

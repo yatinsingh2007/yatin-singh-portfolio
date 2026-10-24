@@ -53,7 +53,6 @@ export default function Education() {
       <SiteNav />
 
       <PageHeader
-        eyebrow="Academic record"
         title="Where the foundations came from"
         description="Milestones and the groundwork behind the engineering — from a physics-heavy start to computer science and AI."
         meta={["2012 — 2028", "CGPA 7.91 / 10"]}

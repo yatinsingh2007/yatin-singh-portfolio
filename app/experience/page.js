@@ -26,18 +26,10 @@ const experiences = [
     roles: [
       {
         title: "SDE Intern",
-        period: "Sep 2026 — Dec 2026",
+        period: "Jun 2026 — Dec 2026",
         location: "Remote",
         type: "Internship",
         current: true,
-        features: [],
-      },
-      {
-        title: "FSD Intern",
-        period: "Jun 2026 — Aug 2026",
-        location: "Remote",
-        type: "Internship",
-        current: false,
         features: [
           "Developed and maintained a client-facing contract management platform for Technology Associates (Tanzania), implementing RBAC, role-based dashboards, contract lifecycle workflows, CRUD operations, data validation, and business logic automation across 10+ core application modules.",
           "Delivered 50+ merged pull requests through Git-based workflows, contributing to production-grade frontend and backend features using Next.js, TypeScript, Prisma, and SQL, while improving maintainability through reusable components and structured API design.",

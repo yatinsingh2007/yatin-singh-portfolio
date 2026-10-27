@@ -25,7 +25,7 @@ const experiences = [
     extensionLetterUrl: "https://drive.google.com/file/d/1bc_2evAhrGGjRzJnnuz0JE2-wroSP8JT/view?usp=sharing",
     roles: [
       {
-        title: "Software Development Engineer",
+        title: "SDE Intern",
         period: "Sep 2026 — Dec 2026",
         location: "Remote",
         type: "Internship",
@@ -33,7 +33,7 @@ const experiences = [
         features: [],
       },
       {
-        title: "Full Stack Developer",
+        title: "FSD Intern",
         period: "Jun 2026 — Aug 2026",
         location: "Remote",
         type: "Internship",
@@ -58,7 +58,7 @@ const experiences = [
     completionLetterUrl: "https://drive.google.com/file/d/1KCeFWM5e_lQdpjEVBcJNGlJZ6pm_aahM/view?usp=sharing",
     roles: [
       {
-        title: "Full Stack Developer",
+        title: "FSD Intern",
         period: "Jun 2025 — Aug 2025",
         location: "Remote",
         type: "Internship",

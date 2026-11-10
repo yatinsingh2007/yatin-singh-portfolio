@@ -50,25 +50,25 @@ const roleMarquee = [
 const projects = [
   {
     title: "Cordis Sentinel", category: "ML · Agentic AI", year: "2026",
-    link: "https://github.com/yatinsingh2007/Cordis-Sentinel",
+    link: "https://github.com/yatinsingh2007/Cordis-Sentinel", image: "/projects/cordis-sentinel.png",
     desc: "An agentic AI pipeline for heart-attack risk prediction with SHAP explainability and a Plan-Execute-Reflect agent.",
     stack: ["Python", "LangGraph", "SHAP", "Llama 3"],
   },
   {
     title: "ReportLens AI", category: "LLM · Documents", year: "2025",
-    link: "https://github.com/yatinsingh2007/ReportLens-AI", image: "/ReportLensAI.jpeg",
+    link: "https://github.com/yatinsingh2007/ReportLens-AI", image: "/projects/reportlens-ai.png",
     desc: "An AI platform that extracts insights from PDF reports and answers complex questions using NLP.",
     stack: ["Next.js", "Gemini AI", "Prisma", "Docker"],
   },
   {
     title: "Velox", category: "Systems · Go", year: "2025",
-    link: "https://github.com/yatinsingh2007/Velox", image: "/Velox.png",
+    link: "https://github.com/yatinsingh2007/Velox", image: "/projects/velox.png",
     desc: "A high-performance, containerized code-execution engine (online judge) built with Go and Docker.",
     stack: ["Go", "Docker", "Compose"],
   },
   {
     title: "CreditIQ", category: "ML · RAG", year: "2025",
-    link: "https://creditiq123.streamlit.app", image: "/creditIQ.jpeg",
+    link: "https://creditiq123.streamlit.app", image: "/projects/creditiq.png",
     desc: "An agentic credit-risk system pairing ML classifiers with a RAG-retrieved policy rulebook for explainable decisions.",
     stack: ["Python", "LangGraph", "ChromaDB", "Streamlit"],
   },
@@ -80,7 +80,7 @@ const projects = [
   },
   {
     title: "create-prism", category: "Open Source · CLI", year: "2025",
-    link: "https://www.npmjs.com/package/create-prism", image: "/create-prism.png",
+    link: "https://www.npmjs.com/package/create-prism", image: "/projects/create-prism.png",
     desc: "A fast CLI to scaffold Node.js + Express + Prisma starter projects in JavaScript or TypeScript.",
     stack: ["Node.js", "Express", "Prisma", "CLI"],
   },

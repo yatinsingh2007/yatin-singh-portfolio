@@ -5,72 +5,72 @@ export const products = [
   {
     title: "Shopsmart",
     link: "https://github.com/yatinsingh2007/shopsmart",
-    thumbnail: "/shopsmart.png"
+    thumbnail: "/projects/shopsmart.png"
   },
   {
     title: "Velox",
     link: "https://github.com/yatinsingh2007/Velox",
-    thumbnail: "/Velox.png"
+    thumbnail: "/projects/velox.png"
   },
   {
     title: "ReportLens AI",
     link: "https://github.com/yatinsingh2007/ReportLens-AI",
-    thumbnail: "/ReportLensAI.jpeg"
+    thumbnail: "/projects/reportlens-ai.png"
   },
   {
     title: "Cordis Sentinel",
     link: "https://github.com/yatinsingh2007/Cordis-Sentinel",
-    thumbnail: "/cordis-sentinel.png"
+    thumbnail: "/projects/cordis-sentinel.png"
   },
   {
     title: "CreditIQ",
     link: "https://creditiq123.streamlit.app",
-    thumbnail: "/creditIQ.jpeg"
+    thumbnail: "/projects/creditiq.png"
   },
   {
     title: "VintiCode",
     link: "https://vinticode.vercel.app/",
-    thumbnail: "/vinticode.png"
+    thumbnail: "/projects/vinticode.png"
   },
   {
     title: "Next Horizon",
     link: "https://next-horizon-nine.vercel.app/",
-    thumbnail: "/NextHorizon.png"
+    thumbnail: "/nexthorizon.png"
   },
   {
     title: "create-prism",
     link: "https://www.npmjs.com/package/create-prism",
-    thumbnail: "/create-prism.png"
+    thumbnail: "/projects/create-prism.png"
   },
   {
     title: "Tic-Tac-Toe",
     link: "https://tic-tac-toe-rust-rho.vercel.app/",
-    thumbnail: "/tic-tac-toe.png"
+    thumbnail: "/projects/tic-tac-toe.png"
   },
   {
     title: "Neura Chat",
     link: "https://neura-chat.netlify.app/",
-    thumbnail: "/neurachat 2.png"
+    thumbnail: "/projects/neura-chat.png"
   },
   {
     title: "Claude Chef",
     link: "https://claude-chef.netlify.app",
-    thumbnail: "/Chef-claude.png"
+    thumbnail: "/projects/claude-chef.png"
   },
   {
     title: "SteamPunk",
     link: "https://yatinsingh2007.github.io/Project_Capstone_1.0/ProjectSteampunk1.0.html",
-    thumbnail: "/steampunk 2.png"
+    thumbnail: "/projects/steampunk.png"
   },
   {
     title: "Calculator",
     link: "https://calculatoryatin.netlify.app/",
-    thumbnail: "/calculator 2.png"
+    thumbnail: "/projects/calculator.png"
   },
   {
     title: "Netflix Clone",
     link: "https://yatinsingh2007.github.io/Netflix_Clone/Netflix.html",
-    thumbnail: "/netflix_clone.jpeg"
+    thumbnail: "/projects/netflix-clone.png"
   }
 ];
 

@@ -49,6 +49,18 @@ const roleMarquee = [
 
 const projects = [
   {
+    title: "HopShare", category: "Mobile · Full-Stack", year: "2026",
+    link: "https://github.com/yatinsingh2007/HopShare", image: "/projects/hopshare.png",
+    desc: "A ride-sharing app that matches verified riders going the same way to share one cab and split the fare over UPI. In active development.",
+    stack: ["React Native", "Expo", "Express", "PostGIS"],
+  },
+  {
+    title: "Drift-Sense", category: "ML · Robotics", year: "2026",
+    link: "https://github.com/yatinsingh2007/Drift-Sense", image: "/projects/drift-sense.png",
+    desc: "Predicts how far a drone's IMU-only position estimate drifts, learned from 104 IMU features — R² 0.76 on held-out flights.",
+    stack: ["Python", "NumPy", "pandas", "Scikit-learn"],
+  },
+  {
     title: "Cordis Sentinel", category: "ML · Agentic AI", year: "2026",
     link: "https://github.com/yatinsingh2007/Cordis-Sentinel", image: "/projects/cordis-sentinel.png",
     desc: "An agentic AI pipeline for heart-attack risk prediction with SHAP explainability and a Plan-Execute-Reflect agent.",
@@ -71,6 +83,12 @@ const projects = [
     link: "https://creditiq123.streamlit.app", image: "/projects/creditiq.png",
     desc: "An agentic credit-risk system pairing ML classifiers with a RAG-retrieved policy rulebook for explainable decisions.",
     stack: ["Python", "LangGraph", "ChromaDB", "Streamlit"],
+  },
+  {
+    title: "VintiCode", category: "Web · EdTech", year: "2025",
+    link: "https://vinticode.vercel.app/", image: "/projects/vinticode.png",
+    desc: "A coding workspace that builds algorithmic intuition through hands-on challenges and automated evaluation.",
+    stack: ["Next.js", "Node.js", "Redis", "PostgreSQL"],
   },
   {
     title: "Next Horizon", category: "Web · MERN", year: "2025",

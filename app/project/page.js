@@ -141,7 +141,7 @@ export default function Project() {
       <PageHeader
         title="A catalogue of what I've built"
         description="Full-stack products, ML pipelines, agentic systems and developer tooling — each one shipped, not shelved."
-        meta={[`${projects.length} projects`, "2023 — 2026"]}
+        meta={[`${projects.length} projects`, "2024 — 2026"]}
       />
 
       <Section className="pt-14 md:pt-20">

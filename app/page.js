@@ -11,6 +11,9 @@ import {
   SiPython,
   SiDjango,
   SiPytorch,
+  SiScikitlearn,
+  SiPandas,
+  SiNumpy,
   SiPostgresql,
   SiPrisma,
   SiMongodb,
@@ -123,6 +126,9 @@ const stack = [
   { name: "Python", Icon: SiPython },
   { name: "Django", Icon: SiDjango },
   { name: "PyTorch", Icon: SiPytorch },
+  { name: "scikit-learn", Icon: SiScikitlearn },
+  { name: "pandas", Icon: SiPandas },
+  { name: "NumPy", Icon: SiNumpy },
   { name: "PostgreSQL", Icon: SiPostgresql },
   { name: "Prisma", Icon: SiPrisma },
   { name: "MongoDB", Icon: SiMongodb },
@@ -133,7 +139,6 @@ const stack = [
 ];
 
 const stats = [
-  { value: 50, suffix: "+", label: "Merged pull requests", note: "In production codebases" },
   { value: 93, suffix: "%", label: "Faster deployments", note: "45 min → under 3 min" },
   { value: 500, suffix: "+", label: "Users served", note: "Across shipped products" },
   { value: 14, suffix: "", label: "Projects shipped", note: "Web, ML and tooling" },
@@ -383,7 +388,7 @@ function Stats() {
     <Section>
       <Container>
         <SectionHeading title="A short ledger of impact" />
-        <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4 md:mt-20">
+        <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3 md:mt-20">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.06} className="bg-void/40 backdrop-blur-xl">
               <div className="h-full p-7">

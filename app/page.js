@@ -122,6 +122,7 @@ const stack = [
   { name: "TypeScript", Icon: SiTypescript },
   { name: "Next.js", Icon: SiNextdotjs },
   { name: "React", Icon: SiReact },
+  { name: "React Native", Icon: SiReact },
   { name: "Node.js", Icon: SiNodedotjs },
   { name: "Python", Icon: SiPython },
   { name: "Django", Icon: SiDjango },

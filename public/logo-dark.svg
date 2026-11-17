@@ -1,23 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 220" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <pattern id="grid-dark" width="30" height="30" patternUnits="userSpaceOnUse">
-      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#26262b" stroke-width="1.2"/>
-    </pattern>
+    <radialGradient id="halo" cx="50%" cy="46%" r="62%">
+      <stop offset="0" stop-color="#23435f" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#23435f" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <!-- Outer Frame & Dark Grid Background -->
-  <rect width="300" height="220" fill="#0e0e11" rx="8" />
-  <rect width="300" height="220" fill="url(#grid-dark)" rx="8" />
-  
-  <!-- YS Monogram -->
-  <text 
-    x="150" 
-    y="120" 
-    text-anchor="middle" 
-    dominant-baseline="middle" 
-    font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', 'Helvetica Neue', sans-serif" 
-    font-size="110" 
-    font-weight="900" 
-    letter-spacing="-2px" 
-    fill="#22d3ee"
-  >YS</text>
+  <rect width="64" height="64" rx="14" fill="#000"/>
+  <rect width="64" height="64" rx="14" fill="url(#halo)"/>
+  <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" fill="none" stroke="#fff" stroke-opacity="0.12"/>
+  <path fill="#fff" d="M13.5 21.08H17.95L23.29 30.74H23.51L28.84 21.08H33.3L25.36 34.75V42.88H21.43V34.75ZM42.24 43.21Q39.7 43.21 37.83 42.43Q35.96 41.64 34.9 40.12Q33.85 38.61 33.77 36.44H37.65Q37.74 37.58 38.35 38.34Q38.97 39.09 39.97 39.47Q40.97 39.85 42.21 39.85Q43.49 39.85 44.47 39.46Q45.45 39.06 46.01 38.36Q46.56 37.66 46.56 36.72Q46.56 35.87 46.07 35.32Q45.57 34.77 44.69 34.39Q43.81 34.01 42.63 33.72L40.16 33.08Q37.47 32.39 35.91 30.98Q34.36 29.56 34.36 27.21Q34.36 25.28 35.4 23.84Q36.44 22.4 38.25 21.59Q40.06 20.79 42.34 20.79Q44.66 20.79 46.42 21.59Q48.17 22.4 49.17 23.82Q50.17 25.23 50.21 27.07H46.39Q46.25 25.68 45.15 24.91Q44.06 24.13 42.29 24.13Q41.06 24.13 40.18 24.5Q39.3 24.87 38.83 25.51Q38.35 26.15 38.35 26.98Q38.35 27.88 38.91 28.46Q39.46 29.04 40.31 29.39Q41.16 29.74 42.05 29.97L44.09 30.49Q45.31 30.78 46.46 31.27Q47.61 31.76 48.52 32.5Q49.43 33.24 49.97 34.29Q50.5 35.34 50.5 36.76Q50.5 38.67 49.52 40.13Q48.55 41.58 46.7 42.4Q44.86 43.21 42.24 43.21Z"/>
+  <circle cx="49.5" cy="16.5" r="2.6" fill="#8ab4dd"/>
 </svg>
